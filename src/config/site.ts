@@ -5,44 +5,44 @@ export const siteConfig = {
     name: "BASES",
     description: "An outpatient facility for SUD serving northern Michigan.",
   },
-  WhyUsPageLinks: [
+  AboutPageLinks: [
     {
       title: "Our Facility",
-      href: "/our-facility",
+      href: "/about/our-facility",
       description: "Welcome to the new BASES building.",
     },
     {
       title: "Our Staff",
-      href: "/our-staff",
+      href: "/about/our-staff",
       description: "Get to know our staff members.",
     },
     {
       title: "Our Board",
-      href: "/our-board",
+      href: "/about/our-board",
       description:
         "Get to know the board members our our non-profit organization.",
     },
     {
       title: "FAQ",
-      href: "/faq",
+      href: "/about/faq",
       description:
         "Get some answers to some of our most frequently asked questions.",
     },
   ],
-  OurServicesPageLinks: [
+  ServicesPageLinks: [
     {
       title: "Individual Counseling",
-      href: "/individual-counseling",
+      href: "/services/individual-counseling",
       description: "One on one counseling with a certified counselor",
     },
     {
       title: "Naloxone Nasal Kits",
-      href: "/naloxone",
+      href: "/services/naloxone",
       description: "We have free Narcan available at our facility",
     },
     {
       title: "Drug Testing",
-      href: "/drug-testing",
+      href: "/services/drug-testing",
       description:
         "We offer several types of drug testing with the highest availablity in the area.",
     },
@@ -54,35 +54,35 @@ export const siteConfig = {
     },
     {
       title: "Assessments",
-      href: "/assessments",
+      href: "/services/assessments",
       description: "We offer comprehensive Substance Use Disorder Assessments.",
     },
     {
       title: "Recovery Coaching",
-      href: "/recovery-coaching",
+      href: "/services/recovery-coaching",
       description: "We have a team of certified Peer Recovery Coaches.",
     },
     {
       title: "Substance Use Disorder Group",
-      href: "/sud-group",
+      href: "/services/sud-group",
       description:
         "Our groups specialize in DBT skills training to enhance relapse prevention.",
     },
     {
       title: "Jail Group",
-      href: "/jail-group",
+      href: "/servicesjail-group",
       description:
         "Bases staff offer weekly jail groups for men and Women in the Charlvoix County Jail.",
     },
     {
       title: "Alcohol Highway Education Class",
-      href: "/alcohol-highway-education-class",
+      href: "/services/alcohol-highway-education-class",
       description:
         "This class is often a requirement for those who recieve their first OWI.",
     },
     {
       title: "Drivers License Appeal",
-      href: "/drivers-license-appeal",
+      href: "/services/drivers-license-appeal",
       description:
         "Get help appealing to regain your drivers license from the State of Michigan.",
     },
