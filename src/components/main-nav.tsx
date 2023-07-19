@@ -44,19 +44,28 @@ export function MainNav() {
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   {siteConfig.AboutPageLinks.map((item, index) => (
-                    <ListItem
-                      href={item.href}
-                      title={item.title}
-                      key={index}
-                      className={cn({
-                        "bg-secondary": isActiveRoute(
-                          currentPathName,
-                          item.href
-                        ),
-                      })}
-                    >
-                      {item.description}
-                    </ListItem>
+                    <Link href={item.href} legacyBehavior passHref key={index}>
+                      <NavigationMenuLink>
+                        <div
+                          className={cn(
+                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                            {
+                              "bg-accent": isActiveRoute(
+                                currentPathName,
+                                item.href
+                              ),
+                            }
+                          )}
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            {item.title}
+                          </div>
+                          <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
+                            {item.description}
+                          </p>
+                        </div>
+                      </NavigationMenuLink>
+                    </Link>
                   ))}
                 </ul>
               </NavigationMenuContent>
@@ -75,19 +84,28 @@ export function MainNav() {
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {siteConfig.ServicesPageLinks.map((item, index) => (
-                    <ListItem
-                      key={index}
-                      title={item.title}
-                      href={item.href}
-                      className={cn({
-                        "bg-secondary": isActiveRoute(
-                          currentPathName,
-                          item.href
-                        ),
-                      })}
-                    >
-                      {item.description}
-                    </ListItem>
+                    <Link href={item.href} legacyBehavior passHref key={index}>
+                      <NavigationMenuLink>
+                        <div
+                          className={cn(
+                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                            {
+                              "bg-accent": isActiveRoute(
+                                currentPathName,
+                                item.href
+                              ),
+                            }
+                          )}
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            {item.title}
+                          </div>
+                          <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
+                            {item.description}
+                          </p>
+                        </div>
+                      </NavigationMenuLink>
+                    </Link>
                   ))}
                 </ul>
               </NavigationMenuContent>
@@ -120,29 +138,3 @@ export function MainNav() {
     </div>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
