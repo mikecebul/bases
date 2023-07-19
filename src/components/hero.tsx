@@ -1,10 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import BASES_Storefront from "../../public/BASES_Storefront_cropped.jpg";
 import { Button, buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
+  const router = useRouter();
+
   return (
     <section className="">
       <div className="grid px-4 py-8 mx-auto lg:container lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -17,16 +22,21 @@ export default function Hero() {
             services that people have come to know and expect.
           </p>
           <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
-            <Link href="/contact">
-              <Button variant="brand" size="xl">
-                Get Started
-              </Button>
-            </Link>
-            <Link href="/about/our-facility">
-              <Button variant="outline" size="xl" className="border-primary">
-                Learn More
-              </Button>
-            </Link>
+            <Button
+              variant="brand"
+              size="xl"
+              onClick={() => router.push("/contact")}
+            >
+              Get Started
+            </Button>
+            <Button
+              variant="outline"
+              size="xl"
+              className="border-primary"
+              onClick={() => router.push("/about/our-facility")}
+            >
+              Learn More
+            </Button>
           </div>
         </div>
         <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
