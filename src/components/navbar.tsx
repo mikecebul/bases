@@ -2,10 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import BASESLOGO from "../../public/BasesLogo.png";
-
 import { cn } from "@/lib/utils";
-// import { Icons } from "@/components/icons"
+import { Icons } from "@/components/icons";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -15,13 +13,12 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import Image from "next/image";
 import { siteConfig } from "@/config/site";
 
 export function Navbar() {
   return (
     <nav className="p-8 flex justify-around">
-      <Image alt="Logo" src={BASESLOGO} className="w-64" />
+      <Icons.logo className="w-64" />
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -40,14 +37,13 @@ export function Navbar() {
                     <li key={index} className="row-span-3">
                       <Link href={item.href} legacyBehavior passHref>
                         <NavigationMenuLink className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
-                          <div>
-                            <div className="mb-2 mt-4 text-lg font-medium">
-                              {item.title}
-                            </div>
-                            <p className="text-sm leading-tight text-muted-foreground">
-                              {item.description}
-                            </p>
+                          <Icons.building className="h-6 w-6" />
+                          <div className="mb-2 mt-4 text-lg font-medium">
+                            {item.title}
                           </div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            {item.description}
+                          </p>
                         </NavigationMenuLink>
                       </Link>
                     </li>
