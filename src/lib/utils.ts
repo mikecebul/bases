@@ -10,7 +10,7 @@ export const isActiveRoute = (
   providedRouteHref: string
 ) => currentRouteHref.endsWith(providedRouteHref);
 
-export const isActiveAccordianItem = (
+export const isActiveMenuItem = (
   currentRouteHref: string,
   providedRouteHref: string
 ) => currentRouteHref.includes(providedRouteHref);
