@@ -16,136 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
-
-const WhyUsPageLinks: { title: string; href: string; description: string }[] = [
-  {
-    title: "Our Staff",
-    href: "/our-staff",
-    description: "Get to know our staff members.",
-  },
-  {
-    title: "Our Board",
-    href: "/our-board",
-    description:
-      "Get to know the board members our our non-profit organization.",
-  },
-  {
-    title: "FAQ",
-    href: "/faq",
-    description:
-      "Get some answers to some of our most frequently asked questions.",
-  },
-];
-
-const OurServicesPageLinks: {
-  title: string;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "Individual Counseling",
-    href: "/individual-counseling",
-    description: "One on one counseling with a certified counselor",
-  },
-  {
-    title: "Naloxone Nasal Kits",
-    href: "/naloxone",
-    description: "We have free Narcan available at our facility",
-  },
-  {
-    title: "Drug Testing",
-    href: "/drug-testing",
-    description:
-      "We offer several types of drug testing with the highest availablity in the area.",
-  },
-  {
-    title: "Batterer Intervention",
-    href: "/batterer-intervention",
-    description:
-      "We offer a men's HEAL group for those needing counseling after domestic violence altercations.",
-  },
-  {
-    title: "Assessments",
-    href: "/assessments",
-    description: "We offer comprehensive Substance Use Disorder Assessments.",
-  },
-  {
-    title: "Recovery Coaching",
-    href: "/recovery-coaching",
-    description: "We have a team of certified Peer Recovery Coaches.",
-  },
-  {
-    title: "Substance Use Disorder Group",
-    href: "/sud-group",
-    description:
-      "Our groups specialize in DBT skills training to enhance relapse prevention.",
-  },
-  {
-    title: "Jail Group",
-    href: "/jail-group",
-    description:
-      "Bases staff offer weekly jail groups for men and Women in the Charlvoix County Jail.",
-  },
-  {
-    title: "Alcohol Highway Education Class",
-    href: "/alcohol-highway-education-class",
-    description:
-      "This class is often a requirement for those who recieve their first OWI.",
-  },
-  {
-    title: "Drivers License Appeal",
-    href: "/drivers-license-appeal",
-    description:
-      "Get help appealing to regain your drivers license from the State of Michigan.",
-  },
-];
-
-const LocalServicesPageLinks: {
-  title: string;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "Transportation",
-    href: "/transportation",
-    description: "Community resources for transportion.",
-  },
-  {
-    title: "Food",
-    href: "/food",
-    description: "Community resources for Food.",
-  },
-  {
-    title: "Housing",
-    href: "/housing",
-    description: "Community resources for housing.",
-  },
-  {
-    title: "Insurance",
-    href: "/insurance",
-    description: "Community resources for insurance.",
-  },
-  {
-    title: "Employment",
-    href: "/employment",
-    description: "Community resources for employment.",
-  },
-  {
-    title: "Healthcare",
-    href: "/healthcare",
-    description: "Community resources for healthcare.",
-  },
-  {
-    title: "Household Items",
-    href: "/household-items",
-    description: "Community resources for household items.",
-  },
-  {
-    title: "Treatment",
-    href: "/treatment",
-    description: "Community resources for SUD and mental health treatment.",
-  },
-];
+import { siteConfig } from "@/config/site";
 
 export function Navbar() {
   return (
@@ -164,7 +35,7 @@ export function Navbar() {
             <NavigationMenuTrigger>Why Us</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                {WhyUsPageLinks.map((item, index) =>
+                {siteConfig.WhyUsPageLinks.map((item, index) =>
                   index === 0 ? (
                     <li key={index} className="row-span-3">
                       <Link href={item.href} legacyBehavior passHref>
@@ -193,7 +64,7 @@ export function Navbar() {
             <NavigationMenuTrigger>Our Services</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                {OurServicesPageLinks.map((item, index) => (
+                {siteConfig.OurServicesPageLinks.map((item, index) => (
                   <ListItem key={index} title={item.title} href={item.href}>
                     {item.description}
                   </ListItem>
@@ -205,7 +76,7 @@ export function Navbar() {
             <NavigationMenuTrigger>Local Services</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                {LocalServicesPageLinks.map((item, index) => (
+                {siteConfig.LocalServicesPageLinks.map((item, index) => (
                   <ListItem key={index} title={item.title} href={item.href}>
                     {item.description}
                   </ListItem>
