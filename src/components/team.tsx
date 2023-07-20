@@ -3,45 +3,39 @@ import Image from "next/image";
 const staff = [
   {
     name: "D Scott Kelly",
-    role: "Executive Director, Counselor, Recovery Coach",
+    role: "Executive Director, Counselor",
     qualifications: "MA, CAADC, MAC, CCS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    imageUrl: "/profiles/DScottKelly_Profile.webp",
   },
   {
     name: "Celia Partida-Kelly",
-    role: "Program Director, Counselor, Recovery Coach",
+    role: "Program Director, Counselor",
     qualifications: "MA, LPC, CAADC, CTP, EMDR",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    imageUrl: "/profiles/CeliaKelly_Profile.webp",
   },
   {
     name: "Leah Mayotte",
     role: "Clinical Supervisor, Counselor",
     qualifications: "MA, LPC, CAADC, CCS, CTP, EMDR",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    imageUrl: "/profiles/LeahMayotte_Profile.webp",
   },
   {
     name: "Michael Cebulski",
     role: "Counselor, Recovery Coach",
     qualifications: "CADC-DP, CPRC",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    imageUrl: "/profiles/MikeCebulski_Profile.webp",
   },
   {
     name: "Melanie Moran",
     role: "Recovery Coach",
     qualifications: "CPRC",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    imageUrl: "/profiles/MelanieMoran_Profile.webp",
   },
   {
     name: "Leland Barta",
     role: "Office Manager",
     qualifications: "",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    imageUrl: "/profiles/LeeBarta_Profile.webp",
   },
 ];
 
