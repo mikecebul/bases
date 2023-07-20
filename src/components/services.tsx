@@ -6,12 +6,12 @@ export default function Services() {
     <div id="services" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-brand">
+          <p className="text-base font-semibold leading-7 text-brand">
             Redefine your recovery path
-          </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Everything you need for a successful recovery journey
           </p>
+          <h3 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Everything you need for a successful recovery journey
+          </h3>
           <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted-foreground">
             Incorporating a unique blend of clinical expertise and compassionate
             care, we&apos;ve curated an exceptional recovery experience for you.
