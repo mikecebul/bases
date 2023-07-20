@@ -1,10 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import BASES_Storefront from "../../public/BASES_Storefront_cropped.jpg";
 import { Button, buttonVariants } from "./ui/button";
-import { Icons } from "./icons";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Hero() {
@@ -17,7 +14,7 @@ export default function Hero() {
           <h1 className="max-w-2xl mb-4 text-3xl font-extrabold mt-2 tracking-tight md:text-5xl xl:text-6xl dark:text-white">
             Bay Area Substance Education Services
           </h1>
-          <p className="max-w-2xl mb-6 font-light text-md text-muted-foreground">
+          <p className="max-w-2xl mb-6 font-light text-base text-muted-foreground">
             Striving to meet the needs of the community and provide quality
             services that people have come to know and expect.
           </p>
@@ -40,11 +37,50 @@ export default function Hero() {
           </div>
         </div>
         <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-          <Image
-            src={BASES_Storefront}
-            alt="BASES Storefront at night"
-            className="object-cover w-full"
-          />
+          <div className="relative">
+            <Image
+              src="/BASES_Road_Sign.webp"
+              alt="BASES Storefront"
+              className="object-cover w-full rounded-md"
+              width={1080}
+              height={1980}
+            />
+            <span className="absolute -left-8 -bottom-8 -z-10 text-brand">
+              <svg
+                width="93"
+                height="93"
+                viewBox="0 0 93 93"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="2.5" cy="2.5" r="2.5" />
+                <circle cx="2.5" cy="24.5" r="2.5" />
+                <circle cx="2.5" cy="46.5" r="2.5" />
+                <circle cx="2.5" cy="68.5" r="2.5" />
+                <circle cx="2.5" cy="90.5" r="2.5" />
+                <circle cx="24.5" cy="2.5" r="2.5" />
+                <circle cx="24.5" cy="24.5" r="2.5" />
+                <circle cx="24.5" cy="46.5" r="2.5" />
+                <circle cx="24.5" cy="68.5" r="2.5" />
+                <circle cx="24.5" cy="90.5" r="2.5" />
+                <circle cx="46.5" cy="2.5" r="2.5" />
+                <circle cx="46.5" cy="24.5" r="2.5" />
+                <circle cx="46.5" cy="46.5" r="2.5" />
+                <circle cx="46.5" cy="68.5" r="2.5" />
+                <circle cx="46.5" cy="90.5" r="2.5" />
+                <circle cx="68.5" cy="2.5" r="2.5" />
+                <circle cx="68.5" cy="24.5" r="2.5" />
+                <circle cx="68.5" cy="46.5" r="2.5" />
+                <circle cx="68.5" cy="68.5" r="2.5" />
+                <circle cx="68.5" cy="90.5" r="2.5" />
+                <circle cx="90.5" cy="2.5" r="2.5" />
+                <circle cx="90.5" cy="24.5" r="2.5" />
+                <circle cx="90.5" cy="46.5" r="2.5" />
+                <circle cx="90.5" cy="68.5" r="2.5" />
+                <circle cx="90.5" cy="90.5" r="2.5" />
+              </svg>
+            </span>
+          </div>
         </div>
       </div>
     </section>
