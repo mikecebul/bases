@@ -1,6 +1,6 @@
 import Image from "next/image";
 import BASESLOGO from "../../public/BasesLogo.png";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 export const Icons = {
   logo: ({ className }: { className: string }) => (
@@ -8,4 +8,5 @@ export const Icons = {
   ),
   openMenu: Menu,
   closeMenu: X,
+  arrowRight: ArrowRight,
 };

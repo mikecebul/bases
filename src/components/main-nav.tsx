@@ -19,7 +19,7 @@ export function MainNav() {
   const currentPathName = usePathname();
   return (
     <div className="flex-1">
-      <nav className="p-8 md:flex justify-around hidden">
+      <nav className="justify-around hidden p-8 md:flex">
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -137,7 +137,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
             {children}
           </p>
         </a>
