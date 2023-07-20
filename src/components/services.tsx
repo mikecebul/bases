@@ -4,8 +4,8 @@ import { siteConfig } from "@/config/site";
 export default function Services() {
   return (
     <div id="services" className="py-24 sm:py-3">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
+      <div className="lg:container px-4 md:px-8 lg:px-0">
+        <div className="max-w-2xl">
           <p className="text-base font-semibold leading-7 text-brand">
             Redefine your recovery path
           </p>
@@ -17,8 +17,8 @@ export default function Services() {
             care, we&apos;ve curated an exceptional recovery experience for you.
           </p>
         </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:container">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 2xl:grid-cols-3">
+        <div className="mt-16 sm:mt-20 lg:mt-24">
+          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
             {siteConfig.Services.map((service) => (
               <div key={service.name} className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-primary">
