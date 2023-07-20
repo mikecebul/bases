@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { Icons } from "./icons";
 import { MainNavLandingPage } from "./main-nav-landing-page";
 import { MobileNavLandingPage } from "./mobile-nav-landing-page";
+import { Button } from "./ui/button";
 
 export function Header() {
   return (
@@ -9,6 +11,15 @@ export function Header() {
         <Icons.logo className="w-40 md:w-44 lg:w-64" />
         <MainNavLandingPage />
         <MobileNavLandingPage />
+        <Link href="tel:2315471144" legacyBehavior passHref>
+          <Button
+            variant="brand"
+            className="hidden lg:flex group-hover:text-brand-foreground/80"
+          >
+            <Icons.phone className="mr-2" size={20} />
+            (231) 547-1144
+          </Button>
+        </Link>
       </div>
     </header>
   );

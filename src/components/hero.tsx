@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { Icons } from "./icons";
+import Link from "next/link";
 
 export default function Hero() {
   const router = useRouter();
@@ -19,17 +21,19 @@ export default function Hero() {
             services that people have come to know and expect.
           </p>
           <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
-            <Button
-              variant="brand"
-              size="xl"
-              onClick={() => router.push("#services")}
-            >
-              Get Started
-            </Button>
+            <Link href="tel:2315471144" legacyBehavior passHref>
+              <Button
+                variant="brand"
+                size="xl"
+              >
+                <Icons.phone className="mr-2" />
+                Call Now
+              </Button>
+            </Link>
             <Button
               variant="outline"
               size="xl"
-              className="border-primary"
+              className=""
               onClick={() => router.push("#about")}
             >
               Learn More

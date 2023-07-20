@@ -10,6 +10,7 @@ import {
   Tally4,
   WineOff,
   Car,
+  Phone,
 } from "lucide-react";
 
 export const Icons = {
@@ -25,4 +26,5 @@ export const Icons = {
   jail: Tally4,
   class: WineOff,
   car: Car,
+  phone: Phone,
 };
