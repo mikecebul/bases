@@ -5,7 +5,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "tailwindui.com",
-        pathname: "/img/component-images/*",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
       },
     ],
   },

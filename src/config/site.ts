@@ -21,12 +21,8 @@ export const siteConfig = {
       href: "#services",
     },
     {
-      title: "Contact",
-      href: "#contact",
-    },
-    {
-      title: "Donate",
-      href: "#donate",
+      title: "Team",
+      href: "#team",
     },
   ],
   AboutPageLinks: [
@@ -153,7 +149,7 @@ export const siteConfig = {
       description: "Community resources for SUD and mental health treatment.",
     },
   ],
-  Features: [
+  Services: [
     {
       name: "Detailed Substance Use Disorder Assessments",
       description:
@@ -161,9 +157,10 @@ export const siteConfig = {
       icon: Icons.arrowRight,
     },
     {
-      name: "Empowering Recovery Coaching",
+      name: "Drug Testing",
       description:
-        "Our peer-based Recovery Coaching offers a level of support that empowers individuals to navigate their own unique recovery path.",
+        "We offer several types of drug testing with the highest availablity in the area.",
+
       icon: Icons.arrowRight,
     },
     {
@@ -184,12 +181,6 @@ export const siteConfig = {
         "Our Alcohol Highway Safety Education Classes are designed for first-time OWI/OUI offenders, providing crucial knowledge and insight.",
       icon: Icons.arrowRight,
     },
-    //   {
-    //     name: "Zero Tolerance Education Class",
-    //     description:
-    //       "Our Zero Tolerance Education Classes are tailored for first-time MIP offenders, equipping them with the knowledge to make better decisions.",
-    //     icon: Icons.arrowRight,
-    //   },
     {
       name: "Driver’s License Appeal Assistance",
       description:
