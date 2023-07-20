@@ -5,7 +5,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative isolate overflow-hidden px-4 md:px-8 lg:px-0 py-24 sm:py-32 lg:overflow-visible"
+      className="relative isolate overflow-hidden px-4 md:px-8 py-24 sm:py-32 2xl:px-0 2xl:overflow-visible 2xl:container"
     >
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <svg
@@ -38,17 +38,17 @@ export default function AboutSection() {
           />
         </svg>
       </div>
-      <div className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:px-0 lg:container lg:grid-cols-2 lg:items-start lg:gap-y-10 lg:gap-x-10">
-        <div className="lg:col-span-2 lg:col-start-2 lg:row-start-1 lg:grid lg:w-full lg:gap-x-8 lg:px-0">
-          <div className="lg:pr-4">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-16 2xl:container 2xl:grid-cols-2 2xl:items-start 2xl:gap-y-10 2xl:gap-x-10 2xl:px-0">
+        <div className="2xl:col-span-2 2xl:col-start-2 2xl:row-start-1 2xl:grid 2xl:w-full 2xl:gap-x-8 2xl:px-0">
+          <div className="">
             <div className="">
               <p className="text-base font-semibold leading-7 text-brand max-w-prose">
                 Where It Started &amp; Where We’ve Been
               </p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-gray-900">
                 Our Journey from the Beginning
               </h2>
-              <p className="mt-6 text-xl leading-8 text-gray-700">
+              <p className="mt-6 text-lg leading-8 text-gray-700 max-w-prose">
                 Co-founded by Scott and Celia Kelly in 1993, BASES initially
                 functioned as a home business, evolving into a
                 community-centered operation addressing the rise of substance
@@ -59,16 +59,16 @@ export default function AboutSection() {
             </div>
           </div>
         </div>
-        <div className="lg:sticky lg:top-4 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:pt-16">
+        <div className="2xl:sticky 2xl:top-4 2xl:col-start-1 2xl:row-span-2 2xl:row-start-1 2xl:pt-16">
           <Image
-            className="hidden rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 object-center sm:block mx-auto"
+            className="hidden rounded-lg bg-gray-900 shadow-lg ring-1 ring-gray-400/10 object-center sm:block"
             src="/Buiding_With_Sign.webp"
             alt="BASES Sign"
             width={1080}
             height={1980}
           />
           <Image
-            className="rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] object-center block mx-auto sm:hidden"
+            className="rounded-lg bg-gray-900 shadow-lg ring-1 ring-gray-400/10 sm:w-[57rem] object-center block mx-auto sm:hidden"
             src="/Buiding_With_Sign_Mobile.webp"
             alt="BASES Sign"
             width={1010}
@@ -76,7 +76,7 @@ export default function AboutSection() {
           />
         </div>
         <div className="">
-          <div className="lg:pr-4">
+          <div className="2xl:pr-4">
             <div className="max-w-prose text-base leading-7 text-gray-700">
               <p>
                 With the advent of the COVID pandemic, BASES swiftly adapted to

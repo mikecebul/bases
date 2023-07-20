@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 export default function Services() {
   return (
     <div id="services" className="py-24 sm:py-3">
-      <div className="lg:container px-4 md:px-8 lg:px-0">
+      <div className="2xl:container px-4 md:px-8 2xl:px-0">
         <div className="max-w-2xl">
           <p className="text-base font-semibold leading-7 text-brand">
             Redefine your recovery path

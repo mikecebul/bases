@@ -4,7 +4,7 @@ import { SiteConfig, siteConfig } from "@/config/site";
 export default function Team() {
   return (
     <section id="team" className="py-24 sm:py-32">
-      <div className="grid lg:container gap-x-8 gap-y-20 px-4 md:px-8 lg:px-0 xl:grid-cols-3">
+      <div className="grid 2xl:container gap-x-8 gap-y-20 px-4 md:px-8 2xl:px-0 xl:grid-cols-3">
         <div className="max-w-2xl">
           <h4 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Meet Our Leadership Team
