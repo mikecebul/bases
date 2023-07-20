@@ -2,6 +2,7 @@ import Image from "next/image";
 import BASES_Storefront from "../../public/BASES_Storefront_cropped.jpg";
 import { Button, buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -15,11 +16,17 @@ export default function Hero() {
             Striving to meet the needs of the community and provide quality
             services that people have come to know and expect.
           </p>
-          <div className="space-x-8">
-            <Button size="xl">Get Started</Button>
-            <Button variant="outline" size="xl" className="border-primary">
-              Learn More
-            </Button>
+          <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
+            <Link href="/contact">
+              <Button variant="brand" size="xl">
+                Get Started
+              </Button>
+            </Link>
+            <Link href="/about/our-facility">
+              <Button variant="outline" size="xl" className="border-primary">
+                Learn More
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
