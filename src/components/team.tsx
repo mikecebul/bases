@@ -1,47 +1,9 @@
 import Image from "next/image";
-
-const staff = [
-  {
-    name: "D Scott Kelly",
-    role: "Executive Director, Counselor",
-    qualifications: "MA, CAADC, MAC, CCS",
-    imageUrl: "/profiles/DScottKelly_Profile.webp",
-  },
-  {
-    name: "Celia Partida-Kelly",
-    role: "Program Director, Counselor",
-    qualifications: "MA, LPC, CAADC, CTP, EMDR",
-    imageUrl: "/profiles/CeliaKelly_Profile.webp",
-  },
-  {
-    name: "Leah Mayotte",
-    role: "Clinical Supervisor, Counselor",
-    qualifications: "MA, LPC, CAADC, CCS, CTP, EMDR",
-    imageUrl: "/profiles/LeahMayotte_Profile.webp",
-  },
-  {
-    name: "Michael Cebulski",
-    role: "Counselor, Recovery Coach",
-    qualifications: "CADC-DP, CPRC",
-    imageUrl: "/profiles/MikeCebulski_Profile.webp",
-  },
-  {
-    name: "Melanie Moran",
-    role: "Recovery Coach",
-    qualifications: "CPRC",
-    imageUrl: "/profiles/MelanieMoran_Profile.webp",
-  },
-  {
-    name: "Leland Barta",
-    role: "Office Manager",
-    qualifications: "",
-    imageUrl: "/profiles/LeeBarta_Profile.webp",
-  },
-];
+import { SiteConfig, siteConfig } from "@/config/site";
 
 export default function Team() {
   return (
-    <section id="team" className="bg-white py-24 sm:py-32">
+    <section id="team" className="py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
         <div className="max-w-2xl">
           <h4 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -58,7 +20,7 @@ export default function Team() {
           role="list"
           className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
         >
-          {staff.map((person) => (
+          {siteConfig.staff.map((person) => (
             <li key={person.name}>
               <div className="flex items-center gap-x-6">
                 <Image

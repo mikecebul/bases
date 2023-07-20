@@ -59,13 +59,20 @@ export default function AboutSection() {
             </div>
           </div>
         </div>
-        <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+        <div className="md:-ml-12 md:-mt-12 md:p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
           <Image
-            className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] object-center block mx-auto"
+            className="hidden w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] object-center sm:block mx-auto"
             src="/Buiding_With_Sign.webp"
             alt="BASES Sign"
             width={1080}
             height={1980}
+          />
+          <Image
+            className="rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] object-center block mx-auto sm:hidden"
+            src="/Buiding_With_Sign_Mobile.webp"
+            alt="BASES Sign"
+            width={1010}
+            height={1515}
           />
         </div>
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">

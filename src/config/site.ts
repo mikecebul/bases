@@ -154,38 +154,76 @@ export const siteConfig = {
       name: "Detailed Substance Use Disorder Assessments",
       description:
         "We provide comprehensive substance use disorder assessments for adults and adolescents to map out the most effective treatment plan.",
-      icon: Icons.arrowRight,
+      icon: Icons.glasses,
+    },
+    {
+      name: "Substance Use Disorder Therapy",
+      description:
+        "We offer individual and group therapy sessions for adults utilizing DBT, CBT, and relapse prevention therapies.",
+      icon: Icons.group,
+    },
+    {
+      name: "Correctional Facility Group Therapy",
+      description:
+        "We facilitate CBT/DBT groups for men (Mondays) and for women (Wednesdays) at the Charlevoix County Jail.",
+      icon: Icons.jail,
     },
     {
       name: "Drug Testing",
       description:
         "We offer several types of drug testing with the highest availablity in the area.",
 
-      icon: Icons.arrowRight,
-    },
-    {
-      name: "Substance Use Disorder Group Therapy",
-      description:
-        "We offer group therapy sessions for adults utilizing DBT, CBT, and relapse prevention therapies.",
-      icon: Icons.arrowRight,
-    },
-    {
-      name: "Correctional Facility Group Therapy",
-      description:
-        "We facilitate CBT/DBT groups for men (Mondays) and for women (Wednesdays) at the Charlevoix County Jail.",
-      icon: Icons.arrowRight,
+      icon: Icons.flask,
     },
     {
       name: "Alcohol Highway Safety Education Class",
       description:
         "Our Alcohol Highway Safety Education Classes are designed for first-time OWI/OUI offenders, providing crucial knowledge and insight.",
-      icon: Icons.arrowRight,
+      icon: Icons.class,
     },
     {
       name: "Driver’s License Appeal Assistance",
       description:
         "We provide substance use disorder evaluations for driver’s license appeal hearings. This service is offered at a $250 charge and includes a drug test, driving record analysis, evaluation, and completion of 10+ page forms.",
-      icon: Icons.arrowRight,
+      icon: Icons.car,
     },
   ],
+  staff: [
+    {
+      name: "D Scott Kelly",
+      role: "Executive Director, Counselor",
+      qualifications: "MA, CAADC, MAC, CCS",
+      imageUrl: "/profiles/DScottKelly_Profile.webp",
+    },
+    {
+      name: "Celia Partida-Kelly",
+      role: "Program Director, Counselor",
+      qualifications: "MA, LPC, CAADC, CTP, EMDR",
+      imageUrl: "/profiles/CeliaKelly_Profile.webp",
+    },
+    {
+      name: "Leah Mayotte",
+      role: "Clinical Supervisor, Counselor",
+      qualifications: "MA, LPC, CAADC, CCS, CTP, EMDR",
+      imageUrl: "/profiles/LeahMayotte_Profile.webp",
+    },
+    {
+      name: "Michael Cebulski",
+      role: "Counselor, Recovery Coach",
+      qualifications: "CADC-DP, CPRC",
+      imageUrl: "/profiles/MikeCebulski_Profile.webp",
+    },
+    {
+      name: "Melanie Moran",
+      role: "Recovery Coach",
+      qualifications: "CPRC",
+      imageUrl: "/profiles/MelanieMoran_Profile.webp",
+    },
+    {
+      name: "Leland Barta",
+      role: "Office Manager",
+      qualifications: "",
+      imageUrl: "/profiles/LeeBarta_Profile.webp",
+    },
+  ]
 };

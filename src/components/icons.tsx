@@ -1,6 +1,16 @@
 import Image from "next/image";
 import BASESLOGO from "../../public/BasesLogo.png";
-import { Menu, X, ArrowRight, Glasses } from "lucide-react";
+import {
+  Menu,
+  X,
+  ArrowRight,
+  Glasses,
+  FlaskConical,
+  Users,
+  Tally4,
+  WineOff,
+  Car,
+} from "lucide-react";
 
 export const Icons = {
   logo: ({ className }: { className: string }) => (
@@ -10,4 +20,9 @@ export const Icons = {
   closeMenu: X,
   arrowRight: ArrowRight,
   glasses: Glasses,
+  flask: FlaskConical,
+  group: Users,
+  jail: Tally4,
+  class: WineOff,
+  car: Car,
 };
