@@ -14,10 +14,10 @@ export default function Hero() {
     <section>
       <div className="grid px-4 py-8 mx-auto lg:container lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="mr-auto place-self-center lg:col-span-7">
-          <h1 className="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
+          <h1 className="max-w-2xl mb-4 text-3xl font-extrabold mt-2 tracking-tight md:text-5xl xl:text-6xl dark:text-white">
             Bay Area Substance Education Services
           </h1>
-          <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+          <p className="max-w-2xl mb-6 font-light text-md text-muted-foreground">
             Striving to meet the needs of the community and provide quality
             services that people have come to know and expect.
           </p>

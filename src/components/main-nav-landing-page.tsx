@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { cn, isActiveMenuItem, isActiveRoute } from "@/lib/utils";
+import { cn, isActiveRoute } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -15,6 +15,7 @@ import { usePathname } from "next/navigation";
 
 export function MainNavLandingPage() {
   const currentPathName = usePathname();
+
   return (
     <div className="flex-1">
       <nav className="justify-around hidden p-8 md:flex">
@@ -25,7 +26,7 @@ export function MainNavLandingPage() {
                 <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink
                     className={cn(navigationMenuTriggerStyle(), "text-lg", {
-                      "bg-secondary": isActiveRoute(currentPathName, item.href),
+                      "bg-accent": isActiveRoute(currentPathName, item.href),
                     })}
                   >
                     {item.title}
@@ -33,10 +34,9 @@ export function MainNavLandingPage() {
                 </Link>
               </NavigationMenuItem>
             ))}
-           
           </NavigationMenuList>
         </NavigationMenu>
       </nav>
     </div>
-  )
+  );
 }

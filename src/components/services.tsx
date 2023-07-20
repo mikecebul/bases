@@ -12,7 +12,7 @@ export default function Services() {
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Everything you need for a successful recovery journey
           </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted-foreground">
             Incorporating a unique blend of clinical expertise and compassionate
             care, we&apos;ve curated an exceptional recovery experience for you.
           </p>
