@@ -11,36 +11,36 @@ export default function Footer() {
           </Link>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
-              <a href="#about" className="mr-4 hover:underline md:mr-6 ">
+              <Link href="#about" className="mr-4 hover:underline md:mr-6 ">
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#services" className="mr-4 hover:underline md:mr-6 ">
+              <Link href="#services" className="mr-4 hover:underline md:mr-6 ">
                 Services
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#team" className="mr-4 hover:underline md:mr-6 ">
+              <Link href="#team" className="mr-4 hover:underline md:mr-6 ">
                 Team
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="https://basesrecoverycenter.org/wp/wp-content/uploads/Preview-consent-document-SimplePractice.pdf"
                 className="mr-4 hover:underline md:mr-6"
               >
                 Privacy Policy
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-autolg:my-8" />
         <span className="block text-sm text-gray-500 sm:text-center">
-          © 2023{" "}
-          <a href="https://basesmi.org/" className="hover:underline">
+          © {new Date().getFullYear()}{" "}
+          <Link href="https://basesmi.org/" className="hover:underline">
             BASES
-          </a>
+          </Link>
           . All Rights Reserved.
         </span>
       </div>

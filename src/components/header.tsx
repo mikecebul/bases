@@ -9,13 +9,14 @@ export function Header() {
     <header className="sticky top-0 z-40 flex w-full bg-background/50 backdrop-blur-sm">
       <div className="flex items-center w-full px-4 md:px-8 2xl:px-0 2xl:container h-14 lg:h-20">
         <Link href="/">
-        <Icons.logo className="w-40 md:w-44 lg:w-64" />
+          <Icons.logo className="w-40 md:w-44 lg:w-64" />
         </Link>
         <MainNavLandingPage />
         <MobileNavLandingPage />
         <Link href="tel:2315471144" legacyBehavior passHref>
           <Button
             variant="brand"
+            size="lg"
             className="hidden lg:flex group-hover:text-brand-foreground/80"
           >
             <Icons.phone className="mr-2" size={20} />
