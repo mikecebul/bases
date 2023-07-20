@@ -225,5 +225,42 @@ export const siteConfig = {
       qualifications: "",
       imageUrl: "/profiles/LeeBarta_Profile.webp",
     },
-  ]
+  ],
+  boardMembers: [
+    {
+      name: "Gwen White-Erickson",
+      role: "Board President",
+      imageUrl: "/profiles/board/GwenWhite.png",
+    },
+    {
+      name: "Eric Eide",
+      role: "Board Vice-President",
+      imageUrl: "/profiles/board/EricEide.png",
+    },
+    {
+      name: "Debbie Neidhamer",
+      role: "Board Secretary",
+      imageUrl: "/profiles/board/DebbieNeidhamer.png",
+    },
+    {
+      name: "Bill Fleck",
+      role: "Board Treasurer",
+      imageUrl: "/profiles/board/BillFleck.jpg",
+    },
+    {
+      name: "Scott Gilland",
+      role: "Board Member",
+      imageUrl: "/profiles/board/ScottGilland.webp",
+    },
+    {
+      name: "Marsy Burns",
+      role: "Board Member",
+      imageUrl: "/profiles/board/MarsyBurns.webp",
+    },
+    {
+      name: "Jim Alger Jr.",
+      role: "Board Member",
+      imageUrl: "/profiles/board/JimAlger.jpg",
+    },
+  ],
 };

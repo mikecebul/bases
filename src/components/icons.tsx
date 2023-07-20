@@ -11,6 +11,7 @@ import {
   WineOff,
   Car,
   Phone,
+  Navigation,
 } from "lucide-react";
 
 export const Icons = {
@@ -27,4 +28,5 @@ export const Icons = {
   class: WineOff,
   car: Car,
   phone: Phone,
+  navigtion: Navigation,
 };

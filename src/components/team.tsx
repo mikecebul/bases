@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SiteConfig, siteConfig } from "@/config/site";
+import { Separator } from "./ui/separator";
 
 export default function Team() {
   return (
@@ -45,6 +46,45 @@ export default function Team() {
             </li>
           ))}
         </ul>
+        <Separator className="col-span-3" />
+        <ul
+          role="list"
+          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+        >
+          {siteConfig.boardMembers.map((person) => (
+            <li key={person.name}>
+              <div className="flex items-center gap-x-6">
+                <Image
+                  className="h-16 w-16 rounded-full"
+                  src={person.imageUrl}
+                  alt=""
+                  width={256}
+                  height={256}
+                />
+                <div>
+                  <p className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                    {person.name}
+                  </p>
+                  <p className="text-sm font-semibold leading-6 text-brand">
+                    {person.role}
+                  </p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className="max-w-2xl">
+          <p className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Meet Our Board of Directors
+          </p>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            Our Board comprises seasoned professionals committed to guiding our
+            organization&apos;s mission. They utilize their diverse experience
+            to strategize and uphold our commitment to patient-focused
+            outpatient care. Their unified aim: to drive excellence and positive
+            patient outcomes.
+          </p>
+        </div>
       </div>
     </section>
   );
