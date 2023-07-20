@@ -3,7 +3,7 @@ import Services from "@/components/services";
 
 export default function Home() {
   return (
-    <main className="">
+    <main>
       <Hero />
       <Services />
     </main>

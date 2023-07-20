@@ -1,3 +1,5 @@
+import { Icons } from "@/components/icons";
+
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
@@ -5,6 +7,28 @@ export const siteConfig = {
     name: "BASES",
     description: "An outpatient facility for SUD serving northern Michigan.",
   },
+  LandingPageLinks: [
+    {
+      title: "Home",
+      href: "#",
+    },
+    {
+      title: "About",
+      href: "#about",
+    },
+    {
+      title: "Services",
+      href: "#services",
+    },
+    {
+      title: "Contact",
+      href: "#contact",
+    },
+    {
+      title: "Donate",
+      href: "#donate",
+    },
+  ],
   AboutPageLinks: [
     {
       title: "Our Facility",
@@ -127,6 +151,50 @@ export const siteConfig = {
       title: "Treatment",
       href: "/treatment",
       description: "Community resources for SUD and mental health treatment.",
+    },
+  ],
+  Features: [
+    {
+      name: "Detailed Substance Use Disorder Assessments",
+      description:
+        "We provide comprehensive substance use disorder assessments for adults and adolescents to map out the most effective treatment plan.",
+      icon: Icons.arrowRight,
+    },
+    {
+      name: "Empowering Recovery Coaching",
+      description:
+        "Our peer-based Recovery Coaching offers a level of support that empowers individuals to navigate their own unique recovery path.",
+      icon: Icons.arrowRight,
+    },
+    {
+      name: "Substance Use Disorder Group Therapy",
+      description:
+        "We offer group therapy sessions for adults utilizing DBT, CBT, and relapse prevention therapies.",
+      icon: Icons.arrowRight,
+    },
+    {
+      name: "Correctional Facility Group Therapy",
+      description:
+        "We facilitate CBT/DBT groups for men (Mondays) and for women (Wednesdays) at the Charlevoix County Jail.",
+      icon: Icons.arrowRight,
+    },
+    {
+      name: "Alcohol Highway Safety Education Class",
+      description:
+        "Our Alcohol Highway Safety Education Classes are designed for first-time OWI/OUI offenders, providing crucial knowledge and insight.",
+      icon: Icons.arrowRight,
+    },
+    //   {
+    //     name: "Zero Tolerance Education Class",
+    //     description:
+    //       "Our Zero Tolerance Education Classes are tailored for first-time MIP offenders, equipping them with the knowledge to make better decisions.",
+    //     icon: Icons.arrowRight,
+    //   },
+    {
+      name: "Driver’s License Appeal Assistance",
+      description:
+        "We provide substance use disorder evaluations for driver’s license appeal hearings. This service is offered at a $250 charge and includes a drug test, driving record analysis, evaluation, and completion of 10+ page forms.",
+      icon: Icons.arrowRight,
     },
   ],
 };
