@@ -38,11 +38,11 @@ export default function AboutSection() {
           />
         </svg>
       </div>
-      <div className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:px-0 lg:container lg:grid-cols-2 lg:items-start lg:gap-y-10">
-        <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:grid lg:w-full lg:grid-cols-2 lg:gap-x-8 lg:px-0">
+      <div className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:px-0 lg:container lg:grid-cols-2 lg:items-start lg:gap-y-10 lg:gap-x-10">
+        <div className="lg:col-span-2 lg:col-start-2 lg:row-start-1 lg:grid lg:w-full lg:gap-x-8 lg:px-0">
           <div className="lg:pr-4">
-            <div className="lg:max-w-lg">
-              <p className="text-base font-semibold leading-7 text-brand">
+            <div className="">
+              <p className="text-base font-semibold leading-7 text-brand max-w-prose">
                 Where It Started &amp; Where We’ve Been
               </p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -59,9 +59,9 @@ export default function AboutSection() {
             </div>
           </div>
         </div>
-        <div className="md:-ml-12 md:-mt-12 md:p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+        <div className="lg:sticky lg:top-4 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:pt-16">
           <Image
-            className="hidden w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] object-center sm:block mx-auto"
+            className="hidden rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 object-center sm:block mx-auto"
             src="/Buiding_With_Sign.webp"
             alt="BASES Sign"
             width={1080}
@@ -75,9 +75,9 @@ export default function AboutSection() {
             height={1515}
           />
         </div>
-        <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:container lg:grid-cols-2 lg:gap-x-8 lg:px-0">
+        <div className="">
           <div className="lg:pr-4">
-            <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
+            <div className="max-w-prose text-base leading-7 text-gray-700">
               <p>
                 With the advent of the COVID pandemic, BASES swiftly adapted to
                 the new normal, providing telehealth services. This leap allowed
