@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { SiteConfig, siteConfig } from "@/config/site";
 import { Separator } from "./ui/separator";
+import Link from "next/link";
 
 export default function Team() {
   return (
@@ -21,29 +22,36 @@ export default function Team() {
           role="list"
           className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
         >
-          {siteConfig.staff.map((person) => (
-            <li key={person.name}>
-              <div className="flex items-center gap-x-6">
-                <Image
-                  className="w-16 h-16 rounded-full"
-                  src={person.imageUrl}
-                  alt=""
-                  width={256}
-                  height={256}
-                />
-                <div>
-                  <p className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                    {person.name}
-                  </p>
-                  <p className="text-sm leading-6 text-muted-foreground">
-                    {person.qualifications}
-                  </p>
-                  <p className="text-sm font-semibold leading-6 text-brand">
-                    {person.role}
-                  </p>
+          {siteConfig.team.staff.map((person) => (
+            <Link
+              key={person.name}
+              href={`/team/staff/[name]`}
+              as={`/team/staff/${person.name.toLowerCase().replace(/ /g, "-")}`}
+              className="hover:bg-muted-foreground/20 p-2 rounded-md -ml-2"
+            >
+              <li>
+                <div className="flex items-center gap-x-6">
+                  <Image
+                    className="w-16 h-16 rounded-full"
+                    src={person.imageUrl}
+                    alt=""
+                    width={256}
+                    height={256}
+                  />
+                  <div>
+                    <p className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                      {person.name}
+                    </p>
+                    <p className="text-sm leading-6 text-muted-foreground">
+                      {person.qualifications}
+                    </p>
+                    <p className="text-sm font-semibold leading-6 text-brand">
+                      {person.role}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
+            </Link>
           ))}
         </ul>
         <Separator className="hidden xl:flex xl:col-span-3" />
@@ -51,26 +59,35 @@ export default function Team() {
           role="list"
           className="grid order-last xl:order-none gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
         >
-          {siteConfig.boardMembers.map((person) => (
-            <li key={person.name}>
-              <div className="flex items-center gap-x-6">
-                <Image
-                  className="w-16 h-16 rounded-full"
-                  src={person.imageUrl}
-                  alt=""
-                  width={256}
-                  height={256}
-                />
-                <div>
-                  <p className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                    {person.name}
-                  </p>
-                  <p className="text-sm font-semibold leading-6 text-brand">
-                    {person.role}
-                  </p>
+          {siteConfig.team.boardMembers.map((person) => (
+            <Link
+              key={person.name}
+              href={`/team/board-members/[name]`}
+              as={`/team/board-members/${person.name
+                .toLowerCase()
+                .replace(/ /g, "-")}`}
+              className="hover:bg-muted-foreground/20 p-2 rounded-md -ml-2"
+            >
+              <li key={person.name}>
+                <div className="flex items-center gap-x-6">
+                  <Image
+                    className="w-16 h-16 rounded-full"
+                    src={person.imageUrl}
+                    alt=""
+                    width={256}
+                    height={256}
+                  />
+                  <div>
+                    <p className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                      {person.name}
+                    </p>
+                    <p className="text-sm font-semibold leading-6 text-brand">
+                      {person.role}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
+            </Link>
           ))}
         </ul>
         <div className="max-w-2xl">

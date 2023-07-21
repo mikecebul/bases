@@ -21,9 +21,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "bg-primary-foreground")}>
+      <body
+        className={cn(
+          inter.className,
+          "bg-primary-foreground min-h-screen flex flex-col"
+        )}
+      >
         <Header />
-        {children}
+        <main className="flex-grow">{children}</main>
         <Footer />
         <Analytics />
       </body>
