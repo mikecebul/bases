@@ -10,19 +10,19 @@ export const siteConfig = {
   LandingPageLinks: [
     {
       title: "Home",
-      href: "#",
+      href: "/#",
     },
     {
       title: "About",
-      href: "#about",
+      href: "/#about",
     },
     {
       title: "Services",
-      href: "#services",
+      href: "/#services",
     },
     {
       title: "Team",
-      href: "#team",
+      href: "/#team",
     },
   ],
   AboutPageLinks: [
