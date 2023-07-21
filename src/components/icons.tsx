@@ -1,5 +1,6 @@
 import Image from "next/image";
 import BASESLOGO from "../../public/BasesLogo.png";
+import Carf from "../../public/carf_accredited-90x90.png";
 import {
   Menu,
   X,
@@ -12,11 +13,15 @@ import {
   Car,
   Phone,
   Navigation,
+  Printer,
 } from "lucide-react";
 
 export const Icons = {
   logo: ({ className }: { className: string }) => (
     <Image src={BASESLOGO} className={className} alt="BASES Logo" />
+  ),
+  carf: ({ className }: { className: string }) => (
+    <Image src={Carf} className={className} alt="CARF Certification" />
   ),
   openMenu: Menu,
   closeMenu: X,
@@ -29,4 +34,5 @@ export const Icons = {
   car: Car,
   phone: Phone,
   navigtion: Navigation,
+  print: Printer,
 };

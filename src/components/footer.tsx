@@ -1,50 +1,135 @@
 import Link from "next/link";
 import { Icons } from "./icons";
+import { Separator } from "./ui/separator";
+import { Button } from "./ui/button";
 
 export default function Footer() {
   return (
     <footer className="shadow rounded-t-md bg-background/50">
       <div className="w-full p-4 mx-auto 2xl:container md:px-8 md:py-8 2xl:px-0">
-        <div className="sm:flex sm:items-center sm:justify-between xl:grid xl:grid-cols-3">
-          <Link href="/">
-            <Icons.logo className="w-40 pb-4 sm:pb-0 md:w-44 lg:w-64" />
-          </Link>
-          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 xl:justify-center sm:mb-0 dark:text-gray-400">
-            <li>
-              <Link href="#about" className="mr-4 hover:underline md:mr-6 ">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link href="#services" className="mr-4 hover:underline md:mr-6 ">
-                Services
-              </Link>
-            </li>
-            <li>
-              <Link href="#team" className="mr-4 hover:underline md:mr-6 ">
-                Team
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="https://basesrecoverycenter.org/wp/wp-content/uploads/Preview-consent-document-SimplePractice.pdf"
-                className="mr-4 hover:underline md:mr-6"
-              >
-                Privacy Policy
-              </Link>
-            </li>
-          </ul>
-          <div className="text-sm text-gray-500 sm:mb-0 dark:text-gray-400 sm:flex sm:flex-col sm:items-end">
-            <div className="">
-              <p>101 M-66 N,</p>
-              <p>Charlevoix, MI 49720</p>
-              <p>Phone: (123) 547-1144</p>
-              <p>Fax: (123) 547-4970</p>
-            </div>
+        <div className="grid md:grid-cols-3 md:gap-4">
+          {/* Logo and CARF Certification Section */}
+          <div className="col-span-1 flex flex-col items-center mb-8 space-y-8 md:mr-16">
+            <Link href="/">
+              <Icons.logo className="w-40 md:w-44 lg:w-64" />
+            </Link>
+
+            <Link href="/carf">
+              <div className="flex flex-col items-center justify-center w-full">
+                <Icons.carf className="w-16 h-16" />
+                <p className="text-[8px] text-justify pt-4 max-w-prose">
+                  is accredited by CARF International Commission on
+                  Accreditation of Rehabilitation Facilities (CARF)
+                  International accreditation demonstrates a program’s quality,
+                  transparency and commitment to the satisfaction of the persons
+                  served. CARF International is an independent, non-profit
+                  accreditor of health and human services. BASES is proud to be
+                  accredited by CARF.
+                </p>
+              </div>
+            </Link>
+          </div>
+
+          {/* Website Sections */}
+          <div className="col-span-1 mb-4">
+            <p className="font-bold text-lg">Website</p>
+            <Separator />
+            <ul className="flex flex-col font-medium text-gray-500 space-y-4 pt-4">
+              <li>
+                <Link href="#about" legacyBehavior passHref>
+                  <Button
+                    variant="ghost"
+                    className="flex group-hover:text-brand-foreground/80"
+                  >
+                    About
+                  </Button>
+                </Link>
+              </li>
+              <li>
+                <Link href="#services" legacyBehavior passHref>
+                  <Button
+                    variant="ghost"
+                    className="2xl:flex group-hover:text-brand-foreground/80"
+                  >
+                    Services
+                  </Button>
+                </Link>
+              </li>
+              <li>
+                <Link href="#team" legacyBehavior passHref>
+                  <Button
+                    variant="ghost"
+                    className="flex group-hover:text-brand-foreground/80"
+                  >
+                    Team
+                  </Button>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://basesrecoverycenter.org/wp/wp-content/uploads/Preview-consent-document-SimplePractice.pdf"
+                  legacyBehavior
+                  passHref
+                >
+                  <Button
+                    variant="ghost"
+                    className="flex group-hover:text-brand-foreground/80"
+                  >
+                    Privacy Policy
+                  </Button>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Section */}
+          <div className="col-span-1">
+            <p className="font-bold text-lg">Contact</p>
+            <Separator />
+            <ul className="text-gray-500 pt-4 space-y-4">
+              <li>
+                <Link
+                  href="https://goo.gl/maps/X956fmf511Fef9Pr7"
+                  legacyBehavior
+                  passHref
+                >
+                  <Button
+                    variant="ghost"
+                    className="flex group-hover:text-brand-foreground/80"
+                  >
+                    <Icons.navigtion className="mr-2" size={20} />
+                    101 M-66 N | Charlevoix, MI
+                  </Button>
+                </Link>
+              </li>
+              <li>
+                <Link href="tel:2315471144" legacyBehavior passHref>
+                  <Button
+                    variant="ghost"
+                    className="flex group-hover:text-brand-foreground/80"
+                  >
+                    <Icons.phone className="mr-2" size={20} />
+                    (123) 547-1144
+                  </Button>
+                </Link>
+              </li>
+              <li>
+                <Link href="tel:2315474970" legacyBehavior passHref>
+                  <Button
+                    variant="ghost"
+                    className="flex group-hover:text-brand-foreground/80"
+                  >
+                    <Icons.print className="mr-2" size={20} />
+                    (123) 547-4970
+                  </Button>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
+
         <hr className="my-6 border-gray-200 sm:mx-autolg:my-8" />
-        <span className="block text-sm text-gray-500 sm:text-center">
+        <span className="block text-sm text-center text-gray-500">
           © {new Date().getFullYear()}{" "}
           <Link href="https://basesmi.org/" className="hover:underline">
             BASES
