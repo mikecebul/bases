@@ -32,7 +32,7 @@ export default function Footer() {
 
           {/* Website Sections */}
           <div className="col-span-1 mb-4">
-            <p className="font-bold text-lg">Website</p>
+            <p className="font-bold text-lg pb-2">Website</p>
             <Separator />
             <ul className="flex flex-col font-medium text-gray-500 space-y-4 pt-4">
               <li>
@@ -84,7 +84,7 @@ export default function Footer() {
 
           {/* Contact Section */}
           <div className="col-span-1">
-            <p className="font-bold text-lg">Contact</p>
+            <p className="font-bold text-lg pb-2">Contact</p>
             <Separator />
             <ul className="text-gray-500 pt-4 space-y-4">
               <li>
