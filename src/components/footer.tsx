@@ -34,6 +34,14 @@ export default function Footer() {
               </Link>
             </li>
           </ul>
+          <div className="text-sm text-gray-500 sm:mb-0 dark:text-gray-400 sm:flex sm:flex-col sm:items-end">
+            <div className="">
+              <p>101 M-66 N,</p>
+              <p>Charlevoix, MI 49720</p>
+              <p>Phone: (123) 547-1144</p>
+              <p>Fax: (123) 547-4970</p>
+            </div>
+          </div>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-autolg:my-8" />
         <span className="block text-sm text-gray-500 sm:text-center">
