@@ -18,12 +18,12 @@ export default function AboutSection() {
                 Our Journey from the Beginning
               </h2>
               <p className="mt-6 text-lg leading-8 text-gray-700 max-w-prose">
-                Co-founded by Scott and Celia Kelly in 1993, BASES initially
-                functioned as a home business, evolving into a
-                community-centered operation addressing the rise of substance
-                abuse issues among the youth. Expanding our focus in 2015, we
-                now provide aid for adults battling substance abuse, mental
-                health issues, and trauma.
+                Co-founded by Scott and Celia Kelly in 1993, BASES originally
+                began as a home-based operation addressing adolescent substance
+                abuse. As we expanded to meet the needs of our community, we
+                formed the Teen Center in 1995, providing a safe after-school
+                space to tackle the rising concern of substance abuse among
+                young people.
               </p>
             </div>
           </div>
@@ -48,31 +48,52 @@ export default function AboutSection() {
         <div className="xl:pr-4">
           <div className="text-base leading-7 text-gray-700 max-w-prose">
             <p>
-              With the advent of the COVID pandemic, BASES swiftly adapted to
-              the new normal, providing telehealth services. This leap allowed
-              us to cater to the needs of people across Michigan, breaking the
-              barriers of accessibility to treatment. Our dedication to adapting
-              and staying updated has propelled us forward.
+              In 1997, we extended our services to the Recovery High program,
+              providing substance abuse education and counseling. Although our
+              primary focus was adolescent treatment until 2015, we also offered
+              services for adults and provided resources in local schools,
+              jails, and through community outreach.
+            </p>
+            <p className="mt-6">
+              In 2015, after the Recovery High program ended, we transitioned
+              our focus to adults. Recognizing the intricate connection between
+              substance abuse, mental health, and trauma, we expanded our
+              expertise to address these co-occurring issues.
+            </p>
+            <p className="mt-6">
+              When the COVID pandemic hit, we adapted swiftly, initiating
+              telehealth services that allowed us to expand our reach across
+              Michigan and break down accessibility barriers to treatment. This
+              commitment to evolving with the times and meeting changing needs
+              is what led us to create our new domain, BASESmi.org.
             </p>
             <p className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
               What’s Coming Next
             </p>
             <p className="mt-6">
-              Owned by the Kellys, who share over 74 years of sobriety, BASES is
-              an embodiment of personal, family-oriented care. We firmly believe
-              in the contagious nature of recovery, and as we look ahead, we are
-              ready to carry this belief forward under the new leadership of
-              Leah Kelly. Leah, having been a part of BASES&apos; journey since
-              the beginning, will gradually assume more directorial
-              responsibilities. At BASES, we aim to continue providing the
-              quality services our community relies on.
+              BASES has always been personal and family-oriented for Scott and
+              Celia. Collectively, they have over 74 years of sobriety. They are
+              living proof that recovery can have a meaningful and lasting
+              impact on a family system. Everyone always talks about addiction
+              and mental health being prevalent in their family tree, but the
+              Kelly&apos;s strive to also teach that recovery can run in
+              families, too.
             </p>
-            <p className="mt-8">
-              Substance use disorders are treatable. Recovery is contagious and
-              occurs within families and communities. Recovery from mental
-              health issues and trauma is achievable with safe, stable, and
-              nurturing environments. Contact BASES to work with our counselors
-              and move towards a healthier you.
+            <p className="mt-6">
+              As Scott and Celia plan to consider retirement of some sort in the
+              next 8 years, they plan to pass the torch to their daughter, Leah,
+              who has worked for BASES for many years and been along for the
+              ride since the beginning. During the next few years, Leah will
+              take on more director duties. BASES will continue to strive to
+              meet the needs of the community and provide quality services that
+              people have come to know and expect.
+            </p>
+            <p className="mt-6">
+              Substance use disorders are very treatable. Recovery is contagious
+              and happens in families and communities. Recovery from mental
+              health and trauma happens with safe, stable, and nurturing people
+              and places. Call BASES to work with our counselors as you work
+              toward accomplishing your goals of a healthier version of you.
             </p>
           </div>
         </div>

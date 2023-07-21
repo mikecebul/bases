@@ -51,6 +51,48 @@ export default function Page({ params }: { params: Params }) {
               {paragraph}
             </p>
           ))}
+          {staffMember.philosophy && (
+            <div>
+              <p className="font-bold text-lg lg:text-xl mt-6 mb-3">
+                Treatment Philosophy and Focus
+              </p>
+              <ul>
+                {staffMember.philosophy?.map((item, index) => (
+                  <p key={index} className="text-sm lg:text-base">
+                    {item}
+                  </p>
+                ))}
+              </ul>
+            </div>
+          )}
+          {staffMember.education && (
+            <div>
+              <p className="font-bold text-lg lg:text-xl mt-6 mb-3">
+                Education and Experience
+              </p>
+              <ul>
+                {staffMember.education?.map((item, index) => (
+                  <p key={index} className="text-sm lg:text-base">
+                    {item}
+                  </p>
+                ))}
+              </ul>
+            </div>
+          )}
+          {staffMember.specializations && (
+            <div>
+              <p className="font-bold text-lg lg:text-xl mt-6 mb-3">
+                Specializations:
+              </p>
+              <ul>
+                {staffMember.specializations?.map((item, index) => (
+                  <li key={index} className="text-sm lg:text-base">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <Image
           src={staffMember.imageUrl}

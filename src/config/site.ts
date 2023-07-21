@@ -222,8 +222,22 @@ export const siteConfig = {
         id: "3",
         bio: [
           "Leah has been working in the substance abuse and mental health field since 2007 in a variety of settings. Leah comes by this line of work naturally as both of her parents are counselors and in long-term recovery. She provides quality services and creates an environment where clients feel safe to communicate their thoughts and feelings.",
+        ],
+        philosophy: [
           "Leah’s approach to counseling is interactive in style with an emphasis on action and the empathic response model. She uses techniques that empower her clients to challenge internal thinking processes to motivate positive change. Leah’s treatment philosophy includes a person-centered and solution focused approach. She likes to meet the client where they are and help them gain various tools and skills they need to address their concerns. Leah utilizes Dialectical Behavior Therapy (DBT) and Cognitive Behavior Therapy (CBT) techniques. Her main specialties include substance abuse and addiction, trauma, and mood disorders. She works with ages 12 and up.",
+        ],
+        education: [
           "Leah has a master’s degree in Counselor Education: Clinical Mental Health Counseling from Western Michigan University. She is a Licensed Professional Counselor (LPC), Certified Advanced Alcohol and Drug Counselor (CAADC), Eye Movement Desensitization Reprocessing (EMDR) certified therapist, Certified Trauma Practitioner (CTP), and Certified Clinical Supervisor (CCS). Leah has worked as a Clinical Therapist in Charlevoix working with adolescents, adults, and families. She has also spent time as a Clinical Manager in Grand Rapids for a men’s residential treatment facility. She has experience with individual, group, couples, and family counseling.",
+        ],
+        specializations: [
+          "Substance abuse and addiction",
+          "Trauma / EMDR",
+          "Anxiety",
+          "Depression",
+          "Grief and Loss",
+          "Relationship Issues",
+          "Self-esteem Issues",
+          "Family Issues",
         ],
       },
       {
