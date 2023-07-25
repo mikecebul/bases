@@ -5,7 +5,7 @@ import { Separator } from "./ui/separator";
 export default function Team() {
   return (
     <section id="team" className="py-24 sm:py-32">
-      <div className="grid 2xl:container gap-x-8 gap-y-20 px-4 md:px-8 2xl:px-0 xl:grid-cols-3">
+      <div className="grid px-4 2xl:container gap-x-8 gap-y-20 md:px-8 2xl:px-0 xl:grid-cols-3">
         <div className="max-w-2xl">
           <h4 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Meet Our Leadership Team
@@ -25,7 +25,7 @@ export default function Team() {
             <li key={person.name}>
               <div className="flex items-center gap-x-6">
                 <Image
-                  className="h-16 w-16 rounded-full"
+                  className="w-16 h-16 rounded-full"
                   src={person.imageUrl}
                   alt=""
                   width={256}
@@ -46,16 +46,16 @@ export default function Team() {
             </li>
           ))}
         </ul>
-        <Separator className="col-span-3" />
+        <Separator className="hidden xl:flex xl:col-span-3" />
         <ul
           role="list"
-          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+          className="grid order-last xl:order-none gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
         >
           {siteConfig.boardMembers.map((person) => (
             <li key={person.name}>
               <div className="flex items-center gap-x-6">
                 <Image
-                  className="h-16 w-16 rounded-full"
+                  className="w-16 h-16 rounded-full"
                   src={person.imageUrl}
                   alt=""
                   width={256}
