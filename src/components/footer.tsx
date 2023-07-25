@@ -3,13 +3,13 @@ import { Icons } from "./icons";
 
 export default function Footer() {
   return (
-    <footer className="rounded-t-md shadow bg-background/50">
-      <div className="w-full mx-auto p-4 md:px-8 md:py-8 container 2xl:px-0">
-        <div className="sm:flex sm:items-center sm:justify-between">
+    <footer className="shadow rounded-t-md bg-background/50">
+      <div className="w-full p-4 mx-auto 2xl:container md:px-8 md:py-8 2xl:px-0">
+        <div className="sm:flex sm:items-center sm:justify-between xl:grid xl:grid-cols-3">
           <Link href="/">
-            <Icons.logo className="w-40 md:w-44 lg:w-64" />
+            <Icons.logo className="w-40 pb-4 sm:pb-0 md:w-44 lg:w-64" />
           </Link>
-          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 xl:justify-center sm:mb-0 dark:text-gray-400">
             <li>
               <Link href="#about" className="mr-4 hover:underline md:mr-6 ">
                 About
