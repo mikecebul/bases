@@ -5,9 +5,9 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative isolate overflow-hidden px-4 md:px-8 py-24 sm:py-32 2xl:px-0 2xl:overflow-visible 2xl:container"
+      className="relative px-4 py-24 overflow-hidden isolate md:px-8 sm:py-32 2xl:px-0 2xl:overflow-visible 2xl:container"
     >
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden -z-10">
         <svg
           className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
           aria-hidden="true"
@@ -61,11 +61,12 @@ export default function AboutSection() {
         </div>
         <div className="2xl:sticky 2xl:top-4 2xl:col-start-1 2xl:row-span-2 2xl:row-start-1 2xl:pt-16">
           <Image
-            className="hidden rounded-lg bg-gray-900 shadow-lg ring-1 ring-gray-400/10 object-center sm:block"
+            className="hidden object-center bg-gray-900 rounded-lg shadow-lg ring-1 ring-gray-400/10 sm:block"
             src="/Buiding_With_Sign.webp"
             alt="BASES Sign"
             width={1080}
             height={1980}
+            priority
           />
           <Image
             className="rounded-lg bg-gray-900 shadow-lg ring-1 ring-gray-400/10 sm:w-[57rem] object-center block mx-auto sm:hidden"
@@ -77,7 +78,7 @@ export default function AboutSection() {
         </div>
         <div className="">
           <div className="2xl:pr-4">
-            <div className="max-w-prose text-base leading-7 text-gray-700">
+            <div className="text-base leading-7 text-gray-700 max-w-prose">
               <p>
                 With the advent of the COVID pandemic, BASES swiftly adapted to
                 the new normal, providing telehealth services. This leap allowed
