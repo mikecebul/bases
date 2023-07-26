@@ -35,7 +35,7 @@ export default function Services() {
           />
         </svg>
       </div>
-      <div className="2xl:container px-4 md:px-8 2xl:px-0">
+      <div className="2xl:container px-4 md:px-8 2xl:px-0 flex flex-col xl:items-center xl:text-center">
         <div className="max-w-2xl">
           <p className="text-base font-semibold leading-7 text-brand">
             Redefine your recovery path
@@ -48,7 +48,7 @@ export default function Services() {
             care, we&apos;ve curated an exceptional recovery experience for you.
           </p>
         </div>
-        <div className="mt-16 sm:mt-20 lg:mt-24">
+        <div className="mt-16 sm:mt-20 lg:mt-24 text-left">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
             {siteConfig.Services.map((service) => (
               <div key={service.name} className="relative pl-16">

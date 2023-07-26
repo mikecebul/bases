@@ -110,15 +110,10 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="tel:2315474970" legacyBehavior passHref>
-                  <Button
-                    variant="ghost"
-                    className="flex group-hover:text-brand-foreground/80"
-                  >
-                    <Icons.print className="mr-2" size={20} />
-                    (123) 547-4970
-                  </Button>
-                </Link>
+                <div className=" font-medium flex items-center pr-2 ml-4">
+                  <Icons.print className="mr-2" size={20} />
+                  (231) 547-4970
+                </div>
               </li>
             </ul>
           </div>

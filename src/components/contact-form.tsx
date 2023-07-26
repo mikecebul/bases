@@ -36,7 +36,7 @@ export function ContactForm() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Get In Touch With Us</DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="pb-8">
             Let us know how we can reach you and what you&apos;re interested in.
             We&apos;ll get back to you as soon as possible.
           </DialogDescription>
@@ -59,6 +59,7 @@ const formSchema = z.object({
     .max(14, {
       message: "Phone number must not exceed 14 charaters.",
     }),
+  email: z.string().optional(),
   description: z.string().min(2, {
     message: "Description must be at least 2 characters.",
   }),
@@ -160,6 +161,22 @@ export function ContactUsForm({ onSubmitted }: ContactUsFormProps) {
               </FormControl>
               <FormDescription>
                 Which number should we use to reach out to you?
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email Address</FormLabel>
+              <FormControl>
+                <Input placeholder="example@gmil.com" {...field} />
+              </FormControl>
+              <FormDescription>
+                What is a good email address for you?
               </FormDescription>
               <FormMessage />
             </FormItem>

@@ -5,30 +5,25 @@ export default function AboutSection() {
   return (
     <section
       id="about-us"
-      className="relative px-4 pt-16 lg:pt-32 overflow-hidden isolate md:px-8 2xl:px-0 xl:overflow-visible 2xl:container"
+      className="relative px-4 py-16 lg:py-24 overflow-hidden isolate md:px-8 2xl:px-0 xl:overflow-visible 2xl:container"
     >
       <div className="grid grid-cols-1 gap-x-8 gap-y-16 xl:container xl:grid-cols-2 xl:items-start xl:gap-y-10 xl:gap-x-10 xl:px-0">
-        <div className="xl:col-span-2 xl:col-start-2 xl:row-start-1 xl:grid xl:w-full xl:gap-x-8 xl:px-0">
-          <div className="">
-            <div className="">
-              <p className="text-base font-semibold leading-7 text-brand max-w-prose">
-                Where It Started &amp; Where We&apos;ve Been
-              </p>
-              <h2 className="mt-2 text-2xl font-bold tracking-tight text-gray-900">
-                Our Journey from the Beginning
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-700 max-w-prose">
-                Co-founded by Scott and Celia Kelly in 1993, BASES originally
-                began as a home-based operation addressing adolescent substance
-                abuse. As we expanded to meet the needs of our community, we
-                formed the Teen Center in 1995, providing a safe after-school
-                space to tackle the rising concern of substance abuse among
-                young people.
-              </p>
-            </div>
-          </div>
+        <div className="xl:col-span-2 xl:col-start-1 xl:row-start-1 xl:grid xl:w-full xl:gap-x-8 xl:px-0">
+          <p className="text-base font-semibold leading-7 text-brand max-w-prose">
+            Where It Started &amp; Where We&apos;ve Been
+          </p>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight text-gray-900">
+            Our Journey from the Beginning
+          </h2>
+          <p className="mt-6 text-lg leading-8 text-gray-700 max-w-prose">
+            Co-founded by Scott and Celia Kelly in 1993, BASES originally began
+            as a home-based operation addressing adolescent substance abuse. As
+            we expanded to meet the needs of our community, we formed the Teen
+            Center in 1995, providing a safe after-school space to tackle the
+            rising concern of substance abuse among young people.
+          </p>
         </div>
-        <div className="xl:sticky xl:top-4 xl:col-start-1 xl:row-span-2 xl:row-start-1 xl:pt-24">
+        <div className="xl:sticky xl:top-20 xl:col-start-2 xl:row-span-2 xl:row-start-1 xl:pt-2">
           <Image
             className="object-cover w-full max-w-3xl bg-gray-900 rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
             src="/Buiding_With_Sign.webp"
@@ -37,13 +32,6 @@ export default function AboutSection() {
             height={1980}
             priority
           />
-          {/* <Image
-            className="rounded-lg bg-gray-900 shadow-lg ring-1 ring-gray-400/10 sm:w-[57rem] object-center block mx-auto sm:hidden"
-            src="/Buiding_With_Sign_Mobile.webp"
-            alt="BASES Sign"
-            width={1010}
-            height={1515}
-          /> */}
         </div>
         <div className="xl:pr-4">
           <div className="text-base leading-7 text-gray-700 max-w-prose">

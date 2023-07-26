@@ -14,14 +14,14 @@ export default function Hero() {
 
   return (
     <section className="">
-      <div className="grid px-4 py-8 lg:gap-8 xl:gap-0 lg:pt-32 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
+      <div className="grid px-4 py-8 lg:gap-8 xl:gap-0 lg:pt-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
         <div className="mr-auto place-self-center lg:col-span-6">
-          <h1 className="max-w-2xl mt-2 mb-4 text-3xl font-extrabold tracking-tight sm:text-5xl xl:text-6xl dark:text-white">
-            Bay Area Substance Education Services
+          <h1 className="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight sm:text-5xl xl:text-7xl dark:text-white">
+            Substance Use & Mental Health Counseling
           </h1>
-          <p className="max-w-2xl mb-6 text-base font-light text-muted-foreground">
-            Striving to meet the needs of the community and provide quality
-            services that people have come to know and expect.
+          <p className="max-w-xl mb-6 text-base font-light text-muted-foreground">
+            We bridge the gap to recovery, offering flexible and personalized
+            services both in-person and via telehealth.
           </p>
           <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
             {!isDesktop ? (
@@ -39,7 +39,7 @@ export default function Hero() {
               variant="outline"
               size="xl"
               className=""
-              onClick={() => router.push("#about")}
+              onClick={() => router.push("/about-us")}
             >
               Learn More
             </Button>
@@ -48,8 +48,8 @@ export default function Hero() {
         <div className="hidden lg:mt-0 lg:col-span-6 lg:flex">
           <div className="relative">
             <Image
-              src="/BASES_Road_Sign.webp"
-              alt="BASES Storefront"
+              src="/Woman_Laptop.webp"
+              alt="Woman using telehealth services from home."
               className="object-cover w-full rounded-md"
               width={1080}
               height={1980}

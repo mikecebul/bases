@@ -14,7 +14,7 @@ export const siteConfig = {
     },
     {
       title: "About Us",
-      href: "/#about-us",
+      href: "/about-us",
     },
     {
       title: "Services",
@@ -151,15 +151,15 @@ export const siteConfig = {
   ],
   Services: [
     {
-      name: "Detailed Substance Use Disorder Assessments",
+      name: "Detailed Substance Use and Mental Health Assessments",
       description:
-        "We provide comprehensive substance use disorder assessments for adults and adolescents to map out the most effective treatment plan.",
+        "Our team delivers comprehensive assessments for substance use disorders, mental health, and trauma for adults and adolescents, helping to formulate the most effective personalized treatment plan.",
       icon: Icons.glasses,
     },
     {
-      name: "Substance Use Disorder Therapy",
+      name: "Individual and Group Counseling",
       description:
-        "We offer individual and group therapy sessions for adults utilizing DBT, CBT, and relapse prevention therapies.",
+        "We offer individual and group counseling sessions addressing substance use, mental health, and trauma. Our therapies include DBT (Dialectical Behavior Therapy), CBT (Cognitive Behavior Therapy), and EMDR (Eye Movement Desensitization and Reprocessing).",
       icon: Icons.group,
     },
     {
