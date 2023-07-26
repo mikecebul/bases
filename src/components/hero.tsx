@@ -11,7 +11,7 @@ export default function Hero() {
 
   return (
     <section className="">
-      <div className="grid px-4 py-8 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
+      <div className="grid px-4 py-8 lg:gap-8 xl:gap-0 lg:pt-32 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
         <div className="mr-auto place-self-center lg:col-span-6">
           <h1 className="max-w-2xl mt-2 mb-4 text-3xl font-extrabold tracking-tight sm:text-5xl xl:text-6xl dark:text-white">
             Bay Area Substance Education Services

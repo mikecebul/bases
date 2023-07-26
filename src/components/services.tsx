@@ -3,10 +3,10 @@ import { siteConfig } from "@/config/site";
 
 export default function Services() {
   return (
-    <section id="services" className="py-16 relative isolate">
+    <section id="services" className="pt-16 lg:pt-32 relative isolate">
       <div className="absolute inset-0 overflow-hidden -z-10">
         <svg
-          className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
+          className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] pt-16"
           aria-hidden="true"
         >
           <defs>
