@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 
 export default function Services() {
   return (
-    <div id="services" className="py-24 sm:py-3 relative">
+    <section id="services" className="py-16 relative isolate">
       <div className="absolute inset-0 overflow-hidden -z-10">
         <svg
           className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
@@ -69,6 +69,6 @@ export default function Services() {
           </dl>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
