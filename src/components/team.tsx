@@ -27,7 +27,7 @@ export default function Team() {
               key={person.name}
               href={`/team/staff/[name]`}
               as={`/team/staff/${person.name.toLowerCase().replace(/ /g, "-")}`}
-              className="hover:bg-muted-foreground/20 p-2 rounded-md -ml-2"
+              className="hover:bg-muted-foreground/10 p-2 rounded-md -ml-2"
             >
               <li>
                 <div className="flex items-center gap-x-6">
@@ -66,7 +66,7 @@ export default function Team() {
               as={`/team/board-members/${person.name
                 .toLowerCase()
                 .replace(/ /g, "-")}`}
-              className="hover:bg-muted-foreground/20 p-2 rounded-md -ml-2"
+              className="hover:bg-muted-foreground/10 p-2 rounded-md -ml-2"
             >
               <li key={person.name}>
                 <div className="flex items-center gap-x-6">
