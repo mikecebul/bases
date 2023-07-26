@@ -24,8 +24,6 @@ import { Textarea } from "./ui/textarea";
 import { useEffect, useState } from "react";
 import { toast } from "./ui/use-toast";
 
-const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
-
 export function ContactForm() {
   const [open, setOpen] = useState(false);
   return (
@@ -78,6 +76,8 @@ export function ContactUsForm({ onSubmitted }: ContactUsFormProps) {
     error: "error",
   };
 
+  const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
+
   const [status, setStatus] = useState(contactStatuses.idle);
 
   const abortLongFetch = new AbortController();
@@ -117,7 +117,7 @@ export function ContactUsForm({ onSubmitted }: ContactUsFormProps) {
 
       setStatus(contactStatuses.submitted);
       form.reset();
-      onSubmitted();
+      wait().then(() => onSubmitted());
     } catch (err) {
       setStatus(contactStatuses.error);
       console.error(err);

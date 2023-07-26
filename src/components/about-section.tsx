@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function AboutSection() {
   return (
     <section
-      id="about"
+      id="about-us"
       className="relative px-4 pt-16 lg:pt-32 overflow-hidden isolate md:px-8 2xl:px-0 xl:overflow-visible 2xl:container"
     >
       <div className="grid grid-cols-1 gap-x-8 gap-y-16 xl:container xl:grid-cols-2 xl:items-start xl:gap-y-10 xl:gap-x-10 xl:px-0">
@@ -12,7 +12,7 @@ export default function AboutSection() {
           <div className="">
             <div className="">
               <p className="text-base font-semibold leading-7 text-brand max-w-prose">
-                Where It Started &amp; Where We’ve Been
+                Where It Started &amp; Where We&apos;ve Been
               </p>
               <h2 className="mt-2 text-2xl font-bold tracking-tight text-gray-900">
                 Our Journey from the Beginning
