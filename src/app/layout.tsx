@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
+        <Toaster />
         <Analytics />
       </body>
     </html>

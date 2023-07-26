@@ -5,9 +5,12 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { Icons } from "./icons";
 import Link from "next/link";
+import { ContactForm } from "./contact-form";
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function Hero() {
   const router = useRouter();
+  const isDesktop = useMediaQuery("(min-width: 1440px)");
 
   return (
     <section className="">
@@ -21,12 +24,17 @@ export default function Hero() {
             services that people have come to know and expect.
           </p>
           <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
-            <Link href="tel:2315471144" legacyBehavior passHref>
-              <Button variant="brand" size="xl">
-                <Icons.phone className="mr-2" />
-                Call Now
-              </Button>
-            </Link>
+            {!isDesktop ? (
+              <Link href="tel:2315471144" legacyBehavior passHref>
+                <Button variant="brand" size="xl">
+                  <Icons.phone className="mr-2" />
+                  Call Now
+                </Button>
+              </Link>
+            ) : (
+              <ContactForm />
+            )}
+
             <Button
               variant="outline"
               size="xl"
