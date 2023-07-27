@@ -17,7 +17,7 @@ export function Header() {
     <motion.header
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.1 }}
+      transition={{ duration: 0.2 }}
       className="sticky top-0 z-40 flex w-full bg-background/50 backdrop-blur-sm"
     >
       <div className="flex items-center w-full px-4 md:px-8 2xl:px-0 2xl:container h-14 lg:h-20">

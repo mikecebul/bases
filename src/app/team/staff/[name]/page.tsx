@@ -1,6 +1,7 @@
-/* eslint-disable react/no-unescaped-entities */
-import { siteConfig } from "@/config/site";
+"use client";
 
+import { siteConfig } from "@/config/site";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -38,7 +39,12 @@ export default function Page({ params }: { params: Params }) {
   }
 
   return (
-    <div className="w-full lg:container my-2 lg:my-4 mx-auto">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="w-full lg:container my-2 lg:my-4 mx-auto"
+    >
       <CardHeader className="container">
         <CardTitle>{staffMember.name}</CardTitle>
         <CardDescription>{staffMember.qualifications}</CardDescription>
@@ -107,6 +113,6 @@ export default function Page({ params }: { params: Params }) {
           <Button variant="outline">Back</Button>
         </Link>
       </CardFooter>
-    </div>
+    </motion.div>
   );
 }

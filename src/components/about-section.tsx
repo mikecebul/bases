@@ -1,9 +1,14 @@
-// import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
       id="about-us"
       className="relative px-4 py-16 lg:py-24 overflow-hidden isolate md:px-8 2xl:px-0 xl:overflow-visible 2xl:container"
     >
@@ -86,6 +91,6 @@ export default function AboutSection() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
