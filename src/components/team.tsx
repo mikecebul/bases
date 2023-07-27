@@ -1,13 +1,25 @@
+"use client";
+
 import Image from "next/image";
 import { SiteConfig, siteConfig } from "@/config/site";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function Team() {
+  const isDesktop = useMediaQuery("(min-width: 1440px)");
+
   return (
     <section id="team" className="pt-16 lg:pt-32 pb-32">
       <div className="grid px-4 2xl:container gap-x-8 gap-y-20 md:px-8 2xl:px-0 xl:grid-cols-3">
-        <div className="max-w-2xl">
+        <motion.div
+          initial={{ x: -100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl"
+        >
           <h4 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Meet Our Leadership Team
           </h4>
@@ -17,8 +29,12 @@ export default function Team() {
             driven by a shared commitment to excellence and a relentless pursuit
             of positive outcomes for our patients.
           </p>
-        </div>
-        <ul
+        </motion.div>
+        <motion.ul
+          initial={{ x: 100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           role="list"
           className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
         >
@@ -53,9 +69,13 @@ export default function Team() {
               </li>
             </Link>
           ))}
-        </ul>
+        </motion.ul>
         <Separator className="hidden xl:flex xl:col-span-3" />
-        <ul
+        <motion.ul
+          initial={{ x: !isDesktop ? -100 : 100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
           role="list"
           className="grid order-last xl:order-none gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
         >
@@ -89,8 +109,14 @@ export default function Team() {
               </li>
             </Link>
           ))}
-        </ul>
-        <div className="max-w-2xl">
+        </motion.ul>
+        <motion.div
+          initial={{ x: !isDesktop ? 100 : -100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="max-w-2xl"
+        >
           <p className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Meet Our Board of Directors
           </p>
@@ -101,7 +127,7 @@ export default function Team() {
             outpatient care. Their unified aim: to drive excellence and positive
             patient outcomes.
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

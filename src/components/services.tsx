@@ -1,10 +1,18 @@
+"use client";
+
 import React from "react";
 import { siteConfig } from "@/config/site";
+import { motion } from "framer-motion";
 
 export default function Services() {
   return (
     <section id="services" className="pt-16 lg:pt-32 relative isolate">
-      <div className="absolute inset-0 overflow-hidden -z-10">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="absolute inset-0 overflow-hidden -z-10"
+      >
         <svg
           className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] pt-16"
           aria-hidden="true"
@@ -34,9 +42,14 @@ export default function Services() {
             fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)"
           />
         </svg>
-      </div>
+      </motion.div>
       <div className="2xl:container px-4 md:px-8 2xl:px-0 flex flex-col xl:items-center xl:text-center">
-        <div className="max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="max-w-2xl"
+        >
           <p className="text-base font-semibold leading-7 text-brand">
             Redefine your recovery path
           </p>
@@ -47,11 +60,38 @@ export default function Services() {
             Incorporating a unique blend of clinical expertise and compassionate
             care, we&apos;ve curated an exceptional recovery experience for you.
           </p>
-        </div>
-        <div className="mt-16 sm:mt-20 lg:mt-24 text-left">
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                delayChildren: 0.3,
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+          className="mt-16 sm:mt-20 lg:mt-24 text-left"
+        >
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
             {siteConfig.Services.map((service) => (
-              <div key={service.name} className="relative pl-16">
+              <motion.div
+                key={service.name}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      duration: 0.4,
+                    },
+                  },
+                }}
+                className="relative pl-16"
+              >
                 <dt className="text-base font-semibold leading-7 text-primary">
                   <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-brand">
                     <service.icon
@@ -64,10 +104,10 @@ export default function Services() {
                 <dd className="mt-2 text-base leading-7 text-muted-foreground">
                   {service.description}
                 </dd>
-              </div>
+              </motion.div>
             ))}
           </dl>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -7,13 +7,19 @@ import { Icons } from "./icons";
 import Link from "next/link";
 import { ContactForm } from "./contact-form";
 import { useMediaQuery } from "@mantine/hooks";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   const router = useRouter();
   const isDesktop = useMediaQuery("(min-width: 1440px)");
 
   return (
-    <section className="">
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className=""
+    >
       <div className="grid px-4 py-8 lg:gap-8 lg:pt-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
         <div className="mr-auto place-self-center lg:col-span-6">
           <h1 className="max-w-2xl mb-4 lg:mb-8 text-3xl font-extrabold tracking-tight sm:text-4xl xl:text-6xl 2xl:text-7xl">
@@ -93,6 +99,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

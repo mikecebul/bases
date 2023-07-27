@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { cn, isActiveMenuItem, isActiveRoute } from "@/lib/utils";
+import { cn, isActiveRoute } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -47,7 +47,7 @@ export function MainNav() {
             <NavigationMenuItem>
               <NavigationMenuTrigger
                 className={cn("text-lg", {
-                  "bg-secondary": isActiveMenuItem(currentPathName, "/about"),
+                  "bg-secondary": isActiveRoute(currentPathName, "/about"),
                 })}
               >
                 About Us
@@ -84,10 +84,7 @@ export function MainNav() {
             <NavigationMenuItem>
               <NavigationMenuTrigger
                 className={cn("text-lg", {
-                  "bg-secondary": isActiveMenuItem(
-                    currentPathName,
-                    "/services"
-                  ),
+                  "bg-secondary": isActiveRoute(currentPathName, "/services"),
                 })}
               >
                 Services
