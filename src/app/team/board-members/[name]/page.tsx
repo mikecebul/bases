@@ -1,4 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client";
+
 import { siteConfig } from "@/config/site";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
