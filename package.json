@@ -31,6 +31,7 @@
     "clsx": "^2.0.0",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
+    "framer-motion": "^10.14.0",
     "lucide-react": "^0.261.0",
     "next": "13.4.10",
     "nodemailer": "^6.9.4",

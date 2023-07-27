@@ -34,12 +34,23 @@ export function MainNav() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
+              <Link href="/about-us" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={cn(navigationMenuTriggerStyle(), "text-lg", {
+                    "bg-secondary": isActiveRoute(currentPathName, "/"),
+                  })}
+                >
+                  About Us
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
               <NavigationMenuTrigger
                 className={cn("text-lg", {
                   "bg-secondary": isActiveMenuItem(currentPathName, "/about"),
                 })}
               >
-                About
+                About Us
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">

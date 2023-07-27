@@ -7,6 +7,8 @@ import { MobileNavLandingPage } from "./mobile-nav-landing-page";
 import { Button } from "./ui/button";
 import { useMediaQuery } from "@mantine/hooks";
 import { cn } from "@/lib/utils";
+import { MainNav } from "./main-nav";
+import { MainNav2 } from "./main-nav-2";
 
 export function Header() {
   const isDesktop = useMediaQuery("(min-width: 1440px)");
@@ -16,7 +18,8 @@ export function Header() {
         <Link href="/">
           <Icons.logo className="w-40 md:w-44 lg:w-64" />
         </Link>
-        <MainNavLandingPage />
+        {/* <MainNavLandingPage /> */}
+        <MainNav2 />
         <MobileNavLandingPage />
         <div className="flex flex-col space-y-2 items-center 2xl:flex-row 2xl:space-x-2 2xl:space-y-0">
           {isDesktop ? (

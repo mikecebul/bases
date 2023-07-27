@@ -9,8 +9,3 @@ export const isActiveRoute = (
   currentRouteHref: string,
   providedRouteHref: string
 ) => currentRouteHref.endsWith(providedRouteHref);
-
-export const isActiveMenuItem = (
-  currentRouteHref: string,
-  providedRouteHref: string
-) => currentRouteHref.includes(providedRouteHref);

@@ -105,7 +105,7 @@ export default function Footer() {
                     className="flex group-hover:text-brand-foreground/80"
                   >
                     <Icons.phone className="mr-2" size={20} />
-                    (123) 547-1144
+                    (231) 547-1144
                   </Button>
                 </Link>
               </li>
