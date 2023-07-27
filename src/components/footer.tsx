@@ -16,12 +16,12 @@ export default function Footer() {
             <div className="flex flex-col items-center justify-center w-full">
               <Icons.carf className="w-16 h-16" />
               <p className="text-[8px] text-justify pt-4 max-w-prose">
-                is accredited by CARF International Commission on Accreditation
-                of Rehabilitation Facilities (CARF) International accreditation
-                demonstrates a program’s quality, transparency and commitment to
-                the satisfaction of the persons served. CARF International is an
-                independent, non-profit accreditor of health and human services.
-                BASES is proud to be accredited by CARF.
+                BASES is accredited by CARF International Commission on
+                Accreditation of Rehabilitation Facilities (CARF) International
+                accreditation demonstrates a program’s quality, transparency and
+                commitment to the satisfaction of the persons served. CARF
+                International is an independent, non-profit accreditor of health
+                and human services. BASES is proud to be accredited by CARF.
               </p>
             </div>
           </div>

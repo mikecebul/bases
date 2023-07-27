@@ -8,7 +8,7 @@ export default function AboutSection() {
       className="relative px-4 py-16 lg:py-24 overflow-hidden isolate md:px-8 2xl:px-0 xl:overflow-visible 2xl:container"
     >
       <div className="grid grid-cols-1 gap-x-8 gap-y-16 xl:container xl:grid-cols-2 xl:items-start xl:gap-y-10 xl:gap-x-10 xl:px-0">
-        <div className="xl:col-span-2 xl:col-start-1 xl:row-start-1 xl:grid xl:w-full xl:gap-x-8 xl:px-0">
+        <div className="xl:col-start-1 xl:row-start-1 xl:grid xl:w-full xl:gap-x-8 xl:px-0">
           <p className="text-base font-semibold leading-7 text-brand max-w-prose">
             Where It Started &amp; Where We&apos;ve Been
           </p>
