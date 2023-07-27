@@ -14,6 +14,7 @@ import {
   Phone,
   Navigation,
   Printer,
+  Mail,
 } from "lucide-react";
 
 export const Icons = {
@@ -35,4 +36,5 @@ export const Icons = {
   phone: Phone,
   navigtion: Navigation,
   print: Printer,
+  mail: Mail,
 };

@@ -117,6 +117,21 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="mailto:info@basesrecoverycenter.org"
+                  legacyBehavior
+                  passHref
+                >
+                  <Button
+                    variant="ghost"
+                    className="flex group-hover:text-brand-foreground/80"
+                  >
+                    <Icons.mail className="mr-2" size={20} />
+                    info@basesrecoverycenter.org
+                  </Button>
+                </Link>
+              </li>
+              <li>
                 <div className=" font-medium flex items-center pr-2 ml-4">
                   <Icons.print className="mr-2" size={20} />
                   (231) 547-4970
