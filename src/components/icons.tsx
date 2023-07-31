@@ -15,6 +15,7 @@ import {
   Navigation,
   Printer,
   Mail,
+  Pencil,
 } from "lucide-react";
 
 export const Icons = {
@@ -37,4 +38,5 @@ export const Icons = {
   navigtion: Navigation,
   print: Printer,
   mail: Mail,
+  pencil: Pencil,
 };

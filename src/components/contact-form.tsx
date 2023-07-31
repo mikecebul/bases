@@ -21,7 +21,7 @@ import {
 } from "./ui/form";
 import { useForm } from "react-hook-form";
 import { Textarea } from "./ui/textarea";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "./ui/use-toast";
 
 export function ContactForm() {

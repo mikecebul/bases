@@ -21,11 +21,12 @@ export default function AboutSection() {
             Our Journey from the Beginning
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-700 max-w-prose">
-            Co-founded by Scott and Celia Kelly in 1993, BASES originally began
-            as a home-based operation addressing adolescent substance abuse. As
-            we expanded to meet the needs of our community, we formed the Teen
-            Center in 1995, providing a safe after-school space to tackle the
-            rising concern of substance abuse among young people.
+            BASES (Bay Area Substance Education Services), co-founded by Scott
+            and Celia Kelly in 1993, originally began as a home-based operation
+            addressing adolescent substance abuse. As we expanded to meet the
+            needs of our community, we formed the Teen Center in 1995, providing
+            a safe after-school space to tackle the rising concern of substance
+            abuse among young people.
           </p>
         </div>
         <div className="xl:sticky xl:top-20 xl:col-start-2 xl:row-span-2 xl:row-start-1 xl:pt-2">
