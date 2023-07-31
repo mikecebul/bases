@@ -1,15 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { SiteConfig, siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "@mantine/hooks";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
+import { StaffMember } from "@prisma/client";
 
-export default function Team() {
+export default function Team({
+  staffMembers,
+}: {
+  staffMembers: StaffMember[];
+}) {
   const isDesktop = useMediaQuery("(min-width: 1440px)");
 
   return (
