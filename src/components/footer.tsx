@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Icons } from "./icons";
 import { Separator } from "./ui/separator";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 export default function Footer() {
   return (
@@ -131,11 +132,14 @@ export default function Footer() {
                   </Button>
                 </Link>
               </li>
-              <li>
-                <div className=" font-medium flex items-center pr-2 ml-4">
-                  <Icons.print className="mr-2" size={20} />
-                  (231) 547-4970
-                </div>
+              <li
+                className={cn(
+                  buttonVariants({ variant: "text" }),
+                  "text-gray-500"
+                )}
+              >
+                <Icons.print className="mr-2" size={20} />
+                (231) 547-4970
               </li>
             </ul>
           </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Icons } from "./icons";
 import { MainNavLandingPage } from "./main-nav-landing-page";
 import { MobileNavLandingPage } from "./mobile-nav-landing-page";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { useMediaQuery } from "@mantine/hooks";
 import { cn } from "@/lib/utils";
 import { MainNav } from "./main-nav";
@@ -29,15 +29,23 @@ export function Header() {
         <MobileNavLandingPage />
         <div className="flex flex-col space-y-2 items-center 2xl:flex-row 2xl:space-x-2 2xl:space-y-0">
           {isDesktop ? (
-            <div className="font-semibold text-brand flex items-center text-lg pr-2">
+            <div
+              className={cn(
+                buttonVariants({ variant: "text" }),
+                "text-lg text-brand"
+              )}
+            >
               <Icons.phone className="mr-2" size={20} />
               (231) 547-1144
             </div>
           ) : (
-            <Link href="tel:2315471144" legacyBehavior passHref>
+            <Link href="tel:2315471144">
               <Button
                 variant="brand"
-                className=" hidden lg:flex group-hover:text-brand-foreground/80 bg-brand"
+                className={cn(
+                  buttonVariants({ variant: "brand" }),
+                  "hidden lg:inline-flex group-hover:text-brand-foreground/80"
+                )}
               >
                 <Icons.phone className="mr-2" size={20} />
                 (231) 547-1144
