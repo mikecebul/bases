@@ -13,12 +13,15 @@ export default function Footer() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="w-full p-4 mx-auto 2xl:container md:px-8 md:py-8 2xl:px-0"
+        className="w-full px-4 pt-4 mx-auto 2xl:container md:px-8 md:pt-8 2xl:px-0"
       >
         <div className="grid md:grid-cols-3 md:gap-4">
           {/* Logo and CARF Certification Section */}
           <div className="col-span-1 flex flex-col items-center mb-8 space-y-8 md:mr-16">
-            <Link href="/">
+            <Link
+              href="/"
+              className={cn(buttonVariants({ variant: "ghost" }), "py-8")}
+            >
               <Icons.logo className="w-40 md:w-44 lg:w-64" />
             </Link>
             <div className="flex flex-col items-center justify-center w-full">
@@ -145,14 +148,19 @@ export default function Footer() {
           </div>
         </div>
 
-        <hr className="my-6 border-gray-200 sm:mx-autolg:my-8" />
-        <span className="block text-sm text-center text-gray-500">
-          © {new Date().getFullYear()}{" "}
-          <Link href="https://basesmi.org/" className="hover:underline">
-            BASES
-          </Link>
-          . All Rights Reserved.
-        </span>
+        <Separator />
+        <div className="flex items-center justify-center">
+          <span className="block text-sm text-center text-gray-500">
+            © {new Date().getFullYear()}{" "}
+            <Link
+              href="https://basesmi.org/"
+              className={cn(buttonVariants({ variant: "ghost" }), "p-0")}
+            >
+              BASES
+            </Link>
+            . All Rights Reserved.
+          </span>
+        </div>
       </motion.div>
     </footer>
   );

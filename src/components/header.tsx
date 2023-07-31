@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { Icons } from "./icons";
-import { MainNavLandingPage } from "./main-nav-landing-page";
 import { MobileNavLandingPage } from "./mobile-nav-landing-page";
-import { Button, buttonVariants } from "./ui/button";
+import { buttonVariants } from "./ui/button";
 import { useMediaQuery } from "@mantine/hooks";
 import { cn } from "@/lib/utils";
-import { MainNav } from "./main-nav";
 import { MainNav2 } from "./main-nav-2";
 import { motion } from "framer-motion";
 
@@ -21,7 +19,10 @@ export function Header() {
       className="sticky top-0 z-40 flex w-full bg-background/50 backdrop-blur-sm"
     >
       <div className="flex items-center w-full px-4 md:px-8 2xl:px-0 2xl:container h-14 lg:h-20">
-        <Link href="/">
+        <Link
+          href="/"
+          className={cn(buttonVariants({ variant: "ghost" }), "py-8 px-0")}
+        >
           <Icons.logo className="w-40 md:w-44 lg:w-64" />
         </Link>
         {/* <MainNavLandingPage /> */}
@@ -39,31 +40,26 @@ export function Header() {
               (231) 547-1144
             </div>
           ) : (
-            <Link href="tel:2315471144">
-              <Button
-                variant="brand"
-                className={cn(
-                  buttonVariants({ variant: "brand" }),
-                  "hidden lg:inline-flex group-hover:text-brand-foreground/80"
-                )}
-              >
-                <Icons.phone className="mr-2" size={20} />
-                (231) 547-1144
-              </Button>
+            <Link
+              href="tel:2315471144"
+              className={cn(
+                buttonVariants({ variant: "brand" }),
+                "hidden lg:inline-flex"
+              )}
+            >
+              <Icons.phone className="mr-2" size={20} />
+              (231) 547-1144
             </Link>
           )}
           <Link
             href="https://goo.gl/maps/X956fmf511Fef9Pr7"
-            legacyBehavior
-            passHref
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "hidden 2xl:inline-flex"
+            )}
           >
-            <Button
-              variant="outline"
-              className="hidden 2xl:flex group-hover:text-brand-foreground/80"
-            >
-              <Icons.navigtion className="mr-2" size={20} />
-              101 M-66 N | Charlevoix, MI
-            </Button>
+            <Icons.navigtion className="mr-2" size={20} />
+            101 M-66 N | Charlevoix, MI
           </Link>
         </div>
       </div>

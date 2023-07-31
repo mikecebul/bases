@@ -6,6 +6,8 @@ import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "@mantine/hooks";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "./ui/button";
 
 export default function Team() {
   const isDesktop = useMediaQuery("(min-width: 1440px)");
@@ -36,14 +38,17 @@ export default function Team() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           role="list"
-          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+          className="grid gap-x-6 gap-y-8  sm:grid-cols-2 sm:gap-y-12 xl:col-span-2"
         >
           {siteConfig.team.staff.map((person) => (
             <Link
               key={person.name}
               href={`/team/staff/[name]`}
               as={`/team/staff/${person.name.toLowerCase().replace(/ /g, "-")}`}
-              className="hover:bg-muted-foreground/10 p-2 rounded-md -ml-2"
+              className={cn(
+                buttonVariants({ variant: "card" }),
+                "hover:bg-muted-foreground/10 p-2 rounded-md -ml-2 justify-start py-16 sm:py-10"
+              )}
             >
               <li>
                 <div className="flex items-center gap-x-6">
@@ -77,7 +82,7 @@ export default function Team() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           role="list"
-          className="grid order-last xl:order-none gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+          className="grid order-last xl:order-none gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-y-12 xl:col-span-2"
         >
           {siteConfig.team.boardMembers.map((person) => (
             <Link
@@ -86,7 +91,10 @@ export default function Team() {
               as={`/team/board-members/${person.name
                 .toLowerCase()
                 .replace(/ /g, "-")}`}
-              className="hover:bg-muted-foreground/10 p-2 rounded-md -ml-2"
+              className={cn(
+                buttonVariants({ variant: "card" }),
+                "hover:bg-muted-foreground/10 p-2 rounded-md -ml-2 justify-start py-16 sm:py-10"
+              )}
             >
               <li key={person.name}>
                 <div className="flex items-center gap-x-6">

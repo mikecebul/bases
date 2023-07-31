@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { Icons } from "./icons";
 import Link from "next/link";
 import { ContactForm } from "./contact-form";
 import { useMediaQuery } from "@mantine/hooks";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export default function Hero() {
   const router = useRouter();
@@ -31,24 +32,26 @@ export default function Hero() {
           </p>
           <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
             {!isDesktop ? (
-              <Link href="tel:2315471144" legacyBehavior passHref>
-                <Button variant="brand" size="xl">
-                  <Icons.phone className="mr-2" />
-                  Call Now
-                </Button>
+              <Link
+                href="tel:2315471144"
+                className={cn(
+                  buttonVariants({ variant: "brand", size: "xl" }),
+                  ""
+                )}
+              >
+                <Icons.phone className="mr-2" />
+                Call Now
               </Link>
             ) : (
               <ContactForm />
             )}
 
-            <Button
-              variant="outline"
-              size="xl"
-              className=""
-              onClick={() => router.push("/about-us")}
+            <Link
+              className={cn(buttonVariants({variant: "outline", size: "xl"}), "")}
+              href="/about-us"
             >
               Learn More
-            </Button>
+            </Link>
           </div>
         </div>
         <div className="hidden lg:mt-0 lg:col-span-6 lg:flex">
