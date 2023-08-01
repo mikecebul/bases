@@ -39,31 +39,40 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 function Sidebar() {
   return (
-    <div className="h-screen col-span-1 border-r border-border">
+    <div className="h-screen col-span-1 border-r border-border flex flex-col justify-between">
       <div className="py-4 space-y-4">
         <div className="px-3 py-2">
           <Link
             href="/admin"
             className={cn(
               buttonVariants({ variant: "ghost" }),
-              "w-full justify-start mb-2 text-lg font-semibold tracking-tight"
+              "w-full justify-start text-lg font-semibold tracking-tight"
             )}
           >
             Menu
           </Link>
-          <Separator />
-          <div className="py-8 space-y-1">
-            <Link
-              href="/admin/staff"
-              className={cn(
-                buttonVariants({ variant: "ghost" }),
-                "justify-start w-full"
-              )}
-            >
-              Staff
-            </Link>
-          </div>
+          <Separator className="my-2" />
+          <Link
+            href="/admin/staff"
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "justify-start w-full"
+            )}
+          >
+            Staff
+          </Link>
         </div>
+      </div>
+      <div className="px-3 py-2">
+        <Link
+          href="/"
+          className={cn(
+            buttonVariants({ variant: "brand" }),
+            "justify-center w-full"
+          )}
+        >
+          View site
+        </Link>
       </div>
     </div>
   );

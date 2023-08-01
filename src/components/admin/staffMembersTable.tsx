@@ -56,7 +56,7 @@ export async function StaffMembersTable() {
                     width={1000}
                     height={1000}
                     alt="Profile of row item"
-                    className="w-24 rounded-full"
+                    className="w-12 rounded-full"
                   />
                 </TableCell>
                 <TableCell className="">

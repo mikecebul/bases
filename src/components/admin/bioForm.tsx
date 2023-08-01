@@ -20,9 +20,11 @@ import { useRouter } from "next/navigation";
 export default function BioForm({
   bio,
   staffMemberId,
+  pathToInvalidate,
 }: {
   bio: string[];
   staffMemberId: string;
+  pathToInvalidate: string;
 }) {
   const router = useRouter();
 
@@ -71,14 +73,14 @@ export default function BioForm({
     if (status === bioStatuses.submitted) {
       toast({ description: "Your message was sent successfully." });
     }
-  }, [status]);
+  }, [bioStatuses.error, bioStatuses.submitted, status]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setStatus(bioStatuses.loading);
 
     const bioArray = Object.values(values);
 
-    console.log({ bioArray, values, staffMemberId });
+    // console.log({ bioArray, values, staffMemberId });
 
     try {
       const res = await fetch("/api/staff/update", {
@@ -97,11 +99,30 @@ export default function BioForm({
       }
 
       setStatus(bioStatuses.submitted);
-      router.refresh();
     } catch (err) {
       setStatus(bioStatuses.error);
       console.error(err);
     }
+
+    try {
+      const invalidateRes = await fetch("/api/revalidate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          path: "pathToInvalidate", 
+        }),
+      });
+
+      if (!invalidateRes.ok) {
+        throw new Error("Error invalidating cache.");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    router.refresh();
   }
 
   function handleAddBio() {
@@ -115,48 +136,48 @@ export default function BioForm({
   }
 
   return (
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          {bioElements.map((_, index) => (
-            <div key={index}>
-              <FormField
-                control={form.control}
-                name={`bio${index}`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Paragraph {index + 1}</FormLabel>
-                    <FormControl>
-                      <Textarea {...field} className="h-32" />
-                    </FormControl>
-                    <FormMessage />
-                    <div>
-                      <Button
-                        type="button"
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => handleRemoveBio(index)}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </FormItem>
-                )}
-              />
-            </div>
-          ))}
-          <div className="flex justify-between">
-            <Button type="button" variant="outline" onClick={handleAddBio}>
-              Add Paragraph
-            </Button>
-            <Button
-              type="submit"
-              variant="brand"
-              disabled={status === bioStatuses.loading}
-            >
-              {status === bioStatuses.loading ? "Sending..." : "Submit Request"}
-            </Button>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        {bioElements.map((_, index) => (
+          <div key={index}>
+            <FormField
+              control={form.control}
+              name={`bio${index}`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Paragraph {index + 1}</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} className="h-32" />
+                  </FormControl>
+                  <FormMessage />
+                  <div>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => handleRemoveBio(index)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </FormItem>
+              )}
+            />
           </div>
-        </form>
-      </Form>
+        ))}
+        <div className="flex justify-between">
+          <Button type="button" variant="outline" onClick={handleAddBio}>
+            Add Paragraph
+          </Button>
+          <Button
+            type="submit"
+            variant="brand"
+            disabled={status === bioStatuses.loading}
+          >
+            {status === bioStatuses.loading ? "Sending..." : "Submit Request"}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }

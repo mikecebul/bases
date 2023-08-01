@@ -1,5 +1,3 @@
-"use client";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { Icons } from "./icons";
 import { Separator } from "./ui/separator";
@@ -9,12 +7,7 @@ import { cn } from "@/lib/utils";
 export default function Footer() {
   return (
     <footer className="shadow rounded-t-md bg-background/50">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        className="w-full px-4 pt-4 mx-auto 2xl:container md:px-8 md:pt-8 2xl:px-0"
-      >
+      <div className="w-full px-4 pt-4 mx-auto 2xl:container md:px-8 md:pt-8 2xl:px-0">
         <div className="grid md:grid-cols-3 md:gap-4">
           {/* Logo and CARF Certification Section */}
           <div className="col-span-1 flex flex-col items-center mb-8 space-y-8 md:mr-16">
@@ -161,7 +154,7 @@ export default function Footer() {
             . All Rights Reserved.
           </span>
         </div>
-      </motion.div>
+      </div>
     </footer>
   );
 }

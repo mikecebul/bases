@@ -1,4 +1,3 @@
-import AboutSection from "@/components/about-section";
 import Hero from "@/components/hero";
 import Services from "@/components/services";
 import Team from "@/components/team";
@@ -11,6 +10,7 @@ async function getStaffMembers() {
 
 export default async function Home() {
   const staffMembers = await getStaffMembers();
+
   return (
     <>
       <Hero />

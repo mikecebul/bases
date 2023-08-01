@@ -238,13 +238,13 @@ export const siteConfig = {
           "Relationship Issues",
           "Self-esteem Issues",
           "Family Issues",
-          "Traumatic Brain Injury / Auto Accident ",
+          "Traumatic Brain Injury / Auto Accident",
         ],
       },
       {
         name: "Michael Cebulski",
         role: "Counselor, Recovery Coach",
-        qualifications: "CADC-DP, CPRC",
+        qualifications: "CADC, CPRC",
         imageUrl: "/profiles/MikeCebulski_Profile.webp",
         id: "4",
         bio: [

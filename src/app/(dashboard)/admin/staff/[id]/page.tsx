@@ -17,6 +17,8 @@ export default async function Page({
   };
 
   const staffMember = await getstaffMember(id);
+  const staffName = staffMember?.name.toLowerCase().replace(/ /g, "-");
+  const pathToInvalidate = `/team/staff/${staffName}`;
 
   return (
     <div className="w-5/6 py-8 mx-auto">
@@ -25,7 +27,7 @@ export default async function Page({
           Edit Bio of {staffMember?.name}
         </p>
 
-        <BioForm bio={staffMember?.bio as string[]} staffMemberId={id} />
+        <BioForm bio={staffMember?.bio as string[]} staffMemberId={id} pathToInvalidate={pathToInvalidate}/>
       </Suspense>
     </div>
   );

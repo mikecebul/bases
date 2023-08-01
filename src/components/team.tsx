@@ -45,11 +45,11 @@ export default function Team({
           role="list"
           className="grid gap-x-6 gap-y-8  sm:grid-cols-2 sm:gap-y-12 xl:col-span-2"
         >
-          {siteConfig.team.staff.map((person) => (
+          {staffMembers.map((person) => (
             <Link
               key={person.name}
-              href={`/team/staff/[name]`}
-              as={`/team/staff/${person.name.toLowerCase().replace(/ /g, "-")}`}
+              href={`/team/staff/[id]`}
+              as={`/team/staff/${person.id}`}
               className={cn(
                 buttonVariants({ variant: "card" }),
                 "hover:bg-muted-foreground/10 p-2 rounded-md -ml-2 justify-start py-16 sm:py-10"
