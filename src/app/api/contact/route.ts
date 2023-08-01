@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { getMaxListeners } from "process";
 
 export async function POST(req: Request) {
   const request = await req.json();
@@ -16,8 +15,8 @@ export async function POST(req: Request) {
     secure: false,
     auth: {
       user: process.env.NEXT_PUBLIC_EMAIL_USER,
-      pass: process.env.NEXT_PUBLIC_EMAIL_PASS
-    }
+      pass: process.env.NEXT_PUBLIC_EMAIL_PASS,
+    },
   });
 
   const mailOptions: nodemailer.SendMailOptions = {
@@ -25,7 +24,7 @@ export async function POST(req: Request) {
     to: process.env.NEXT_PUBLIC_EMAIL_SEND_TO, // list of receivers
     subject: "BASES: " + request.name + ": " + request.phone, // Subject line
     text: request.description, // plain text body
-    html: `<div>${request.description}</div>` // html body
+    html: `<div>${request.description}</div>`, // html body
   };
 
   return await transporter

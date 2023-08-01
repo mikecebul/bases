@@ -7,22 +7,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { StaffMember } from "@prisma/client";
 import Image from "next/image";
 import BioPopover from "./bioPopover";
 import { Icons } from "../icons";
-import { Button, buttonVariants } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import prisma from "@/lib/prisma";
 
-export function StaffMembersTable({
-  staffMembers,
-}: {
-  staffMembers: StaffMember[];
-}) {
+async function getStaffMembers() {
+  const staffMembers = await prisma.staffMember.findMany();
+  return staffMembers;
+}
+
+export async function StaffMembersTable() {
+  const staffMembers = await getStaffMembers();
+
   return (
     <div className="w-full p-8">
-      <p className="font-semi-bold text-center pb-4">Staff Members</p>
+      <p className="pb-4 text-xl font-semi-bold">Staff Members</p>
       <div className="border rounded-md shadow">
         <Table className="">
           <TableCaption className="pb-2">
@@ -47,13 +50,13 @@ export function StaffMembersTable({
                 <TableCell>
                   <BioPopover bio={person.bio} />
                 </TableCell>
-                <TableCell className="flex justify-center items-center">
+                <TableCell className="flex items-center justify-center">
                   <Image
                     src={person.imageUrl}
                     width={1000}
                     height={1000}
                     alt="Profile of row item"
-                    className="rounded-full w-24"
+                    className="w-24 rounded-full"
                   />
                 </TableCell>
                 <TableCell className="">
@@ -62,7 +65,7 @@ export function StaffMembersTable({
                       buttonVariants({ variant: "outline", size: "icon" }),
                       ""
                     )}
-                    href={`/admin/staff/${person.id}/edit`}
+                    href={`/admin/staff/${person.id}`}
                   >
                     <Icons.pencil />
                   </Link>
