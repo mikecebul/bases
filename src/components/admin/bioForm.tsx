@@ -103,15 +103,9 @@ export default function BioForm({
     }
 
     try {
-      const invalidateRes = await fetch("/api/revalidate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          path: pathToInvalidate,
-        }),
-      });
+      const invalidateRes = await fetch(
+        `/api/revalidate?path=${pathToInvalidate}`
+      );
 
       if (!invalidateRes.ok) {
         throw new Error("Error invalidating cache.");
