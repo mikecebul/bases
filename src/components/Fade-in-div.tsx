@@ -10,6 +10,7 @@ export default function FadeInDiv({ children }: { children: ReactNode }) {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.3 }}
+      className="min-h-[100dvh] flex flex-col"
     >
       {children}
     </motion.div>

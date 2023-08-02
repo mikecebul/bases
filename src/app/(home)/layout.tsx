@@ -23,15 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          inter.className,
-          "bg-primary-foreground min-h-screen flex flex-col"
-        )}
-      >
+      <body className={cn(inter.className, "bg-primary-foreground")}>
         <FadeInDiv>
           <Header />
-          <main className="flex-grow">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </FadeInDiv>
         <Toaster />

@@ -48,8 +48,8 @@ export default function Team({
           {staffMembers.map((person) => (
             <Link
               key={person.name}
-              href={`/team/staff/[id]`}
-              as={`/team/staff/${person.id}`}
+              href={`/team/staff/[slug]`}
+              as={`/team/staff/${person.slug}`}
               className={cn(
                 buttonVariants({ variant: "card" }),
                 "hover:bg-muted-foreground/10 p-2 rounded-md -ml-2 justify-start py-16 sm:py-10"
