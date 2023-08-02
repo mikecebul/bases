@@ -103,12 +103,12 @@ export default function BioForm({
 
     try {
       const invalidateRes = await fetch("/api/revalidate", {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          path: "pathToInvalidate", 
+          path: "pathToInvalidate",
         }),
       });
 
