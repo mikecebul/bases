@@ -9,6 +9,7 @@ export async function POST(request: Request) {
       where: { id: staffMemberId },
       data: { bio },
     });
+
     return new NextResponse(JSON.stringify(updatedStaffMember), {
       status: 200,
       headers: { "Content-Type": "application/json" },

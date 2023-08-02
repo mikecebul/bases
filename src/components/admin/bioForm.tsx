@@ -87,7 +87,8 @@ export default function BioForm({
         },
         body: JSON.stringify({
           bio: bioArray,
-          staffMemberId, // replace with actual staff member id
+          staffMemberId,
+          pathToInvalidate,
         }),
       });
 
@@ -103,12 +104,12 @@ export default function BioForm({
 
     try {
       const invalidateRes = await fetch("/api/revalidate", {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          path: "pathToInvalidate",
+          path: pathToInvalidate,
         }),
       });
 
