@@ -4,7 +4,11 @@ import Team from "@/components/team";
 import prisma from "@/lib/prisma";
 
 async function getStaffMembers() {
-  const staffMembers = await prisma.staffMember.findMany();
+  const staffMembers = await prisma.staffMember.findMany({
+    orderBy: {
+      order: "asc",
+    },
+  });
   return staffMembers;
 }
 

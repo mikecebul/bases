@@ -11,7 +11,7 @@ datasource db {
 
 model StaffMember {
     id              String   @id @default(cuid())
-    order           Int?     @unique @default(autoincrement())
+    order           Int     @default(autoincrement())
     slug            String?
     name            String
     role            String
