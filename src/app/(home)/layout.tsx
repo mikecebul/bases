@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import Footer from "@/components/footer";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster";
+import FadeInDiv from "@/components/Fade-in-div";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,9 +29,11 @@ export default function RootLayout({
           "bg-primary-foreground min-h-screen flex flex-col"
         )}
       >
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <FadeInDiv>
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </FadeInDiv>
         <Toaster />
         <Analytics />
       </body>

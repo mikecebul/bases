@@ -1,26 +1,12 @@
-"use client";
-
 import Image from "next/image";
-import { Button, buttonVariants } from "./ui/button";
-import { useRouter } from "next/navigation";
+import { buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
 import Link from "next/link";
-import { ContactForm } from "./contact-form";
-import { useMediaQuery } from "@mantine/hooks";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export default function Hero() {
-  const router = useRouter();
-  const isDesktop = useMediaQuery("(min-width: 1440px)");
-
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-      className=""
-    >
+    <section>
       <div className="grid px-4 py-8 lg:gap-8 lg:pt-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
         <div className="mr-auto place-self-center lg:col-span-6">
           <h1 className="max-w-2xl mb-4 lg:mb-8 text-3xl font-extrabold tracking-tight sm:text-4xl xl:text-6xl 2xl:text-7xl">
@@ -30,24 +16,23 @@ export default function Hero() {
             We bridge the gap to recovery, offering flexible and personalized
             services both in-person and via telehealth.
           </p>
-          <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
-            {!isDesktop ? (
-              <Link
-                href="tel:2315471144"
-                className={cn(
-                  buttonVariants({ variant: "brand", size: "xl" }),
-                  ""
-                )}
-              >
-                <Icons.phone className="mr-2" />
-                Call Now
-              </Link>
-            ) : (
-              <ContactForm />
-            )}
+          <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 xl:space-x-0">
+            <Link
+              href="tel:2315471144"
+              className={cn(
+                buttonVariants({ variant: "brand", size: "xl" }),
+                "xl:hidden"
+              )}
+            >
+              <Icons.phone className="mr-2" />
+              Call Now
+            </Link>
 
             <Link
-              className={cn(buttonVariants({variant: "outline", size: "xl"}), "")}
+              className={cn(
+                buttonVariants({ variant: "outline", size: "xl" }),
+                ""
+              )}
               href="/about-us"
             >
               Learn More
@@ -102,6 +87,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
