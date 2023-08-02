@@ -77,10 +77,7 @@ export default function BioForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setStatus(bioStatuses.loading);
-
     const bioArray = Object.values(values);
-
-    // console.log({ bioArray, values, staffMemberId });
 
     try {
       const res = await fetch("/api/staff/update", {

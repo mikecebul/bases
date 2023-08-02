@@ -1,6 +1,5 @@
 import BioForm from "@/components/admin/bioForm";
 import prisma from "@/lib/prisma";
-import { Suspense } from "react";
 
 export default async function Page({
   params: { id },
@@ -17,18 +16,19 @@ export default async function Page({
   };
 
   const staffMember = await getstaffMember(id);
-  const staffName = staffMember?.name.toLowerCase().replace(/ /g, "-");
-  const pathToInvalidate = `/team/staff/${staffName}`;
+  const pathToInvalidate = `/team/staff/${staffMember?.slug}`;
 
   return (
     <div className="w-5/6 py-8 mx-auto">
-      <Suspense fallback={<p>Loading...</p>}>
-        <p className="pb-8 text-xl font-semibold">
-          Edit Bio of {staffMember?.name}
-        </p>
+      <p className="pb-8 text-xl font-semibold">
+        Edit Bio of {staffMember?.name}
+      </p>
 
-        <BioForm bio={staffMember?.bio as string[]} staffMemberId={id} pathToInvalidate={pathToInvalidate}/>
-      </Suspense>
+      <BioForm
+        bio={staffMember?.bio as string[]}
+        staffMemberId={id}
+        pathToInvalidate={pathToInvalidate}
+      />
     </div>
   );
 }
