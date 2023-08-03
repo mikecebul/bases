@@ -14,8 +14,6 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials, req) {
-        console.log("password:", credentials?.password);
-        console.log("hash:", process.env.ADMIN_PASSWORD_HASH);
         if (!credentials || !credentials.password) {
           return null;
         }
