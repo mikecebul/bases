@@ -3,10 +3,12 @@ import { buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import Banner from "./banner";
 
 export default function Hero() {
   return (
     <section>
+      <Banner />
       <div className="grid px-4 py-8 lg:gap-8 lg:pt-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
         <div className="mr-auto place-self-center lg:col-span-6">
           <h1 className="max-w-2xl mb-4 lg:mb-8 text-3xl font-extrabold tracking-tight sm:text-4xl xl:text-6xl 2xl:text-7xl">
@@ -31,11 +33,20 @@ export default function Hero() {
             <Link
               className={cn(
                 buttonVariants({ variant: "outline", size: "xl" }),
-                ""
+                "xl:hidden"
               )}
-              href="/about-us"
+              href="/#services"
             >
-              Learn More
+              Explore Our Services
+            </Link>
+            <Link
+              className={cn(
+                buttonVariants({ variant: "brand", size: "xl" }),
+                "hidden xl:flex"
+              )}
+              href="/#services"
+            >
+              Explore Our Services
             </Link>
           </div>
         </div>
