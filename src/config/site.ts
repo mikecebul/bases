@@ -155,7 +155,7 @@ export const siteConfig = {
       name: "Individual and Group Counseling",
       description:
         "We offer individual and group counseling sessions addressing substance use, mental health, and trauma. Our therapies include DBT (Dialectical Behavior Therapy), CBT (Cognitive Behavior Therapy), and EMDR (Eye Movement Desensitization and Reprocessing).",
-      icon: Icons.group,
+      icon: Icons.brain,
     },
     {
       name: "Batterer Intervention",
@@ -173,7 +173,7 @@ export const siteConfig = {
     {
       name: "Drug Testing",
       description:
-        "We offer several types of drug testing with the highest availablity in the area. Our standard 10 panel costs $25.",
+        "We offer several types of drug testing with the highest availablity in the area. Our standard 10 panel costs $25 and EtGs cost $35.",
 
       icon: Icons.flask,
     },
@@ -184,10 +184,23 @@ export const siteConfig = {
       icon: Icons.class,
     },
     {
+      name: "Zero Tolerance Education Class",
+      description:
+        "Our Alcohol Highway Safety Education Classes are designed for first-time OWI/OUI offenders, providing crucial knowledge and insight.",
+      icon: Icons.zero,
+    },
+    {
       name: "Driver’s License Appeal Assistance",
       description:
-        "We provide substance use disorder evaluations for driver’s license appeal hearings. This service is offered at a $250 charge and includes a drug test, driving record analysis, evaluation, and completion of 10+ page forms.",
+        "Zero tolerance education classes for first-time MIP offenders. $75 charge for a 3-hour class. Just call our office and register for our next available class. Quanity of classes is adjusted based on area needs.",
       icon: Icons.car,
+    },
+    {
+      name: "Naloxone Nasal Kits",
+      href: "/services/naloxone",
+      description:
+        "BASES has free naloxone nasal kits (opioid overdose reversal drug). If you or a family member have opioid concerns, you should have one of these life saving kits on hand.",
+      icon: Icons.spray,
     },
   ],
   FrontPageServices: [
@@ -206,7 +219,7 @@ export const siteConfig = {
     {
       name: "Drug Testing",
       description:
-        "We offer several types of drug testing with the highest availablity in the area.",
+        "We offer several types of drug testing with the highest availablity in the area. Our standard 10 panel costs $25 and EtGs cost $35.",
 
       icon: Icons.flask,
     },

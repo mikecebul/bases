@@ -16,6 +16,9 @@ import {
   Printer,
   Mail,
   Pencil,
+  SprayCan,
+  Brain,
+  CircleOff,
 } from "lucide-react";
 
 export const Icons = {
@@ -39,4 +42,7 @@ export const Icons = {
   print: Printer,
   mail: Mail,
   pencil: Pencil,
+  spray: SprayCan,
+  brain: Brain,
+  zero: CircleOff,
 };

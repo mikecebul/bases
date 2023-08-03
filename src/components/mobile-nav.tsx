@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
 import { ScrollArea } from "./ui/scroll-area";
 import { siteConfig } from "@/config/site";
@@ -19,7 +19,7 @@ export function MobileNav() {
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button
-            className="w-8 h-8 p-0 bg-secondary text-primary"
+            className="w-8 h-8 p-0 bg-secondary text-primary hover:bg-muted-foreground/20"
             onClick={() => setOpen(!open)}
           >
             {open ? (
@@ -40,7 +40,14 @@ export function MobileNav() {
                   <Link
                     key={index}
                     href={item.href}
-                    className="text-lg"
+                    className={cn(
+                      buttonVariants({ variant: "link" }),
+                      " hover:no-underline hover:text-muted-foreground font-medium",
+                      {
+                        "border-b-2 border-b-brand border-opacity-100 rounded-b-none text-brand":
+                          isActiveRoute(currentPathName as string, item.href),
+                      }
+                    )}
                     onClick={() => {
                       setOpen(false);
                     }}
