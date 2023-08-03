@@ -14,7 +14,7 @@ export default async function handler(
   try {
     // this should be the actual path not a rewritten path
     // e.g. for "/blog/[slug]" this should be "/blog/post-1"
-    if (path == typeof String) await res.revalidate(path);
+    if (typeof path === "string") await res.revalidate(path);
     return res.json({ revalidated: true });
   } catch (err) {
     // If there was an error, Next.js will continue
