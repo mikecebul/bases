@@ -16,7 +16,7 @@ export default async function Page({
   };
 
   const staffMember = await getstaffMember(id);
-  const pathToInvalidate = '/team/staff/[slug]';
+  const pathToInvalidate = `/team/staff/${staffMember?.slug}`;
 
   return (
     <div className="w-5/6 py-8 mx-auto">
