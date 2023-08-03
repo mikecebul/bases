@@ -1,8 +1,6 @@
 import prisma from "@/lib/prisma";
 import StaffBio from "@/components/staff-bio";
 
-export const revalidate = 60
-
 export async function generateStaticParams() {
   const StaffMembers = await prisma.staffMember.findMany();
   return StaffMembers.map((person) => ({
