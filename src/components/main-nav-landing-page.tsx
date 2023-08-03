@@ -16,6 +16,8 @@ import { usePathname } from "next/navigation";
 export function MainNavLandingPage() {
   const currentPathName = usePathname();
 
+  if (!currentPathName) return;
+
   return (
     <div className="flex-1">
       <nav className="justify-around hidden p-8 md:flex">

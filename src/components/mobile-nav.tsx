@@ -20,8 +20,10 @@ export function MobileNav() {
   const [open, setOpen] = useState(false);
   const currentPathName = usePathname();
 
+  if (!currentPathName) return;
+
   return (
-    <div className="md:hidden flex items-center">
+    <div className="flex items-center md:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button
@@ -29,9 +31,9 @@ export function MobileNav() {
             onClick={() => setOpen(!open)}
           >
             {open ? (
-              <Icons.closeMenu className="h-8 w-8" />
+              <Icons.closeMenu className="w-8 h-8" />
             ) : (
-              <Icons.openMenu className="h-8 w-8" />
+              <Icons.openMenu className="w-8 h-8" />
             )}
           </Button>
         </SheetTrigger>
