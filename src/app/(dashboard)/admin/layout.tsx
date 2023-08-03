@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { Separator } from "@/components/ui/separator";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import { NextAuthSessionProvider } from "../../../providers/sessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,8 @@ export const metadata: Metadata = {
   description: "Admin dashboard for BASESmi.org",
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+
   return (
     <html lang="en">
       <body
@@ -25,12 +27,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           "bg-primary-foreground min-h-[100dvh] flex flex-col"
         )}
       >
-        <main className="flex-grow">
-          <div className="grid grid-cols-12">
-            <Sidebar />
-            <div className="col-span-11">{children}</div>
-          </div>
-        </main>
+        <NextAuthSessionProvider >
+          <main className="flex-grow">
+            <div className="grid grid-cols-12">
+              <Sidebar />
+              <div className="col-span-11">{children}</div>
+            </div>
+          </main>
+        </NextAuthSessionProvider>
         <Toaster />
       </body>
     </html>

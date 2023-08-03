@@ -23,3 +23,17 @@ model StaffMember {
     education       String?
     specializations String[]
 }
+
+model Admin {
+  id            String    @id @default(cuid())
+  hashedPassword String
+  sessions      Session[]
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique@map("session_token")
+  adminId      String   @map("admin_id")
+  expires      DateTime
+  admin        Admin    @relation(fields:[adminId], references:[id], onDelete: Cascade)
+}
