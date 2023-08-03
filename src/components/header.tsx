@@ -18,16 +18,6 @@ export function Header() {
         <MainNav2 />
         <MobileNavLandingPage />
         <div className="flex flex-col space-y-2 items-center xl:flex-row 2xl:space-x-2 2xl:space-y-0">
-          <Link
-            href="tel:2315471144"
-            className={cn(
-              buttonVariants({ variant: "brand" }),
-              "hidden xl:hidden lg:inline-flex"
-            )}
-          >
-            <Icons.phone className="mr-2" size={20} />
-            (231) 547-1144
-          </Link>
           <div
             className={cn(
               buttonVariants({ variant: "text" }),
