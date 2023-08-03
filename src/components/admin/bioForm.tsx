@@ -104,7 +104,7 @@ export default function BioForm({
 
     try {
       const invalidateRes = await fetch(
-        `/api/revalidate?path=${pathToInvalidate}&secret=${process.env.REVALIDATE_TOKEN}`
+        `/api/revalidate?path=${pathToInvalidate}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
       );
 
       if (!invalidateRes.ok) {
