@@ -18,7 +18,7 @@ export default function Team({
   const isDesktop = useMediaQuery("(min-width: 1440px)");
 
   return (
-    <section id="team" className="pt-16 lg:pt-32 pb-32">
+    <section id="team" className="pt-16 pb-32 lg:pt-32">
       <div className="grid px-4 2xl:container gap-x-8 gap-y-20 md:px-8 2xl:px-0 xl:grid-cols-3">
         <motion.div
           initial={{ x: !isDesktop ? -20 : -40, opacity: 0 }}
@@ -27,9 +27,9 @@ export default function Team({
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <h4 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h3 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Meet Our Leadership Team
-          </h4>
+          </h3>
           <p className="mt-6 text-lg leading-8 text-gray-600">
             Our passionate and dedicated leadership team brings a wealth of
             experience and expertise in outpatient care. They lead by example,
@@ -43,7 +43,7 @@ export default function Team({
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           role="list"
-          className="grid gap-x-6 gap-y-8  sm:grid-cols-2 sm:gap-y-12 xl:col-span-2"
+          className="grid gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-y-12 xl:col-span-2"
         >
           {staffMembers.map((person) => (
             <Link
@@ -92,10 +92,8 @@ export default function Team({
           {siteConfig.team.boardMembers.map((person) => (
             <Link
               key={person.name}
-              href={`/team/board-members/[name]`}
-              as={`/team/board-members/${person.name
-                .toLowerCase()
-                .replace(/ /g, "-")}`}
+              href={`/team/board-members/[slug]`}
+              as={`/team/board-members/${person.slug}`}
               className={cn(
                 buttonVariants({ variant: "card" }),
                 "hover:bg-muted-foreground/10 p-2 rounded-md -ml-2 justify-start py-16 sm:py-10"
@@ -130,9 +128,9 @@ export default function Team({
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <p className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h4 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Meet Our Board of Directors
-          </p>
+          </h4>
           <p className="mt-6 text-lg leading-8 text-gray-600">
             Our Board comprises seasoned professionals committed to guiding our
             organization&apos;s mission. They utilize their diverse experience

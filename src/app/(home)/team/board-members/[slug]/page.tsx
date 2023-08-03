@@ -5,9 +5,7 @@ import { siteConfig } from "@/config/site";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardSubTitle,
@@ -17,22 +15,22 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface Params {
-  name: string;
+  slug: string;
 }
 
 export async function generateStaticParams() {
   const boardMembers = siteConfig.team.boardMembers;
 
   return boardMembers.map((person) => ({
-    slug: person.name.toLowerCase().replace(/ /g, "-"),
+    slug: person.slug,
   }));
 }
 
 export default function Page({ params }: { params: Params }) {
-  const { name } = params;
-
+  const { slug } = params;
+  console.log("Slug: ", slug);
   const boardMember = siteConfig.team.boardMembers.find(
-    (person) => person.name.toLowerCase().replace(/ /g, "-") === name
+    (person) => person.slug === slug
   );
 
   if (!boardMember) {

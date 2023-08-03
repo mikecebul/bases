@@ -275,6 +275,7 @@ export const siteConfig = {
     boardMembers: [
       {
         name: "Gwen White-Erickson",
+        slug: "gwen-white-erickson",
         role: "Board President",
         imageUrl: "/profiles/board/GwenWhite.png",
         bio: [
@@ -283,6 +284,7 @@ export const siteConfig = {
       },
       {
         name: "Eric Eide",
+        slug: "eric-eide",
         role: "Board Vice-President",
         imageUrl: "/profiles/board/EricEide.png",
         bio: [
@@ -291,6 +293,7 @@ export const siteConfig = {
       },
       {
         name: "Debbie Neidhamer",
+        slug: "debbie-neidhamer",
         role: "Board Secretary",
         imageUrl: "/profiles/board/DebbieNeidhamer.png",
         bio: [
@@ -299,6 +302,7 @@ export const siteConfig = {
       },
       {
         name: "Bill Fleck",
+        slug: "bill-fleck",
         role: "Board Treasurer",
         imageUrl: "/profiles/board/BillFleck.jpg",
         bio: [
@@ -307,6 +311,7 @@ export const siteConfig = {
       },
       {
         name: "Scott Gilland",
+        slug: "scott-gilland",
         role: "Board Member",
         imageUrl: "/profiles/board/ScottGilland.webp",
         bio: [
@@ -315,6 +320,7 @@ export const siteConfig = {
       },
       {
         name: "Marsy Burns",
+        slug: "marsy-burns",
         role: "Board Member",
         imageUrl: "/profiles/board/MarsyBurns.webp",
         bio: [
@@ -323,6 +329,7 @@ export const siteConfig = {
       },
       {
         name: "Jim Alger Jr.",
+        slug: "jim-alger-jr",
         role: "Board Member",
         imageUrl: "/profiles/board/JimAlger.jpg",
         bio: [

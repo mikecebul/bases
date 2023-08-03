@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Services() {
   return (
-    <section id="services" className="pt-16 lg:pt-32 relative isolate">
+    <section id="services" className="relative pt-16 lg:pt-32 isolate">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -43,7 +43,7 @@ export default function Services() {
           />
         </svg>
       </motion.div>
-      <div className="2xl:container px-4 md:px-8 2xl:px-0 flex flex-col xl:items-center xl:text-center">
+      <div className="flex flex-col px-4 2xl:container md:px-8 2xl:px-0 xl:items-center xl:text-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -53,9 +53,9 @@ export default function Services() {
           <p className="text-base font-semibold leading-7 text-brand">
             Redefine your recovery path
           </p>
-          <h3 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Everything you need for a successful recovery journey
-          </h3>
+          </h2>
           <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted-foreground">
             Incorporating a unique blend of clinical expertise and compassionate
             care, we&apos;ve curated an exceptional recovery experience for you.
@@ -75,7 +75,7 @@ export default function Services() {
               },
             },
           }}
-          className="mt-16 sm:mt-20 lg:mt-24 text-left"
+          className="mt-16 text-left sm:mt-20 lg:mt-24"
         >
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
             {siteConfig.Services.map((service) => (
@@ -93,9 +93,9 @@ export default function Services() {
                 className="relative pl-16"
               >
                 <dt className="text-base font-semibold leading-7 text-primary">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-brand">
+                  <div className="absolute top-0 left-0 flex items-center justify-center w-10 h-10 rounded-lg bg-brand">
                     <service.icon
-                      className="h-6 w-6 text-white"
+                      className="w-6 h-6 text-white"
                       aria-hidden="true"
                     />
                   </div>
