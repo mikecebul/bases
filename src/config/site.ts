@@ -7,10 +7,10 @@ export const siteConfig = {
     name: "BASES",
     description: "An outpatient facility for SUD serving northern Michigan.",
   },
-  LandingPageLinks: [
+  NavLinks: [
     {
       title: "Home",
-      href: "/#",
+      href: "/",
     },
     {
       title: "About Us",
@@ -18,11 +18,11 @@ export const siteConfig = {
     },
     {
       title: "Services",
-      href: "/#services",
+      href: "/services",
     },
     {
       title: "Team",
-      href: "/#team",
+      href: "/team",
     },
   ],
   AboutPageLinks: [
@@ -76,11 +76,6 @@ export const siteConfig = {
       title: "Assessments",
       href: "/services/assessments",
       description: "We offer comprehensive Substance Use Disorder Assessments.",
-    },
-    {
-      title: "Recovery Coaching",
-      href: "/services/recovery-coaching",
-      description: "We have a team of certified Peer Recovery Coaches.",
     },
     {
       title: "Substance Use Disorder Group",
@@ -163,6 +158,13 @@ export const siteConfig = {
       icon: Icons.group,
     },
     {
+      name: "Batterer Intervention",
+      href: "/services/batterer-intervention",
+      description:
+        "We offer a men's HEAL (Helping Explore Accountable Lifestyles) group for those needing counseling after domestic violence altercations. It is a 39 session commitment with a cost of $25 per session.",
+      icon: Icons.group,
+    },
+    {
       name: "Correctional Facility Group Therapy",
       description:
         "We facilitate CBT/DBT groups for men (Mondays) and for women (Wednesdays) at the Charlevoix County Jail.",
@@ -171,7 +173,7 @@ export const siteConfig = {
     {
       name: "Drug Testing",
       description:
-        "We offer several types of drug testing with the highest availablity in the area.",
+        "We offer several types of drug testing with the highest availablity in the area. Our standard 10 panel costs $25.",
 
       icon: Icons.flask,
     },
@@ -186,6 +188,27 @@ export const siteConfig = {
       description:
         "We provide substance use disorder evaluations for driver’s license appeal hearings. This service is offered at a $250 charge and includes a drug test, driving record analysis, evaluation, and completion of 10+ page forms.",
       icon: Icons.car,
+    },
+  ],
+  FrontPageServices: [
+    {
+      name: "Detailed Substance Use and Mental Health Assessments",
+      description:
+        "Our team delivers comprehensive assessments for substance use disorders, mental health, and trauma for adults and adolescents, helping to formulate the most effective personalized treatment plan.",
+      icon: Icons.glasses,
+    },
+    {
+      name: "Individual and Group Counseling",
+      description:
+        "We offer individual and group counseling sessions addressing substance use, mental health, and trauma. Our therapies include DBT (Dialectical Behavior Therapy), CBT (Cognitive Behavior Therapy), and EMDR (Eye Movement Desensitization and Reprocessing).",
+      icon: Icons.group,
+    },
+    {
+      name: "Drug Testing",
+      description:
+        "We offer several types of drug testing with the highest availablity in the area.",
+
+      icon: Icons.flask,
     },
   ],
   team: {

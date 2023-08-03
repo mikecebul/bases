@@ -6,24 +6,16 @@ import { Button } from "./ui/button";
 import { Icons } from "./icons";
 import { ScrollArea } from "./ui/scroll-area";
 import { siteConfig } from "@/config/site";
-import { cn, isActiveRoute } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import Link, { LinkProps } from "next/link";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "./ui/accordion";
+import Link from "next/link";
+import { cn, isActiveRoute } from "@/lib/utils";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
   const currentPathName = usePathname();
 
-  if (!currentPathName) return;
-
   return (
-    <div className="flex items-center md:hidden">
+    <div className="md:hidden flex items-center">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button
@@ -31,9 +23,9 @@ export function MobileNav() {
             onClick={() => setOpen(!open)}
           >
             {open ? (
-              <Icons.closeMenu className="w-8 h-8" />
+              <Icons.closeMenu className="h-8 w-8" />
             ) : (
-              <Icons.openMenu className="w-8 h-8" />
+              <Icons.openMenu className="h-8 w-8" />
             )}
           </Button>
         </SheetTrigger>
@@ -44,101 +36,24 @@ export function MobileNav() {
           <ScrollArea className="my-4 h-[calc(100vh-9rem)] pb-10">
             <div className="flex flex-col items-center justify-center gap-10 py-2">
               <nav className="flex flex-col items-center justify-center flex-1 space-y-4">
-                <Accordian onOpenChange={setOpen} href={currentPathName} />
+                {siteConfig.NavLinks.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className="text-lg"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    {item.title}
+                  </Link>
+                ))}
               </nav>
-              <div className="absolute bottom-0 right-0">
-                {/* <ModeToggle /> */}
-              </div>
+              <div className="absolute bottom-0 right-0"></div>
             </div>
           </ScrollArea>
         </SheetContent>
       </Sheet>
     </div>
-  );
-}
-
-interface AccordianLinkProps extends LinkProps {
-  // eslint-disable-next-line no-unused-vars
-  onOpenChange?: (open: boolean) => void;
-  href: string;
-}
-
-function Accordian({ onOpenChange, href }: AccordianLinkProps) {
-  const activeAccordianItem = href.split("/")[1];
-  return (
-    <Accordion
-      type="single"
-      defaultValue={activeAccordianItem}
-      collapsible
-      className="w-full"
-    >
-      <Link
-        href="/"
-        className={cn("border-b py-4 block", {
-          "font-bold": isActiveRoute(href, "/"),
-        })}
-        onClick={() => {
-          onOpenChange?.(false);
-        }}
-      >
-        Home
-      </Link>
-      <AccordionItem value="about">
-        <AccordionTrigger>About</AccordionTrigger>
-        {siteConfig.AboutPageLinks.map((item, index) => (
-          <Link
-            key={index}
-            href={item.href}
-            className={cn("", {
-              "font-bold": isActiveRoute(href, item.href),
-            })}
-            onClick={() => {
-              onOpenChange?.(false);
-            }}
-          >
-            <AccordionContent>{item.title}</AccordionContent>
-          </Link>
-        ))}
-      </AccordionItem>
-      <AccordionItem value="services">
-        <AccordionTrigger>Services</AccordionTrigger>
-        {siteConfig.ServicesPageLinks.map((item, index) => (
-          <Link
-            key={index}
-            href={item.href}
-            className={cn("", {
-              "font-bold": isActiveRoute(href, item.href),
-            })}
-            onClick={() => {
-              onOpenChange?.(false);
-            }}
-          >
-            <AccordionContent>{item.title}</AccordionContent>
-          </Link>
-        ))}
-      </AccordionItem>
-      <Link
-        href="/contact"
-        className={cn("border-b py-4 block", {
-          "font-bold": isActiveRoute(href, "/contact"),
-        })}
-        onClick={() => {
-          onOpenChange?.(false);
-        }}
-      >
-        Contact
-      </Link>
-      <Link
-        href="/donate"
-        className={cn("border-b py-4 block", {
-          "font-bold": isActiveRoute(href, "/donate"),
-        })}
-        onClick={() => {
-          onOpenChange?.(false);
-        }}
-      >
-        Donate
-      </Link>
-    </Accordion>
   );
 }

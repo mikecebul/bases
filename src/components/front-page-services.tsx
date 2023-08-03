@@ -3,10 +3,13 @@
 import React from "react";
 import { siteConfig } from "@/config/site";
 import { motion } from "framer-motion";
+import { buttonVariants } from "./ui/button";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export default function Services() {
+export default function FrontPageServices() {
   return (
-    <section id="services" className="relative py-16 lg:py-32 isolate">
+    <section id="services" className="relative py-16 lg:py-24 isolate">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -78,7 +81,7 @@ export default function Services() {
           className="mt-16 text-left sm:mt-20 lg:mt-24"
         >
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
-            {siteConfig.Services.map((service) => (
+            {siteConfig.FrontPageServices.map((service) => (
               <motion.div
                 key={service.name}
                 variants={{
@@ -107,6 +110,17 @@ export default function Services() {
               </motion.div>
             ))}
           </dl>
+          <div className="flex justify-center py-16">
+            <Link
+              href="/services"
+              className={cn(
+                buttonVariants({ size: "xl", variant: "brand" }),
+                ""
+              )}
+            >
+              Explore More of Our Services
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Icons } from "./icons";
-import { MobileNavLandingPage } from "./mobile-nav-landing-page";
+import { MobileNav } from "./mobile-nav";
 import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
-import { MainNav2 } from "./main-nav-2";
+import { MainNav } from "./main-nav";
 
 export function Header() {
   return (
@@ -15,8 +15,8 @@ export function Header() {
         >
           <Icons.logo className="w-40 md:w-44 lg:w-64" />
         </Link>
-        <MainNav2 />
-        <MobileNavLandingPage />
+        <MainNav />
+        <MobileNav />
         <div className="flex flex-col space-y-2 items-center xl:flex-row 2xl:space-x-2 2xl:space-y-0">
           <div
             className={cn(

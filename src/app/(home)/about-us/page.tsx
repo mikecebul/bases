@@ -1,4 +1,4 @@
-import AboutSection from "@/components/about-section";
+import About from "@/components/about";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutUs() {
-  return <AboutSection />;
+  return <About />;
 }

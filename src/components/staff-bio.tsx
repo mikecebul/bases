@@ -84,7 +84,7 @@ export default function StaffBio({
       </CardContent>
       <CardFooter className="flex justify-between">
         <Link
-          href="/#team"
+          href="/team"
           className={cn(buttonVariants({ variant: "outline" }), "")}
         >
           Back

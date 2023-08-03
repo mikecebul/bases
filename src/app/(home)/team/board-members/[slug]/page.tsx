@@ -3,7 +3,7 @@
 
 import { siteConfig } from "@/config/site";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   CardContent,
   CardFooter,
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface Params {
   slug: string;
@@ -65,8 +66,11 @@ export default function Page({ params }: { params: Params }) {
         />
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Link href="/#team" passHref legacyBehavior>
-          <Button variant="outline">Back</Button>
+        <Link
+          href="/team"
+          className={cn(buttonVariants({ variant: "outline" }))}
+        >
+          Back
         </Link>
       </CardFooter>
     </motion.div>

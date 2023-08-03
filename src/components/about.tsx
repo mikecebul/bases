@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function AboutSection() {
+export default function About() {
   return (
     <motion.section
       initial={{ opacity: 0 }}
