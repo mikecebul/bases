@@ -4,6 +4,7 @@ import { Separator } from "./ui/separator";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -75,14 +76,6 @@ export default function Footer() {
                   </li>
                 )
               )}
-            </ul>
-          </div>
-
-          {/* Social Sections */}
-          <div className="col-span-1">
-            <p className="text-lg font-bold">Social</p>
-            <Separator className="my-4" />
-            <ul className="flex flex-col mb-4 space-y-4 font-medium text-gray-500">
               {siteConfig.Footer.Social.map((item) => (
                 <li key={item.title} className="group">
                   <Link
@@ -98,6 +91,21 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Map Section */}
+          <div className="col-span-1">
+            <p className="text-lg font-bold">Location</p>
+            <Separator className="my-4" />
+            <Link href="https://goo.gl/maps/X956fmf511Fef9Pr7">
+              <Image
+                src="https://maps.googleapis.com/maps/api/staticmap?center=45.3035201,-85.2598514&zoom=16&size=400x400&markers=color:blue%7Clabel:B%7C45.3035201,-85.2598514&key=AIzaSyAK58nGhfWhjcDocB__LHHnwmgPKLYTSzA"
+                alt="Google maps of our address"
+                width={1000}
+                height={1000}
+                className="h-[264px] object-cover"
+              ></Image>
+            </Link>
           </div>
         </div>
 

@@ -35,7 +35,7 @@ export default function Hero() {
                 buttonVariants({ variant: "outline", size: "xl" }),
                 "xl:hidden"
               )}
-              href="/#services"
+              href="/services"
             >
               Explore Our Services
             </Link>

@@ -20,7 +20,7 @@ export default function Carf() {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.3, delay: 0.3 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
         viewport={{ once: true }}
         className="max-w-2xl flex flex-col 2xl:containe 2xl:px-0 xl:items-center text-left"
       >

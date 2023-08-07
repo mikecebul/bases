@@ -26,7 +26,7 @@ export default function Banner() {
             buttonVariants({ variant: "brand", size: "sm" }),
             "flex gap-2 items-center text-sm"
           )}
-          href="#"
+          href="https://goo.gl/maps/X956fmf511Fef9Pr7"
         >
           <Icons.navigtion />
           <p>101 M-66 N, Charlevoix, MI 49720</p>
