@@ -1,17 +1,8 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-      id="about-us"
-      className="relative px-4 py-16 lg:py-24 overflow-hidden isolate md:px-8 2xl:px-0 xl:overflow-visible 2xl:container"
-    >
+    <div className="relative px-4 py-16 lg:py-24 overflow-hidden isolate md:px-8 2xl:px-0 xl:overflow-visible 2xl:container">
       <div className="grid grid-cols-1 gap-x-8 gap-y-16 xl:container xl:grid-cols-2 xl:items-start xl:gap-y-10 xl:gap-x-10 xl:px-0">
         <div className="xl:col-start-1 xl:row-start-1 xl:grid xl:w-full xl:gap-x-8 xl:px-0">
           <p className="text-base font-semibold leading-7 text-brand max-w-prose">
@@ -92,6 +83,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </div>
   );
 }

@@ -1,5 +1,11 @@
 import prisma from "@/lib/prisma";
 import StaffBio from "@/components/staff-bio";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Staff",
+  description: "Learn about our staff's education, background, and expertise.",
+};
 
 export async function generateStaticParams() {
   const StaffMembers = await prisma.staffMember.findMany();

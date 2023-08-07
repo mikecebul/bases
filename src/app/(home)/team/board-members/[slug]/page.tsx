@@ -3,7 +3,7 @@
 
 import { siteConfig } from "@/config/site";
 import { motion } from "framer-motion";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   CardContent,
   CardFooter,
@@ -14,6 +14,13 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Board Members",
+  description:
+  "Learn about our BASES board member's history and experience.",
+};
 
 interface Params {
   slug: string;

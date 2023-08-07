@@ -24,11 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, "bg-primary-foreground")}>
-        <FadeInDiv>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </FadeInDiv>
+        {/* <FadeInDiv> */}
+        <Header />
+        <main className="flex-1 animate-fadeIn">{children}</main>
+        <Footer />
+        {/* </FadeInDiv> */}
         <Toaster />
         <Analytics />
       </body>
