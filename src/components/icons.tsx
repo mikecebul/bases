@@ -25,8 +25,8 @@ export const Icons = {
   logo: ({ className }: { className: string }) => (
     <Image
       src="/BasesLogo.png"
-      width={1000}
-      height={1000}
+      width={1024}
+      height={252}
       className={className}
       alt="BASES Logo"
     />
@@ -34,8 +34,8 @@ export const Icons = {
   carf: ({ className }: { className: string }) => (
     <Image
       src="/CARF_GoldSeal.png"
-      width={1000}
-      height={1000}
+      width={500}
+      height={500}
       className={className}
       alt="CARF Certification"
     />
