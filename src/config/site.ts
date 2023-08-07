@@ -29,7 +29,7 @@ export const siteConfig = {
   Footer: {
     Privacy: {
       title: "Privacy Practices",
-      href: "https://basesrecoverycenter.org/wp/wp-content/uploads/Preview-consent-document-SimplePractice.pdf",
+      href: "/Privacy_Practices.pdf",
     },
     Contact: [
       {

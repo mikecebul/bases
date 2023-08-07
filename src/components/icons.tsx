@@ -1,5 +1,4 @@
 import Image from "next/image";
-import BASESLOGO from "../../public/BasesLogo.png";
 import Carf from "../../public/CARF_GoldSeal.png";
 import {
   Menu,
@@ -24,10 +23,22 @@ import {
 
 export const Icons = {
   logo: ({ className }: { className: string }) => (
-    <Image src={BASESLOGO} className={className} alt="BASES Logo" />
+    <Image
+      src="/BasesLogo.png"
+      width={1000}
+      height={1000}
+      className={className}
+      alt="BASES Logo"
+    />
   ),
   carf: ({ className }: { className: string }) => (
-    <Image src={Carf} className={className} alt="CARF Certification" />
+    <Image
+      src="/CARF_GoldSeal.png"
+      width={1000}
+      height={1000}
+      className={className}
+      alt="CARF Certification"
+    />
   ),
   openMenu: Menu,
   closeMenu: X,
