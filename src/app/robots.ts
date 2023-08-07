@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       disallow: "/",
     },
-    sitemap: "https://bases-ten.vercel.app/sitemap.xml",
+    sitemap: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/sitemap.xml`,
   };
 }

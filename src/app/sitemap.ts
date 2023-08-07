@@ -1,14 +1,27 @@
 import { MetadataRoute } from "next";
+import { siteConfig } from "@/config/site";
+import prisma from "@/lib/prisma";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: process.env.NEXT_PUBLIC_DOMAIN_URL || 'https://bases-ten.vercel.com',
-      lastModified: new Date(),
-    },
-    {
-      url: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/about-us`|| 'https://bases-ten.vercel.com/about-us',
-      lastModified: new Date(),
-    },
-  ];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const URL = process.env.NEXT_PUBLIC_DOMAIN_URL
+  const newDate = new Date().toISOString()
+
+  const staff = await prisma.staffMember.findMany();
+  const staffPages = staff.map((person) => ({
+    url: `${URL}/team/staff/${person.slug}`,
+    lastModified: newDate
+  }));
+
+  const boardMembers = siteConfig.team.boardMembers
+  const boardMemberPages = boardMembers.map((person) => ({
+    url: `${URL}/team/staff/${person.slug}`,
+    lastModified: newDate
+  }));
+
+  const routes = siteConfig.NavLinks.map((route) => ({
+    url: `${URL}${route}`,
+    lastModified: newDate
+  }))
+
+  return [...routes, ...boardMemberPages, ...staffPages];
 }
