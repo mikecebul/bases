@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { Icons } from "./icons";
 import { Separator } from "./ui/separator";
-import { Button, buttonVariants } from "./ui/button";
+import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import Image from "next/image";
