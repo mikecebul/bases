@@ -12,7 +12,7 @@ export default function Carf() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
         viewport={{ once: true }}
-        className="max-w-2xl flex justify-start items-center lg:justify-center pb-8"
+        className="max-w-2xl flex justify-center sm:justify-start items-center lg:justify-center pb-8"
       >
         <Icons.carf className="w-32 lg:w-48" />
       </motion.div>
