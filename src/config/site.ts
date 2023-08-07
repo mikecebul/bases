@@ -291,4 +291,36 @@ export const siteConfig = {
       },
     ],
   },
+  AHSE: [
+    {
+      title: 'Beyond "Be Responsible"',
+      description:
+        "Beyond “Be Responsible” is an introductory level educational presentation from the Office of Health and Wellness Promotion at Indiana University-Purdue University Indianapolis (IUPUI)",
+      href: "https://youtube.com/embed/268JVesOhSY",
+    },
+    {
+      title: "BeyondDUI/DWI: Make This One Your Last One",
+      description:
+        "Preview video from Reelizations Media catalog for Addiction Treatment & Behavioral Health.",
+      href: "https://youtube.com/embed/XopdUea_pJM",
+    },
+    {
+      title: "This Place",
+      description:
+        "This award-winning, 15-minute film dramatically captures today&apos;s youth drinking culture. This film shows the alcohol-saturated environment kids are exposed to and the impact of underage drinking. It also offers an important glimpse into communities that are taking action to reduce alcohol problems. (c) 2006.",
+      href: "https://youtube.com/embed/E8VPZRT2wPA",
+    },
+    {
+      title: "A Stone’s Throw",
+      description:
+        "Winner of multiple international film awards, this five-minute film sensitively addresses adult behaviors toward alcohol and their impact on our kids, our communities and ourselves. The film gently urges us to reflect on our attitudes toward alcohol and empowers us to take individual and collective action – without preaching or using hard statistical data. (c) 1994.",
+      href: "https://youtube.com/embed/0EcCH7kJYGE",
+    },
+    {
+      title: "Lift It Up",
+      description:
+        "This riveting seven-minute film draws a straight line between alcohol and violence, it tackles the controversial issue of the role alcohol plays in assault, murder, child abuse, rape, emotional trauma and physical violence. Starting softly – through poetry – the film unmasks the immensity of the issue, then cranks up the volume to get to the heart of it, and concludes with an inspirational challenge for all of us. (c) 1996",
+      href: "https://youtube.com/embed/4WrWKWeF2Gg",
+    },
+  ],
 };
