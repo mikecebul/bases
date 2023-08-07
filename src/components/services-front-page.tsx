@@ -7,7 +7,7 @@ import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export default function FrontPageServices() {
+export default function ServicesFrontPage() {
   return (
     <section id="services" className="relative py-16 lg:pt-24 isolate">
       <motion.div
@@ -110,7 +110,7 @@ export default function FrontPageServices() {
               </motion.div>
             ))}
           </dl>
-          <div className="flex justify-center pt-16">
+          <div className="flex justify-start xl:justify-center pt-16">
             <Link
               href="/services"
               className={cn(
