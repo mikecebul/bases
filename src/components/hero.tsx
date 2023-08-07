@@ -44,7 +44,7 @@ export default function Hero() {
                 buttonVariants({ variant: "brand", size: "xl" }),
                 "hidden xl:flex"
               )}
-              href="/#services"
+              href="/services"
             >
               Explore Our Services
             </Link>

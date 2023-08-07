@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Services() {
   return (
-    <section id="services" className="relative py-16 lg:py-32 isolate">
+    <section id="services" className="relative py-16 lg:py-24 isolate">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

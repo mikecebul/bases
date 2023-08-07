@@ -250,7 +250,7 @@ export const siteConfig = {
         role: "Board Secretary",
         imageUrl: "/profiles/board/DebbieNeidhamer.png",
         bio: [
-          "Debbie is a retired Home Economics Teacher from Boyne City High School. She taught for over 30 years and is now retired to Boyne City where she is involved in many community activities. Debbie has been involved with BASES since 1996. She and her husband, Tom, have three grown children and one grandson.",
+          "Debbie is a retired Home Economics Teacher from Boyne City High School, having served the community for over 30 years. Now residing in Boyne City, she is actively involved in numerous local initiatives. Debbie has been a part of BASES since 1996. Together with her husband, Tom, they are proud parents and grandparents.",
         ],
       },
       {

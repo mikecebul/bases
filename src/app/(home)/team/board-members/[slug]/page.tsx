@@ -43,9 +43,9 @@ export default function Page({ params }: { params: Params }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="w-full mx-auto my-2 lg:container lg:my-4"
+      className="w-full mx-auto my-2 lg:container lg:my-24"
     >
-      <CardHeader className="container">
+      <CardHeader className="container pt-0">
         <CardTitle>{boardMember.name}</CardTitle>
         <CardSubTitle>{boardMember.role}</CardSubTitle>
       </CardHeader>
