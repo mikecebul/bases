@@ -4,17 +4,14 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   Hero: {
-    name: "BASES",
-    description: "An outpatient facility for SUD serving northern Michigan.",
+    title: "Substance Use and Mental Health Counseling",
+    subtitle:
+      "We bridge the gap to recovery, offering flexible and personalized services both in-person and via telehealth.",
   },
   NavLinks: [
     {
       title: "Home",
       href: "/",
-    },
-    {
-      title: "About Us",
-      href: "/about-us",
     },
     {
       title: "Services",
@@ -24,126 +21,46 @@ export const siteConfig = {
       title: "Team",
       href: "/team",
     },
-  ],
-  AboutPageLinks: [
     {
-      title: "Our Facility",
-      href: "/about/our-facility",
-      description: "Welcome to the new BASES building.",
-    },
-    {
-      title: "Our Staff",
-      href: "/about/our-staff",
-      description: "Get to know our staff members.",
-    },
-    {
-      title: "Our Board",
-      href: "/about/our-board",
-      description:
-        "Get to know the board members our our non-profit organization.",
-    },
-    {
-      title: "FAQ",
-      href: "/about/faq",
-      description:
-        "Get some answers to some of our most frequently asked questions.",
+      title: "About Us",
+      href: "/about-us",
     },
   ],
-  ServicesPageLinks: [
-    {
-      title: "Individual Counseling",
-      href: "/services/individual-counseling",
-      description: "One on one counseling with a certified counselor",
+  Footer: {
+    Privacy: {
+      title: "Privacy Practices",
+      href: "https://basesrecoverycenter.org/wp/wp-content/uploads/Preview-consent-document-SimplePractice.pdf",
     },
-    {
-      title: "Naloxone Nasal Kits",
-      href: "/services/naloxone",
-      description: "We have free Narcan available at our facility",
-    },
-    {
-      title: "Drug Testing",
-      href: "/services/drug-testing",
-      description:
-        "We offer several types of drug testing with the highest availablity in the area.",
-    },
-    {
-      title: "Batterer Intervention",
-      href: "/batterer-intervention",
-      description:
-        "We offer a men's HEAL group for those needing counseling after domestic violence altercations.",
-    },
-    {
-      title: "Assessments",
-      href: "/services/assessments",
-      description: "We offer comprehensive Substance Use Disorder Assessments.",
-    },
-    {
-      title: "Substance Use Disorder Group",
-      href: "/services/sud-group",
-      description:
-        "Our groups specialize in DBT skills training to enhance relapse prevention.",
-    },
-    {
-      title: "Jail Group",
-      href: "/servicesjail-group",
-      description:
-        "Bases staff offer weekly jail groups for men and Women in the Charlvoix County Jail.",
-    },
-    {
-      title: "Alcohol Highway Education Class",
-      href: "/services/alcohol-highway-education-class",
-      description:
-        "This class is often a requirement for those who recieve their first OWI.",
-    },
-    {
-      title: "Drivers License Appeal",
-      href: "/services/drivers-license-appeal",
-      description:
-        "Get help appealing to regain your drivers license from the State of Michigan.",
-    },
-  ],
-  LocalServicesPageLinks: [
-    {
-      title: "Transportation",
-      href: "/transportation",
-      description: "Community resources for transportion.",
-    },
-    {
-      title: "Food",
-      href: "/food",
-      description: "Community resources for Food.",
-    },
-    {
-      title: "Housing",
-      href: "/housing",
-      description: "Community resources for housing.",
-    },
-    {
-      title: "Insurance",
-      href: "/insurance",
-      description: "Community resources for insurance.",
-    },
-    {
-      title: "Employment",
-      href: "/employment",
-      description: "Community resources for employment.",
-    },
-    {
-      title: "Healthcare",
-      href: "/healthcare",
-      description: "Community resources for healthcare.",
-    },
-    {
-      title: "Household Items",
-      href: "/household-items",
-      description: "Community resources for household items.",
-    },
-    {
-      title: "Treatment",
-      href: "/treatment",
-      description: "Community resources for SUD and mental health treatment.",
-    },
-  ],
+    Contact: [
+      {
+        icon: Icons.navigtion,
+        title: "101 M-66 N | Charlevoix, MI",
+        href: "https://goo.gl/maps/X956fmf511Fef9Pr7",
+      },
+      {
+        icon: Icons.phone,
+        title: "(231) 547-1144",
+        href: "tel:2315471144",
+      },
+      {
+        icon: Icons.mail,
+        title: "info@basesrecoverycenter.org",
+        href: "mailto:info@basesrecoverycenter.org",
+      },
+      {
+        icon: Icons.print,
+        title: "(231) 547-4970",
+        href: null,
+      },
+    ],
+    Social: [
+      {
+        icon: Icons.facebook,
+        title: "Public Group",
+        href: "https://www.facebook.com/groups/2161896330714628/",
+      },
+    ],
+  },
   Services: [
     {
       name: "Detailed Substance Use and Mental Health Assessments",

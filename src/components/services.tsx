@@ -57,8 +57,8 @@ export default function Services() {
             Everything you need for a successful recovery journey
           </h2>
           <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted-foreground">
-            Incorporating a unique blend of clinical expertise and compassionate
-            care, we&apos;ve curated an exceptional recovery experience for you.
+            With decades of experience, we've developed services that truly
+            serve our community's needs.
           </p>
         </motion.div>
         <motion.div

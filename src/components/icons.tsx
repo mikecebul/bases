@@ -1,6 +1,6 @@
 import Image from "next/image";
 import BASESLOGO from "../../public/BasesLogo.png";
-import Carf from "../../public/carf_accredited-90x90.png";
+import Carf from "../../public/CARF_GoldSeal.png";
 import {
   Menu,
   X,
@@ -19,6 +19,7 @@ import {
   SprayCan,
   Brain,
   CircleOff,
+  Facebook,
 } from "lucide-react";
 
 export const Icons = {
@@ -45,4 +46,5 @@ export const Icons = {
   spray: SprayCan,
   brain: Brain,
   zero: CircleOff,
+  facebook: Facebook,
 };

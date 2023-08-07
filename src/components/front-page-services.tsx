@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 export default function FrontPageServices() {
   return (
-    <section id="services" className="relative py-16 lg:py-24 isolate">
+    <section id="services" className="relative py-16 lg:pt-24 isolate">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -110,12 +110,12 @@ export default function FrontPageServices() {
               </motion.div>
             ))}
           </dl>
-          <div className="flex justify-center py-16">
+          <div className="flex justify-center pt-16">
             <Link
               href="/services"
               className={cn(
                 buttonVariants({ size: "xl", variant: "brand" }),
-                ""
+                "w-full md:w-fit"
               )}
             >
               Explore More of Our Services
