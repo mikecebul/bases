@@ -98,7 +98,7 @@ export default function Footer() {
             <Separator className="my-4" />
             <Link href="https://goo.gl/maps/X956fmf511Fef9Pr7">
               <Image
-                src="https://maps.googleapis.com/maps/api/staticmap?center=45.3035201,-85.2598514&zoom=16&size=400x400&markers=color:blue%7Clabel:B%7C45.3035201,-85.2598514&key=AIzaSyAK58nGhfWhjcDocB__LHHnwmgPKLYTSzA"
+                src={`https://maps.googleapis.com/maps/api/staticmap?center=45.3035201,-85.2598514&zoom=16&size=400x400&markers=color:blue%7Clabel:B%7C45.3035201,-85.2598514&key=${process.env.GOOGLE_MAPS_API_KEY}`}
                 alt="Google maps of our address"
                 width={1000}
                 height={1000}
