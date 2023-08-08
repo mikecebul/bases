@@ -14,10 +14,6 @@ import {
   FormMessage,
 } from "./ui/form";
 import { useForm } from "react-hook-form";
-import { Textarea } from "./ui/textarea";
-import { useState } from "react";
-import { toast } from "./ui/use-toast";
-import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   amount: z.string().regex(/^\d+\.\d{2}$/, {
@@ -26,7 +22,6 @@ const formSchema = z.object({
 });
 
 export function DonateForm() {
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -37,9 +32,7 @@ export function DonateForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { amount } = values;
-    router.push(
-      `https://www.usaepay.com/interface/epayform/?UMkey=57n3S92mdvKT3NtjtQNN645B24b52741&UMcommand=sale&UMamount=${amount}`
-    );
+    window.location.href = `https://www.usaepay.com/interface/epayform/?UMkey=57n3S92mdvKT3NtjtQNN645B24b52741&UMcommand=sale&UMamount=${amount}`;
     form.reset();
   }
 
