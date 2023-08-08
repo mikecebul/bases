@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 export default function ServicesFrontPage() {
   return (
-    <section id="services" className="relative py-16 lg:pt-24 isolate">
+    <section className="relative isolate pt-16 pb-24 lg:pt-24 lg:pb-32">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -17,7 +17,7 @@ export default function ServicesFrontPage() {
         className="absolute inset-0 overflow-hidden -z-10"
       >
         <svg
-          className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] pt-16"
+          className="absolute left-[max(50%,25rem)] top-0 h-full w-full -translate-x-1/2 stroke-muted/20 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
           aria-hidden="true"
         >
           <defs>
@@ -59,7 +59,7 @@ export default function ServicesFrontPage() {
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Everything you need for a successful recovery journey
           </h2>
-          <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted-foreground">
+          <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted">
             Incorporating a unique blend of clinical expertise and compassionate
             care, we&apos;ve curated an exceptional recovery experience for you.
           </p>
@@ -104,18 +104,18 @@ export default function ServicesFrontPage() {
                   </div>
                   {service.name}
                 </dt>
-                <dd className="mt-2 text-base leading-7 text-muted-foreground">
+                <dd className="mt-2 text-base leading-7 text-muted">
                   {service.description}
                 </dd>
               </motion.div>
             ))}
           </dl>
-          <div className="flex justify-start xl:justify-center pt-16">
+          <div className="flex justify-start xl:justify-center pt-8">
             <Link
               href="/services"
               className={cn(
                 buttonVariants({ size: "xl", variant: "brand" }),
-                "w-full md:w-fit"
+                "w-full md:w-fit text-center"
               )}
             >
               Explore More of Our Services
