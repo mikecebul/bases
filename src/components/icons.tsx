@@ -19,6 +19,7 @@ import {
   Brain,
   CircleOff,
   Facebook,
+  CheckCircle,
 } from "lucide-react";
 
 export const Icons = {
@@ -58,4 +59,5 @@ export const Icons = {
   brain: Brain,
   zero: CircleOff,
   facebook: Facebook,
+  check: CheckCircle,
 };

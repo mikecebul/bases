@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export default function Services() {
   return (
-    <section id="services" className="relative py-16 lg:py-24 isolate">
+    <section id="services" className="relative my-24 lg:my-32 isolate">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -57,7 +57,7 @@ export default function Services() {
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Everything you need for a successful recovery journey
           </h2>
-          <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted-foreground">
+          <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted">
             With decades of experience, we've developed services that truly
             serve our community's needs.
           </p>
@@ -102,7 +102,7 @@ export default function Services() {
                   </div>
                   {service.name}
                 </dt>
-                <dd className="mt-2 text-base leading-7 text-muted-foreground">
+                <dd className="mt-2 text-base leading-7 text-muted">
                   {service.description}
                 </dd>
               </motion.div>

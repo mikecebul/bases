@@ -10,12 +10,12 @@ export default function Hero() {
   return (
     <section>
       <Banner />
-      <div className="grid px-4 py-8 lg:gap-8 lg:py-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
+      <div className="grid px-4 py-16 lg:gap-8 lg:py-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
         <div className="mr-auto place-self-center lg:col-span-6">
           <h1 className="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight lg:mb-8 sm:text-4xl xl:text-6xl 2xl:text-7xl">
             {siteConfig.Hero.title}
           </h1>
-          <p className="max-w-xl mb-4 text-base font-light lg:mb-8 text-muted-foreground">
+          <p className="max-w-xl mb-4 lg:mb-8 text-muted">
             {siteConfig.Hero.subtitle}
           </p>
           <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 xl:space-x-0">

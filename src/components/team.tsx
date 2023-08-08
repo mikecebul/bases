@@ -18,7 +18,7 @@ export default function Team({
   const isDesktop = useMediaQuery("(min-width: 1440px)");
 
   return (
-    <section id="team" className="py-16 lg:py-24">
+    <section id="team" className="my-24 lg:my-32">
       <div className="grid px-4 2xl:container gap-x-8 gap-y-20 md:px-8 2xl:px-0 xl:grid-cols-3">
         <motion.div
           initial={{ x: !isDesktop ? -20 : -40, opacity: 0 }}
@@ -52,7 +52,7 @@ export default function Team({
               as={`/team/staff/${person.slug}`}
               className={cn(
                 buttonVariants({ variant: "card" }),
-                "hover:bg-muted-foreground/10 p-2 rounded-md -ml-2 justify-start py-16 sm:py-10"
+                "hover:bg-accent p-2 rounded-md -ml-2 justify-start py-16 sm:py-10"
               )}
             >
               <li>
@@ -68,7 +68,7 @@ export default function Team({
                     <p className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                       {person.name}
                     </p>
-                    <p className="text-sm leading-6 text-muted-foreground">
+                    <p className="text-sm leading-6 text-muted">
                       {person.qualifications}
                     </p>
                     <p className="text-sm font-semibold leading-6 text-brand">
@@ -96,7 +96,7 @@ export default function Team({
               as={`/team/board-members/${person.slug}`}
               className={cn(
                 buttonVariants({ variant: "card" }),
-                "hover:bg-muted-foreground/10 p-2 rounded-md -ml-2 justify-start py-16 sm:py-10"
+                "hover:bg-accent p-2 rounded-md -ml-2 justify-start py-16 sm:py-10"
               )}
             >
               <li key={person.name}>
