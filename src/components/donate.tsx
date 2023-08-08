@@ -17,10 +17,13 @@ export default function Donate() {
     <div className="py-24 lg:py-32 px-4 md:px-8 2xl:container 2xl:px-0">
       <div className="">
         <div className="xl:mx-auto xl:max-w-2xl xl:text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Support BASES Community Programs
-          </h2>
-          <p className="mt-6 text-lg leading-8 text-muted max-w-prose">
+          <p className="text-base font-semibold leading-7 text-brand">
+            Make a difference today
+          </p>
+          <h4 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mt-2">
+            Strengthen Our Community with Your Contribution
+          </h4>
+          <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted max-w-prose">
             BASES is committed to strengthening our community through various
             services. We deeply value the contributions and support from
             businesses and individuals alike.
@@ -29,7 +32,7 @@ export default function Donate() {
         <div className="mt-8 sm:mt-16 lg:flex lg:max-w-none gap-16">
           <div className="lg:flex-auto">
             <h3 className="text-2xl font-bold tracking-tight text-gray-900">
-              Support Our Community Services
+              Support Our Community Programs
             </h3>
             <p className="mt-6 leading-7 text-muted max-w-prose">
               Your donation will help support our various community programs and
@@ -56,7 +59,7 @@ export default function Donate() {
             </ul>
           </div>
           <div className="pt-12 lg:pt-0">
-            <div className="lg:flex-shrink-0 rounded-md bg-brand p-8 lg:flex lg:flex-col lg:justify-center lg:text-center max-w-lg mx-auto lg:max-w-md">
+            <div className="lg:flex-shrink-0 rounded-md bg-brand p-8 lg:flex lg:flex-col lg:justify-center max-w-lg mx-auto lg:max-w-md">
               <div className="text-accent">
                 <p className="text-base font-medium pb-6">
                   Contribute $100 or more to support our vital community
