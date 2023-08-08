@@ -23,7 +23,7 @@ export default function Donate() {
           <h4 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mt-2">
             Strengthen Our Community with Your Contribution
           </h4>
-          <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted max-w-prose">
+          <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted-foreground max-w-prose">
             BASES is committed to strengthening our community through various
             services. We deeply value the contributions and support from
             businesses and individuals alike.
@@ -34,7 +34,7 @@ export default function Donate() {
             <h3 className="text-2xl font-bold tracking-tight text-gray-900">
               Support Our Community Programs
             </h3>
-            <p className="mt-6 leading-7 text-muted max-w-prose">
+            <p className="mt-6 leading-7 text-muted-foreground max-w-prose">
               Your donation will help support our various community programs and
               make a positive impact in the lives of many.
             </p>

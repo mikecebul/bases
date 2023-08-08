@@ -15,7 +15,7 @@ export default function Hero() {
           <h1 className="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight lg:mb-8 sm:text-4xl xl:text-6xl 2xl:text-7xl">
             {siteConfig.Hero.title}
           </h1>
-          <p className="max-w-xl mb-4 lg:mb-8 text-muted">
+          <p className="max-w-xl mb-4 lg:mb-8 text-muted-foreground">
             {siteConfig.Hero.subtitle}
           </p>
           <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 xl:space-x-0">

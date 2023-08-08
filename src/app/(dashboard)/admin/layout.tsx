@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { NextAuthSessionProvider } from "../../../providers/sessionProvider";
+import SignOUtButton from "@/components/admin/signOutButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +18,11 @@ export const metadata: Metadata = {
   description: "Admin dashboard for BASESmi.org",
 };
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
-
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body
@@ -27,7 +31,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
           "bg-primary-foreground min-h-[100dvh] flex flex-col"
         )}
       >
-        <NextAuthSessionProvider >
+        <NextAuthSessionProvider>
           <main className="flex-grow">
             <div className="grid grid-cols-12">
               <Sidebar />
@@ -43,7 +47,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
 function Sidebar() {
   return (
-    <div className="h-screen col-span-1 border-r border-border flex flex-col justify-between">
+    <div className="h-screen col-span-5 md:col-span-3 lg:col-span-2 2xl:col-span-1 border-r border-border flex flex-col justify-between">
       <div className="py-4 space-y-4">
         <div className="px-3 py-2">
           <Link
@@ -67,7 +71,8 @@ function Sidebar() {
           </Link>
         </div>
       </div>
-      <div className="px-3 py-2">
+      <div className="px-3 py-6 space-y-4">
+        <SignOUtButton />
         <Link
           href="/"
           className={cn(

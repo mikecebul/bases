@@ -22,7 +22,6 @@ const formSchema = z.object({
 });
 
 export function DonateForm() {
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,7 +48,7 @@ export function DonateForm() {
                 <Input
                   placeholder="100.00"
                   {...field}
-                  className="text-primary"
+                  className="text-primary placeholder:text-muted-foreground/50"
                 />
               </FormControl>
               <FormDescription className="text-accent/70 text-xs">

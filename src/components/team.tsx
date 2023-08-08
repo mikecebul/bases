@@ -27,10 +27,10 @@ export default function Team({
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Meet Our Leadership Team
           </h1>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <p className="mt-6 text-lg leading-8 text-muted-foreground">
             Our passionate and dedicated leadership team brings a wealth of
             experience and expertise in outpatient care. They lead by example,
             driven by a shared commitment to excellence and a relentless pursuit
@@ -65,10 +65,10 @@ export default function Team({
                     height={256}
                   />
                   <div>
-                    <p className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                    <p className="text-base font-semibold leading-7 tracking-tight">
                       {person.name}
                     </p>
-                    <p className="text-sm leading-6 text-muted">
+                    <p className="text-sm leading-6 text-muted-foreground">
                       {person.qualifications}
                     </p>
                     <p className="text-sm font-semibold leading-6 text-brand">
@@ -109,7 +109,7 @@ export default function Team({
                     height={256}
                   />
                   <div>
-                    <p className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                    <p className="text-base font-semibold leading-7 tracking-tight">
                       {person.name}
                     </p>
                     <p className="text-sm font-semibold leading-6 text-brand">
@@ -128,10 +128,10 @@ export default function Team({
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Meet Our Board of Directors
           </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <p className="mt-6 text-lg leading-8 text-muted-foreground">
             Our Board comprises seasoned professionals committed to guiding our
             organization&apos;s mission. They utilize their diverse experience
             to strategize and uphold our commitment to patient-focused
