@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export default function Services() {
   return (
-    <section id="services" className="relative my-24 lg:my-32 isolate">
+    <section id="services" className="relative py-24 lg:pb-32 isolate">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -15,7 +15,7 @@ export default function Services() {
         className="absolute inset-0 overflow-hidden -z-10"
       >
         <svg
-          className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] pt-16"
+          className="absolute left-[max(50%,25rem)] top-0 h-full w-full -translate-x-1/2 stroke-muted/20 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
           aria-hidden="true"
         >
           <defs>

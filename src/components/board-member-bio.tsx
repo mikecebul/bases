@@ -24,7 +24,7 @@ export default function BoardMemberBio({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="w-full my-24 2xl:container lg:my-32 lg:px-0"
+      className="w-full py-24 2xl:container lg:pb-32 lg:px-0"
     >
       <CardHeader className="pt-0 2xl:container px-4 md:px-8 2xl:px-0">
         <CardTitle>{boardMember.name}</CardTitle>
