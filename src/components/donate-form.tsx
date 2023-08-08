@@ -40,6 +40,7 @@ export function DonateForm() {
     router.push(
       `https://www.usaepay.com/interface/epayform/?UMkey=57n3S92mdvKT3NtjtQNN645B24b52741&UMcommand=sale&UMamount=${amount}`
     );
+    form.reset();
   }
 
   return (
