@@ -51,7 +51,6 @@ export default function BioForm({
       value: str,
     })),
   };
-  console.log("Default Values:", defaultValues);
 
   const form = useForm<BioFormValues>({
     resolver: zodResolver(bioFormSchema),
@@ -118,7 +117,7 @@ export default function BioForm({
 
     router.refresh();
   }
-  console.log("Fields:", fields);
+  
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
