@@ -25,17 +25,12 @@ export default async function Layout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          inter.className,
-          "bg-primary-foreground min-h-[100dvh] flex flex-col"
-        )}
-      >
+      <body className={cn(inter.className, "bg-background min-h-[100dvh]")}>
         <NextAuthSessionProvider>
-          <main className="flex-grow">
-            <div className="grid grid-cols-12">
+          <main className="fadeIn">
+            <div className="">
               <Sidebar />
-              <div className="col-span-11">{children}</div>
+              <div className="flex flex-col ml-48 py-24 px-8">{children}</div>
             </div>
           </main>
         </NextAuthSessionProvider>
@@ -47,7 +42,7 @@ export default async function Layout({
 
 function Sidebar() {
   return (
-    <div className="h-screen col-span-5 md:col-span-3 lg:col-span-2 2xl:col-span-1 border-r border-border flex flex-col justify-between">
+    <div className="fixed inset-0 border-r border-border flex flex-col justify-between w-48 bg-primary-foreground">
       <div className="py-4 space-y-4">
         <div className="px-3 py-2">
           <Link

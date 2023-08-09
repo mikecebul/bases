@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "bg-primary-foreground")}>
+      <body className={cn(inter.className, "bg-background")}>
         {/* <FadeInDiv> */}
         <Header />
         <main className="flex-1 animate-fadeIn">{children}</main>

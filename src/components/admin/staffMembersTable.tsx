@@ -24,7 +24,7 @@ export async function StaffMembersTable() {
   const staffMembers = await getStaffMembers();
 
   return (
-    <div className="w-full p-8">
+    <div className="max-w-7xl p-8">
       <p className="pb-4 text-xl font-semi-bold">Staff Members</p>
       <div className="border rounded-md shadow">
         <Table className="">

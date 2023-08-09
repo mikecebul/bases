@@ -28,6 +28,15 @@ export default function BioForm({
 }) {
   const router = useRouter();
 
+  const [bioElements, setBioElements] = useState(bio);
+    const bioStatuses = {
+    idle: "idle",
+    loading: "loading",
+    submitted: "submitted",
+    error: "error",
+  };  
+  const [status, setStatus] = useState(bioStatuses.idle);
+  
   const createFormSchema = (bio: string[]) => {
     let schema: { [key: string]: z.ZodString } = {};
     bio.forEach((_, index) => {
@@ -37,18 +46,7 @@ export default function BioForm({
     });
     return z.object(schema);
   };
-
-  const [bioElements, setBioElements] = useState(bio);
   const formSchema = createFormSchema(bioElements);
-
-  const bioStatuses = {
-    idle: "idle",
-    loading: "loading",
-    submitted: "submitted",
-    error: "error",
-  };
-
-  const [status, setStatus] = useState(bioStatuses.idle);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,6 +72,16 @@ export default function BioForm({
       toast({ description: "Your message was sent successfully." });
     }
   }, [bioStatuses.error, bioStatuses.submitted, status]);
+
+  function handleAddBio() {
+    setBioElements((prevBioElements) => [...prevBioElements, ""]);
+  }
+
+  function handleRemoveBio(index: number) {
+    setBioElements((prevBioElements) =>
+      prevBioElements.filter((_, i) => i !== index)
+    );
+  }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setStatus(bioStatuses.loading);
@@ -115,16 +123,6 @@ export default function BioForm({
     }
 
     router.refresh();
-  }
-
-  function handleAddBio() {
-    setBioElements((prevBioElements) => [...prevBioElements, ""]);
-  }
-
-  function handleRemoveBio(index: number) {
-    setBioElements((prevBioElements) =>
-      prevBioElements.filter((_, i) => i !== index)
-    );
   }
 
   return (

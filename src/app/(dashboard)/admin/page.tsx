@@ -1,4 +1,3 @@
-
 import { StaffMembersTable } from "@/components/admin/staffMembersTable";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
@@ -12,7 +11,7 @@ export default async function Page() {
   }
 
   return (
-    <div className="xl:px-32 py-16 flex justify-center items-center">
+    <div className="px-auto py-16 flex justify-center items-center">
       <StaffMembersTable />
     </div>
   );
