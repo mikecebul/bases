@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "@/components/ui/use-toast";
 import {
@@ -17,6 +17,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
+const bioFormSchema = z.object({
+  bio: z.array(
+    z.object({
+      value: z.string(),
+    })
+  ),
+});
+
+type BioFormValues = z.infer<typeof bioFormSchema>;
+
 export default function BioForm({
   bio,
   staffMemberId,
@@ -28,35 +38,30 @@ export default function BioForm({
 }) {
   const router = useRouter();
 
-  const [bioElements, setBioElements] = useState(bio);
-    const bioStatuses = {
+  const bioStatuses = {
     idle: "idle",
     loading: "loading",
     submitted: "submitted",
     error: "error",
-  };  
-  const [status, setStatus] = useState(bioStatuses.idle);
-  
-  const createFormSchema = (bio: string[]) => {
-    let schema: { [key: string]: z.ZodString } = {};
-    bio.forEach((_, index) => {
-      schema[`bio${index}`] = z.string().min(3, {
-        message: "Paragraph name must be at least 3 characters.",
-      });
-    });
-    return z.object(schema);
   };
-  const formSchema = createFormSchema(bioElements);
+  const [status, setStatus] = useState(bioStatuses.idle);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: bioElements.reduce(
-      (prev, curr, index) => ({
-        ...prev,
-        [`bio${index}`]: curr,
-      }),
-      {}
-    ),
+  const defaultValues: Partial<BioFormValues> = {
+    bio: bio.map((str) => ({
+      value: str,
+    })),
+  };
+  console.log("Default Values:", defaultValues);
+
+  const form = useForm<BioFormValues>({
+    resolver: zodResolver(bioFormSchema),
+    defaultValues,
+    mode: "onChange",
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    name: "bio",
+    control: form.control,
   });
 
   useEffect(() => {
@@ -73,19 +78,9 @@ export default function BioForm({
     }
   }, [bioStatuses.error, bioStatuses.submitted, status]);
 
-  function handleAddBio() {
-    setBioElements((prevBioElements) => [...prevBioElements, ""]);
-  }
-
-  function handleRemoveBio(index: number) {
-    setBioElements((prevBioElements) =>
-      prevBioElements.filter((_, i) => i !== index)
-    );
-  }
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: BioFormValues) {
     setStatus(bioStatuses.loading);
-    const bioArray = Object.values(values);
+    const bioArray = values.bio.map((bioObj) => bioObj.value);
 
     try {
       const res = await fetch("/api/staff/update", {
@@ -96,7 +91,6 @@ export default function BioForm({
         body: JSON.stringify({
           bio: bioArray,
           staffMemberId,
-          pathToInvalidate,
         }),
       });
 
@@ -124,39 +118,42 @@ export default function BioForm({
 
     router.refresh();
   }
-
+  console.log("Fields:", fields);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        {bioElements.map((_, index) => (
-          <div key={index}>
+        {fields.map((field, index) => (
+          <div key={field.id} className="flex flex-col w-2/3 gap-8">
             <FormField
               control={form.control}
-              name={`bio${index}`}
+              name={`bio.${index}.value`}
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="">
                   <FormLabel>Paragraph {index + 1}</FormLabel>
                   <FormControl>
                     <Textarea {...field} className="h-32" />
                   </FormControl>
                   <FormMessage />
-                  <div>
-                    <Button
-                      type="button"
-                      size="sm"
-                      variant="destructive"
-                      onClick={() => handleRemoveBio(index)}
-                    >
-                      Delete
-                    </Button>
-                  </div>
                 </FormItem>
               )}
             />
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => remove(index)}
+              >
+                Delete
+              </Button>
+            </div>
           </div>
         ))}
         <div className="flex justify-between">
-          <Button type="button" variant="outline" onClick={handleAddBio}>
+          <Button
+            type="button"
+            variant="default"
+            onClick={() => append({ value: "" })}
+          >
             Add Paragraph
           </Button>
           <Button

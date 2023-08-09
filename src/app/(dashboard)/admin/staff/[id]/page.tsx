@@ -1,4 +1,6 @@
 import BioForm from "@/components/admin/bioForm";
+import { FieldArrayExample } from "@/components/admin/field-array-axample";
+import StaffMemberForm from "@/components/admin/staff-member-form";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
@@ -44,7 +46,7 @@ export default async function Page({
           className="w-24 rounded-full"
         />
       </div>
-      <div>
+      {/* <div>
         <p className="text-xl font-semibold pb-4">Name</p>
       </div>
       <div>
@@ -52,7 +54,7 @@ export default async function Page({
       </div>
       <div>
         <p className="text-xl font-semibold pb-4">Q</p>
-      </div>
+      </div> */}
 
       <div className="">
         <p className="text-xl font-semibold pb-4">Bio</p>
@@ -62,6 +64,11 @@ export default async function Page({
           staffMemberId={id}
           pathToInvalidate={pathToInvalidate}
         />
+        {/* <StaffMemberForm
+          bio={staffMember.bio as string[]}
+          staffMemberId={id}
+          pathToInvalidate={pathToInvalidate}
+        /> */}
       </div>
     </div>
   );
