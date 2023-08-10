@@ -3,11 +3,16 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const { bio, staffMemberId } = await request.json();
+    const { person, staffMemberId } = await request.json();
 
     const updatedStaffMember = await prisma.staffMember.update({
       where: { id: staffMemberId },
-      data: { bio },
+      data: {
+        name: person.name,
+        role: person.role,
+        qualifications: person.qualifications,
+        bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
+      },
     });
 
     return new NextResponse(JSON.stringify(updatedStaffMember), {
@@ -15,7 +20,7 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error: any) {
-    console.error(error);
+    console.error("Route API Error:", error);
 
     if (error.code === "P2025") {
       // Resource not found error in Prisma
