@@ -1,39 +1,39 @@
 // schema.prisma
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider  = "postgresql"
-    url       = env("DATABASE_URL")
-    directUrl = env("DIRECT_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model StaffMember {
-    id              String   @id @default(cuid())
-    order           Int      @default(autoincrement())
-    slug            String?
-    name            String
-    role            String
-    qualifications  String
-    imageUrl        String
-    bio             String[]
-    philosophy      String?
-    education       String?
-    specializations String[]
+  id              String   @id @default(cuid())
+  order           Int      @default(autoincrement())
+  slug            String?
+  name            String
+  role            String
+  qualifications  String
+  imageUrl        String
+  bio             String[]
+  philosophy      String[]
+  education       String[]
+  specializations String[]
 }
 
 model Admin {
-  id            String    @id @default(cuid())
+  id             String    @id @default(cuid())
   hashedPassword String
-  sessions      Session[]
+  sessions       Session[]
 }
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique@map("session_token")
+  sessionToken String   @unique @map("session_token")
   adminId      String   @map("admin_id")
   expires      DateTime
-  admin        Admin    @relation(fields:[adminId], references:[id], onDelete: Cascade)
+  admin        Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
 }

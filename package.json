@@ -7,7 +7,8 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "migrate:from-temp": "ts-node src/migrations/migrate-from-temp.ts"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2",
@@ -56,6 +57,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/google.maps": "^3.53.6",
     "@types/nodemailer": "^6.4.9",
-    "prisma": "^5.0.0"
+    "prisma": "^5.0.0",
+    "ts-node": "^10.9.1"
   }
 }
