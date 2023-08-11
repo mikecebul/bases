@@ -29,21 +29,21 @@ const staffFormSchema = z.object({
       value: z.string(),
     })
   ),
-  // philosophy: z.array(
-  //   z.object({
-  //     value: z.string(),
-  //   })
-  // ),
-  // education: z.array(
-  //   z.object({
-  //     value: z.string(),
-  //   })
-  // ),
-  // specializations: z.array(
-  //   z.object({
-  //     value: z.string(),
-  //   })
-  // ),
+  philosophy: z.array(
+    z.object({
+      value: z.string(),
+    })
+  ),
+  education: z.array(
+    z.object({
+      value: z.string(),
+    })
+  ),
+  specializations: z.array(
+    z.object({
+      value: z.string(),
+    })
+  ),
 });
 
 type StaffFormValues = z.infer<typeof staffFormSchema>;
@@ -74,6 +74,15 @@ export default function StaffForm({
     bio: person.bio.map((str) => ({
       value: str,
     })),
+    philosophy: person.philosophy.map((str) => ({
+      value: str,
+    })),
+    education: person.education.map((str) => ({
+      value: str,
+    })),
+    specializations: person.specializations.map((str) => ({
+      value: str,
+    })),
   };
 
   const form = useForm<StaffFormValues>({
@@ -90,18 +99,42 @@ export default function StaffForm({
     name: "bio",
     control: form.control,
   });
+  const {
+    fields: philosophyFields,
+    append: philosophyAppend,
+    remove: philosophyRemove,
+  } = useFieldArray({
+    name: "philosophy",
+    control: form.control,
+  });
+  const {
+    fields: educationFields,
+    append: educationAppend,
+    remove: educationRemove,
+  } = useFieldArray({
+    name: "education",
+    control: form.control,
+  });
+  const {
+    fields: specializationsFields,
+    append: specializationsAppend,
+    remove: specializationsRemove,
+  } = useFieldArray({
+    name: "specializations",
+    control: form.control,
+  });
 
   useEffect(() => {
     if (status === formStatus.error) {
       toast({
         variant: "destructive",
         description:
-          "Oops, there was an error sending your email. Please try again.",
+          "Oops, there was an error updating the profile. Please try again.",
       });
     }
 
     if (status === formStatus.submitted) {
-      toast({ description: "Your message was sent successfully." });
+      toast({ description: "Profile was updated successfully." });
     }
   }, [formStatus.error, formStatus.submitted, status]);
 
@@ -193,7 +226,7 @@ export default function StaffForm({
           )}
         />
 
-        <p className="text-xl font-semibold">Bio</p>
+        <p className="text-xl font-semibold">Bio Introduction</p>
         {bioFields.map((field, index) => (
           <div key={field.id} className="p-4 rounded-md bg-accent/50">
             <FormField
@@ -227,6 +260,115 @@ export default function StaffForm({
             onClick={() => bioAppend({ value: "" })}
           >
             Add Paragraph To Bio
+          </Button>
+        </div>
+
+        <p className="text-xl font-semibold">Treatment Philosophy and Focus</p>
+        {philosophyFields.map((field, index) => (
+          <div key={field.id} className="p-4 rounded-md bg-accent/50">
+            <FormField
+              control={form.control}
+              name={`philosophy.${index}.value`}
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>Paragraph {index + 1}</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} className="h-32" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex justify-end pt-4">
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => philosophyRemove(index)}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+        ))}
+        <div className="flex justify-between">
+          <Button
+            type="button"
+            variant="default"
+            onClick={() => philosophyAppend({ value: "" })}
+          >
+            Add Paragraph To Philosophy
+          </Button>
+        </div>
+        <p className="text-xl font-semibold">Education</p>
+        {educationFields.map((field, index) => (
+          <div key={field.id} className="p-4 rounded-md bg-accent/50">
+            <FormField
+              control={form.control}
+              name={`education.${index}.value`}
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>Paragraph {index + 1}</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} className="h-32" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex justify-end pt-4">
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => educationRemove(index)}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+        ))}
+        <div className="flex justify-between">
+          <Button
+            type="button"
+            variant="default"
+            onClick={() => educationAppend({ value: "" })}
+          >
+            Add Paragraph To Education
+          </Button>
+        </div>
+        <p className="text-xl font-semibold">Specializations</p>
+        {specializationsFields.map((field, index) => (
+          <div key={field.id} className="p-4 rounded-md bg-accent/50">
+            <FormField
+              control={form.control}
+              name={`specializations.${index}.value`}
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>Specialization {index + 1}</FormLabel>
+                  <FormControl>
+                    <Input {...field} className="" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex justify-end pt-4">
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => specializationsRemove(index)}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+        ))}
+        <div className="flex justify-between">
+          <Button
+            type="button"
+            variant="default"
+            onClick={() => specializationsAppend({ value: "" })}
+          >
+            Add A Speciaization
           </Button>
         </div>
 

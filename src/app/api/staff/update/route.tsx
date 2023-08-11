@@ -12,6 +12,9 @@ export async function POST(request: Request) {
         role: person.role,
         qualifications: person.qualifications,
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
+        philosophy: person.philosophy.map((philosophyObj: { value: string }) => philosophyObj.value),
+        education: person.education.map((educationObj: { value: string }) => educationObj.value),
+        specializations: person.specializations.map((specializationObj: { value: string }) => specializationObj.value),
       },
     });
 

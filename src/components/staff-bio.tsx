@@ -39,7 +39,7 @@ export default function StaffBio({
               {paragraph}
             </p>
           ))}
-          {staffMember.philosophy && (
+          {staffMember.philosophy.length > 0 && (
             <div>
               <p className="mt-6 mb-3 text-lg font-bold lg:text-xl">
                 Treatment Philosophy and Focus
@@ -49,7 +49,7 @@ export default function StaffBio({
               </ul>
             </div>
           )}
-          {staffMember.education && (
+          {staffMember.education.length > 0 && (
             <div>
               <p className="mt-6 mb-3 text-lg font-bold lg:text-xl">
                 Education and Experience

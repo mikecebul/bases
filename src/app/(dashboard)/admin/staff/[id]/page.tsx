@@ -1,4 +1,3 @@
-import BioForm from "@/components/admin/bio-form";
 import StaffForm from "@/components/admin/staffForm";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
