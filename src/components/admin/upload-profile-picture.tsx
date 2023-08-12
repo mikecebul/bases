@@ -2,8 +2,8 @@
 
 import { UploadButton } from "@/lib/uploadthing";
 import { StaffMember } from "@prisma/client";
-import { revalidatePath } from "next/cache";
 import Image from "next/image";
+import { useState } from "react";
 
 type UploadProfilePictureProps = {
   person: StaffMember;
@@ -12,7 +12,10 @@ type UploadProfilePictureProps = {
 export default function UploadProfilePicture({
   person,
 }: UploadProfilePictureProps) {
+  const [imageUrl, setImageUrl] = useState(person.imageUrl);
+
   const updateImageWithURL = async ({ url }: { url: string | undefined }) => {
+    if (!url) return;
     try {
       const response = await fetch("/api/staff/update-profile-picture", {
         method: "POST",
@@ -25,7 +28,7 @@ export default function UploadProfilePicture({
         }),
       });
 
-      revalidatePath("/admin");
+      setImageUrl(url);
 
       if (!response.ok) {
         throw new Error("Error updating profile picture.");
@@ -43,7 +46,7 @@ export default function UploadProfilePicture({
       </div>
       <div className="flex flex-col items-center gap-4 justifyu-center">
         <Image
-          src={person.imageUrl}
+          src={imageUrl}
           alt="profile of staff member."
           width={250}
           height={250}
