@@ -30,6 +30,18 @@ export default function UploadProfilePicture({
 
       setImageUrl(url);
 
+      try {
+        const invalidateRes = await fetch(
+          `/api/revalidate?path=/team&secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
+        );
+
+        if (!invalidateRes.ok) {
+          throw new Error("Error invalidating cache.");
+        }
+      } catch (err) {
+        console.error(err);
+      }
+
       if (!response.ok) {
         throw new Error("Error updating profile picture.");
       }
