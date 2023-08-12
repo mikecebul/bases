@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
@@ -12,13 +11,19 @@ export async function POST(request: Request) {
         role: person.role,
         qualifications: person.qualifications,
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
-        philosophy: person.philosophy.map((philosophyObj: { value: string }) => philosophyObj.value),
-        education: person.education.map((educationObj: { value: string }) => educationObj.value),
-        specializations: person.specializations.map((specializationObj: { value: string }) => specializationObj.value),
+        philosophy: person.philosophy.map(
+          (philosophyObj: { value: string }) => philosophyObj.value
+        ),
+        education: person.education.map(
+          (educationObj: { value: string }) => educationObj.value
+        ),
+        specializations: person.specializations.map(
+          (specializationObj: { value: string }) => specializationObj.value
+        ),
       },
     });
 
-    return new NextResponse(JSON.stringify(updatedStaffMember), {
+    return new Response(JSON.stringify(updatedStaffMember), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
@@ -27,11 +32,11 @@ export async function POST(request: Request) {
 
     if (error.code === "P2025") {
       // Resource not found error in Prisma
-      return new NextResponse("Staff member not found", {
+      return new Response("Staff member not found", {
         status: 404,
       });
     }
 
-    return new NextResponse(error.message, { status: 500 });
+    return new Response(error.message, { status: 500 });
   }
 }

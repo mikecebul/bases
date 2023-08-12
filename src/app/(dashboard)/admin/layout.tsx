@@ -8,6 +8,7 @@ import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { NextAuthSessionProvider } from "../../../providers/sessionProvider";
 import SignOUtButton from "@/components/admin/signOutButton";
+import "@uploadthing/react/styles.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
