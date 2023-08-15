@@ -90,7 +90,7 @@ export const siteConfig = {
     {
       name: "Drug Testing",
       description:
-        "We offer several types of drug testing with the highest availablity in the area. Our standard 10 panel costs $25 and EtGs cost $35.",
+        "We offer several types of drug testing available during business hours, along with weekend appointments for an additional $20 charge. Our standard 10 panel costs $25 and EtGs cost $35.",
 
       icon: Icons.flask,
     },
@@ -136,8 +136,7 @@ export const siteConfig = {
     {
       name: "Drug Testing",
       description:
-        "We offer several types of drug testing with the highest availablity in the area. Our standard 10 panel costs $25 and EtGs cost $35.",
-
+        "We offer several types of drug testing available during business hours, along with weekend appointments for an additional $20 charge. Our standard 10 panel costs $25 and EtGs cost $35.",
       icon: Icons.flask,
     },
   ],
