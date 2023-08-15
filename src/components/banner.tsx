@@ -28,7 +28,7 @@ export default function Banner() {
           )}
           href="https://goo.gl/maps/X956fmf511Fef9Pr7"
         >
-          <Icons.navigtion />
+          <Icons.navigation />
           <p>101 M-66 N, Charlevoix, MI 49720</p>
         </Link>
       </div>
