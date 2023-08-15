@@ -33,7 +33,7 @@ export const siteConfig = {
     },
     Contact: [
       {
-        icon: Icons.navigtion,
+        icon: Icons.navigation,
         title: "101 M-66 N | Charlevoix, MI",
         href: "https://goo.gl/maps/X956fmf511Fef9Pr7",
       },
@@ -109,7 +109,7 @@ export const siteConfig = {
     {
       name: "Driver’s License Appeal Assistance",
       description:
-        "Zero tolerance education classes for first-time MIP offenders. $75 charge for a 3-hour class. Just call our office and register for our next available class. Quanity of classes is adjusted based on area needs.",
+        "For a $250 fee, this service includes a drug test, analysis of your driving record, an evaluation, and completion of the necessary 10+ page forms for driver's license appeal hearings.",
       icon: Icons.car,
     },
     {

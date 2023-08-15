@@ -34,7 +34,7 @@ export function Header() {
               "hidden xl:inline-flex"
             )}
           >
-            <Icons.navigtion className="mr-2" size={20} />
+            <Icons.navigation className="mr-2" size={20} />
             101 M-66 N | Charlevoix, MI
           </Link>
         </div>

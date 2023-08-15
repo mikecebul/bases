@@ -51,7 +51,7 @@ export const Icons = {
   class: WineOff,
   car: Car,
   phone: Phone,
-  navigtion: Navigation,
+  navigation: Navigation,
   print: Printer,
   mail: Mail,
   pencil: Pencil,
