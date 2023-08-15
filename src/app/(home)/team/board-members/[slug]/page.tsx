@@ -3,13 +3,23 @@ import BoardMemberBio from "@/components/board-member-bio";
 import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Board Members",
-  description: "Learn about our BASES board member's history and experience.",
-};
-
 interface Params {
   slug: string;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { slug } = params;
+  const boardMember = siteConfig.team.boardMembers.find(
+    (person) => person.slug === slug
+  );
+  return {
+    title: `Board Member - ${boardMember?.name}` || "Board member profile page",
+    description: `Learn about the history and experience of our board member ${boardMember?.name}.` || "Learn about the history and experience of our board member",
+  };
 }
 
 export async function generateStaticParams() {

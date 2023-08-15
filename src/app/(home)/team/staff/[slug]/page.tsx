@@ -2,18 +2,6 @@ import prisma from "@/lib/prisma";
 import StaffBio from "@/components/staff-bio";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Staff",
-  description: "Learn about our staff's education, background, and expertise.",
-};
-
-export async function generateStaticParams() {
-  const StaffMembers = await prisma.staffMember.findMany();
-  return StaffMembers.map((person) => ({
-    slug: person.slug,
-  }));
-}
-
 interface Params {
   slug: string;
 }
@@ -25,6 +13,32 @@ async function getStaffMember(slug: string) {
     },
   });
   return staffMember;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { slug } = params;
+  const staffMember = await prisma.staffMember.findFirst({
+    where: {
+      slug: params.slug,
+    },
+  });
+  return {
+    title: `Board Member - ${staffMember?.name}` || "Staff profile page",
+    description:
+      `Learn about the history and experience of our board member ${staffMember?.name}.` ||
+      "Learn about our staff members education, background, and expertise.",
+  };
+}
+
+export async function generateStaticParams() {
+  const StaffMembers = await prisma.staffMember.findMany();
+  return StaffMembers.map((person) => ({
+    slug: person.slug,
+  }));
 }
 
 export default async function Page({ params }: { params: Params }) {
