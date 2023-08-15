@@ -322,4 +322,18 @@ export const siteConfig = {
       href: "https://youtube.com/embed/4WrWKWeF2Gg",
     },
   ],
+  HEAL: [
+    {
+      title: "#StopThisTraffic",
+      description:
+        "Some things in this world should not exist. The sexual exploitation of children is one of those things. #StopThisTraffic surfaces some of the stories and statistics of children exploited in West Michigan alone.",
+      href: "https://www.youtube.com/embed/U0j8fOdFuJI",
+    },
+    {
+      title: "Be A Man: Joe Ehrmann at TEDxBaltimore 2013",
+      description:
+        'Joe Ehrmann has been an educator, author, activist, pastor and coach for more than 25 years. He was a college All-American athlete who played professional football for 13 years. Among numerous awards, Joe has been named "The Most Important Coach in America" for his work to transform the culture of sports.',
+      href: "https://www.youtube.com/embed/jVI1Xutc_Ws",
+    },
+  ],
 };
