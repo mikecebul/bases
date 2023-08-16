@@ -29,8 +29,8 @@ export default function Carf() {
             <p className="text-base font-semibold leading-7 text-brand-foreground">
               BASES is proud to be accredited by CARF
             </p>
-            <h3 className="mt-2 text-3xl font-bold tracking-normal sm:text-4xl">
-              International accreditation demonstrates a program&apos;s quality
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Quality shown by global accreditation
             </h3>
             <p className="mt-6 text-md lg:text-lg lg:leading-8 text-accent/70 text-prose">
               BASES is proud to be accredited by CARF International Commission
