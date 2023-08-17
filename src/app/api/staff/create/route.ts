@@ -4,11 +4,18 @@ export async function POST(request: Request) {
   try {
     const { person } = await request.json();
 
+    const slug = person.name
+      .split(" ")
+      .join("-")
+      .toLowerCase()
+      .replace(/[^\w-]+/g, "");
+
     const newStaffMember = await prisma.staffMember.create({
       data: {
         name: person.name,
         role: person.role,
         qualifications: person.qualifications || "",
+        slug: slug,
         imageUrl: person.imageUrl || "",
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
         philosophy: person.philosophy.map(
