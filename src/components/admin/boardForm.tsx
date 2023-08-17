@@ -92,7 +92,7 @@ export default function BoardForm({
     const newPersonData = values;
 
     try {
-      const res = await fetch("/api/staff/update", {
+      const res = await fetch("/api/board/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
