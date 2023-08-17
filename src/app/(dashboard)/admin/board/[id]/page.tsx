@@ -30,7 +30,7 @@ export default async function Page({
     throw new Error("Staff memeber did not load");
   }
 
-  const pathToInvalidate = `/team/staff/${boardMember.slug}`;
+  const pathToInvalidate = `/team/board-members/${boardMember.slug}`;
 
   return (
     <div className="flex flex-col w-2/3 gap-8">
