@@ -18,7 +18,11 @@ import prisma from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 async function getBoardMembers() {
-  const boardMembers = await prisma.boardMember.findMany();
+  const boardMembers = await prisma.boardMember.findMany({
+    orderBy: {
+      order: "asc",
+    },
+  });
   return boardMembers;
 }
 
