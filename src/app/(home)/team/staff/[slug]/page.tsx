@@ -23,7 +23,7 @@ export async function generateMetadata({
   const { slug } = params;
   const staffMember = await prisma.staffMember.findFirst({
     where: {
-      slug: params.slug,
+      slug: slug,
     },
   });
   return {
@@ -35,8 +35,12 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const StaffMembers = await prisma.staffMember.findMany();
-  return StaffMembers.map((person) => ({
+  const staffMembers = await prisma.staffMember.findMany({
+    where: {
+      status: "PUBLISHED",
+    },
+  });
+  return staffMembers.map((person) => ({
     slug: person.slug,
   }));
 }

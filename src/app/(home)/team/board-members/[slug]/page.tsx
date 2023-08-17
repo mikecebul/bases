@@ -37,7 +37,11 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const boardMembers = await prisma.boardMember.findMany();
+  const boardMembers = await prisma.boardMember.findMany({
+    where: {
+      status: "PUBLISHED"
+    }
+  });
     return boardMembers.map((person) => ({
     slug: person.slug,
   }));
