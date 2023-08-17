@@ -21,6 +21,7 @@ import {
   CheckCircle,
   UserPlus,
   User,
+  UserX,
 } from "lucide-react";
 
 export const Icons = {
@@ -63,4 +64,5 @@ export const Icons = {
   check: CheckCircle,
   adduser: UserPlus,
   user: User,
+  delete: UserX,
 };

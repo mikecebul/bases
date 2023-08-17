@@ -16,14 +16,14 @@ export default function FirstStaffProfilePicture({
 }: FirstProfilePictureProps) {
   return (
     <div className="flex items-end justify-start pb-8 gap-x-48">
-      <div className="flex flex-col items-center gap-4 justifyu-center">
+      <div className="flex flex-col items-center gap-4 justify-center">
         <Avatar>
           <AvatarImage
             src={imageUrl}
             alt="profile of staff member."
-            className="w-24"
+            className="w-24 rounded-full"
           />
-          <AvatarFallback className="w-24 h-24">
+          <AvatarFallback className="">
             <Icons.user className="w-16 h-16" />
           </AvatarFallback>
         </Avatar>

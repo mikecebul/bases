@@ -2,10 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 
 export function Toast() {
-  const { toast } = useToast();
 
   return (
     <Button

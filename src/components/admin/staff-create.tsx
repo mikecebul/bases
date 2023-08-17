@@ -151,7 +151,8 @@ export default function StaffCreate() {
       console.error(err);
     }
 
-    router.refresh();
+    form.reset();
+    router.push("/admin/staff")
   }
 
   return (
