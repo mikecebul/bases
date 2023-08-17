@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Carf from "../../public/CARF_GoldSeal.png";
 import {
   Menu,
   X,
@@ -20,6 +19,8 @@ import {
   CircleOff,
   Facebook,
   CheckCircle,
+  UserPlus,
+  User,
 } from "lucide-react";
 
 export const Icons = {
@@ -60,4 +61,6 @@ export const Icons = {
   zero: CircleOff,
   facebook: Facebook,
   check: CheckCircle,
+  adduser: UserPlus,
+  user: User,
 };

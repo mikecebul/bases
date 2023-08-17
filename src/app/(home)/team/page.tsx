@@ -10,6 +10,9 @@ export const metadata: Metadata = {
 
 async function getStaffMembers() {
   const staffMembers = await prisma.staffMember.findMany({
+    where: {
+      status: "PUBLISHED",
+    },
     orderBy: {
       order: "asc",
     },
@@ -18,6 +21,9 @@ async function getStaffMembers() {
 }
 async function getBoardMembers() {
   const boardMembers = await prisma.boardMember.findMany({
+    where: {
+      status: "PUBLISHED",
+    },
     orderBy: {
       order: "asc",
     },

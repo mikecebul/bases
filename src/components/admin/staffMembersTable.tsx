@@ -14,6 +14,7 @@ import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import prisma from "@/lib/prisma";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 async function getStaffMembers() {
   const staffMembers = await prisma.staffMember.findMany({
@@ -29,7 +30,25 @@ export async function StaffMembersTable() {
 
   return (
     <div className="max-w-7xl p-8">
-      <p className="pb-4 text-xl font-semi-bold">Staff Members</p>
+      <div className="flex justify-between items-center pb-4">
+        <p className=" text-xl font-semi-bold">Staff Members</p>
+        <div className="flex items-center">
+          <Link
+            className="flex items-center gap-4 group"
+            href="/admin/staff/create"
+          >
+            <p className="text-brand group-hover:text-brand/80">Add New</p>
+            <div
+              className={cn(
+                buttonVariants({ variant: "brand", size: "icon" }),
+                "group-hover:bg-brand/90"
+              )}
+            >
+              <Icons.adduser />
+            </div>
+          </Link>
+        </div>
+      </div>
       <div className="border rounded-md shadow">
         <Table className="">
           <TableCaption className="pb-2">
@@ -42,6 +61,7 @@ export async function StaffMembersTable() {
               <TableHead>Qualifications</TableHead>
               <TableHead>Bio</TableHead>
               <TableHead className="text-center">Image</TableHead>
+              <TableHead className="text-center">Status</TableHead>
               <TableHead className="">Edit</TableHead>
             </TableRow>
           </TableHeader>
@@ -55,13 +75,31 @@ export async function StaffMembersTable() {
                   <BioPopover bio={person.bio} />
                 </TableCell>
                 <TableCell className="flex items-center justify-center">
-                  <Image
-                    src={person.imageUrl}
-                    width={1000}
-                    height={1000}
-                    alt="Profile of row item"
-                    className="w-12 rounded-full"
-                  />
+                  <Avatar className="w-12 h-12">
+                    <AvatarImage
+                      src={person.imageUrl}
+                      alt="Profile of row item"
+                    />
+                    <AvatarFallback>
+                      <Icons.user />
+                    </AvatarFallback>
+                  </Avatar>
+                </TableCell>
+                <TableCell>
+                  {person.status === "PUBLISHED" ? (
+                    <div className={cn(buttonVariants(), "bg-green-600")}>
+                      <p>Published</p>
+                    </div>
+                  ) : (
+                    <div
+                      className={cn(
+                        buttonVariants(),
+                        "bg-yellow-500 text-black"
+                      )}
+                    >
+                      <p>Draft</p>
+                    </div>
+                  )}
                 </TableCell>
                 <TableCell className="">
                   <Link
@@ -69,7 +107,7 @@ export async function StaffMembersTable() {
                       buttonVariants({ variant: "outline", size: "icon" }),
                       ""
                     )}
-                    href={`/admin/staff/${person.id}`}
+                    href={`/admin/staff/edit/${person.id}`}
                   >
                     <Icons.pencil />
                   </Link>

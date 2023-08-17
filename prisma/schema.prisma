@@ -22,6 +22,7 @@ model StaffMember {
   philosophy      String[]
   education       String[]
   specializations String[]
+  status          Status   @default(DRAFT)
 }
 
 model BoardMember {
@@ -32,6 +33,7 @@ model BoardMember {
   role     String
   imageUrl String
   bio      String[]
+  status   Status   @default(DRAFT)
 }
 
 model Admin {
@@ -46,4 +48,9 @@ model Session {
   adminId      String   @map("admin_id")
   expires      DateTime
   admin        Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+}
+
+enum Status {
+  DRAFT
+  PUBLISHED
 }

@@ -23,7 +23,6 @@ const staffFormSchema = z.object({
   name: z.string(),
   role: z.string(),
   qualifications: z.string(),
-  // imageUrl: z.string(),
   bio: z.array(
     z.object({
       value: z.string(),

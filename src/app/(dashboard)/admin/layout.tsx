@@ -31,7 +31,7 @@ export default async function Layout({
           <div className="fadeIn">
             <div className="">
               <Sidebar />
-              <main className="flex flex-col ml-48 py-12 px-8">{children}</main>
+              <main className="flex flex-col ml-48 py-6 px-8">{children}</main>
             </div>
           </div>
         </NextAuthSessionProvider>
