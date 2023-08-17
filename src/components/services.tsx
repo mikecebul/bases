@@ -8,10 +8,7 @@ import { motion } from "framer-motion";
 export default function Services() {
   return (
     <section id="services" className="relative py-24 lg:pb-32 isolate">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
+      <div
         className="absolute inset-0 overflow-hidden -z-10"
       >
         <svg
@@ -43,12 +40,9 @@ export default function Services() {
             fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)"
           />
         </svg>
-      </motion.div>
+      </div>
       <div className="flex flex-col px-4 2xl:container md:px-8 2xl:px-0 xl:items-center xl:text-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
+        <div
           className="max-w-2xl"
         >
           <p className="text-base font-semibold leading-7 text-brand">
@@ -61,7 +55,7 @@ export default function Services() {
             With decades of experience, we've developed services that truly
             serve our community's needs.
           </p>
-        </motion.div>
+        </div>
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -71,7 +65,6 @@ export default function Services() {
             visible: {
               opacity: 1,
               transition: {
-                delayChildren: 0.3,
                 staggerChildren: 0.15,
               },
             },

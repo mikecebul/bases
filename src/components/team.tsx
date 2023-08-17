@@ -21,8 +21,8 @@ export default function Team({
     <section id="team" className="py-24 lg:pb-32">
       <div className="grid px-4 2xl:container gap-x-8 gap-y-20 md:px-8 2xl:px-0 xl:grid-cols-3">
         <motion.div
-          initial={{ x: !isDesktop ? -20 : -40, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
+          initial={{ x: !isDesktop ? -20 : -40 }}
+          whileInView={{ x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
