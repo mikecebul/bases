@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "migrate:from-temp": "ts-node src/migrations/migrate-from-temp.ts"
+    "seed:board": "ts-node src/migrations/seed-board-members.ts"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2",

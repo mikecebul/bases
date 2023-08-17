@@ -1,7 +1,7 @@
 "use client";
 
 import { UploadButton } from "@/lib/uploadthing";
-import { StaffMember } from "@prisma/client";
+import { StaffMember, BoardMember } from "@prisma/client";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -9,7 +9,7 @@ type UploadProfilePictureProps = {
   person: StaffMember;
 };
 
-export default function UploadProfilePicture({
+export default function UploadStaffProfilePicture({
   person,
 }: UploadProfilePictureProps) {
   const [imageUrl, setImageUrl] = useState(person.imageUrl);

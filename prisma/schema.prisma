@@ -24,6 +24,16 @@ model StaffMember {
   specializations String[]
 }
 
+model BoardMember {
+  id       String   @id @default(cuid())
+  order    Int      @default(autoincrement())
+  slug     String?
+  name     String
+  role     String
+  imageUrl String
+  bio      String[]
+}
+
 model Admin {
   id             String    @id @default(cuid())
   hashedPassword String

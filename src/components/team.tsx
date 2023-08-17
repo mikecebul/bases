@@ -1,19 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { siteConfig } from "@/config/site";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "@mantine/hooks";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
-import { StaffMember } from "@prisma/client";
+import { BoardMember, StaffMember } from "@prisma/client";
 
 export default function Team({
   staffMembers,
+  boardMembers,
 }: {
   staffMembers: StaffMember[];
+  boardMembers: BoardMember[];
 }) {
   const isDesktop = useMediaQuery("(min-width: 1440px)");
 
@@ -89,7 +90,7 @@ export default function Team({
           role="list"
           className="grid order-last xl:order-none gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-y-12 xl:col-span-2"
         >
-          {siteConfig.team.boardMembers.map((person) => (
+          {boardMembers.map((person) => (
             <Link
               key={person.name}
               href={`/team/board-members/[slug]`}

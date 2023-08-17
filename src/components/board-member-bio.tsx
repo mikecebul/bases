@@ -12,12 +12,12 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { SiteConfig } from "@/config/site";
+import { BoardMember } from "@prisma/client";
 
 export default function BoardMemberBio({
   boardMember,
 }: {
-  boardMember: SiteConfig["team"]["boardMembers"][number];
+  boardMember: BoardMember;
 }) {
   return (
     <motion.div

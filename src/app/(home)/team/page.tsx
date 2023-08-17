@@ -16,11 +16,20 @@ async function getStaffMembers() {
   });
   return staffMembers;
 }
+async function getBoardMembers() {
+  const boardMembers = await prisma.boardMember.findMany({
+    orderBy: {
+      order: "asc",
+    },
+  });
+  return boardMembers;
+}
 export default async function Page() {
   const staffMembers = await getStaffMembers();
+  const boardMembers = await getBoardMembers();
   return (
     <>
-      <Team staffMembers={staffMembers} />
+      <Team staffMembers={staffMembers} boardMembers={boardMembers} />
     </>
   );
 }

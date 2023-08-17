@@ -1,9 +1,9 @@
-import StaffForm from "@/components/admin/staffForm";
+import BoardForm from "@/components/admin/boardForm";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import UploadStaffProfilePicture from "@/components/admin/upload-staff-profile-picture";
+import UploadBoardProfilePicture from "@/components/admin/upload-board-profile-picture";
 
 export default async function Page({
   params: { id },
@@ -15,8 +15,8 @@ export default async function Page({
   if (!session) {
     redirect("/api/auth/signin");
   }
-  const getstaffMember = async (id: string) => {
-    const person = await prisma.staffMember.findFirst({
+  const getBoardMember = async (id: string) => {
+    const person = await prisma.boardMember.findFirst({
       where: {
         id: id as string,
       },
@@ -24,22 +24,22 @@ export default async function Page({
     return person;
   };
 
-  const staffMember = await getstaffMember(id);
+  const boardMember = await getBoardMember(id);
 
-  if (!staffMember) {
+  if (!boardMember) {
     throw new Error("Staff memeber did not load");
   }
 
-  const pathToInvalidate = `/team/staff/${staffMember.slug}`;
+  const pathToInvalidate = `/team/staff/${boardMember.slug}`;
 
   return (
     <div className="flex flex-col w-2/3 gap-8">
-      <UploadStaffProfilePicture person={staffMember} />
+      <UploadBoardProfilePicture person={boardMember} />
 
       <div className="">
-        <StaffForm
-          person={staffMember}
-          staffMemberId={id}
+        <BoardForm
+          person={boardMember}
+          boardMemberId={id}
           pathToInvalidate={pathToInvalidate}
         />
       </div>

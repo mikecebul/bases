@@ -28,12 +28,12 @@ export default async function Layout({
     <html lang="en">
       <body className={cn(inter.className, "bg-background min-h-[100dvh]")}>
         <NextAuthSessionProvider>
-          <main className="fadeIn">
+          <div className="fadeIn">
             <div className="">
               <Sidebar />
-              <div className="flex flex-col ml-48 py-24 px-8">{children}</div>
+              <main className="flex flex-col ml-48 py-12 px-8">{children}</main>
             </div>
-          </main>
+          </div>
         </NextAuthSessionProvider>
         <Toaster />
       </body>
@@ -64,6 +64,15 @@ function Sidebar() {
             )}
           >
             Staff
+          </Link>
+          <Link
+            href="/admin/board"
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "justify-start w-full"
+            )}
+          >
+            Board
           </Link>
         </div>
       </div>
