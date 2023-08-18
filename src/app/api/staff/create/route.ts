@@ -14,9 +14,9 @@ export async function POST(request: Request) {
       data: {
         name: person.name,
         role: person.role,
-        qualifications: person.qualifications || "",
+        qualifications: person.qualifications || null,
         slug: slug,
-        imageUrl: person.imageUrl || "",
+        imageUrl: person.imageUrl || null,
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
         philosophy: person.philosophy.map(
           (philosophyObj: { value: string }) => philosophyObj.value

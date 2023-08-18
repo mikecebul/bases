@@ -8,6 +8,8 @@ import { useMediaQuery } from "@mantine/hooks";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import { BoardMember, StaffMember } from "@prisma/client";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Icons } from "./icons";
 
 export default function Team({
   staffMembers,
@@ -58,13 +60,15 @@ export default function Team({
             >
               <li>
                 <div className="flex items-center gap-x-6">
-                  <Image
-                    className="w-16 h-16 rounded-full"
-                    src={person.imageUrl}
-                    alt=""
-                    width={256}
-                    height={256}
-                  />
+                  <Avatar className="w-16 h-16">
+                    <AvatarImage
+                      src={person.imageUrl}
+                      alt="profile of staff member."
+                    />
+                    <AvatarFallback>
+                      <Icons.user className="w-8 h-8" />
+                    </AvatarFallback>
+                  </Avatar>
                   <div>
                     <p className="text-base font-semibold leading-7 tracking-tight">
                       {person.name}

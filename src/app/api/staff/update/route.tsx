@@ -9,7 +9,8 @@ export async function POST(request: Request) {
       data: {
         name: person.name,
         role: person.role,
-        qualifications: person.qualifications,
+        qualifications: person.qualifications || null,
+        status: person.status,
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
         philosophy: person.philosophy.map(
           (philosophyObj: { value: string }) => philosophyObj.value

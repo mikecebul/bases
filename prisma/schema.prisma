@@ -13,11 +13,11 @@ datasource db {
 model StaffMember {
   id              String   @id @default(cuid())
   order           Int      @default(autoincrement())
-  slug            String?
+  slug            String
   name            String
   role            String
-  qualifications  String
-  imageUrl        String
+  qualifications  String?
+  imageUrl        String?
   bio             String[]
   philosophy      String[]
   education       String[]

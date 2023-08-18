@@ -115,11 +115,11 @@ export async function StaffMembersTable() {
                     )}
                     href={`/admin/staff/edit/${person.id}`}
                   >
-                    <Icons.pencil />
+                    <Icons.pencil className="" />
                   </Link>
                 </TableCell>
                 <TableCell className="">
-                  <DeleteStaffMemberButton id={person.id} />
+                  <DeleteStaffMemberButton id={person.id} name={person.name} />
                 </TableCell>
               </TableRow>
             ))}

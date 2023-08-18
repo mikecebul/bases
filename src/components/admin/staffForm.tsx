@@ -18,11 +18,14 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
 import { StaffMember } from "@prisma/client";
+import { Switch } from "../ui/switch";
+import { Label } from "../ui/label";
 
 const staffFormSchema = z.object({
   name: z.string(),
   role: z.string(),
-  qualifications: z.string(),
+  qualifications: z.string().optional(),
+  status: z.union([z.literal("DRAFT"), z.literal("PUBLISHED")]),
   bio: z.array(
     z.object({
       value: z.string(),
@@ -69,7 +72,8 @@ export default function StaffForm({
   const defaultValues: Partial<StaffFormValues> = {
     name: person.name,
     role: person.role,
-    qualifications: person.qualifications,
+    qualifications: person.qualifications || undefined,
+    status: person.status,
     bio: person.bio.map((str) => ({
       value: str,
     })),
@@ -175,7 +179,8 @@ export default function StaffForm({
       console.error(err);
     }
 
-    router.refresh();
+    form.reset();
+    router.push("/admin/staff");
   }
 
   return (
@@ -185,6 +190,31 @@ export default function StaffForm({
         onInvalid={() => console.log("Form is invalid")}
         className="space-y-8"
       >
+        <FormField
+          control={form.control}
+          name={"status"}
+          render={({ field }) => (
+            <FormItem className="">
+              <FormLabel>Status</FormLabel>
+              <FormControl>
+                <div className="flex items-center space-x-2">
+                  <Switch
+                    {...field}
+                    id="status"
+                    onCheckedChange={(checked) =>
+                      field.onChange(checked ? "PUBLISHED" : "DRAFT")
+                    }
+                    checked={field.value === "PUBLISHED"}
+                  />
+                  <Label htmlFor="status">
+                    {field.value === "PUBLISHED" ? "Published" : "Draft"}
+                  </Label>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name={"name"}
