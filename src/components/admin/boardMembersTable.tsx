@@ -14,8 +14,7 @@ import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import prisma from "@/lib/prisma";
-
-export const dynamic = "force-dynamic";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 async function getBoardMembers() {
   const boardMembers = await prisma.boardMember.findMany({
@@ -31,7 +30,25 @@ export async function BoardMembersTable() {
 
   return (
     <div className="max-w-7xl p-8">
-      <p className="pb-4 text-xl font-semi-bold">Board Members</p>
+      <div className="flex justify-between items-center pb-4">
+        <p className=" text-xl font-semi-bold">Board Members</p>
+        <div className="flex items-center">
+          <Link
+            className="flex items-center gap-4 group"
+            href="/admin/board/create"
+          >
+            <p className="text-brand group-hover:text-brand/80">Add New</p>
+            <div
+              className={cn(
+                buttonVariants({ variant: "brand", size: "icon" }),
+                "group-hover:bg-brand/90"
+              )}
+            >
+              <Icons.adduser />
+            </div>
+          </Link>
+        </div>
+      </div>
       <div className="border rounded-md shadow">
         <Table className="">
           <TableCaption className="pb-2">
@@ -55,13 +72,15 @@ export async function BoardMembersTable() {
                   <BioPopover bio={person.bio} />
                 </TableCell>
                 <TableCell className="flex items-center justify-center">
-                  <Image
-                    src={person.imageUrl}
-                    width={1000}
-                    height={1000}
-                    alt="Profile of row item"
-                    className="w-12 rounded-full"
-                  />
+                  <Avatar className="w-12 h-12">
+                    <AvatarImage
+                      src={person.imageUrl || undefined}
+                      alt="Profile of row item"
+                    />
+                    <AvatarFallback>
+                      <Icons.user />
+                    </AvatarFallback>
+                  </Avatar>
                 </TableCell>
                 <TableCell className="">
                   <Link
@@ -69,7 +88,7 @@ export async function BoardMembersTable() {
                       buttonVariants({ variant: "outline", size: "icon" }),
                       ""
                     )}
-                    href={`/admin/board/${person.id}`}
+                    href={`/admin/board/edit/${person.id}`}
                   >
                     <Icons.pencil />
                   </Link>

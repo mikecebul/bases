@@ -2,13 +2,14 @@ import prisma from "@/lib/prisma";
 
 export async function POST(request: Request) {
   try {
-    const { person, boardMemberId } = await request.json();
+    const { person, id } = await request.json();
 
     const updatedBoardMember = await prisma.boardMember.update({
-      where: { id: boardMemberId },
+      where: { id },
       data: {
         name: person.name,
         role: person.role,
+        imageUrl: person.imageUrl || null,
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
       },
     });

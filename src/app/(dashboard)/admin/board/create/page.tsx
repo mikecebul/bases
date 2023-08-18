@@ -1,4 +1,4 @@
-import StaffCreateForm from "@/components/admin/staffCreateForm";
+import BoardCreateForm from "@/components/admin/boardCreateForm";
 import { Separator } from "@/components/ui/separator";
 
 export default function CreatePage() {
@@ -10,7 +10,7 @@ export default function CreatePage() {
         </h1>
         <Separator />
       </div>
-      <StaffCreateForm />
+      <BoardCreateForm />
     </>
   );
 }

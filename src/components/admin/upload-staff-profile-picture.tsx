@@ -1,8 +1,7 @@
 "use client";
 
 import { UploadButton } from "@/lib/uploadthing";
-import { StaffMember, BoardMember } from "@prisma/client";
-import Image from "next/image";
+import { StaffMember } from "@prisma/client";
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Icons } from "../icons";
@@ -56,7 +55,10 @@ export default function UploadStaffProfilePicture({
     <div className="flex flex-col items-start py-16">
       <div className="flex flex-col items-center gap-4">
         <Avatar className="w-24 h-24">
-          <AvatarImage src={imageUrl || undefined} alt="profile of staff member." />
+          <AvatarImage
+            src={imageUrl || undefined}
+            alt="profile of staff member."
+          />
           <AvatarFallback className="">
             <Icons.user className="w-16 h-16 rounded-full" />
           </AvatarFallback>

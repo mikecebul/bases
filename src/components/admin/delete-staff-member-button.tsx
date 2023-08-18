@@ -1,5 +1,5 @@
 "use client";
-import { DeleteStaffMemberAction } from "@/app/actions/delete-staff-member-action";
+import { DeleteStaffMemberAction } from "@/actions/delete-staff-member-action";
 import { Icons } from "../icons";
 import { Button, buttonVariants } from "../ui/button";
 import { ToastAction } from "@/components/ui/toast";

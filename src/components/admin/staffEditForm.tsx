@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "@/components/ui/use-toast";
@@ -17,13 +17,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
-import FirstStaffProfilePicture from "./first-staff-profile-picture";
+import { StaffMember } from "@prisma/client";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { UpdateStaffMemberAction } from "@/actions/update-staff-member-action";
+import UploadProfilePicture from "./uploadProfilePicture";
 
 const staffFormSchema = z.object({
   name: z.string(),
   role: z.string(),
   qualifications: z.string().optional(),
-  imageUrl: z.string().optional(),
+  status: z.union([z.literal("DRAFT"), z.literal("PUBLISHED")]),
   bio: z.array(
     z.object({
       value: z.string(),
@@ -48,23 +52,49 @@ const staffFormSchema = z.object({
 
 type StaffFormValues = z.infer<typeof staffFormSchema>;
 
-export default function StaffCreate() {
+export default function StaffEditForm({ person }: { person: StaffMember }) {
   const router = useRouter();
 
-  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
-
-  const formStatus = {
-    idle: "idle",
-    loading: "loading",
-    submitted: "submitted",
-    error: "error",
+  const formStaffMember = {
+    ...person,
+    qualifications: person.qualifications || undefined,
+    imageUrl: person.imageUrl || undefined,
+    bio: person.bio.map((str) => ({
+      value: str,
+    })),
+    philosophy: person.philosophy.map((str) => ({
+      value: str,
+    })),
+    education: person.education.map((str) => ({
+      value: str,
+    })),
+    specializations: person.specializations.map((str) => ({
+      value: str,
+    })),
   };
-  const [status, setStatus] = useState(formStatus.idle);
+
+  const [imageUrl, setImageUrl] = useState(formStaffMember.imageUrl);
+
+  const defaultValues: Partial<StaffFormValues> = {
+    name: formStaffMember.name,
+    role: formStaffMember.role,
+    qualifications: formStaffMember.qualifications,
+    status: formStaffMember.status,
+    bio: formStaffMember.bio,
+    philosophy: formStaffMember.philosophy,
+    education: formStaffMember.education,
+    specializations: formStaffMember.specializations,
+  };
 
   const form = useForm<StaffFormValues>({
     resolver: zodResolver(staffFormSchema),
+    defaultValues,
     mode: "onChange",
   });
+
+  const {
+    formState: { isSubmitting },
+  } = form;
 
   const {
     fields: bioFields,
@@ -99,71 +129,59 @@ export default function StaffCreate() {
     control: form.control,
   });
 
-  useEffect(() => {
-    if (status === formStatus.error) {
+  async function onSubmit(values: StaffFormValues) {
+    const newStaffMemberData = { ...values, imageUrl: imageUrl };
+    const { id } = person;
+    const result = await UpdateStaffMemberAction({
+      id,
+      newStaffMemberData,
+    });
+
+    if (result?.error) {
       toast({
         variant: "destructive",
-        description:
-          "Oops, there was an error updating the profile. Please try again.",
+        description: result.error,
       });
-    }
-
-    if (status === formStatus.submitted) {
+    } else {
       toast({ description: "Profile was updated successfully." });
+      router.push("/admin/staff");
     }
-  }, [formStatus.error, formStatus.submitted, status]);
-
-  async function onSubmit(values: StaffFormValues) {
-    setStatus(formStatus.loading);
-    const newPersonData = values;
-    newPersonData.imageUrl = imageUrl;
-
-    try {
-      const res = await fetch("/api/staff/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          person: newPersonData,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Error creating new staff member.");
-      }
-
-      setStatus(formStatus.submitted);
-    } catch (err) {
-      setStatus(formStatus.error);
-      console.error(err);
-    }
-
-    try {
-      const invalidateRes = await fetch(
-        `/api/revalidate?path=/team&secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
-      );
-
-      if (!invalidateRes.ok) {
-        throw new Error("Error invalidating cache.");
-      }
-    } catch (err) {
-      console.error(err);
-    }
-
-    form.reset();
-    router.push("/admin/staff")
   }
 
   return (
     <div className="max-w-7xl p-8">
-      <FirstStaffProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
+      <UploadProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           onInvalid={() => console.log("Form is invalid")}
           className="space-y-8"
         >
+          <FormField
+            control={form.control}
+            name={"status"}
+            render={({ field }) => (
+              <FormItem className="">
+                <FormLabel>Status</FormLabel>
+                <FormControl>
+                  <div className="flex items-center space-x-2">
+                    <Switch
+                      {...field}
+                      id="status"
+                      onCheckedChange={(checked: boolean) =>
+                        field.onChange(checked ? "PUBLISHED" : "DRAFT")
+                      }
+                      checked={field.value === "PUBLISHED"}
+                    />
+                    <Label htmlFor="status">
+                      {field.value === "PUBLISHED" ? "Published" : "Draft"}
+                    </Label>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name={"name"}
@@ -237,7 +255,7 @@ export default function StaffCreate() {
               variant="default"
               onClick={() => bioAppend({ value: "" })}
             >
-              Add Paragraph To Introduction
+              Add Paragraph To Bio
             </Button>
           </div>
 
@@ -353,12 +371,8 @@ export default function StaffCreate() {
           </div>
 
           <div className="flex justify-end">
-            <Button
-              type="submit"
-              variant="brand"
-              disabled={status === formStatus.loading}
-            >
-              {status === formStatus.loading ? "Sending..." : "Submit Request"}
+            <Button type="submit" variant="brand" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Submit Form"}
             </Button>
           </div>
         </form>

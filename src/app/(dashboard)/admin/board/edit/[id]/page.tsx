@@ -1,9 +1,9 @@
-import BoardForm from "@/components/admin/boardForm";
+import BoardEditForm from "@/components/admin/boardEditForm";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import UploadBoardProfilePicture from "@/components/admin/upload-board-profile-picture";
+import { Separator } from "@/components/ui/separator";
 
 export default async function Page({
   params: { id },
@@ -15,6 +15,7 @@ export default async function Page({
   if (!session) {
     redirect("/api/auth/signin");
   }
+
   const getBoardMember = async (id: string) => {
     const person = await prisma.boardMember.findFirst({
       where: {
@@ -33,16 +34,12 @@ export default async function Page({
   const pathToInvalidate = `/team/board-members/${boardMember.slug}`;
 
   return (
-    <div className="flex flex-col w-2/3 gap-8">
-      <UploadBoardProfilePicture person={boardMember} />
-
-      <div className="">
-        <BoardForm
-          person={boardMember}
-          boardMemberId={id}
-          pathToInvalidate={pathToInvalidate}
-        />
-      </div>
-    </div>
+    <>
+      <h1 className="pl-8 text-4xl font-semibold pb-2">
+        Editing {boardMember.name}
+      </h1>
+      <Separator />
+      <BoardEditForm person={boardMember} />
+    </>
   );
 }

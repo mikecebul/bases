@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -106,13 +105,15 @@ export default function Team({
             >
               <li key={person.name}>
                 <div className="flex items-center gap-x-6">
-                  <Image
-                    className="w-16 h-16 rounded-full"
-                    src={person.imageUrl}
-                    alt=""
-                    width={256}
-                    height={256}
-                  />
+                  <Avatar className="w-16 h-16">
+                    <AvatarImage
+                      src={person.imageUrl || undefined}
+                      alt="profile of staff member."
+                    />
+                    <AvatarFallback>
+                      <Icons.user className="w-8 h-8" />
+                    </AvatarFallback>
+                  </Avatar>
                   <div>
                     <p className="text-base font-semibold leading-7 tracking-tight">
                       {person.name}

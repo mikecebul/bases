@@ -1,5 +1,4 @@
 import Team from "@/components/team";
-import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,30 +8,34 @@ export const metadata: Metadata = {
 };
 
 async function getStaffMembers() {
-  const staffMembers = await prisma.staffMember.findMany({
-    where: {
-      status: "PUBLISHED",
-    },
-    orderBy: {
-      order: "asc",
-    },
+  const res = await fetch("/api/staff/get-all-published", {
+    next: { tags: ["staffMembers"] },
   });
-  return staffMembers;
+  if (!res.ok) {
+    throw new Error("Failed to fetch published staff memebers");
+  }
+  return res.json();
 }
+
 async function getBoardMembers() {
-  const boardMembers = await prisma.boardMember.findMany({
-    where: {
-      status: "PUBLISHED",
-    },
-    orderBy: {
-      order: "asc",
-    },
+  const res = await fetch("/api/board/get-all-published", {
+    next: { tags: ["boardMembers"] },
   });
-  return boardMembers;
+  if (!res.ok) {
+    throw new Error("Failed to fetch published board memebers");
+  }
+  return res.json();
 }
+
 export default async function Page() {
-  const staffMembers = await getStaffMembers();
-  const boardMembers = await getBoardMembers();
+  const staffMemberData = await getStaffMembers();
+  const boardMemberData = await getBoardMembers();
+
+  const [staffMembers, boardMembers] = await Promise.all([
+    staffMemberData,
+    boardMemberData,
+  ]);
+
   return (
     <>
       <Team staffMembers={staffMembers} boardMembers={boardMembers} />

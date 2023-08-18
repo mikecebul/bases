@@ -8,9 +8,7 @@ import { motion } from "framer-motion";
 export default function Services() {
   return (
     <section id="services" className="relative py-24 lg:pb-32 isolate">
-      <div
-        className="absolute inset-0 overflow-hidden -z-10"
-      >
+      <div className="absolute inset-0 overflow-hidden -z-10">
         <svg
           className="absolute left-[max(50%,25rem)] top-0 h-full w-full -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
           aria-hidden="true"
@@ -42,9 +40,7 @@ export default function Services() {
         </svg>
       </div>
       <div className="flex flex-col px-4 2xl:container md:px-8 2xl:px-0 xl:items-center xl:text-center">
-        <div
-          className="max-w-2xl"
-        >
+        <div className="max-w-2xl">
           <p className="text-base font-semibold leading-7 text-brand">
             Redefine your recovery path
           </p>

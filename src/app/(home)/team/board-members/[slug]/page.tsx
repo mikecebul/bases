@@ -39,17 +39,17 @@ export async function generateMetadata({
 export async function generateStaticParams() {
   const boardMembers = await prisma.boardMember.findMany({
     where: {
-      status: "PUBLISHED"
-    }
+      status: "PUBLISHED",
+    },
   });
-    return boardMembers.map((person) => ({
+  return boardMembers.map((person) => ({
     slug: person.slug,
   }));
 }
 
 export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
-  const boardMember = await getBoardMember(slug)
+  const boardMember = await getBoardMember(slug);
   if (!boardMember) {
     return <div>Board member not found</div>;
   }
