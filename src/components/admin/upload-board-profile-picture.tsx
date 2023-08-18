@@ -4,6 +4,8 @@ import { UploadButton } from "@/lib/uploadthing";
 import { BoardMember } from "@prisma/client";
 import Image from "next/image";
 import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Icons } from "../icons";
 
 type UploadBoardProfilePictureProps = {
   person: BoardMember;
@@ -56,14 +58,13 @@ export default function UploadBoardProfilePicture({
         <p className="font-semibold text-brand">Editing</p>
         <p className="text-xl font-semibold">{person.name}</p>
       </div>
-      <div className="flex flex-col items-center gap-4 justifyu-center">
-        <Image
-          src={imageUrl}
-          alt="profile of staff member."
-          width={250}
-          height={250}
-          className="w-24 rounded-full"
-        />
+      <div className="flex flex-col items-center gap-4 justify-center">
+      <Avatar className="w-24 h-24">
+          <AvatarImage src={imageUrl || undefined} alt="profile of staff member." />
+          <AvatarFallback className="">
+            <Icons.user className="w-16 h-16 rounded-full" />
+          </AvatarFallback>
+        </Avatar>
         <UploadButton
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {

@@ -78,7 +78,7 @@ export async function StaffMembersTable() {
                 <TableCell className="flex items-center justify-center">
                   <Avatar className="w-12 h-12">
                     <AvatarImage
-                      src={person.imageUrl}
+                      src={person.imageUrl || undefined}
                       alt="Profile of row item"
                     />
                     <AvatarFallback>

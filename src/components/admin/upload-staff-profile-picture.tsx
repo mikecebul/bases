@@ -56,7 +56,7 @@ export default function UploadStaffProfilePicture({
     <div className="flex flex-col items-start py-16">
       <div className="flex flex-col items-center gap-4">
         <Avatar className="w-24 h-24">
-          <AvatarImage src={imageUrl} alt="profile of staff member." />
+          <AvatarImage src={imageUrl || undefined} alt="profile of staff member." />
           <AvatarFallback className="">
             <Icons.user className="w-16 h-16 rounded-full" />
           </AvatarFallback>

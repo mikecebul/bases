@@ -13,7 +13,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../ui/alert-dialog";
+} from "@/components/ui/alert-dialog";
 import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
 import { cn } from "@/lib/utils";
 

@@ -74,13 +74,15 @@ export default function StaffBio({
             </div>
           )}
         </div>
-        <Image
-          src={staffMember.imageUrl}
-          alt={staffMember.name}
-          width={1000}
-          height={1000}
-          className="order-first object-top mx-auto mt-0 rounded-md sm:w-full md:w-4/5 lg:w-3/5 sm:mt-6 sm:order-last"
-        />
+        {!!staffMember.imageUrl && (
+          <Image
+            src={staffMember.imageUrl}
+            alt={staffMember.name}
+            width={1000}
+            height={1000}
+            className="order-first object-top mx-auto mt-0 rounded-md sm:w-full md:w-4/5 lg:w-3/5 sm:mt-6 sm:order-last"
+          />
+        )}
       </CardContent>
       <CardFooter className="flex justify-between px-4 md:px-8 2xl:px-0 lg:mt-8">
         <Link

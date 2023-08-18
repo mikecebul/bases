@@ -18,8 +18,8 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
 import { StaffMember } from "@prisma/client";
-import { Switch } from "../ui/switch";
-import { Label } from "../ui/label";
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label";
 
 const staffFormSchema = z.object({
   name: z.string(),
@@ -201,7 +201,7 @@ export default function StaffForm({
                   <Switch
                     {...field}
                     id="status"
-                    onCheckedChange={(checked) =>
+                    onCheckedChange={(checked: boolean) =>
                       field.onChange(checked ? "PUBLISHED" : "DRAFT")
                     }
                     checked={field.value === "PUBLISHED"}

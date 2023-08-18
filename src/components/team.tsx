@@ -62,7 +62,7 @@ export default function Team({
                 <div className="flex items-center gap-x-6">
                   <Avatar className="w-16 h-16">
                     <AvatarImage
-                      src={person.imageUrl}
+                      src={person.imageUrl || undefined}
                       alt="profile of staff member."
                     />
                     <AvatarFallback>
