@@ -22,6 +22,8 @@ import {
   UserPlus,
   User,
   UserX,
+  Check,
+  ChevronsUpDown,
 } from "lucide-react";
 
 export const Icons = {
@@ -61,8 +63,37 @@ export const Icons = {
   brain: Brain,
   zero: CircleOff,
   facebook: Facebook,
-  check: CheckCircle,
+  checkCirlce: CheckCircle,
   adduser: UserPlus,
   user: User,
   delete: UserX,
+  check: Check,
+  chevronsUpDown: ChevronsUpDown,
 };
+
+export const lucideIcons = [
+  { component: Menu, label: "Menu" },
+  { component: X, label: "X" },
+  { component: ArrowRight, label: "Arrow Right" },
+  { component: Glasses, label: "Glasses" },
+  { component: FlaskConical, label: "Flask" },
+  { component: Users, label: "Group" },
+  { component: Tally4, label: "Jail" },
+  { component: WineOff, label: "Wine Off" },
+  { component: Car, label: "Car" },
+  { component: Phone, label: "Phone" },
+  { component: Navigation, label: "Navigation" },
+  { component: Printer, label: "Printer" },
+  { component: Mail, label: "Mail" },
+  { component: Pencil, label: "Pencil" },
+  { component: SprayCan, label: "Spray Can" },
+  { component: Brain, label: "Brain" },
+  { component: CircleOff, label: "Circle Off" },
+  { component: Facebook, label: "Facebook" },
+  { component: CheckCircle, label: "Check Circle" },
+  { component: UserPlus, label: "Add User" },
+  { component: User, label: "User" },
+  { component: UserX, label: "Delete User" },
+  { component: Check, label: "Check" },
+  { component: ChevronsUpDown, label: "Up Down" },
+];

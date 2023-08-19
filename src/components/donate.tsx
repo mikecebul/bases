@@ -49,7 +49,7 @@ export default function Donate() {
             >
               {includedFeatures.map((feature) => (
                 <li key={feature} className="flex gap-x-3">
-                  <Icons.check
+                  <Icons.checkCirlce
                     className="h-6 w-5 flex-none text-brand"
                     aria-hidden="true"
                   />
