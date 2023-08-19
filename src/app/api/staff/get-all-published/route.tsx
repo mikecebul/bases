@@ -1,4 +1,4 @@
-import prisma from "@/_lib/prisma";
+import prisma from "@/lib/prisma";
 
 export async function GET(request: Request) {
   try {
@@ -10,7 +10,7 @@ export async function GET(request: Request) {
         order: "asc",
       },
     });
-    return new Response(JSON.stringify(boardMembers), {
+    return new Response(JSON.stringify(staffMembers), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

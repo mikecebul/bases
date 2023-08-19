@@ -8,9 +8,12 @@ export const metadata: Metadata = {
 };
 
 async function getStaffMembers() {
-  const res = await fetch("/api/staff/get-all-published", {
-    next: { tags: ["staffMembers"] },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/staff/get-all-published`,
+    {
+      next: { tags: ["staffMembers"] },
+    }
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch published staff memebers");
   }
@@ -18,9 +21,12 @@ async function getStaffMembers() {
 }
 
 async function getBoardMembers() {
-  const res = await fetch("/api/board/get-all-published", {
-    next: { tags: ["boardMembers"] },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/board/get-all-published`,
+    {
+      next: { tags: ["boardMembers"] },
+    }
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch published board memebers");
   }

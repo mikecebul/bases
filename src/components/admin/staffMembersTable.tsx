@@ -14,7 +14,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import prisma from "@/lib/prisma";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import DeleteStaffMemberButton from "./delete-staff-member-button";
+import DeleteStaffMemberButton from "./deleteStaffMemberButton";
 
 async function getStaffMembers() {
   const staffMembers = await prisma.staffMember.findMany({

@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Image from "next/image";
 import BioPopover from "./bioPopover";
 import { Icons } from "../icons";
 import { buttonVariants } from "../ui/button";
@@ -15,6 +14,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import prisma from "@/lib/prisma";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import DeleteBoardMemberButton from "./deleteBoardMemberButton";
 
 async function getBoardMembers() {
   const boardMembers = await prisma.boardMember.findMany({
@@ -60,7 +60,9 @@ export async function BoardMembersTable() {
               <TableHead>Role</TableHead>
               <TableHead>Bio</TableHead>
               <TableHead className="text-center">Image</TableHead>
+              <TableHead className="text-center">Status</TableHead>
               <TableHead className="">Edit</TableHead>
+              <TableHead className="">Delete</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -82,6 +84,27 @@ export async function BoardMembersTable() {
                     </AvatarFallback>
                   </Avatar>
                 </TableCell>
+                <TableCell>
+                  {person.status === "PUBLISHED" ? (
+                    <div
+                      className={cn(
+                        buttonVariants(),
+                        "bg-green-600 hover:bg-green-600"
+                      )}
+                    >
+                      <p>Published</p>
+                    </div>
+                  ) : (
+                    <div
+                      className={cn(
+                        buttonVariants(),
+                        "bg-yellow-500 hover:bg-yellow-500 text-black"
+                      )}
+                    >
+                      <p>Draft</p>
+                    </div>
+                  )}
+                </TableCell>
                 <TableCell className="">
                   <Link
                     className={cn(
@@ -92,6 +115,9 @@ export async function BoardMembersTable() {
                   >
                     <Icons.pencil />
                   </Link>
+                </TableCell>
+                <TableCell className="">
+                  <DeleteBoardMemberButton id={person.id} name={person.name} />
                 </TableCell>
               </TableRow>
             ))}
