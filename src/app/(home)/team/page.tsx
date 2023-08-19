@@ -1,4 +1,5 @@
 import Team from "@/components/team";
+import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,30 +8,28 @@ export const metadata: Metadata = {
     "Learn about the BASES staff and boardmembers which make our facility unique.",
 };
 
-async function getStaffMembers() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/staff/get-all-published`,
-    {
-      next: { tags: ["staffMembers"] },
-    }
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch published staff memebers");
-  }
-  return res.json();
+async function getStaffMembers() {  
+  const staffMembers = await prisma.staffMember.findMany({
+    where: {
+      status: "PUBLISHED",
+    },
+    orderBy: {
+      order: "asc",
+    },
+  });
+  return staffMembers
 }
 
-async function getBoardMembers() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/board/get-all-published`,
-    {
-      next: { tags: ["boardMembers"] },
-    }
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch published board memebers");
-  }
-  return res.json();
+async function getBoardMembers() {  
+  const boardMembers = await prisma.boardMember.findMany({
+    where: {
+      status: "PUBLISHED",
+    },
+    orderBy: {
+      order: "asc",
+    },
+  });
+  return boardMembers
 }
 
 export default async function Page() {
