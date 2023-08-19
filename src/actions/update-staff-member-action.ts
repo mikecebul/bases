@@ -52,7 +52,8 @@ export async function UpdateStaffMemberAction({
         ),
       },
     });
-    revalidatePath("/teams");
+    revalidatePath("/team");
+    revalidatePath("/team/staff/[slug]");
   } catch (error) {
     return {
       error: getErrorMessage(

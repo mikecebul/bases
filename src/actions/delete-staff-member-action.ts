@@ -14,6 +14,7 @@ export async function DeleteStaffMemberAction(id: string) {
       },
     });
     revalidatePath("/team");
+    revalidatePath("/team/staff/[slug]");
     return { success: true };
     
   } catch (error) {

@@ -14,6 +14,7 @@ export async function DeleteServiceAction(id: string) {
       },
     });
     revalidatePath("/");
+    revalidatePath("/services");
     return { success: true };
     
   } catch (error) {

@@ -28,7 +28,8 @@ export async function CreateBoardMemberAction({
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
       },
     });
-    revalidatePath("/teams");
+    revalidatePath("/team");
+    revalidatePath("/team/board-members/[slug]");
   } catch (error) {
     return {
       error: getErrorMessage(

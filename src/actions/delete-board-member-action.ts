@@ -14,8 +14,8 @@ export async function DeleteBoardMemberAction(id: string) {
       },
     });
     revalidatePath("/team");
+    revalidatePath("/team/board/[slug]");
     return { success: true };
-    
   } catch (error) {
     return {
       error: getErrorMessage(
