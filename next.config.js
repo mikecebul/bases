@@ -26,6 +26,14 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/wp/:path*",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
-
 module.exports = nextConfig;

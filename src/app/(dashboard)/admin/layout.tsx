@@ -74,6 +74,15 @@ function Sidebar() {
           >
             Board
           </Link>
+          <Link
+            href="/admin/services"
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "justify-start w-full"
+            )}
+          >
+            Services
+          </Link>
         </div>
       </div>
       <div className="px-3 py-6 space-y-4">
