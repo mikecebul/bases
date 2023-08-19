@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { getErrorMessage } from "@/lib/utils";
+import { generateSlug, getErrorMessage } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 type FormStaffMember = {
@@ -28,17 +28,11 @@ export async function CreateStaffMemberAction({
 }: {
   newStaffMemberData: FormStaffMember;
 }) {
-  const slug = person.name
-    .split(" ")
-    .join("-")
-    .toLowerCase()
-    .replace(/[^\w-]+/g, "");
-
   try {
     await prisma.staffMember.create({
       data: {
         name: person.name,
-        slug: slug,
+        slug: generateSlug(person.name),
         role: person.role,
         qualifications: person.qualifications || null,
         imageUrl: person.imageUrl || null,

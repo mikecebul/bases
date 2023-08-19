@@ -15,13 +15,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { lucideIcons, Icons } from "@/components/icons";
+import { lucideIcons, Icons, renderIcon } from "@/components/icons";
 
-export default function Page() {
+type IconComboBoxProps = {
+  onChange?: (...event: any[]) => void;
+  onBlur?: any;
+  value: string;
+  setIcon: (icon: string) => void;
+  name?: string;
+  ref?: any;
+};
+export function IconComboBox({ setIcon, value }: IconComboBoxProps) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
-
-  const selectedIcon = lucideIcons.find((icon) => icon.label === value);
+  const selectedIcon = lucideIcons.find((icon) => icon.value === value);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -32,14 +38,8 @@ export default function Page() {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {selectedIcon ? (
-            <>
-              <selectedIcon.component className="mr-2 h-4 w-4" />
-              {selectedIcon.label}
-            </>
-          ) : (
-            "Select Icon..."
-          )}
+          {!!value ? renderIcon(value, "small") : "Select Icon..."}
+          {selectedIcon && selectedIcon.label}
           <Icons.chevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -54,7 +54,7 @@ export default function Page() {
                 <CommandItem
                   key={index}
                   onSelect={() => {
-                    setValue(icon.label === value ? "" : icon.label);
+                    setIcon(icon.value === value ? "" : icon.value);
                     setOpen(false);
                   }}
                 >
@@ -62,7 +62,7 @@ export default function Page() {
                   <Icons.check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === icon.label ? "opacity-100" : "opacity-0"
+                      value === icon.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {icon.label}

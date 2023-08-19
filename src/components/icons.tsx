@@ -24,7 +24,10 @@ import {
   UserX,
   Check,
   ChevronsUpDown,
+  LucideIcon,
 } from "lucide-react";
+import { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 export const Icons = {
   logo: ({ className }: { className: string }) => (
@@ -71,29 +74,68 @@ export const Icons = {
   chevronsUpDown: ChevronsUpDown,
 };
 
-export const lucideIcons = [
-  { component: Menu, label: "Menu" },
-  { component: X, label: "X" },
-  { component: ArrowRight, label: "Arrow Right" },
-  { component: Glasses, label: "Glasses" },
-  { component: FlaskConical, label: "Flask" },
-  { component: Users, label: "Group" },
-  { component: Tally4, label: "Jail" },
-  { component: WineOff, label: "Wine Off" },
-  { component: Car, label: "Car" },
-  { component: Phone, label: "Phone" },
-  { component: Navigation, label: "Navigation" },
-  { component: Printer, label: "Printer" },
-  { component: Mail, label: "Mail" },
-  { component: Pencil, label: "Pencil" },
-  { component: SprayCan, label: "Spray Can" },
-  { component: Brain, label: "Brain" },
-  { component: CircleOff, label: "Circle Off" },
-  { component: Facebook, label: "Facebook" },
-  { component: CheckCircle, label: "Check Circle" },
-  { component: UserPlus, label: "Add User" },
-  { component: User, label: "User" },
-  { component: UserX, label: "Delete User" },
-  { component: Check, label: "Check" },
-  { component: ChevronsUpDown, label: "Up Down" },
+type LucideIconsType = {
+  component: LucideIcon;
+  label: string;
+  value: string;
+};
+
+export const lucideIcons: LucideIconsType[] = [
+  { component: User, label: "Fall Back", value: "fallback" },
+  { component: Menu, label: "Menu", value: "openMenu" },
+  { component: X, label: "X", value: "closeMenu" },
+  { component: ArrowRight, label: "Arrow Right", value: "arrowRight" },
+  { component: Glasses, label: "Glasses", value: "glasses" },
+  { component: FlaskConical, label: "Flask", value: "flask" },
+  { component: Users, label: "Group", value: "group" },
+  { component: Tally4, label: "Jail", value: "jail" },
+  { component: WineOff, label: "Wine Off", value: "class" },
+  { component: Car, label: "Car", value: "car" },
+  { component: Phone, label: "Phone", value: "phone" },
+  { component: Navigation, label: "Navigation", value: "navigation" },
+  { component: Printer, label: "Printer", value: "print" },
+  { component: Mail, label: "Mail", value: "mail" },
+  { component: Pencil, label: "Pencil", value: "pencil" },
+  { component: SprayCan, label: "Spray Can", value: "spray" },
+  { component: Brain, label: "Brain", value: "brain" },
+  { component: CircleOff, label: "Circle Off", value: "zero" },
+  { component: Facebook, label: "Facebook", value: "facebook" },
+  { component: CheckCircle, label: "Check Circle", value: "checkCirlce" },
+  { component: UserPlus, label: "Add User", value: "adduser" },
+  { component: User, label: "User", value: "user" },
+  { component: UserX, label: "Delete User", value: "delete" },
+  { component: Check, label: "Check", value: "check" },
+  { component: ChevronsUpDown, label: "Up Down", value: "chevronsUpDown" },
 ];
+
+export const iconMapping = lucideIcons.reduce<Record<string, LucideIcon>>(
+  (acc, icon) => {
+    acc[icon.value] = icon.component;
+    return acc;
+  },
+  {}
+);
+
+export const renderIcon = (iconValue: string, size: string): ReactNode => {
+  const IconComponent = iconMapping[iconValue];
+  const iconSize = size === "small" ? "w-4 h-4" : "w-6 h-6"; // Adjust the icon size
+  const containerSize = size === "small" ? "w-6 h-6" : "w-10 h-10"; // Adjust the container size
+
+  if (!IconComponent) {
+    return (
+      <div
+        className={`flex items-center justify-center ${containerSize} rounded-lg bg-brand`}
+      >
+        <User className={`${iconSize} text-white`} aria-hidden="true" />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`flex items-center justify-center ${containerSize} rounded-lg bg-brand`}
+    >
+      <IconComponent className={`${iconSize} text-white`} aria-hidden="true" />
+    </div>
+  );
+};

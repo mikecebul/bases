@@ -103,7 +103,7 @@ export const siteConfig = {
     {
       name: "Zero Tolerance Education Class",
       description:
-        "Our Alcohol Highway Safety Education Classes are designed for first-time OWI/OUI offenders, providing crucial knowledge and insight.",
+        "Tailored for MIPs and adolescents, this class educates on strict underage alcohol and marijuana regulations and promotes responsible behavior.",
       icon: Icons.zero,
     },
     {

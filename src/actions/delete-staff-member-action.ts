@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { getErrorMessage } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 export async function DeleteStaffMemberAction(id: string) {
@@ -16,9 +17,11 @@ export async function DeleteStaffMemberAction(id: string) {
     return { success: true };
     
   } catch (error) {
-    if (error instanceof Error) {
-      return { success: false, error: error.message };
-    }
-    return { success: false, error: "An error occurred" };
+    return {
+      error: getErrorMessage(
+        error,
+        "Oops, there was an error deleting the staff member. Please try again."
+      ),
+    };
   }
 }

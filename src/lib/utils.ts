@@ -27,3 +27,10 @@ export const getErrorMessage = (
   }
   return message;
 };
+
+export const generateSlug = (name: string) =>
+  name
+    .split(" ")
+    .join("-")
+    .toLowerCase()
+    .replace(/[^\w-]+/g, "");

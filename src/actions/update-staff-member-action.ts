@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/prisma";
-import { getErrorMessage } from "@/lib/utils";
+import { generateSlug, getErrorMessage } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 type FormStaffMember = {
@@ -36,6 +36,7 @@ export async function UpdateStaffMemberAction({
       data: {
         status: person.status,
         name: person.name,
+        slug: generateSlug(person.name),
         role: person.role,
         qualifications: person.qualifications || null,
         imageUrl: person.imageUrl || null,

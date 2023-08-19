@@ -1,13 +1,17 @@
 "use client";
 
-import React from "react";
-import { siteConfig } from "@/config/site";
 import { motion } from "framer-motion";
 import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Service } from "@prisma/client";
+import { renderIcon } from "./icons";
 
-export default function ServicesFrontPage() {
+export default function ServicesFrontPage({
+  services,
+}: {
+  services: Service[];
+}) {
   return (
     <section className="relative isolate pt-16 pb-24 lg:pt-24 lg:pb-32">
       <motion.div
@@ -80,7 +84,7 @@ export default function ServicesFrontPage() {
           className="mt-16 text-left sm:mt-20 lg:mt-24"
         >
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
-            {siteConfig.FrontPageServices.map((service) => (
+            {services?.map((service) => (
               <motion.div
                 key={service.name}
                 variants={{
@@ -95,11 +99,10 @@ export default function ServicesFrontPage() {
                 className="relative pl-16"
               >
                 <dt className="text-base font-semibold leading-7 text-primary">
-                  <div className="absolute top-0 left-0 flex items-center justify-center w-10 h-10 rounded-lg bg-brand">
-                    <service.icon
-                      className="w-6 h-6 text-white"
-                      aria-hidden="true"
-                    />
+                  <div className="absolute top-0 left-0">
+                    {!!service.icon
+                      ? renderIcon(service.icon)
+                      : renderIcon("fallback")}
                   </div>
                   {service.name}
                 </dt>

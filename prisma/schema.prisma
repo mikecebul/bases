@@ -36,6 +36,17 @@ model BoardMember {
   status   Status   @default(DRAFT)
 }
 
+model Service {
+  id          String  @id @default(cuid())
+  order       Int     @default(autoincrement())
+  slug        String
+  name        String
+  description String
+  icon        String
+  frontpage   Boolean @default(false)
+  status      Status  @default(DRAFT)
+}
+
 model Admin {
   id             String    @id @default(cuid())
   hashedPassword String

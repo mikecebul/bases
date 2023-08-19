@@ -2,10 +2,11 @@
 "use client";
 
 import React from "react";
-import { siteConfig } from "@/config/site";
 import { motion } from "framer-motion";
+import { Service } from "@prisma/client";
+import { renderIcon } from "./icons";
 
-export default function Services() {
+export default function Services({services}: {services: Service[]}) {
   return (
     <section id="services" className="relative py-24 lg:pb-32 isolate">
       <div className="absolute inset-0 overflow-hidden -z-10">
@@ -68,7 +69,7 @@ export default function Services() {
           className="mt-16 text-left sm:mt-20 lg:mt-24"
         >
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
-            {siteConfig.Services.map((service) => (
+            {services.map((service) => (
               <motion.div
                 key={service.name}
                 variants={{
@@ -83,11 +84,8 @@ export default function Services() {
                 className="relative pl-16"
               >
                 <dt className="text-base font-semibold leading-7 text-primary">
-                  <div className="absolute top-0 left-0 flex items-center justify-center w-10 h-10 rounded-lg bg-brand">
-                    <service.icon
-                      className="w-6 h-6 text-white"
-                      aria-hidden="true"
-                    />
+                  <div className="absolute top-0 left-0">
+                    {!!service.icon ? renderIcon(service.icon) : renderIcon("fallback")}
                   </div>
                   {service.name}
                 </dt>

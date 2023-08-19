@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/prisma";
-import { getErrorMessage } from "@/lib/utils";
+import { generateSlug, getErrorMessage } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 type FormBoardMember = {
@@ -26,6 +26,7 @@ export async function UpdateBoardMemberAction({
       data: {
         status: person.status,
         name: person.name,
+        slug: generateSlug(person.name),
         role: person.role,
         imageUrl: person.imageUrl || null,
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
