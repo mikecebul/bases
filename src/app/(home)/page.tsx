@@ -4,7 +4,7 @@ import Hero from "@/components/hero";
 import Donate from "@/components/donate";
 import prisma from "@/lib/prisma";
 
-export async function getFrontPageServices() {
+async function getFrontPageServices() {
   const services = await prisma.service.findMany({
     where: {
       status: "PUBLISHED",
