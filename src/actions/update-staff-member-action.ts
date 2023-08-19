@@ -1,6 +1,6 @@
 "use server";
 import { getErrorMessage } from "@/lib/utils";
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 type FormStaffMember = {
   status: "DRAFT" | "PUBLISHED";
@@ -50,8 +50,7 @@ export async function UpdateStaffMemberAction({
         ),
       },
     });
-    revalidateTag("staffMembers");
-    // redirect("/admin/staff");
+    revalidatePath("/teams");
   } catch (error) {
     return {
       error: getErrorMessage(

@@ -1,7 +1,7 @@
 "use server";
 
 import { getErrorMessage } from "@/lib/utils";
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 type FormStaffMember = {
   name: string;
@@ -53,8 +53,7 @@ export async function CreateStaffMemberAction({
         ),
       },
     });
-    revalidateTag("staffMembers");
-    // redirect("/admin/staff");
+    revalidatePath("/teams");
   } catch (error) {
     return {
       error: getErrorMessage(

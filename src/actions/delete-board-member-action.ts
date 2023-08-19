@@ -13,6 +13,7 @@ export async function DeleteBoardMemberAction(id: string) {
     });
     revalidatePath("/team");
     return { success: true };
+    
   } catch (error) {
     if (error instanceof Error) {
       return { success: false, error: error.message };

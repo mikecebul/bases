@@ -1,7 +1,7 @@
 "use server";
 
 import { getErrorMessage } from "@/lib/utils";
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 type FormBoardMember = {
   name: string;
@@ -33,7 +33,7 @@ export async function CreateBoardMemberAction({
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
       },
     });
-    revalidateTag("boardMembers");
+    revalidatePath("/teams");
   } catch (error) {
     return {
       error: getErrorMessage(

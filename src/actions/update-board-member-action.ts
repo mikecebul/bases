@@ -1,6 +1,6 @@
 "use server";
 import { getErrorMessage } from "@/lib/utils";
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 type FormBoardMember = {
   status: "DRAFT" | "PUBLISHED";
@@ -30,7 +30,7 @@ export async function UpdateBoardMemberAction({
         bio: person.bio.map((bioObj: { value: string }) => bioObj.value),
       },
     });
-    revalidateTag("boardMembers");
+    revalidatePath("/teams");
   } catch (error) {
     return {
       error: getErrorMessage(
