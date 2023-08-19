@@ -73,7 +73,7 @@ export async function StaffMembersTable() {
                 <TableCell className="font-medium">{person.role}</TableCell>
                 <TableCell>{person.qualifications}</TableCell>
                 <TableCell>
-                  <BioPopover bio={person.bio} />
+                  <BioPopover bio={person.bio} education={person.education} philosophy={person.philosophy} specializations={person.specializations} />
                 </TableCell>
                 <TableCell className="flex items-center justify-center">
                   <Avatar className="w-12 h-12">
