@@ -7,6 +7,7 @@ import prisma from "@/lib/prisma";
 export async function getFrontPageServices() {
   const services = await prisma.service.findMany({
     where: {
+      status: "PUBLISHED",
       frontpage: true,
     },
   });

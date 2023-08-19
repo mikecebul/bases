@@ -17,17 +17,10 @@ import {
 } from "@/components/ui/popover";
 import { lucideIcons, Icons, renderIcon } from "@/components/icons";
 
-type IconComboBoxProps = {
-  onChange?: (...event: any[]) => void;
-  onBlur?: any;
-  value: string;
-  setIcon: (icon: string) => void;
-  name?: string;
-  ref?: any;
-};
-export function IconComboBox({ setIcon, value }: IconComboBoxProps) {
+
+export function IconComboBox({ icon, setIcon }: {icon: string, setIcon: (name: "icon", value: string) => void}) {
   const [open, setOpen] = useState(false);
-  const selectedIcon = lucideIcons.find((icon) => icon.value === value);
+  const selectedIcon = lucideIcons.find((item) => item.value === icon);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -38,7 +31,7 @@ export function IconComboBox({ setIcon, value }: IconComboBoxProps) {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {!!value ? renderIcon(value, "small") : "Select Icon..."}
+          {!!selectedIcon ? renderIcon(icon, "small") : "Select Icon..."}
           {selectedIcon && selectedIcon.label}
           <Icons.chevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -48,13 +41,15 @@ export function IconComboBox({ setIcon, value }: IconComboBoxProps) {
           <CommandInput placeholder="Search Icon..." />
           <CommandEmpty>No Icon found.</CommandEmpty>
           <CommandGroup>
-            {lucideIcons.map((icon, index) => {
-              const IconComponent = icon.component;
+            {lucideIcons.map((item) => {
+              const IconComponent = item.component;
               return (
                 <CommandItem
-                  key={index}
+                value={item.label}
+                  key={item.value}
                   onSelect={() => {
-                    setIcon(icon.value === value ? "" : icon.value);
+                    setIcon("icon", item.value);
+                    // setIcon(icon.value === value ? "" : icon.value);
                     setOpen(false);
                   }}
                 >
@@ -62,10 +57,10 @@ export function IconComboBox({ setIcon, value }: IconComboBoxProps) {
                   <Icons.check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === icon.value ? "opacity-100" : "opacity-0"
+                      item.value === icon ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {icon.label}
+                  {item.label}
                 </CommandItem>
               );
             })}

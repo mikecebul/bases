@@ -1,33 +1,31 @@
 "use server";
-import prisma, { Service } from "@/lib/prisma";
+
+import prisma from "@/lib/prisma";
 import { generateSlug, getErrorMessage } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 type NewServiceData = {
-    name: string;
-    description: string;
-    icon: string;
-    frontpage: boolean;
-    status: "DRAFT" | "PUBLISHED";
-}
+  name: string;
+  description: string;
+  icon: string | undefined;
+  frontpage: boolean;
+  status: "DRAFT" | "PUBLISHED";
+};
 
-export async function UpdateServiceAction({
-  id,
+export async function CreateServiceAction({
   values: service,
 }: {
-  id: string;
   values: NewServiceData;
 }) {
   try {
-    await prisma.service.update({
-      where: { id },
+    await prisma.service.create({
       data: {
         status: service.status,
         frontpage: service.frontpage,
         name: service.name,
         slug: generateSlug(service.name),
         description: service.description,
-        icon: service.icon,
+        icon: service.icon || "user",
       },
     });
     revalidatePath("/");
@@ -35,7 +33,7 @@ export async function UpdateServiceAction({
     return {
       error: getErrorMessage(
         error,
-        "Oops, there was an error updating the service. Please try again."
+        "Oops, there was an error updating the profile. Please try again."
       ),
     };
   }

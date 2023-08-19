@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -13,13 +12,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
-import { Service } from "@prisma/client";
+import { CreateServiceAction } from "@/actions/create-service-action";
 import { Switch } from "../ui/switch";
 import { Label } from "../ui/label";
-import { UpdateServiceAction } from "@/actions/update-service-action";
-import { Textarea } from "../ui/textarea";
 import { IconComboBox } from "./iconCombobox";
 
 const ServiceFormSchema = z.object({
@@ -32,15 +31,12 @@ const ServiceFormSchema = z.object({
 
 type ServiceFormValues = z.infer<typeof ServiceFormSchema>;
 
-export default function ServiceEditForm({ service }: { service: Service }) {
+export default function ServiceCreateForm() {
   const router = useRouter();
 
   const defaultValues: Partial<ServiceFormValues> = {
-    status: service.status,
-    frontpage: service.frontpage,
-    name: service.name,
-    description: service.description,
-    icon: service.icon,
+    status: "DRAFT",
+    frontpage: false,
   };
 
   const form = useForm<ServiceFormValues>({
@@ -54,11 +50,7 @@ export default function ServiceEditForm({ service }: { service: Service }) {
   } = form;
 
   async function onSubmit(values: ServiceFormValues) {
-    const { id } = service;
-    const result = await UpdateServiceAction({
-      id,
-      values,
-    });
+    const result = await CreateServiceAction({ values });
 
     if (result?.error) {
       toast({

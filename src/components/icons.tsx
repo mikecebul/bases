@@ -25,6 +25,7 @@ import {
   Check,
   ChevronsUpDown,
   LucideIcon,
+  PlusCircle,
 } from "lucide-react";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
@@ -72,6 +73,7 @@ export const Icons = {
   delete: UserX,
   check: Check,
   chevronsUpDown: ChevronsUpDown,
+  plusCircle: PlusCircle,
 };
 
 type LucideIconsType = {
@@ -106,6 +108,7 @@ export const lucideIcons: LucideIconsType[] = [
   { component: UserX, label: "Delete User", value: "delete" },
   { component: Check, label: "Check", value: "check" },
   { component: ChevronsUpDown, label: "Up Down", value: "chevronsUpDown" },
+  { component: PlusCircle, label: "Plus Circle", value: "plusCircle" },
 ];
 
 export const iconMapping = lucideIcons.reduce<Record<string, LucideIcon>>(
@@ -116,10 +119,10 @@ export const iconMapping = lucideIcons.reduce<Record<string, LucideIcon>>(
   {}
 );
 
-export const renderIcon = (iconValue: string, size: string): ReactNode => {
+export const renderIcon = (iconValue: string, small?: "small"): ReactNode => {
   const IconComponent = iconMapping[iconValue];
-  const iconSize = size === "small" ? "w-4 h-4" : "w-6 h-6"; // Adjust the icon size
-  const containerSize = size === "small" ? "w-6 h-6" : "w-10 h-10"; // Adjust the container size
+  const iconSize = small ? "w-4 h-4" : "w-6 h-6"; // Adjust the icon size
+  const containerSize = small ? "w-6 h-6" : "w-10 h-10"; // Adjust the container size
 
   if (!IconComponent) {
     return (

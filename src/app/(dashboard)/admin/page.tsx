@@ -1,4 +1,5 @@
 import { BoardMembersTable } from "@/components/admin/boardMembersTable";
+import { ServicesTable } from "@/components/admin/servicesTable";
 import { StaffMembersTable } from "@/components/admin/staffMembersTable";
 import { Separator } from "@/components/ui/separator";
 
@@ -9,6 +10,7 @@ export default async function Page() {
       <Separator />
       <StaffMembersTable />
       <BoardMembersTable />
+      <ServicesTable />
     </div>
   );
 }

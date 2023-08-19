@@ -29,7 +29,7 @@ export async function ServicesTable() {
   return (
     <div className="max-w-7xl p-8">
       <div className="flex justify-between items-center pb-4">
-        <p className=" text-xl font-semi-bold">Board Members</p>
+        <p className=" text-xl font-semi-bold">Services</p>
         <div className="flex items-center">
           <Link
             className="flex items-center gap-4 group"
@@ -42,7 +42,7 @@ export async function ServicesTable() {
                 "group-hover:bg-brand/90"
               )}
             >
-              <Icons.adduser />
+              <Icons.plusCircle />
             </div>
           </Link>
         </div>
