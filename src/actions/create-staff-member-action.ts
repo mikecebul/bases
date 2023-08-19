@@ -1,5 +1,6 @@
 "use server";
 
+import prisma from "@/lib/prisma";
 import { getErrorMessage } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
