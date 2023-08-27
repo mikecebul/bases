@@ -31,7 +31,7 @@ export async function UpdateServiceAction({
       },
     });
     // revalidatePath("/");
-    revalidatePath("/services");
+    revalidatePath("services");
   } catch (error) {
     return {
       error: getErrorMessage(
