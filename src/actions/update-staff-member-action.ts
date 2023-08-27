@@ -53,7 +53,7 @@ export async function UpdateStaffMemberAction({
       },
     });
     revalidatePath("/team");
-    revalidatePath("/team/staff/[slug]");
+    revalidatePath(`/team/staff/${generateSlug(person.name)}`);
   } catch (error) {
     return {
       error: getErrorMessage(
