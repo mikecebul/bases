@@ -3,6 +3,8 @@ import prisma from '@/lib/prisma';
 import { Metadata } from 'next';
 import React from 'react'
 
+export const revalidate = true
+
 export const metadata: Metadata = {
   title: "Services",
   description:
