@@ -45,7 +45,7 @@ export async function revalidate(path: string) {
       throw new Error("Error invalidating cache.");
     }
     if (invalidateRes.ok) {
-      console.log("Revalidation Completed Successfully!");
+      // console.log("Revalidation Completed Successfully!");
     }
   } catch (err) {
     console.error(err);

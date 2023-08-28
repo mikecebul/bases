@@ -95,16 +95,9 @@ export default function BoardEditForm({ person }: { person: BoardMember }) {
       toast({ description: "Profile was updated successfully." });
       router.refresh();
       router.push("/admin/board");
-      console.log(person.slug);
       await revalidate("/team");
-      console.log(`Revalidating person.slug: /team/board/${person.slug}`);
       await revalidate(`/team/board/${person.slug}`);
       await revalidate(`/team/board/${generateSlug(newBoardMemberData.name)}`);
-      console.log(
-        `Revalidating generateSlug(newBoardMemberData.name: /team/board/${generateSlug(
-          newBoardMemberData.name
-        )}`
-      );
     }
   }
 
@@ -113,11 +106,7 @@ export default function BoardEditForm({ person }: { person: BoardMember }) {
       <UploadProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
 
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          onInvalid={() => console.log("Form is invalid")}
-          className="space-y-8"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name={"status"}

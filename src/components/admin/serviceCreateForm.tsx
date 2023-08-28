@@ -60,7 +60,7 @@ export default function ServiceCreateForm() {
       });
     } else {
       toast({ description: "Service was updated successfully." });
-      router.refresh()
+      router.refresh();
       router.push("/admin/services");
       await revalidate("/");
       await revalidate("/services");
@@ -70,11 +70,7 @@ export default function ServiceCreateForm() {
   return (
     <div className="max-w-7xl p-8">
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          onInvalid={() => console.log("Form is invalid")}
-          className="space-y-8"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name={"status"}

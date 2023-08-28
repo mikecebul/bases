@@ -81,11 +81,7 @@ export default function BoardCreateForm() {
     <div className="max-w-7xl p-8">
       <FirstStaffProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          onInvalid={() => console.log("Form is invalid")}
-          className="space-y-8"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name={"name"}

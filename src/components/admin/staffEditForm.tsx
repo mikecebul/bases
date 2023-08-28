@@ -157,11 +157,7 @@ export default function StaffEditForm({ person }: { person: StaffMember }) {
     <div className="p-8 max-w-7xl">
       <UploadProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          onInvalid={() => console.log("Form is invalid")}
-          className="space-y-8"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name={"status"}

@@ -111,10 +111,10 @@ export default function StaffCreateForm() {
       });
     } else {
       toast({ description: "Profile was updated successfully." });
-      router.refresh()
+      router.refresh();
       router.push("/admin/staff");
-      await revalidate("/team")
-      await revalidate(`/team/staff/${generateSlug(newStaffMemberData.name)}`)
+      await revalidate("/team");
+      await revalidate(`/team/staff/${generateSlug(newStaffMemberData.name)}`);
     }
   }
 
@@ -122,11 +122,7 @@ export default function StaffCreateForm() {
     <div className="p-8 max-w-7xl">
       <FirstStaffProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          onInvalid={() => console.log("Form is invalid")}
-          className="space-y-8"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name={"name"}
