@@ -10,6 +10,9 @@ async function getFrontPageServices() {
       status: "PUBLISHED",
       frontpage: true,
     },
+    orderBy: {
+      order: "asc",
+    },
   });
   return services;
 }
