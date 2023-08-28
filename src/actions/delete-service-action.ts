@@ -13,7 +13,7 @@ export async function DeleteServiceAction(id: string) {
         id: id,
       },
     });
-    revalidatePath("(home)/");
+    revalidatePath("/");
     revalidatePath("(home)/services");
     return { success: true };
   } catch (error) {

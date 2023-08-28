@@ -28,7 +28,7 @@ export async function CreateServiceAction({
         icon: service.icon || "user",
       },
     });
-    revalidatePath("(home)/");
+    revalidatePath("/");
     revalidatePath("(home)/services");
   } catch (error) {
     return {
