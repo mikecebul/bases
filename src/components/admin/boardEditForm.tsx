@@ -95,10 +95,16 @@ export default function BoardEditForm({ person }: { person: BoardMember }) {
       toast({ description: "Profile was updated successfully." });
       router.refresh();
       router.push("/admin/board");
-      console.log(person.slug)
+      console.log(person.slug);
       await revalidate("/team");
+      console.log(`Revalidating person.slug: /team/board/${person.slug}`);
       await revalidate(`/team/board/${person.slug}`);
       await revalidate(`/team/board/${generateSlug(newBoardMemberData.name)}`);
+      console.log(
+        `Revalidating generateSlug(newBoardMemberData.name: /team/board/${generateSlug(
+          newBoardMemberData.name
+        )}`
+      );
     }
   }
 

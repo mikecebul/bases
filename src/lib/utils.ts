@@ -33,7 +33,7 @@ export const generateSlug = (name: string) =>
     .split(" ")
     .join("-")
     .toLowerCase()
-    .replace(/[^\w-]+/g, "");
+    .replace(/[^\w-\s]+/g, "");
 
 export async function revalidate(path: string) {
   try {
@@ -42,7 +42,7 @@ export async function revalidate(path: string) {
     );
 
     if (!invalidateRes.ok) {
-      throw new Error('Error invalidating "/services" cache.');
+      throw new Error("Error invalidating cache.");
     }
     if (invalidateRes.ok) {
       console.log("Revalidation Completed Successfully!");
