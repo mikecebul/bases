@@ -27,9 +27,9 @@ export async function generateMetadata({
     },
   });
   return {
-    title: `Board Member - ${staffMember?.name}` || "Staff profile page",
+    title: `Staff Member - ${staffMember?.name}` || "Staff profile page",
     description:
-      `Learn about the history and experience of our board member ${staffMember?.name}.` ||
+      `Learn about the history and experience of our staff member ${staffMember?.name}.` ||
       "Learn about our staff members education, background, and expertise.",
   };
 }
