@@ -22,6 +22,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { UpdateStaffMemberAction } from "@/actions/update-staff-member-action";
 import UploadProfilePicture from "./uploadProfilePicture";
+import { generateSlug, revalidate } from "@/lib/utils";
 
 const staffFormSchema = z.object({
   name: z.string(),
@@ -145,11 +146,13 @@ export default function StaffEditForm({ person }: { person: StaffMember }) {
     } else {
       toast({ description: "Profile was updated successfully." });
       router.push("/admin/staff");
+      await revalidate("/team")
+      await revalidate(`/team/staff/${generateSlug(newStaffMemberData.name)}`)
     }
   }
 
   return (
-    <div className="max-w-7xl p-8">
+    <div className="p-8 max-w-7xl">
       <UploadProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
       <Form {...form}>
         <form
