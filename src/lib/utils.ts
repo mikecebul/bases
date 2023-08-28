@@ -36,12 +36,12 @@ export const generateSlug = (name: string) =>
     .replace(/[^\w-]+/g, "");
 
 export async function revalidate(path: string) {
-  await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/revalidate`, {
+  await fetch(`/api/revalidate`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ path }),
   });
-  console.log("Revalidated path:", path);
+  // console.log("Revalidated path:", path);
 }

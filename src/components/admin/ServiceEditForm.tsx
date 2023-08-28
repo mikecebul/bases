@@ -21,6 +21,7 @@ import { Label } from "../ui/label";
 import { UpdateServiceAction } from "@/actions/update-service-action";
 import { Textarea } from "../ui/textarea";
 import { IconComboBox } from "./iconCombobox";
+import { revalidate } from "@/lib/utils";
 
 const ServiceFormSchema = z.object({
   name: z.string(),
@@ -68,11 +69,17 @@ export default function ServiceEditForm({ service }: { service: Service }) {
     } else {
       toast({ description: "Service was updated successfully." });
       router.push("/admin/services");
+      try {
+        await revalidate("/");
+        await revalidate("/services");
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
   return (
-    <div className="max-w-7xl p-8">
+    <div className="p-8 max-w-7xl">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

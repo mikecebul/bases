@@ -33,12 +33,6 @@ export async function UpdateServiceAction({
     });
     // revalidatePath("/");
     // revalidatePath("(home)/services");
-    try {
-      await revalidate("/");
-      await revalidate("/services");
-    } catch (error) {
-      console.error(error);
-    }
   } catch (error) {
     return {
       error: getErrorMessage(
