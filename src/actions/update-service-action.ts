@@ -31,8 +31,7 @@ export async function UpdateServiceAction({
       },
     });
     revalidatePath("/");
-    revalidatePath("/services");
-    console.log("After revalidate Path");
+    revalidatePath("(home)/services");
   } catch (error) {
     return {
       error: getErrorMessage(
