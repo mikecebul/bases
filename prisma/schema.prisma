@@ -28,7 +28,7 @@ model StaffMember {
 model BoardMember {
   id       String   @id @default(cuid())
   order    Int      @default(autoincrement())
-  slug     String?
+  slug     String
   name     String
   role     String
   imageUrl String?
