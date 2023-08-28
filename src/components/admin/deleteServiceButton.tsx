@@ -15,7 +15,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
-import { cn } from "@/lib/utils";
+import { cn, revalidate } from "@/lib/utils";
 import { DeleteServiceAction } from "@/actions/delete-service-action";
 
 export default function DeleteServiceButton({
@@ -36,6 +36,8 @@ export default function DeleteServiceButton({
         action: <ToastAction altText="close">close</ToastAction>,
       });
       router.refresh();
+      await revalidate("/");
+      await revalidate("/services");
     } else {
       toast({
         variant: "destructive",

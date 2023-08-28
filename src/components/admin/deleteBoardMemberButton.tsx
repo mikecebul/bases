@@ -15,7 +15,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
-import { cn } from "@/lib/utils";
+import { cn, generateSlug, revalidate } from "@/lib/utils";
 
 export default function DeleteBoardMemberButton({
   id,
@@ -34,7 +34,9 @@ export default function DeleteBoardMemberButton({
         description: "",
         action: <ToastAction altText="close">close</ToastAction>,
       });
-      router.refresh();
+      router.refresh()      
+      await revalidate("/team");
+      await revalidate(`/team/board/${generateSlug(name)}`);
     } else {
       toast({
         variant: "destructive",

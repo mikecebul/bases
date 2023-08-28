@@ -20,6 +20,7 @@ import { CreateServiceAction } from "@/actions/create-service-action";
 import { Switch } from "../ui/switch";
 import { Label } from "../ui/label";
 import { IconComboBox } from "./iconCombobox";
+import { revalidate } from "@/lib/utils";
 
 const ServiceFormSchema = z.object({
   name: z.string(),
@@ -59,7 +60,10 @@ export default function ServiceCreateForm() {
       });
     } else {
       toast({ description: "Service was updated successfully." });
+      router.refresh()
       router.push("/admin/services");
+      await revalidate("/");
+      await revalidate("/services");
     }
   }
 

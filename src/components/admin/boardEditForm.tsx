@@ -22,6 +22,7 @@ import UploadProfilePicture from "./uploadProfilePicture";
 import { UpdateBoardMemberAction } from "@/actions/update-board-member-action";
 import { Switch } from "../ui/switch";
 import { Label } from "../ui/label";
+import { generateSlug, revalidate } from "@/lib/utils";
 
 const boardFormSchema = z.object({
   name: z.string(),
@@ -93,6 +94,8 @@ export default function BoardEditForm({ person }: { person: BoardMember }) {
     } else {
       toast({ description: "Profile was updated successfully." });
       router.push("/admin/board");
+      await revalidate("/team");
+      await revalidate(`/team/board/${generateSlug(person.name)}`);
     }
   }
 

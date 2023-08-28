@@ -68,9 +68,10 @@ export default function ServiceEditForm({ service }: { service: Service }) {
       });
     } else {
       toast({ description: "Service was updated successfully." });
+      router.refresh();
       router.push("/admin/services");
-      await revalidate("/")
-      await revalidate("/services")
+      await revalidate("/");
+      await revalidate("/services");
     }
   }
 

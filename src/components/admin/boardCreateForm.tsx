@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
 import FirstStaffProfilePicture from "./first-staff-profile-picture";
 import { CreateBoardMemberAction } from "@/actions/create-board-member-action";
+import { generateSlug, revalidate } from "@/lib/utils";
 
 const boardFormSchema = z.object({
   name: z.string(),
@@ -71,6 +72,8 @@ export default function BoardCreateForm() {
     } else {
       toast({ description: "Profile was updated successfully." });
       router.push("/admin/board");
+      await revalidate("/team");
+      await revalidate(`/team/board/${generateSlug(newBoardMemberData.name)}`);
     }
   }
 
