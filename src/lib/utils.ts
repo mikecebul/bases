@@ -36,12 +36,15 @@ export const generateSlug = (name: string) =>
     .replace(/[^\w-]+/g, "");
 
 export async function revalidate(path: string) {
-  await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/revalidate`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ path }),
-  });
-  // console.log("Revalidated path:", path);
+  try {
+    const invalidateRes = await fetch(
+      `/api/revalidate?path=${path}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
+    );
+
+    if (!invalidateRes.ok) {
+      throw new Error("Error invalidating cache.");
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }
