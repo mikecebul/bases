@@ -1,14 +1,11 @@
-import Services from '@/components/services'
-import prisma from '@/lib/prisma';
-import { Metadata } from 'next';
-import React from 'react'
-
-export const revalidate = true
+import Services from "@/components/services";
+import prisma from "@/lib/prisma";
+import { Metadata } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Services",
-  description:
-    "Explore all the recovery services provided at BASES.",
+  description: "Explore all the recovery services provided at BASES.",
 };
 
 async function getServices() {
@@ -24,8 +21,6 @@ async function getServices() {
 }
 
 export default async function Page() {
-  const services = await getServices()
-  return (
-    <Services services={services} />
-  )
+  const services = await getServices();
+  return <Services services={services} />;
 }
