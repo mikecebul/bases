@@ -28,8 +28,8 @@ export async function CreateServiceAction({
         icon: service.icon || "user",
       },
     });
-    revalidatePath("/");
-    revalidatePath("/services");
+    revalidatePath("(home)/");
+    revalidatePath("(home)/services");
   } catch (error) {
     return {
       error: getErrorMessage(
