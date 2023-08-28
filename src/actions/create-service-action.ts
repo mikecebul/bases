@@ -29,7 +29,7 @@ export async function CreateServiceAction({
       },
     });
     revalidatePath("/");
-    revalidatePath("/services");
+    revalidatePath("(home)/services");
   } catch (error) {
     return {
       error: getErrorMessage(

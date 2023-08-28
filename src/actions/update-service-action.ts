@@ -4,12 +4,12 @@ import { generateSlug, getErrorMessage } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 type NewServiceData = {
-    name: string;
-    description: string;
-    icon: string;
-    frontpage: boolean;
-    status: "DRAFT" | "PUBLISHED";
-}
+  name: string;
+  description: string;
+  icon: string;
+  frontpage: boolean;
+  status: "DRAFT" | "PUBLISHED";
+};
 
 export async function UpdateServiceAction({
   id,
@@ -31,7 +31,7 @@ export async function UpdateServiceAction({
       },
     });
     revalidatePath("/");
-    revalidatePath("/services");
+    revalidatePath("(home)/services");
   } catch (error) {
     return {
       error: getErrorMessage(

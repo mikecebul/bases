@@ -13,8 +13,8 @@ export async function DeleteBoardMemberAction(id: string) {
         id: id,
       },
     });
-    revalidatePath("/team");
-    revalidatePath("/team/board/[slug]");
+    revalidatePath("(home)/team");
+    revalidatePath("(home)/team/board/[slug]");
     return { success: true };
   } catch (error) {
     return {
