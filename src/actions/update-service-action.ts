@@ -1,7 +1,6 @@
 "use server";
-import prisma, { Service } from "@/lib/prisma";
-import { generateSlug, getErrorMessage, revalidate } from "@/lib/utils";
-import { log } from "console";
+import prisma from "@/lib/prisma";
+import { generateSlug, getErrorMessage } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 type NewServiceData = {
@@ -31,8 +30,8 @@ export async function UpdateServiceAction({
         icon: service.icon,
       },
     });
-    // revalidatePath("/");
-    // revalidatePath("(home)/services");
+    revalidatePath("/(home)");
+    revalidatePath("/(home)/services");
   } catch (error) {
     return {
       error: getErrorMessage(

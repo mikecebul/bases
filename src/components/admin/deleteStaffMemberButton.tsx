@@ -34,9 +34,9 @@ export default function DeleteStaffMemberButton({
         description: "",
         action: <ToastAction altText="close">close</ToastAction>,
       });
-      router.refresh();
-      await revalidate("/team");
-      await revalidate(`/team/staff/${generateSlug(name)}`);
+      // router.refresh();
+      // await revalidate("/team");
+      // await revalidate(`/team/staff/${generateSlug(name)}`);
     } else {
       toast({
         variant: "destructive",

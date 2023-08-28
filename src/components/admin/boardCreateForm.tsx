@@ -72,8 +72,8 @@ export default function BoardCreateForm() {
     } else {
       toast({ description: "Profile was updated successfully." });
       router.push("/admin/board");
-      await revalidate("/team");
-      await revalidate(`/team/board/${generateSlug(newBoardMemberData.name)}`);
+      // await revalidate("/team");
+      // await revalidate(`/team/board/${generateSlug(newBoardMemberData.name)}`);
     }
   }
 

@@ -111,10 +111,10 @@ export default function StaffCreateForm() {
       });
     } else {
       toast({ description: "Profile was updated successfully." });
-      router.refresh();
+      // router.refresh();
       router.push("/admin/staff");
-      await revalidate("/team");
-      await revalidate(`/team/staff/${generateSlug(newStaffMemberData.name)}`);
+      // await revalidate("/team");
+      // await revalidate(`/team/staff/${generateSlug(newStaffMemberData.name)}`);
     }
   }
 

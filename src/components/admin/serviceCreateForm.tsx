@@ -60,10 +60,10 @@ export default function ServiceCreateForm() {
       });
     } else {
       toast({ description: "Service was updated successfully." });
-      router.refresh();
+      // router.refresh();
       router.push("/admin/services");
-      await revalidate("/");
-      await revalidate("/services");
+      // await revalidate("/");
+      // await revalidate("/services");
     }
   }
 
