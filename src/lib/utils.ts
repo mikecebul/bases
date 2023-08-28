@@ -37,14 +37,14 @@ export const generateSlug = (name: string) =>
 
 export async function revalidate(path: string) {
   try {
-    const invalidateRes = await fetch(
-      `/api/revalidate?path=${path}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
-    );
+        const invalidateRes = await fetch(
+          `/api/revalidate?path=${path}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
+        );
 
-    if (!invalidateRes.ok) {
-      throw new Error("Error invalidating cache.");
-    }
-  } catch (err) {
-    console.error(err);
-  }
+        if (!invalidateRes.ok) {
+          throw new Error('Error invalidating "/services" cache.');
+        }
+      } catch (err) {
+        console.error(err);
+      }
 }

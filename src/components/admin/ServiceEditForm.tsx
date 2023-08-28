@@ -69,28 +69,8 @@ export default function ServiceEditForm({ service }: { service: Service }) {
     } else {
       toast({ description: "Service was updated successfully." });
       router.push("/admin/services");
-      try {
-        const invalidateRes = await fetch(
-          `/api/revalidate?path=/&secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
-        );
-
-        if (!invalidateRes.ok) {
-          throw new Error('Error invalidating "/" cache.');
-        }
-      } catch (err) {
-        console.error(err);
-      }
-      try {
-        const invalidateRes = await fetch(
-          `/api/revalidate?path=/services&secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
-        );
-
-        if (!invalidateRes.ok) {
-          throw new Error('Error invalidating "/services" cache.');
-        }
-      } catch (err) {
-        console.error(err);
-      }
+      await revalidate("/")
+      await revalidate("/services")
     }
   }
 
