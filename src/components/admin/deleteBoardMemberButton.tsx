@@ -34,9 +34,9 @@ export default function DeleteBoardMemberButton({
         description: "",
         action: <ToastAction altText="close">close</ToastAction>,
       });
-      // router.refresh()      
-      // await revalidate("/team");
-      // await revalidate(`/team/board/${generateSlug(name)}`);
+      router.refresh()      
+      await revalidate("/team");
+      await revalidate(`/team/board/${generateSlug(name)}`);
     } else {
       toast({
         variant: "destructive",

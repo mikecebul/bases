@@ -68,7 +68,7 @@ export default function ServiceEditForm({ service }: { service: Service }) {
       });
     } else {
       toast({ description: "Service was updated successfully." });
-      // router.refresh();
+      router.refresh();
       router.push("/admin/services");
     }
   }

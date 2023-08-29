@@ -93,16 +93,16 @@ export default function BoardEditForm({ person }: { person: BoardMember }) {
       });
     } else {
       toast({ description: "Profile was updated successfully." });
-      // router.refresh();
+      router.refresh();
       router.push("/admin/board");
-      // await revalidate("/team");
-      // await revalidate(`/team/board/${person.slug}`);
-      // await revalidate(`/team/board/${generateSlug(newBoardMemberData.name)}`);
+      await revalidate("/team");
+      await revalidate(`/team/board/${person.slug}`);
+      await revalidate(`/team/board/${generateSlug(newBoardMemberData.name)}`);
     }
   }
 
   return (
-    <div className="max-w-7xl p-8">
+    <div className="p-8 max-w-7xl">
       <UploadProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
 
       <Form {...form}>

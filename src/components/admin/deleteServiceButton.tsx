@@ -35,9 +35,9 @@ export default function DeleteServiceButton({
         description: "",
         action: <ToastAction altText="close">close</ToastAction>,
       });
-      // router.refresh();
-      // await revalidate("/");
-      // await revalidate("/services");
+      router.refresh();
+      await revalidate("/");
+      await revalidate("/services");
     } else {
       toast({
         variant: "destructive",

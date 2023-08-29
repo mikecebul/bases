@@ -71,14 +71,15 @@ export default function BoardCreateForm() {
       });
     } else {
       toast({ description: "Profile was updated successfully." });
+      router.refresh();
       router.push("/admin/board");
-      // await revalidate("/team");
-      // await revalidate(`/team/board/${generateSlug(newBoardMemberData.name)}`);
+      await revalidate("/team");
+      await revalidate(`/team/board/${generateSlug(newBoardMemberData.name)}`);
     }
   }
 
   return (
-    <div className="max-w-7xl p-8">
+    <div className="p-8 max-w-7xl">
       <FirstStaffProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

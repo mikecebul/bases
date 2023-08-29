@@ -29,9 +29,9 @@ export async function StaffMembersTable() {
   const staffMembers = await getStaffMembers();
 
   return (
-    <div className="max-w-7xl p-8">
-      <div className="flex justify-between items-center pb-4">
-        <p className=" text-xl font-semi-bold">Staff Members</p>
+    <div className="p-8 max-w-7xl">
+      <div className="flex items-center justify-between pb-4">
+        <p className="text-xl font-semi-bold">Staff Members</p>
         <div className="flex items-center">
           <Link
             className="flex items-center gap-4 group"

@@ -60,15 +60,15 @@ export default function ServiceCreateForm() {
       });
     } else {
       toast({ description: "Service was updated successfully." });
-      // router.refresh();
+      router.refresh();
       router.push("/admin/services");
-      // await revalidate("/");
-      // await revalidate("/services");
+      await revalidate("/");
+      await revalidate("/services");
     }
   }
 
   return (
-    <div className="max-w-7xl p-8">
+    <div className="p-8 max-w-7xl">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
