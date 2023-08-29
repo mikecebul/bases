@@ -30,8 +30,8 @@ export async function UpdateServiceAction({
         icon: service.icon,
       },
     });
-    revalidatePath("/(home)/page");
-    revalidatePath("/(home)/services/page");
+    revalidatePath("/");
+    revalidatePath("/services");
   } catch (error) {
     return {
       error: getErrorMessage(
