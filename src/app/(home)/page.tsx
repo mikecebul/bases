@@ -17,7 +17,7 @@ async function getFrontPageServices() {
   return services;
 }
 
-export default async function Page() {
+export default async function Home() {
   const services = await getFrontPageServices();
   return (
     <>
