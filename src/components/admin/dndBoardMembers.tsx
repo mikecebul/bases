@@ -9,25 +9,31 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Icons, renderIcon } from "../icons";
+import BioPopover from "./bioPopover";
+import { Icons } from "../icons";
 import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { cn, revalidate } from "@/lib/utils";
-import DeleteServiceButton from "./deleteServiceButton";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import DeleteBoardMemberButton from "./deleteBoardMemberButton";
+import { BoardMember } from "@prisma/client";
+import { useState } from "react";
 import {
   DragDropContext,
-  Droppable,
   Draggable,
-  OnDragEndResponder,
   DropResult,
+  Droppable,
+  OnDragEndResponder,
 } from "react-beautiful-dnd";
-import { Service } from "@prisma/client";
-import { useState } from "react";
-import { UpdateServicesOrderAction } from "@/actions/update-services-order-action";
+import { UpdateBoardMemberOrderAction } from "@/actions/update-board-member-order-action";
 import { toast } from "../ui/use-toast";
 
-export default function DndServices({ services }: { services: Service[] }) {
-  const [items, setItems] = useState(services);
+export default function DndBoardMembers({
+  boardMembers,
+}: {
+  boardMembers: BoardMember[];
+}) {
+  const [items, setItems] = useState(boardMembers);
 
   const handleDragDrop: OnDragEndResponder = async (results: DropResult) => {
     const { source, destination, type } = results;
@@ -50,7 +56,7 @@ export default function DndServices({ services }: { services: Service[] }) {
       reorderedItems.splice(destinationIndex, 0, removedItem);
 
       setItems(reorderedItems);
-      const result = await UpdateServicesOrderAction(reorderedItems);
+      const result = await UpdateBoardMemberOrderAction(reorderedItems);
       if (result?.error) {
         toast({
           variant: "destructive",
@@ -58,8 +64,7 @@ export default function DndServices({ services }: { services: Service[] }) {
         });
       } else {
         toast({ description: "Service was updated successfully." });
-        await revalidate("/");
-        await revalidate("/services");
+        await revalidate("/team");
       }
     }
     return;
@@ -67,7 +72,7 @@ export default function DndServices({ services }: { services: Service[] }) {
 
   return (
     <DragDropContext onDragEnd={handleDragDrop}>
-      <Droppable droppableId="services" type="group">
+      <Droppable droppableId="boardmembers" type="group">
         {(provided, snapshot) => (
           <Table
             ref={provided.innerRef}
@@ -76,24 +81,24 @@ export default function DndServices({ services }: { services: Service[] }) {
             })}
           >
             <TableCaption className="pb-2">
-              A list of our services.
+              A list of your Board members.
             </TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="">Name</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead>Icon</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead className="text-center">Bio</TableHead>
+                <TableHead className="text-center">Image</TableHead>
                 <TableHead className="text-center">Status</TableHead>
-                <TableHead className="text-center">Front Page</TableHead>
-                <TableHead className="">Edit</TableHead>
-                <TableHead className="">Delete</TableHead>
+                <TableHead className="text-center">Edit</TableHead>
+                <TableHead className="text-center">Delete</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {items.map((service, index) => (
+              {items.map((person, index) => (
                 <Draggable
-                  draggableId={service.id}
-                  key={service.id}
+                  draggableId={person.id}
+                  key={person.id}
                   index={index}
                 >
                   {(provided, snapshot) => (
@@ -105,23 +110,32 @@ export default function DndServices({ services }: { services: Service[] }) {
                         "bg-teal-100/80": snapshot.isDragging,
                       })}
                     >
-                      <TableCell className="w-1/5 font-medium">
-                        {service.name}
+                      <TableCell className="font-medium w-[20%]">
+                        {person.name}
                       </TableCell>
-                      <TableCell className="w-2/5 font-medium">
-                        {service.description}
+                      <TableCell className="font-medium w-[20%]">
+                        {person.role}
                       </TableCell>
-                      <TableCell className="font-medium">
-                        {!!service.icon
-                          ? renderIcon(service.icon)
-                          : renderIcon("fallback")}
+                      <TableCell className="text-center w-[14%]">
+                        <BioPopover bio={person.bio} />
                       </TableCell>
-                      <TableCell>
-                        {service.status === "PUBLISHED" ? (
+                      <TableCell className="text-center w-[10%]">
+                        <Avatar className="inline-flex justify-center w-12 h-12">
+                          <AvatarImage
+                            src={person.imageUrl || undefined}
+                            alt="Profile of row item"
+                          />
+                          <AvatarFallback>
+                            <Icons.user />
+                          </AvatarFallback>
+                        </Avatar>
+                      </TableCell>
+                      <TableCell className="w-[14%]">
+                        {person.status === "PUBLISHED" ? (
                           <div
                             className={cn(
                               buttonVariants(),
-                              "bg-green-600 hover:bg-green-600 w-28"
+                              "bg-green-600 hover:bg-green-600"
                             )}
                           >
                             <p>Published</p>
@@ -130,35 +144,14 @@ export default function DndServices({ services }: { services: Service[] }) {
                           <div
                             className={cn(
                               buttonVariants(),
-                              "bg-yellow-500 hover:bg-yellow-500 text-black w-28"
+                              "bg-yellow-500 hover:bg-yellow-500 text-black"
                             )}
                           >
                             <p>Draft</p>
                           </div>
                         )}
                       </TableCell>
-                      <TableCell>
-                        {service.frontpage ? (
-                          <div
-                            className={cn(
-                              buttonVariants(),
-                              "bg-green-600 hover:bg-green-600 w-28"
-                            )}
-                          >
-                            <p>Yes</p>
-                          </div>
-                        ) : (
-                          <div
-                            className={cn(
-                              buttonVariants(),
-                              "bg-yellow-500 hover:bg-yellow-500 text-black w-28"
-                            )}
-                          >
-                            <p>No</p>
-                          </div>
-                        )}
-                      </TableCell>
-                      <TableCell>
+                      <TableCell className="text-center w-[10%]">
                         <Link
                           className={cn(
                             buttonVariants({
@@ -167,15 +160,15 @@ export default function DndServices({ services }: { services: Service[] }) {
                             }),
                             ""
                           )}
-                          href={`/admin/services/edit/${service.id}`}
+                          href={`/admin/board/edit/${person.id}`}
                         >
                           <Icons.pencil />
                         </Link>
                       </TableCell>
-                      <TableCell className="">
-                        <DeleteServiceButton
-                          id={service.id}
-                          name={service.name}
+                      <TableCell className="w-[10%] text-center">
+                        <DeleteBoardMemberButton
+                          id={person.id}
+                          name={person.name}
                         />
                       </TableCell>
                     </TableRow>

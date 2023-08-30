@@ -4,7 +4,6 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import prisma from "@/lib/prisma";
 import DndServices from "./dndServices";
-import { Suspense } from "react";
 
 async function getServices() {
   const services = await prisma.service.findMany({
