@@ -22,12 +22,20 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import { Service } from "@prisma/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UpdateServicesOrderAction } from "@/actions/update-services-order-action";
 import { toast } from "../ui/use-toast";
+import TableSkeleton from "./tableSkeleton";
 
 export default function DndServices({ services }: { services: Service[] }) {
   const [items, setItems] = useState(services);
+  const [tableReady, setTableReady] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setTableReady(true);
+    }
+  }, []);
 
   const handleDragDrop: OnDragEndResponder = async (results: DropResult) => {
     const { source, destination, type } = results;
@@ -65,7 +73,7 @@ export default function DndServices({ services }: { services: Service[] }) {
     return;
   };
 
-  return (
+  return tableReady ? (
     <DragDropContext onDragEnd={handleDragDrop}>
       <Droppable droppableId="services" type="group">
         {(provided, snapshot) => (
@@ -188,5 +196,7 @@ export default function DndServices({ services }: { services: Service[] }) {
         )}
       </Droppable>
     </DragDropContext>
+  ) : (
+    <TableSkeleton />
   );
 }

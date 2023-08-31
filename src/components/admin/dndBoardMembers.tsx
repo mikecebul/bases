@@ -17,7 +17,7 @@ import { cn, revalidate } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import DeleteBoardMemberButton from "./deleteBoardMemberButton";
 import { BoardMember } from "@prisma/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -27,6 +27,7 @@ import {
 } from "react-beautiful-dnd";
 import { UpdateBoardMemberOrderAction } from "@/actions/update-board-member-order-action";
 import { toast } from "../ui/use-toast";
+import TableSkeleton from "./tableSkeleton";
 
 export default function DndBoardMembers({
   boardMembers,
@@ -34,6 +35,13 @@ export default function DndBoardMembers({
   boardMembers: BoardMember[];
 }) {
   const [items, setItems] = useState(boardMembers);
+  const [tableReady, setTableReady] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setTableReady(true);
+    }
+  }, []);
 
   const handleDragDrop: OnDragEndResponder = async (results: DropResult) => {
     const { source, destination, type } = results;
@@ -70,7 +78,7 @@ export default function DndBoardMembers({
     return;
   };
 
-  return (
+  return tableReady ? (
     <DragDropContext onDragEnd={handleDragDrop}>
       <Droppable droppableId="boardMembers" type="group">
         {(provided, snapshot) => (
@@ -181,5 +189,6 @@ export default function DndBoardMembers({
         )}
       </Droppable>
     </DragDropContext>
-  );
+  ) : 
+  <TableSkeleton />
 }

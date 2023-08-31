@@ -16,7 +16,7 @@ import Link from "next/link";
 import { cn, revalidate } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { StaffMember } from "@prisma/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -27,6 +27,8 @@ import {
 import { toast } from "../ui/use-toast";
 import { UpdateStaffMemberOrderAction } from "@/actions/update-staff-member-order-action copy";
 import DeleteStaffMemberButton from "./deleteStaffMemberButton";
+import { Skeleton } from "../ui/skeleton";
+import TableSkeleton from "./tableSkeleton";
 
 export default function DndStaffMembers({
   staffMembers,
@@ -34,6 +36,13 @@ export default function DndStaffMembers({
   staffMembers: StaffMember[];
 }) {
   const [items, setItems] = useState(staffMembers);
+  const [tableReady, setTableReady] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setTableReady(true);
+    }
+  }, []);
 
   const handleDragDrop: OnDragEndResponder = async (results: DropResult) => {
     const { source, destination, type } = results;
@@ -70,7 +79,7 @@ export default function DndStaffMembers({
     return;
   };
 
-  return (
+  return tableReady ? (
     <DragDropContext onDragEnd={handleDragDrop}>
       <Droppable droppableId="staffMembers" type="group">
         {(provided, snapshot) => (
@@ -190,5 +199,7 @@ export default function DndStaffMembers({
         )}
       </Droppable>
     </DragDropContext>
+  ) : (
+    <TableSkeleton />
   );
 }
