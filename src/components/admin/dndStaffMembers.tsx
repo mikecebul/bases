@@ -15,8 +15,7 @@ import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { cn, revalidate } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import DeleteBoardMemberButton from "./deleteBoardMemberButton";
-import { BoardMember } from "@prisma/client";
+import { StaffMember } from "@prisma/client";
 import { useState } from "react";
 import {
   DragDropContext,
@@ -25,15 +24,16 @@ import {
   Droppable,
   OnDragEndResponder,
 } from "react-beautiful-dnd";
-import { UpdateBoardMemberOrderAction } from "@/actions/update-board-member-order-action";
 import { toast } from "../ui/use-toast";
+import { UpdateStaffMemberOrderAction } from "@/actions/update-staff-member-order-action copy";
+import DeleteStaffMemberButton from "./deleteStaffMemberButton";
 
-export default function DndBoardMembers({
-  boardMembers,
+export default function DndStaffMembers({
+  staffMembers,
 }: {
-  boardMembers: BoardMember[];
+  staffMembers: StaffMember[];
 }) {
-  const [items, setItems] = useState(boardMembers);
+  const [items, setItems] = useState(staffMembers);
 
   const handleDragDrop: OnDragEndResponder = async (results: DropResult) => {
     const { source, destination, type } = results;
@@ -56,14 +56,14 @@ export default function DndBoardMembers({
       reorderedItems.splice(destinationIndex, 0, removedItem);
 
       setItems(reorderedItems);
-      const result = await UpdateBoardMemberOrderAction(reorderedItems);
+      const result = await UpdateStaffMemberOrderAction(reorderedItems);
       if (result?.error) {
         toast({
           variant: "destructive",
           description: result.error,
         });
       } else {
-        toast({ description: "Board member order was updated successfully." });
+        toast({ description: "Staff member order was updated successfully." });
         await revalidate("/team");
       }
     }
@@ -72,7 +72,7 @@ export default function DndBoardMembers({
 
   return (
     <DragDropContext onDragEnd={handleDragDrop}>
-      <Droppable droppableId="boardMembers" type="group">
+      <Droppable droppableId="staffMembers" type="group">
         {(provided, snapshot) => (
           <Table
             ref={provided.innerRef}
@@ -87,6 +87,7 @@ export default function DndBoardMembers({
               <TableRow>
                 <TableHead className="">Name</TableHead>
                 <TableHead>Role</TableHead>
+                <TableHead>Qualifications</TableHead>
                 <TableHead className="text-center">Bio</TableHead>
                 <TableHead className="text-center">Image</TableHead>
                 <TableHead className="text-center">Status</TableHead>
@@ -110,14 +111,22 @@ export default function DndBoardMembers({
                         "bg-teal-100/80": snapshot.isDragging,
                       })}
                     >
-                      <TableCell className="font-medium w-[20%]">
+                      <TableCell className="font-medium w-[14%]">
                         {person.name}
                       </TableCell>
-                      <TableCell className="font-medium w-[20%]">
+                      <TableCell className="font-medium w-[14%]">
                         {person.role}
                       </TableCell>
+                      <TableCell className="font-medium w-[14%]">
+                        {person.qualifications}
+                      </TableCell>
                       <TableCell className="text-center w-[14%]">
-                        <BioPopover bio={person.bio} />
+                        <BioPopover
+                          bio={person.bio}
+                          education={person.education}
+                          philosophy={person.philosophy}
+                          specializations={person.specializations}
+                        />
                       </TableCell>
                       <TableCell className="text-center w-[10%]">
                         <Avatar className="inline-flex justify-center w-12 h-12">
@@ -160,13 +169,13 @@ export default function DndBoardMembers({
                             }),
                             ""
                           )}
-                          href={`/admin/board/edit/${person.id}`}
+                          href={`/admin/staff/edit/${person.id}`}
                         >
-                          <Icons.pencil />
+                          <Icons.pencil className="" />
                         </Link>
                       </TableCell>
-                      <TableCell className="w-[10%] text-center">
-                        <DeleteBoardMemberButton
+                      <TableCell className="text-center w-[10%]">
+                        <DeleteStaffMemberButton
                           id={person.id}
                           name={person.name}
                         />
