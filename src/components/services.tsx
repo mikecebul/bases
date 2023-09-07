@@ -65,15 +65,15 @@ export default function Services({ services }: { services: Service[] }) {
         </div>
 
         <div className="mt-16 text-left sm:mt-20 lg:mt-24">
-          <dl className="grid max-w-xl grid-cols-1 lg:hidden gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
-            {services.map((service) => (
+          <dl className="grid max-w-xl grid-cols-1 lg:hidden gap-y-10">
+            {services.map((service, index) => (
               <motion.div
                 key={service.id}
                 initial={{ x: 30, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true, amount: 0.25 }}
+                viewport={{ once: true, amount: "some" }}
                 transition={{
-                  delay: 0.25,
+                  delay: index * 0.05,
                   duration: 0.4,
                 }}
                 className="relative pl-16"
@@ -105,7 +105,7 @@ export default function Services({ services }: { services: Service[] }) {
                 },
               },
             }}
-            className="hidden max-w-xl grid-cols-1 lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3"
+            className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3"
           >
             {services.map((service) => (
               <motion.div
