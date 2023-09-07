@@ -69,10 +69,13 @@ export default function Services({ services }: { services: Service[] }) {
             {services.map((service) => (
               <motion.div
                 key={service.id}
-                initial={{ x: 20, opacity: 0 }}
+                initial={{ x: 30, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ staggerChildren: 0.2, delay: 0.15 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{
+                  delay: 0.25,
+                  duration: 0.4,
+                }}
                 className="relative pl-16"
               >
                 <dt className="text-base font-semibold leading-7 text-primary">
