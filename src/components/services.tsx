@@ -1,12 +1,22 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useInView, useAnimate } from "framer-motion";
 import { Service } from "@prisma/client";
 import { renderIcon } from "./icons";
 
-export default function Services({services}: {services: Service[]}) {
+export default function Services({ services }: { services: Service[] }) {
+  const [delay, setDelay] = useState(1);
+
+  const updateDelay = (isInView: boolean) => {
+    if (isInView) {
+      setDelay((prevDelay) => Math.max(prevDelay - 1, 1));
+    } else {
+      setDelay((prevDelay) => prevDelay + 1);
+    }
+  };
+
   return (
     <section id="services" className="relative py-24 lg:pb-32 isolate">
       <div className="absolute inset-0 overflow-hidden -z-10">
@@ -53,39 +63,23 @@ export default function Services({services}: {services: Service[]}) {
             serve our community's needs.
           </p>
         </div>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.15,
-              },
-            },
-          }}
-          className="mt-16 text-left sm:mt-20 lg:mt-24"
-        >
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
+
+        <div className="mt-16 text-left sm:mt-20 lg:mt-24">
+          <dl className="grid max-w-xl grid-cols-1 lg:hidden gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
             {services.map((service) => (
               <motion.div
-                key={service.name}
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: {
-                      duration: 0.4,
-                    },
-                  },
-                }}
+                key={service.id}
+                initial={{ x: 20, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ staggerChildren: 0.2, delay: 0.15 }}
                 className="relative pl-16"
               >
                 <dt className="text-base font-semibold leading-7 text-primary">
                   <div className="absolute top-0 left-0">
-                    {!!service.icon ? renderIcon(service.icon) : renderIcon("fallback")}
+                    {!!service.icon
+                      ? renderIcon(service.icon)
+                      : renderIcon("fallback")}
                   </div>
                   {service.name}
                 </dt>
@@ -95,7 +89,45 @@ export default function Services({services}: {services: Service[]}) {
               </motion.div>
             ))}
           </dl>
-        </motion.div>
+
+          <motion.dl
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15,
+                },
+              },
+            }}
+            className="hidden max-w-xl grid-cols-1 lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3"
+          >
+            {services.map((service) => (
+              <motion.div
+                key={service.id}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1 },
+                }}
+                className="relative pl-16"
+              >
+                <dt className="text-base font-semibold leading-7 text-primary">
+                  <div className="absolute top-0 left-0">
+                    {!!service.icon
+                      ? renderIcon(service.icon)
+                      : renderIcon("fallback")}
+                  </div>
+                  {service.name}
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-muted-foreground">
+                  {service.description}
+                </dd>
+              </motion.div>
+            ))}
+          </motion.dl>
+        </div>
       </div>
     </section>
   );

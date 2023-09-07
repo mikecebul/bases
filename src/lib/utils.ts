@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@mantine/hooks";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -51,3 +52,5 @@ export async function revalidate(path: string) {
     console.error(err);
   }
 }
+
+export const useIsSmall = () => useMediaQuery('(max-width: 1440px)')
