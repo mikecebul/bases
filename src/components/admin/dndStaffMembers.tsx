@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import {
   Table,
   TableBody,
@@ -27,7 +27,6 @@ import {
 import { toast } from "../ui/use-toast";
 import { UpdateStaffMemberOrderAction } from "@/actions/update-staff-member-order-action copy";
 import DeleteStaffMemberButton from "./deleteStaffMemberButton";
-import { Skeleton } from "../ui/skeleton";
 import TableSkeleton from "./tableSkeleton";
 
 export default function DndStaffMembers({
@@ -37,6 +36,7 @@ export default function DndStaffMembers({
 }) {
   const [items, setItems] = useState(staffMembers);
   const [tableReady, setTableReady] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -74,6 +74,7 @@ export default function DndStaffMembers({
       } else {
         toast({ description: "Staff member order was updated successfully." });
         await revalidate("/team");
+        router.refresh()
       }
     }
     return;
