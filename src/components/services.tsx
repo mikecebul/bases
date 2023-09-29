@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimate } from "framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Service } from "@prisma/client";
 import { renderIcon } from "./icons";
 

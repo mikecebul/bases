@@ -24,7 +24,7 @@ export default async function Page({
 
   return (
     <>
-      <h1 className="pl-8 text-4xl font-semibold pb-2">
+      <h1 className="pb-2 pl-8 text-4xl font-semibold">
         Editing {service.name}
       </h1>
       <Separator />
