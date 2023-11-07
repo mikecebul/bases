@@ -51,7 +51,7 @@ export default function Footer() {
               {siteConfig.Footer.Contact.map((item) =>
                 item.href ? (
                   <li key={item.title} className="group">
-                    <Link
+                    <a
                       href={item.href}
                       className={cn(
                         buttonVariants({ variant: "ghost" }),
@@ -60,7 +60,7 @@ export default function Footer() {
                     >
                       <item.icon className="flex-shrink-0 mr-2" size={20} />
                       {item.title}
-                    </Link>
+                    </a>
                   </li>
                 ) : (
                   <li
@@ -77,7 +77,7 @@ export default function Footer() {
               )}
               {siteConfig.Footer.Social.map((item) => (
                 <li key={item.title} className="group">
-                  <Link
+                  <a
                     href={item.href}
                     className={cn(
                       buttonVariants({ variant: "ghost" }),
@@ -86,7 +86,7 @@ export default function Footer() {
                   >
                     <item.icon className="mr-2" size={20} />
                     {item.title}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

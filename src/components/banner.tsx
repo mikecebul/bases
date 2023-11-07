@@ -15,13 +15,13 @@ export default function Banner() {
     <div
       id="banner"
       tabIndex={-1}
-      className="flex justify-between items-center py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center lg:py-4 xl:hidden"
+      className="flex items-center justify-between w-full px-4 py-3 border border-b border-gray-200 bg-gray-50 sm:items-center lg:py-4 xl:hidden"
     >
-      <div className="flex gap-2 sm:items-center flex-col sm:flex-row">
-        <p className="text-muted-foreground text-xs sm:text-base">
+      <div className="flex flex-col gap-2 sm:items-center sm:flex-row">
+        <p className="text-xs text-muted-foreground sm:text-base">
           Visit us at our new location:{" "}
         </p>
-        <Link
+        <a
           className={cn(
             buttonVariants({ variant: "brand", size: "sm" }),
             "flex gap-2 items-center text-sm"
@@ -30,7 +30,7 @@ export default function Banner() {
         >
           <Icons.navigation />
           <p>101 M-66 N, Charlevoix, MI 49720</p>
-        </Link>
+        </a>
       </div>
       <Button
         data-collapse-toggle="banner"
