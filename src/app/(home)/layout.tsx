@@ -24,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.className, "bg-background")}>
         <Header />
-        <main className="flex-1 animate-fadeIn">{children}</main>
+        <main className="relative flex-1 max-w-full overflow-hidden animate-fadeIn">
+          {children}
+        </main>
         <Footer />
         <Toaster />
         <Analytics />
