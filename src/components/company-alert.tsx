@@ -5,7 +5,6 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -22,32 +21,32 @@ export function CompanyAlert() {
   return (
     mounted && (
       <AlertDialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
-        <AlertDialogContent className="bg-red-300">
+        <AlertDialogContent className="text-left bg-red-300">
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-left">
-              Holiday Closure Dates
-            </AlertDialogTitle>
-            <div className="py-4 pl-6 text-left">
-              <p className="font-semibold">Christmas</p>
-              <p>Friday, December 22, 2023</p>
-              <p>Monday, December 25, 2023</p>
-              <p className="pt-4 font-semibold">New Years</p>
-              <p>Friday, December 29, 2023</p>
-              <p>Monday, January 1, 2024</p>
-            </div>
-            <div className="pb-4 text-left">
-              <p className="font-semibold">Note</p>
-              <p className="">
-                While we are closed we will be scheduling after-hours drug
-                tests. Call{" "}
+            <AlertDialogTitle>Holiday Closure Dates</AlertDialogTitle>
+          </AlertDialogHeader>
+          <div className="pl-6">
+            <p className="font-semibold">Christmas</p>
+            <p>Friday, December 22, 2023</p>
+            <p>Monday, December 25, 2023</p>
+            <p className="pt-4 font-semibold">New Years</p>
+            <p>Friday, December 29, 2023</p>
+            <p>Monday, January 1, 2024</p>
+          </div>
+          <div>
+            <p className="font-semibold">Note</p>
+            <p>
+              While we are closed we will be scheduling after-hours drug tests.
+              Call Scott at{" "}
+              <span className="whitespace-nowrap hover:font-semibold">
                 <a href="tel:2318810810" className="hover:underline">
                   (231) 881-0810
-                </a>{" "}
-                first thing in the morning to schedule an appointment time for
-                an aditional $20 fee.
-              </p>
-            </div>
-          </AlertDialogHeader>
+                </a>
+              </span>{" "}
+              first thing in the morning to schedule an appointment time for an
+              aditional $20 fee.
+            </p>
+          </div>
           <AlertDialogFooter>
             <AlertDialogCancel
               className={cn(
