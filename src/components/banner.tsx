@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { Icons } from "./icons";
-import Link from "next/link";
 
 export default function Banner() {
   const [isOpen, setIsOpen] = useState(true);

@@ -8,9 +8,9 @@ import { siteConfig } from "@/config/site";
 
 export default function Hero() {
   return (
-    <section>
+    <section className="relative px-4">
       <Banner />
-      <div className="grid px-4 py-16 lg:gap-8 lg:py-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
+      <div className="grid py-16 lg:gap-8 lg:py-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
         <div className="mr-auto place-self-center lg:col-span-6">
           <h1 className="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight lg:mb-8 sm:text-4xl xl:text-6xl 2xl:text-7xl">
             {siteConfig.Hero.title}
