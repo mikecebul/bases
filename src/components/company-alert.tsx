@@ -24,20 +24,18 @@ export function CompanyAlert() {
       <AlertDialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
         <AlertDialogContent className="bg-red-300">
           <AlertDialogHeader>
-            <AlertDialogTitle className="">
+            <AlertDialogTitle className="text-left">
               Holiday Closure Dates
             </AlertDialogTitle>
-            <div className="pt-4 pl-6">
-              <div>
-                <p className="font-semibold">Christmas</p>
-                <p>Friday, December 22, 2023</p>
-                <p>Monday, December 25, 2023</p>
-                <p className="pt-4 font-semibold">New Years</p>
-                <p>Friday, December 29, 2023</p>
-                <p>Monday, January 1, 2024</p>
-              </div>
+            <div className="py-4 pl-6 text-left">
+              <p className="font-semibold">Christmas</p>
+              <p>Friday, December 22, 2023</p>
+              <p>Monday, December 25, 2023</p>
+              <p className="pt-4 font-semibold">New Years</p>
+              <p>Friday, December 29, 2023</p>
+              <p>Monday, January 1, 2024</p>
             </div>
-            <div className="pt-4">
+            <div className="pb-4 text-left">
               <p className="font-semibold">Note</p>
               <p className="">
                 While we are closed we will be scheduling after-hours drug
