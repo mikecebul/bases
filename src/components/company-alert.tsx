@@ -27,13 +27,27 @@ export function CompanyAlert() {
             <AlertDialogTitle className="">
               Holiday Closure Dates
             </AlertDialogTitle>
-            <div className="pt-4 pl-4">
-              <p className="font-semibold">Christmas</p>
-              <p>Friday, December 22, 2023</p>
-              <p>Monday, December 25, 2023</p>
-              <p className="pt-4 font-semibold">New Years</p>
-              <p>Friday, December 29, 2023</p>
-              <p>Monday, January 1, 2024</p>
+            <div className="pt-4 pl-6">
+              <div>
+                <p className="font-semibold">Christmas</p>
+                <p>Friday, December 22, 2023</p>
+                <p>Monday, December 25, 2023</p>
+                <p className="pt-4 font-semibold">New Years</p>
+                <p>Friday, December 29, 2023</p>
+                <p>Monday, January 1, 2024</p>
+              </div>
+            </div>
+            <div className="pt-4">
+              <p className="font-semibold">Note</p>
+              <p className="">
+                While we are closed we will be scheduling after-hours drug
+                tests. Call{" "}
+                <a href="tel:2318810810" className="hover:underline">
+                  (231) 881-0810
+                </a>{" "}
+                first thing in the morning to schedule an appointment time for
+                an aditional $20 fee.
+              </p>
             </div>
           </AlertDialogHeader>
           <AlertDialogFooter>
