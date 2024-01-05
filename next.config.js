@@ -31,9 +31,10 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/RDFK.htm",
-        destination: "/RDFK",
-        permanent: true
+        // Redirect for 'rdfk' with an extension
+        source: '/rdfk:extension(\\.[^.]+)',
+        destination: '/RDFK',
+        permanent: false,
       },
     ];
   },
