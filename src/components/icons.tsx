@@ -26,6 +26,8 @@ import {
   ChevronsUpDown,
   LucideIcon,
   PlusCircle,
+  Baby,
+  PersonStanding,
 } from "lucide-react";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
@@ -74,6 +76,8 @@ export const Icons = {
   check: Check,
   chevronsUpDown: ChevronsUpDown,
   plusCircle: PlusCircle,
+  baby: Baby,
+  kid: PersonStanding,
 };
 
 type LucideIconsType = {

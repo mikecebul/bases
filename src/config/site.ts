@@ -140,6 +140,29 @@ export const siteConfig = {
       icon: Icons.flask,
     },
   ],
+  wellChildVisitTools: [
+    {
+      name: "Early Childhood Tools",
+      description:
+        "Our team delivers comprehensive assessments for substance use disorders, mental health, and trauma for adults and adolescents, helping to formulate the most effective personalized treatment plan.",
+      url: "https://www.aap.org/en/practice-management/bright-futures/bright-futures-materials-and-tools/bright-futures-tool-and-resource-kit/bright-futures-early-childhood-tools",
+      icon: Icons.baby,
+    },
+    {
+      name: "Middle Childhood Tools",
+      description:
+        "Our team delivers comprehensive assessments for substance use disorders, mental health, and trauma for adults and adolescents, helping to formulate the most effective personalized treatment plan.",
+      url: "https://www.aap.org/en/practice-management/bright-futures/bright-futures-materials-and-tools/bright-futures-tool-and-resource-kit/bright-futures-early-childhood-tools",
+      icon: Icons.kid,
+    },
+    {
+      name: "Adolescence Childhood Tools",
+      description:
+        "Our team delivers comprehensive assessments for substance use disorders, mental health, and trauma for adults and adolescents, helping to formulate the most effective personalized treatment plan.",
+      url: "https://www.aap.org/en/practice-management/bright-futures/bright-futures-materials-and-tools/bright-futures-tool-and-resource-kit/bright-futures-adolescence-tools",
+      icon: Icons.user,
+    },
+  ],
   team: {
     staff: [
       {
