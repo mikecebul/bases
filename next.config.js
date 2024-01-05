@@ -33,17 +33,7 @@ const nextConfig = {
       {
         source: "/RDFK.htm",
         destination: "/RDFK",
-        permanent: false
-      },
-      {
-        source: "/rdfk.htm",
-        destination: "/RDFK",
-        permanent: false
-      },
-      {
-        source: "/rdfk",
-        destination: "/RDFK",
-        permanent: false
+        permanent: true
       },
     ];
   },
