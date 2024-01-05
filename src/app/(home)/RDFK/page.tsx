@@ -41,7 +41,7 @@ export default function page() {
       <div className="flex flex-col px-4 2xl:container md:px-8 2xl:px-0 xl:items-center xl:text-center">
         <div className="max-w-xl">
           <p className="text-base font-semibold leading-7 text-brand">
-            Well-child visit forms
+            Bright Futures Previsit Questionnaires
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Normal brain develoment and childhood milestones

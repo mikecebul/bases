@@ -144,21 +144,21 @@ export const siteConfig = {
     {
       name: "Early Childhood Tools",
       description:
-        "Our team delivers comprehensive assessments for substance use disorders, mental health, and trauma for adults and adolescents, helping to formulate the most effective personalized treatment plan.",
+        "Tailored for infants and toddlers, this questionnaire focuses on early developmental milestones and health priorities, ensuring a thorough early childhood health evaluation.",
       url: "https://www.aap.org/en/practice-management/bright-futures/bright-futures-materials-and-tools/bright-futures-tool-and-resource-kit/bright-futures-early-childhood-tools",
       icon: Icons.baby,
     },
     {
       name: "Middle Childhood Tools",
       description:
-        "Our team delivers comprehensive assessments for substance use disorders, mental health, and trauma for adults and adolescents, helping to formulate the most effective personalized treatment plan.",
+        "Designed for school-aged children, this tool assesses developmental progress and social well-being, preparing for comprehensive health supervision aligned with Bright Futures Guidelines.",
       url: "https://www.aap.org/en/practice-management/bright-futures/bright-futures-materials-and-tools/bright-futures-tool-and-resource-kit/bright-futures-early-childhood-tools",
       icon: Icons.kid,
     },
     {
       name: "Adolescence Childhood Tools",
       description:
-        "Our team delivers comprehensive assessments for substance use disorders, mental health, and trauma for adults and adolescents, helping to formulate the most effective personalized treatment plan.",
+        "Focused on the unique needs of teenagers, this questionnaire covers physical, emotional, and social development, facilitating meaningful discussions for adolescent health care.",
       url: "https://www.aap.org/en/practice-management/bright-futures/bright-futures-materials-and-tools/bright-futures-tool-and-resource-kit/bright-futures-adolescence-tools",
       icon: Icons.user,
     },
