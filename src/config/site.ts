@@ -44,8 +44,8 @@ export const siteConfig = {
       },
       {
         icon: Icons.mail,
-        title: "info@basesrecoverycenter.org",
-        href: "mailto:info@basesrecoverycenter.org",
+        title: "info@basesmi.org",
+        href: "mailto:info@basesmi.org",
       },
       {
         icon: Icons.print,
