@@ -31,13 +31,24 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href={siteConfig.Footer.Privacy.href}
+                  href={siteConfig.footer.privacy.href}
                   className={cn(
                     buttonVariants({ variant: "ghost" }),
                     "flex justify-start"
                   )}
                 >
-                  {siteConfig.Footer.Privacy.title}
+                  {siteConfig.footer.privacy.title}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={siteConfig.footer.resources.href}
+                  className={cn(
+                    buttonVariants({ variant: "ghost" }),
+                    "flex justify-start"
+                  )}
+                >
+                  {siteConfig.footer.resources.title}
                 </Link>
               </li>
             </ul>
@@ -48,7 +59,7 @@ export default function Footer() {
             <p className="text-lg font-bold">Contact</p>
             <Separator className="my-4" />
             <ul className="mb-8 space-y-4 text-gray-500">
-              {siteConfig.Footer.Contact.map((item) =>
+              {siteConfig.footer.Contact.map((item) =>
                 item.href ? (
                   <li key={item.title} className="group">
                     <a
@@ -75,7 +86,7 @@ export default function Footer() {
                   </li>
                 )
               )}
-              {siteConfig.Footer.Social.map((item) => (
+              {siteConfig.footer.Social.map((item) => (
                 <li key={item.title} className="group">
                   <a
                     href={item.href}

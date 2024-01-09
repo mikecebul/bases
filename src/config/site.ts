@@ -26,10 +26,14 @@ export const siteConfig = {
       href: "/about-us",
     },
   ],
-  Footer: {
-    Privacy: {
+  footer: {
+    privacy: {
       title: "Privacy Practices",
       href: "/Privacy_Practices.pdf",
+    },
+    resources: {
+      title: "Resources",
+      href: "/resources.pdf",
     },
     Contact: [
       {
