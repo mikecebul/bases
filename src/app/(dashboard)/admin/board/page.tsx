@@ -1,4 +1,4 @@
-import { BoardMembersTable } from "@/components/admin/boardMembersTable";
+import { BoardMembersTable } from "@/components/admin/team/board/boardMembersTable";
 import { Separator } from "@/components/ui/separator";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
@@ -14,7 +14,7 @@ export default async function Page() {
   return (
     <>
       <div className="">
-        <h1 className="pl-8 text-4xl font-semibold pb-2">View Board Members</h1>
+        <h1 className="pb-2 pl-8 text-4xl font-semibold">View Board Members</h1>
         <Separator />
       </div>
       <BoardMembersTable />

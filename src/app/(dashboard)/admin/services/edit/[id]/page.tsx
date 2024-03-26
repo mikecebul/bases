@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { Separator } from "@/components/ui/separator";
-import ServiceEditForm from "@/components/admin/ServiceEditForm";
+import ServiceEditForm from "@/components/admin/service/ServiceEditForm";
 
 export default async function Page({
   params: { id },

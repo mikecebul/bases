@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import StaffBio from "@/components/staff-bio";
+import StaffBio from "@/components/team/staff-bio";
 import { Metadata } from "next";
 
 interface Params {

@@ -1,5 +1,5 @@
 import Carf from "@/components/carf";
-import FrontPageServices from "@/components/services-front-page";
+import FrontPageServices from "@/components/service/services-front-page";
 import Hero from "@/components/hero";
 import Donate from "@/components/donate";
 import prisma from "@/lib/prisma";

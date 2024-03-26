@@ -1,6 +1,6 @@
-import { BoardMembersTable } from "@/components/admin/boardMembersTable";
-import { ServicesTable } from "@/components/admin/servicesTable";
-import { StaffMembersTable } from "@/components/admin/staffMembersTable";
+import { BoardMembersTable } from "@/components/admin/team/board/boardMembersTable";
+import { ServicesTable } from "@/components/admin/service/servicesTable";
+import { StaffMembersTable } from "@/components/admin/team/staff/staffMembersTable";
 import { Separator } from "@/components/ui/separator";
 
 export default async function Page() {

@@ -1,4 +1,4 @@
-import Services from "@/components/services";
+import Services from "@/components/service/services";
 import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 import React from "react";
