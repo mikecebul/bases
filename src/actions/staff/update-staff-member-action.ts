@@ -53,10 +53,6 @@ export async function UpdateStaffMemberAction({
       },
     });
 
-    revalidatePath("/(home)/team", "page");
-    revalidatePath("/(home)/team/staff/[slug]", "page");
-    revalidatePath("/(dashboard)", "layout");
-
     return {
       status: "success",
     };
@@ -68,5 +64,9 @@ export async function UpdateStaffMemberAction({
         "Oops, there was an error updating the profile. Please try again."
       ),
     };
+  } finally {
+    revalidatePath("/(home)/team", "page");
+    revalidatePath("/(home)/team/staff/[slug]", "page");
+    revalidatePath("/(dashboard)", "layout");
   }
 }
