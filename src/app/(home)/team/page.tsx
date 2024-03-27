@@ -1,7 +1,7 @@
 import Team from "@/components/team/team";
 import { Metadata } from "next";
-import { getAllStaff } from "@/lib/fetch/staff";
-import { getAllBoard } from "@/lib/fetch/board";
+import { getAllActiveStaff } from "@/lib/fetch/staff";
+import { getAllActiveBoard } from "@/lib/fetch/board";
 
 export const metadata: Metadata = {
   title: "Team",
@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const staffMembers = await getAllStaff();
-  const boardMembers = await getAllBoard();
+  const staffMembers = await getAllActiveStaff();
+  const boardMembers = await getAllActiveBoard();
 
   return (
     <>
