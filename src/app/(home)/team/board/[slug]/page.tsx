@@ -1,20 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 import BoardMemberBio from "@/components/team/board-member-bio";
-import { siteConfig } from "@/config/site";
+import { getAllBoard, getBoardBySlug } from "@/lib/fetch/board";
 import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 
 interface Params {
   slug: string;
-}
-
-async function getBoardMember(slug: string) {
-  const boardMember = await prisma.boardMember.findFirst({
-    where: {
-      slug: slug,
-    },
-  });
-  return boardMember;
 }
 
 export async function generateMetadata({
@@ -23,11 +14,7 @@ export async function generateMetadata({
   params: Params;
 }): Promise<Metadata> {
   const { slug } = params;
-  const boardMember = await prisma.boardMember.findFirst({
-    where: {
-      slug: params.slug,
-    },
-  });
+  const boardMember = await getBoardBySlug(slug);
   return {
     title: `Board Member - ${boardMember?.name}` || "Board member profile page",
     description:
@@ -37,11 +24,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const boardMembers = await prisma.boardMember.findMany({
-    where: {
-      status: "PUBLISHED",
-    },
-  });
+  const boardMembers = await getAllBoard();
   return boardMembers.map((person) => ({
     slug: person.slug,
   }));
@@ -49,7 +32,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
-  const boardMember = await getBoardMember(slug);
+  const boardMember = await getBoardBySlug(slug);
   if (!boardMember) {
     return <div>Board member not found</div>;
   }

@@ -1,7 +1,7 @@
 "use client";
 import { DeleteStaffMemberAction } from "@/actions/staff/delete-staff-member-action";
-import { Icons } from "../../../icons";
-import { Button, buttonVariants } from "../../../ui/button";
+import { Icons } from "@/components/icons";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";

@@ -3,25 +3,16 @@ import { Icons } from "../../../icons";
 import { buttonVariants } from "../../../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import prisma from "@/lib/prisma";
 import DndBoardMembers from "./dndBoardMembers";
-
-async function getBoardMembers() {
-  const boardMembers = await prisma.boardMember.findMany({
-    orderBy: {
-      order: "asc",
-    },
-  });
-  return boardMembers;
-}
+import { getAllBoard } from "@/lib/fetch/board";
 
 export async function BoardMembersTable() {
-  const boardMembers = await getBoardMembers();
+  const boardMembers = await getAllBoard();
 
   return (
-    <div className="max-w-7xl p-8">
-      <div className="flex justify-between items-center pb-4">
-        <p className=" text-xl font-semi-bold">Board Members</p>
+    <div className="p-8 max-w-7xl">
+      <div className="flex items-center justify-between pb-4">
+        <p className="text-xl  font-semi-bold">Board Members</p>
         <div className="flex items-center">
           <Link
             className="flex items-center gap-4 group"

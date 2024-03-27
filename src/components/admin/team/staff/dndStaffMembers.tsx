@@ -73,8 +73,8 @@ export default function DndStaffMembers({
         });
       } else {
         toast({ description: "Staff member order was updated successfully." });
-        await revalidate("/team");
-        router.refresh()
+        // await revalidate("/team");
+        // router.refresh()
       }
     }
     return;

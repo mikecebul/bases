@@ -52,10 +52,13 @@ export async function UpdateStaffMemberAction({
         ),
       },
     });
+
+    revalidatePath("/(home)", "layout");
+    revalidatePath("/(dashboard)", "layout");
+
     return {
       status: "success",
-    }
-    // revalidatePath("/(home)");
+    };
     // revalidatePath("/(home)/team/staff/[slug]");
   } catch (error) {
     return {

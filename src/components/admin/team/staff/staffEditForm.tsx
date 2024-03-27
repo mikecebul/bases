@@ -16,13 +16,13 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { Input } from "../../../ui/input";
+import { Input } from "@/components/ui/input";
 import { StaffMember } from "@prisma/client";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { UpdateStaffMemberAction } from "@/actions/update-staff-member-action";
+import { UpdateStaffMemberAction } from "@/actions/staff/update-staff-member-action";
 import UploadProfilePicture from "../uploadProfilePicture";
-import { generateSlug, revalidate } from "@/lib/utils";
+// import { generateSlug } from "@/lib/utils";
 
 const staffFormSchema = z.object({
   name: z.string(),
@@ -145,11 +145,11 @@ export default function StaffEditForm({ person }: { person: StaffMember }) {
       });
     } else {
       toast({ description: "Profile was updated successfully." });
-      router.refresh();
+      // router.refresh();
       router.push("/admin/staff");
-      await revalidate("/team");
-      await revalidate(`/team/staff/${person.slug}`);
-      await revalidate(`/team/staff/${generateSlug(newStaffMemberData.name)}`);
+      // await revalidate("/team");
+      // await revalidate(`/team/staff/${person.slug}`);
+      // await revalidate(`/team/staff/${generateSlug(newStaffMemberData.name)}`);
     }
   }
 

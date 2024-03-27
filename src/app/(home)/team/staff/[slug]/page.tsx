@@ -1,18 +1,9 @@
-import prisma from "@/lib/prisma";
 import StaffBio from "@/components/team/staff-bio";
 import { Metadata } from "next";
+import { getAllStaff, getStaffBySlug } from "@/lib/fetch/staff";
 
 interface Params {
   slug: string;
-}
-
-async function getStaffMember(slug: string) {
-  const staffMember = await prisma.staffMember.findFirst({
-    where: {
-      slug: slug,
-    },
-  });
-  return staffMember;
 }
 
 export async function generateMetadata({
@@ -21,11 +12,7 @@ export async function generateMetadata({
   params: Params;
 }): Promise<Metadata> {
   const { slug } = params;
-  const staffMember = await prisma.staffMember.findFirst({
-    where: {
-      slug: slug,
-    },
-  });
+  const staffMember = await getStaffBySlug(slug);
   return {
     title: `Staff Member - ${staffMember?.name}` || "Staff profile page",
     description:
@@ -35,11 +22,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const staffMembers = await prisma.staffMember.findMany({
-    where: {
-      status: "PUBLISHED",
-    },
-  });
+  const staffMembers = await getAllStaff();
   return staffMembers.map((person) => ({
     slug: person.slug,
   }));
@@ -47,7 +30,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
-  const staffMember = await getStaffMember(slug);
+  const staffMember = await getStaffBySlug(slug);
 
   if (!staffMember) {
     return <div className="">Staff member not found</div>;

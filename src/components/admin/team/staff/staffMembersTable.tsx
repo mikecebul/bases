@@ -2,20 +2,11 @@ import { Icons } from "../../../icons";
 import { buttonVariants } from "../../../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import prisma from "@/lib/prisma";
 import DndStaffMembers from "./dndStaffMembers";
-
-async function getStaffMembers() {
-  const staffMembers = await prisma.staffMember.findMany({
-    orderBy: {
-      order: "asc",
-    },
-  });
-  return staffMembers;
-}
+import { getAllStaff } from "@/lib/fetch/staff";
 
 export async function StaffMembersTable() {
-  const staffMembers = await getStaffMembers();
+  const staffMembers = await getAllStaff();
 
   return (
     <div className="p-8 max-w-7xl">
