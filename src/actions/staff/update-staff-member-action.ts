@@ -53,7 +53,8 @@ export async function UpdateStaffMemberAction({
       },
     });
 
-    revalidatePath("/(home)", "layout");
+    revalidatePath("/(home)/team", "page");
+    revalidatePath("/(home)/team/staff/[slug]", "page");
     revalidatePath("/(dashboard)", "layout");
 
     return {
