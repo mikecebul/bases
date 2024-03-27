@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const [staffMembers, boardMembers] = await Promise.all([
-    getAllStaff(),
-    getAllBoard(),
-  ]);
+  const staffMembers = await getAllStaff();
+  const boardMembers = await getAllBoard();
 
   return (
     <>
