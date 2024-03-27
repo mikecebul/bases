@@ -52,11 +52,19 @@ export async function UpdateStaffMemberAction({
         ),
       },
     });
+    revalidatePath("/(home)/team", "page");
+    revalidatePath("/(home)/team/staff/[slug]", "page");
+    revalidatePath("/(dashboard)", "layout");
+    fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/team`);
+    fetch(
+      `${process.env.NEXT_PUBLIC_DOMAIN_URL}/team/staff/${generateSlug(
+        person.name
+      )}`
+    );
 
     return {
       status: "success",
     };
-    // revalidatePath("/(home)/team/staff/[slug]");
   } catch (error) {
     return {
       error: getErrorMessage(
@@ -64,9 +72,5 @@ export async function UpdateStaffMemberAction({
         "Oops, there was an error updating the profile. Please try again."
       ),
     };
-  } finally {
-    revalidatePath("/(home)/team", "page");
-    revalidatePath("/(home)/team/staff/[slug]", "page");
-    revalidatePath("/(dashboard)", "layout");
   }
 }
