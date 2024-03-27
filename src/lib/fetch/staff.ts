@@ -2,6 +2,9 @@ import prisma from "@/lib/prisma";
 
 export async function getAllStaff() {
   const staffMembers = await prisma.staffMember.findMany({
+    where: {
+      status: "PUBLISHED",
+    },
     orderBy: {
       order: "asc",
     },
