@@ -1,7 +1,7 @@
 "use server";
 import prisma, { StaffMember } from "@/lib/prisma";
 import { getErrorMessage } from "@/lib/utils";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function UpdateStaffMemberOrderAction(
   reorderedItems: StaffMember[]
@@ -15,8 +15,10 @@ export async function UpdateStaffMemberOrderAction(
 
   try {
     await prisma.$transaction(updateStaffMemberOrderPromises);
-    revalidatePath("/(home)", "layout");
-    revalidatePath("/(dashboard)", "layout");
+    revalidateTag('staff')
+
+    // revalidatePath("/(home)", "layout");
+    // revalidatePath("/(dashboard)", "layout");
   } catch (error) {
     return {
       error: getErrorMessage(
