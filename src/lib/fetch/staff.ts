@@ -8,7 +8,7 @@ export const getAllStaff = unstable_cache(
         order: "asc",
       },
     }),
-  ["staff"],
+  ["staff", "all"],
   { tags: ["staff"] }
 );
 
@@ -22,7 +22,7 @@ export const getAllActiveStaff = unstable_cache(
         order: "asc",
       },
     }),
-  ["staff"],
+  ["staff", "active"],
   { tags: ["staff"] }
 );
 
@@ -33,6 +33,6 @@ export const getStaffBySlug = unstable_cache(
         slug: slug,
       },
     }),
-  ["staff"],
+  ["staff", "slug"],
   { tags: ["staff"] }
 );
