@@ -1,16 +1,15 @@
 import prisma from "@/lib/prisma";
-import { unstable_cache } from "next/cache";
+import { unstable_cache, unstable_noStore as noStore } from "next/cache";
 
-export const getAllStaff = unstable_cache(
-  async () =>
-    await prisma.staffMember.findMany({
-      orderBy: {
-        order: "asc",
-      },
-    }),
-  ["staff", "all"],
-  { tags: ["staff"] }
-);
+export async function getAllStaff() {
+  noStore();
+  const allStaff = await prisma.staffMember.findMany({
+    orderBy: {
+      order: "asc",
+    },
+  });
+  return allStaff;
+}
 
 export const getAllActiveStaff = unstable_cache(
   async () =>

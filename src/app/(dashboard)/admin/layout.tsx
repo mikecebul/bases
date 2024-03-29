@@ -12,8 +12,6 @@ import "@uploadthing/react/styles.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "Admin Dashboard",
   description: "Admin dashboard for BASESmi.org",
@@ -31,7 +29,7 @@ export default async function Layout({
           <div className="fadeIn">
             <div className="">
               <Sidebar />
-              <main className="flex flex-col ml-48 py-6 px-8">{children}</main>
+              <main className="flex flex-col px-8 py-6 ml-48">{children}</main>
             </div>
           </div>
         </NextAuthSessionProvider>
@@ -43,7 +41,7 @@ export default async function Layout({
 
 function Sidebar() {
   return (
-    <div className="fixed inset-0 border-r border-border flex flex-col justify-between w-48 bg-primary-foreground">
+    <div className="fixed inset-0 flex flex-col justify-between w-48 border-r border-border bg-primary-foreground">
       <div className="py-4 space-y-4">
         <div className="px-3 py-2">
           <Link
