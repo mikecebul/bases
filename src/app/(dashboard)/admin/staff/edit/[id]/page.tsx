@@ -1,22 +1,14 @@
 import StaffEditForm from "@/components/admin/team/staff/staffEditForm";
-import prisma from "@/lib/prisma";
 import { Separator } from "@/components/ui/separator";
+import { getStaffBySlugAdmin } from "@/lib/fetch/staff";
 
 export default async function Page({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const getstaffMember = async (id: string) => {
-    const person = await prisma.staffMember.findFirst({
-      where: {
-        id: id as string,
-      },
-    });
-    return person;
-  };
 
-  const staffMember = await getstaffMember(id);
+  const staffMember = await getStaffBySlugAdmin(id);
 
   if (!staffMember) {
     throw new Error("Staff memeber did not load");

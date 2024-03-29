@@ -3,10 +3,10 @@ import { buttonVariants } from "../../../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import DndStaffMembers from "./dndStaffMembers";
-import { getAllStaff } from "@/lib/fetch/staff";
+import { getAllStaffAdmin } from "@/lib/fetch/staff";
 
 export async function StaffMembersTable() {
-  const staffMembers = await getAllStaff();
+  const staffMembers = await getAllStaffAdmin();
 
   return (
     <div className="p-8 max-w-7xl">
