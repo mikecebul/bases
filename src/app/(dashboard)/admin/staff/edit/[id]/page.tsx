@@ -1,14 +1,13 @@
 import StaffEditForm from "@/components/admin/team/staff/staffEditForm";
 import { Separator } from "@/components/ui/separator";
-import { getStaffBySlugAdmin } from "@/lib/fetch/staff";
+import { getStaffByIDAdmin } from "@/lib/fetch/staff";
 
 export default async function Page({
   params: { id },
 }: {
   params: { id: string };
 }) {
-
-  const staffMember = await getStaffBySlugAdmin(id);
+  const staffMember = await getStaffByIDAdmin(id);
 
   if (!staffMember) {
     throw new Error("Staff memeber did not load");

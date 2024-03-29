@@ -10,14 +10,14 @@ export async function getAllStaffAdmin() {
   });
   return allStaff;
 }
-export async function getStaffBySlugAdmin(slug: string) {
+export async function getStaffByIDAdmin(id: string) {
   noStore();
-  const allStaff = await prisma.staffMember.findFirst({
+  const staffByID = await prisma.staffMember.findFirst({
     where: {
-      slug: slug,
+      id: id as string,
     },
   });
-  return allStaff;
+  return staffByID;
 }
 
 export const getAllActiveStaff = unstable_cache(
