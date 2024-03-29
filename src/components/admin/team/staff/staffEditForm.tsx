@@ -144,12 +144,8 @@ export default function StaffEditForm({ person }: { person: StaffMember }) {
         description: result.error,
       });
     } else {
-      toast({ description: "Profile was updated successfully." });
-      // router.refresh();
+      toast({ description: JSON.stringify(result?.deploy?.job) });
       router.push("/admin/staff");
-      // await revalidate("/team");
-      // await revalidate(`/team/staff/${person.slug}`);
-      // await revalidate(`/team/staff/${generateSlug(newStaffMemberData.name)}`);
     }
   }
 
