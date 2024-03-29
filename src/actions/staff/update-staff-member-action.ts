@@ -23,6 +23,10 @@ type FormStaffMember = {
   }[];
 };
 
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function UpdateStaffMemberAction({
   id,
   newStaffMemberData: person,
@@ -52,10 +56,8 @@ export async function UpdateStaffMemberAction({
         ),
       },
     });
-    setTimeout(() => {
-      revalidateTag("staff");
-    }, 500);
-
+    await delay(500);
+    revalidateTag("staff");
     // revalidatePath("/(home)/team", "page");
     // revalidatePath("/(home)/team/staff/[slug]", "page");
     // fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/team`);
