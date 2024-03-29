@@ -54,15 +54,14 @@ export async function UpdateStaffMemberAction({
     });
     revalidateTag("staff");
 
-    // revalidatePath("/(home)/team", "page");
-    // revalidatePath("/(home)/team/staff/[slug]", "page");
-    // revalidatePath("/(dashboard)", "layout");
-    // fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/team`);
-    // fetch(
-    //   `${process.env.NEXT_PUBLIC_DOMAIN_URL}/team/staff/${generateSlug(
-    //     person.name
-    //   )}`
-    // );
+    revalidatePath("/(home)/team", "page");
+    revalidatePath("/(home)/team/staff/[slug]", "page");
+    fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/team`);
+    fetch(
+      `${process.env.NEXT_PUBLIC_DOMAIN_URL}/team/staff/${generateSlug(
+        person.name
+      )}`
+    );
 
     return {
       status: "success",

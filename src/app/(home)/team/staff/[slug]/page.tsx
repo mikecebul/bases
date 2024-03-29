@@ -1,6 +1,6 @@
 import StaffBio from "@/components/team/staff-bio";
 import { Metadata } from "next";
-import { getAllStaff, getStaffBySlug } from "@/lib/fetch/staff";
+import { getAllActiveStaff, getStaffBySlug } from "@/lib/fetch/staff";
 
 interface Params {
   slug: string;
@@ -17,12 +17,12 @@ export async function generateMetadata({
     title: `Staff Member - ${staffMember?.name}` || "Staff profile page",
     description:
       `Learn about the history and experience of our staff member ${staffMember?.name}.` ||
-      "Learn about our staff members education, background, and expertise.",
+      "Learn about our their education, background, and expertise.",
   };
 }
 
 export async function generateStaticParams() {
-  const staffMembers = await getAllStaff();
+  const staffMembers = await getAllActiveStaff();
   return staffMembers.map((person) => ({
     slug: person.slug,
   }));
