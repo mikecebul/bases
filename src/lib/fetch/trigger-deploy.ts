@@ -1,4 +1,6 @@
-async function triggerDeploy() {
+import { DeployHook } from "@/types/deploy-hook";
+
+export async function triggerDeploy(): Promise<DeployHook | undefined> {
   try {
     const response = await fetch(process.env.DEPLOY_HOOK_URL!, {
       method: "POST",
@@ -8,5 +10,6 @@ async function triggerDeploy() {
     return data;
   } catch (error) {
     console.error("Error triggering deploy:", error);
+    return undefined;
   }
 }

@@ -144,7 +144,7 @@ export default function StaffEditForm({ person }: { person: StaffMember }) {
         description: result.error,
       });
     } else {
-      toast({ description: JSON.stringify(result?.deploy?.job) });
+      toast({ description: JSON.stringify(result?.deploy?.job?.state) });
       router.push("/admin/staff");
     }
   }

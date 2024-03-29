@@ -1,4 +1,5 @@
 "use server";
+import { triggerDeploy } from "@/lib/fetch/trigger-deploy";
 import prisma from "@/lib/prisma";
 import { generateSlug, getErrorMessage } from "@/lib/utils";
 import type { DeployHook } from "@/types/deploy-hook";
@@ -52,7 +53,7 @@ export async function UpdateStaffMemberAction({
         ),
       },
     });
-    const deploy: DeployHook = await triggerDeploy();
+    const deploy = await triggerDeploy();
     return {
       status: "success",
       deploy: deploy,
