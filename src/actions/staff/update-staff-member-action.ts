@@ -2,7 +2,7 @@
 import { triggerDeploy } from "@/lib/fetch/trigger-deploy";
 import prisma from "@/lib/prisma";
 import { generateSlug, getErrorMessage } from "@/lib/utils";
-import type { DeployHook } from "@/types/deploy-hook";
+import { revalidateTag } from "next/cache";
 
 type FormStaffMember = {
   status: "DRAFT" | "PUBLISHED";
@@ -53,7 +53,10 @@ export async function UpdateStaffMemberAction({
         ),
       },
     });
+
     const deploy = await triggerDeploy();
+    revalidateTag("staff");
+
     return {
       status: "success",
       deploy: deploy,
