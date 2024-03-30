@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { unstable_cache, unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function getAllStaffAdmin() {
   noStore();
@@ -20,27 +20,23 @@ export async function getStaffByIDAdmin(id: string) {
   return staffByID;
 }
 
-export const getAllActiveStaff = unstable_cache(
-  async () =>
-    await prisma.staffMember.findMany({
-      where: {
-        status: "PUBLISHED",
-      },
-      orderBy: {
-        order: "asc",
-      },
-    }),
-  ["staff", "active"],
-  { tags: ["staff"] }
-);
+export async function getAllActiveStaff() {
+  const allActiveStaff = await prisma.staffMember.findMany({
+    where: {
+      status: "PUBLISHED",
+    },
+    orderBy: {
+      order: "asc",
+    },
+  });
+  return allActiveStaff;
+}
 
-export const getStaffBySlug = unstable_cache(
-  async (slug: string) =>
-    await prisma.staffMember.findFirst({
-      where: {
-        slug: slug,
-      },
-    }),
-  ["staff", "slug"],
-  { tags: ["staff"] }
-);
+export async function getStaffBySlug(slug: string) {
+  const staffBySlug = await prisma.staffMember.findFirst({
+    where: {
+      slug: slug,
+    },
+  });
+  return staffBySlug;
+}
