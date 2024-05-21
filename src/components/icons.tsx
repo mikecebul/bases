@@ -28,6 +28,7 @@ import {
   PlusCircle,
   Baby,
   PersonStanding,
+  Clock
 } from "lucide-react";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
@@ -78,6 +79,7 @@ export const Icons = {
   plusCircle: PlusCircle,
   baby: Baby,
   kid: PersonStanding,
+  clock: Clock,
 };
 
 type LucideIconsType = {

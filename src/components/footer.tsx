@@ -4,6 +4,7 @@ import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import Image from "next/image";
+import { Clock } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -55,7 +56,7 @@ export default function Footer() {
           </div>
 
           {/* Contact Section */}
-          <div className="col-span-1">
+          <div className="col-span-1 mb-6">
             <p className="text-lg font-bold">Contact</p>
             <Separator className="my-4" />
             <ul className="mb-8 space-y-4 text-gray-500">
@@ -100,6 +101,23 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              
+              {/* Hours */}
+             <li
+                className={cn(
+                  buttonVariants({ variant: "text" }),
+                  "text-gray-500"
+                )}
+              >
+                <div className="flex items-start pt-8">
+                  <Clock className="mt-1 mr-2" size={20} />
+                  <ul className="">
+                    <li><strong>Mon - Thu:</strong> 10am - 6pm</li>
+                    <li><strong>Fri:</strong> 10am - 5pm</li>
+                    <li>After hours by appointment only</li>
+                  </ul>
+                </div>
+              </li>
             </ul>
           </div>
 
