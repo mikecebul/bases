@@ -5,11 +5,21 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Banner from "./banner";
 import { siteConfig } from "@/config/site";
+import { getPayload } from "payload";
+import payloadConfig from "@/payload.config";
 
-export default function Hero() {
+export default async function Hero() {
+  const payload = await getPayload({
+    config: payloadConfig,
+  });
+  const { address, phone } = await payload.findGlobal({
+    slug: "new-site-config",
+  });
+  const cleanedPhone = phone.replace(/\D/g, "");
+
   return (
     <section className="relative px-4">
-      <Banner />
+      <Banner address={address} />
       <div className="grid py-16 lg:gap-8 lg:py-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
         <div className="mr-auto place-self-center lg:col-span-6">
           <h1 className="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight lg:mb-8 sm:text-4xl xl:text-6xl 2xl:text-7xl">
@@ -20,7 +30,7 @@ export default function Hero() {
           </p>
           <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 xl:space-x-0">
             <Link
-              href="tel:2315471144"
+              href={`tel:${cleanedPhone}`}
               className={cn(
                 buttonVariants({ variant: "brand", size: "xl" }),
                 "xl:hidden"

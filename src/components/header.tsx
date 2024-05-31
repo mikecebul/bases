@@ -4,8 +4,17 @@ import { MobileNav } from "./mobile-nav";
 import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { MainNav } from "./main-nav";
+import { getPayload } from "payload";
+import payloadConfig from "@/payload.config";
 
-export function Header() {
+export async function Header() {
+  const payload = await getPayload({
+    config: payloadConfig,
+  });
+  const { address, phone } = await payload.findGlobal({
+    slug: "new-site-config",
+  });
+
   return (
     <header className="sticky top-0 z-40 flex w-full bg-background/50 backdrop-blur-sm">
       <div className="flex items-center w-full px-4 md:px-8 2xl:px-0 2xl:container h-14 lg:h-20">
@@ -17,7 +26,7 @@ export function Header() {
         </Link>
         <MainNav />
         <MobileNav />
-        <div className="flex flex-col space-y-2 items-center xl:flex-row 2xl:space-x-2 2xl:space-y-0">
+        <div className="flex flex-col items-center space-y-2 xl:flex-row 2xl:space-x-2 2xl:space-y-0">
           <div
             className={cn(
               buttonVariants({ variant: "text" }),
@@ -25,7 +34,7 @@ export function Header() {
             )}
           >
             <Icons.phone className="mr-2" size={20} />
-            (231) 547-1144
+            {phone}
           </div>
           <Link
             href="https://goo.gl/maps/X956fmf511Fef9Pr7"
@@ -35,7 +44,7 @@ export function Header() {
             )}
           >
             <Icons.navigation className="mr-2" size={20} />
-            101 M-66 N | Charlevoix, MI
+            {address}
           </Link>
         </div>
       </div>

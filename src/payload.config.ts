@@ -1,29 +1,31 @@
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { mongooseAdapter } from "@payloadcms/db-mongodb";
 // import { payloadCloud } from '@payloadcms/plugin-cloud'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { buildConfig } from 'payload/config'
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import path from "path";
+import { buildConfig } from "payload/config";
 // import sharp from 'sharp'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from "url";
 
-import { Users } from './collections/Users'
+import { Users } from "./collections/Users";
+import { NewSiteConfig } from "./globals/NewSiteConfig";
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
     user: Users.slug,
   },
   collections: [Users],
+  globals: [NewSiteConfig],
   editor: lexicalEditor({}),
   // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+    url: process.env.DATABASE_URI || "",
   }),
 
   // Sharp is now an optional dependency -
@@ -34,4 +36,4 @@ export default buildConfig({
   // for this before reaching 3.0 stable
 
   // sharp,
-})
+});
