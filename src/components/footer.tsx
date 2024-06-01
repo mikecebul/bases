@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Separator } from "./ui/separator";
 import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
-import { siteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/config/site";
 import Image from "next/image";
 import { Clock } from "lucide-react";
 
@@ -16,7 +16,7 @@ export default function Footer() {
             <p className="text-lg font-bold">Website</p>
             <Separator className="my-4" />
             <ul className="flex flex-col mb-8 space-y-4 font-medium text-gray-500">
-              {siteConfig.NavLinks.map((item) => (
+              {oldSiteConfig.NavLinks.map((item) => (
                 <li key={item.title}>
                   <Link
                     href={item.href}
@@ -32,24 +32,24 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href={siteConfig.footer.privacy.href}
+                  href={oldSiteConfig.footer.privacy.href}
                   className={cn(
                     buttonVariants({ variant: "ghost" }),
                     "flex justify-start"
                   )}
                 >
-                  {siteConfig.footer.privacy.title}
+                  {oldSiteConfig.footer.privacy.title}
                 </Link>
               </li>
               <li>
                 <Link
-                  href={siteConfig.footer.resources.href}
+                  href={oldSiteConfig.footer.resources.href}
                   className={cn(
                     buttonVariants({ variant: "ghost" }),
                     "flex justify-start"
                   )}
                 >
-                  {siteConfig.footer.resources.title}
+                  {oldSiteConfig.footer.resources.title}
                 </Link>
               </li>
             </ul>
@@ -60,7 +60,7 @@ export default function Footer() {
             <p className="text-lg font-bold">Contact</p>
             <Separator className="my-4" />
             <ul className="mb-8 space-y-4 text-gray-500">
-              {siteConfig.footer.Contact.map((item) =>
+              {oldSiteConfig.footer.Contact.map((item) =>
                 item.href ? (
                   <li key={item.title} className="group">
                     <a
@@ -87,7 +87,7 @@ export default function Footer() {
                   </li>
                 )
               )}
-              {siteConfig.footer.Social.map((item) => (
+              {oldSiteConfig.footer.Social.map((item) => (
                 <li key={item.title} className="group">
                   <a
                     href={item.href}
@@ -101,9 +101,9 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
-              
+
               {/* Hours */}
-             <li
+              <li
                 className={cn(
                   buttonVariants({ variant: "text" }),
                   "text-gray-500"
@@ -112,8 +112,12 @@ export default function Footer() {
                 <div className="flex items-start pt-8">
                   <Clock className="mt-1 mr-2" size={20} />
                   <ul className="">
-                    <li><strong>Mon - Thu:</strong> 10am - 6pm</li>
-                    <li><strong>Fri:</strong> 10am - 5pm</li>
+                    <li>
+                      <strong>Mon - Thu:</strong> 10am - 6pm
+                    </li>
+                    <li>
+                      <strong>Fri:</strong> 10am - 5pm
+                    </li>
                     <li>After hours by appointment only</li>
                   </ul>
                 </div>

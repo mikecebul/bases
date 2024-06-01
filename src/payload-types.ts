@@ -13,7 +13,7 @@ export interface Config {
     'payload-migrations': PayloadMigration;
   };
   globals: {
-    'new-site-config': NewSiteConfig;
+    'site-config': SiteConfig;
   };
   locale: null;
   user: User & {
@@ -73,9 +73,9 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "new-site-config".
+ * via the `definition` "site-config".
  */
-export interface NewSiteConfig {
+export interface SiteConfig {
   id: string;
   phone: string;
   address: string;

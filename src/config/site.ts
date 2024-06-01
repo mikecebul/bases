@@ -1,8 +1,8 @@
 import { Icons } from "@/components/icons";
 
-export type SiteConfig = typeof siteConfig;
+export type OldSiteConfig = typeof oldSiteConfig;
 
-export const siteConfig = {
+export const oldSiteConfig = {
   Hero: {
     title: "Substance Use and Mental Health Counseling",
     subtitle:

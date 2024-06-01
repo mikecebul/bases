@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/config/site";
 import prisma from "@/lib/prisma";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -12,13 +12,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: newDate,
   }));
 
-  const boardMembers = siteConfig.team.boardMembers;
+  const boardMembers = oldSiteConfig.team.boardMembers;
   const boardMemberPages = boardMembers.map((person) => ({
     url: `${URL}/team/board/${person.slug}`,
     lastModified: newDate,
   }));
 
-  const routes = siteConfig.NavLinks.map((route) => ({
+  const routes = oldSiteConfig.NavLinks.map((route) => ({
     url: `${URL}${route.href}`,
     lastModified: newDate,
   }));

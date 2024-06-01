@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import BoardMemberBio from "@/components/board-member-bio";
-import { siteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/config/site";
 import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 

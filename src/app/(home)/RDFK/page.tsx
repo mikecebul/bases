@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { siteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/config/site";
 
 export default function page() {
-  const links = siteConfig.wellChildVisitTools;
+  const links = oldSiteConfig.wellChildVisitTools;
   return (
     <section className="relative pt-16 pb-24 isolate lg:pt-24 lg:pb-32">
       <div className="absolute inset-0 overflow-hidden -z-10">

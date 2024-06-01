@@ -12,7 +12,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
-import { siteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/config/site";
 
 export function MainNav() {
   const currentPathName = usePathname();
@@ -22,7 +22,7 @@ export function MainNav() {
       <nav className="justify-around hidden p-8 md:flex">
         <NavigationMenu>
           <NavigationMenuList>
-            {siteConfig.NavLinks.map((item) => (
+            {oldSiteConfig.NavLinks.map((item) => (
               <NavigationMenuItem key={item.title}>
                 <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink

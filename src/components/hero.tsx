@@ -4,7 +4,7 @@ import { Icons } from "./icons";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Banner from "./banner";
-import { siteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/config/site";
 import { getPayload } from "payload";
 import payloadConfig from "@/payload.config";
 
@@ -13,7 +13,7 @@ export default async function Hero() {
     config: payloadConfig,
   });
   const { address, phone } = await payload.findGlobal({
-    slug: "new-site-config",
+    slug: "site-config",
   });
   const cleanedPhone = phone.replace(/\D/g, "");
 
@@ -23,10 +23,10 @@ export default async function Hero() {
       <div className="grid py-16 lg:gap-8 lg:py-24 lg:grid-cols-12 md:px-8 2xl:px-0 2xl:container">
         <div className="mr-auto place-self-center lg:col-span-6">
           <h1 className="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight lg:mb-8 sm:text-4xl xl:text-6xl 2xl:text-7xl">
-            {siteConfig.Hero.title}
+            {oldSiteConfig.Hero.title}
           </h1>
           <p className="max-w-xl mb-4 lg:mb-8 text-muted-foreground">
-            {siteConfig.Hero.subtitle}
+            {oldSiteConfig.Hero.subtitle}
           </p>
           <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 xl:space-x-0">
             <Link

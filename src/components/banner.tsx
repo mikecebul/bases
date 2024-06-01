@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { Icons } from "./icons";
-import { NewSiteConfig } from "@/payload-types";
+import { SiteConfig } from "@/payload-types";
 
-type BannerProps = Pick<NewSiteConfig, "address">;
+type BannerProps = Pick<SiteConfig, "address">;
 
 export default function Banner({ address }: BannerProps) {
   const [isOpen, setIsOpen] = useState(true);

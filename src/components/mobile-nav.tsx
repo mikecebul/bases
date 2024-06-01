@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Button, buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
 import { ScrollArea } from "./ui/scroll-area";
-import { siteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/config/site";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn, isActiveRoute } from "@/lib/utils";
@@ -36,7 +36,7 @@ export function MobileNav() {
           <ScrollArea className="my-4 h-[calc(100vh-9rem)] pb-10">
             <div className="flex flex-col items-center justify-center gap-10 py-2">
               <nav className="flex flex-col items-center justify-center flex-1 space-y-4">
-                {siteConfig.NavLinks.map((item, index) => (
+                {oldSiteConfig.NavLinks.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}

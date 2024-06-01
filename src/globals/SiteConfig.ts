@@ -1,7 +1,7 @@
 import { GlobalConfig } from "payload/types";
 
-export const NewSiteConfig: GlobalConfig = {
-  slug: "new-site-config",
+export const SiteConfig: GlobalConfig = {
+  slug: "site-config",
   label: "Site Config",
   fields: [
     {

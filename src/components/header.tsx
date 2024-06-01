@@ -12,7 +12,7 @@ export async function Header() {
     config: payloadConfig,
   });
   const { address, phone } = await payload.findGlobal({
-    slug: "new-site-config",
+    slug: "site-config",
   });
 
   return (

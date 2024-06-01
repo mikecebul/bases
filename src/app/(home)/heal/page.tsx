@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/config/site";
 
 export default function Page() {
   return (
@@ -10,7 +10,7 @@ export default function Page() {
         </h1>
       </div>
       <div className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-16">
-        {siteConfig.HEAL.map((item) => (
+        {oldSiteConfig.HEAL.map((item) => (
           <div key={item.title} className="rounded-md bg-gray-200 text-left">
             <iframe
               src={item.href}
