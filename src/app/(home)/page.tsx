@@ -4,25 +4,25 @@ import Hero from "@/components/hero";
 import Donate from "@/components/donate";
 import prisma from "@/lib/prisma";
 
-async function getFrontPageServices() {
-  const services = await prisma.service.findMany({
-    where: {
-      status: "PUBLISHED",
-      frontpage: true,
-    },
-    orderBy: {
-      order: "asc",
-    },
-  });
-  return services;
-}
+// async function getFrontPageServices() {
+//   const services = await prisma.service.findMany({
+//     where: {
+//       status: "PUBLISHED",
+//       frontpage: true,
+//     },
+//     orderBy: {
+//       order: "asc",
+//     },
+//   });
+//   return services;
+// }
 
 export default async function Home() {
-  const services = await getFrontPageServices();
+  // const services = await getFrontPageServices();
   return (
     <>
       <Hero />
-      <FrontPageServices services={services} />
+      {/* <FrontPageServices services={services} /> */}
       <Carf />
       <Donate />
     </>

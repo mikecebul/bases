@@ -19,6 +19,7 @@
     "@payloadcms/next": "3.0.0-beta.39",
     "@payloadcms/plugin-cloud": "3.0.0-beta.39",
     "@payloadcms/richtext-lexical": "3.0.0-beta.39",
+    "@payloadcms/ui": "3.0.0-beta.29",
     "@prisma/client": "^5.5.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.4",
@@ -48,6 +49,7 @@
     "eslint-config-next": "15.0.0-rc.0",
     "framer-motion": "^10.14.0",
     "graphql": "^16.8.1",
+    "layouts": "link:@payloadcms/next/layouts",
     "lucide-react": "^0.261.0",
     "next": "15.0.0-rc.0",
     "next-auth": "^4.24.4",
@@ -75,5 +77,15 @@
     "@types/react-beautiful-dnd": "^13.1.4",
     "prisma": "^5.5.2",
     "ts-node": "^10.9.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@19.0.0-beta.2",
+      "@types/react-dom": "npm:types-react-dom@19.0.0-beta.2"
+    }
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@19.0.0-beta.2",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-beta.2"
   }
 }

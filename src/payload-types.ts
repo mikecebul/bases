@@ -79,6 +79,12 @@ export interface SiteConfig {
   id: string;
   phone: string;
   address: string;
+  title: string;
+  description: string;
+  cta: {
+    title: string;
+    link: string;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }

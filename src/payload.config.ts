@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 
 import { Users } from "./collections/Users";
 import { SiteConfig } from "./globals/SiteConfig";
+import { Services } from "./collections/Services";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -16,7 +17,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users],
+  collections: [Services, Users],
   globals: [SiteConfig],
   editor: lexicalEditor({}),
   // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
