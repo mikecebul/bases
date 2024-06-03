@@ -1,4 +1,4 @@
-import { withPayload } from '@payloadcms/next/withPayload'
+import { withPayload } from "@payloadcms/next/withPayload";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -33,11 +33,11 @@ const nextConfig = {
       },
       {
         // Redirect for 'rdfk' with an extension
-        source: '/rdfk:extension(\\.[^.]+)',
-        destination: '/RDFK',
+        source: "/rdfk:extension(\\.[^.]+)",
+        destination: "/RDFK",
         permanent: false,
       },
     ];
   },
 };
-module.exports = withPayload(nextConfig);
+export default withPayload(nextConfig);
