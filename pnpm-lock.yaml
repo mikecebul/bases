@@ -126,9 +126,6 @@ importers:
       graphql:
         specifier: ^16.8.1
         version: 16.8.1
-      layouts:
-        specifier: link:@payloadcms/next/layouts
-        version: link:@payloadcms/next/layouts
       lucide-react:
         specifier: ^0.261.0
         version: 0.261.0(react@19.0.0-rc-6d3110b4d9-20240531)

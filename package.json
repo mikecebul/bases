@@ -1,5 +1,6 @@
 {
   "name": "bases",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -50,7 +51,6 @@
     "eslint-config-next": "15.0.0-rc.0",
     "framer-motion": "^10.14.0",
     "graphql": "^16.8.1",
-    "layouts": "link:@payloadcms/next/layouts",
     "lucide-react": "^0.261.0",
     "next": "15.0.0-rc.0",
     "next-auth": "^4.24.4",

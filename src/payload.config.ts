@@ -1,7 +1,7 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 // import { payloadCloud } from '@payloadcms/plugin-cloud'
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { resendAdapter} from '@payloadcms/email-resend'
+import { resendAdapter } from "@payloadcms/email-resend";
 import path from "path";
 import { buildConfig } from "payload/config";
 // import sharp from 'sharp'
@@ -33,8 +33,8 @@ export default buildConfig({
     process.env.RESEND_DEFAULT_EMAIL && process.env.AUTH_RESEND_KEY
       ? resendAdapter({
           defaultFromAddress: process.env.RESEND_DEFAULT_EMAIL,
-          defaultFromName: 'Payload Admin',
-          apiKey: process.env.AUTH_RESEND_KEY || ''
+          defaultFromName: "Payload Admin",
+          apiKey: process.env.AUTH_RESEND_KEY || "",
         })
       : undefined,
 
