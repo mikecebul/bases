@@ -1,5 +1,7 @@
-const { PrismaClient } = require("@prisma/client");
-const boardMembers = require("../config/board-members");
+import { oldSiteConfig } from "@/config/site";
+import { PrismaClient } from "@prisma/client";
+
+const boardMembers = oldSiteConfig.team.boardMembers;
 
 const prisma = new PrismaClient();
 
