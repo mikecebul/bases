@@ -16,7 +16,7 @@ export default function FirstStaffProfilePicture({
 }: FirstProfilePictureProps) {
   return (
     <div className="flex items-end justify-start pb-8 gap-x-48">
-      <div className="flex flex-col items-center gap-4 justify-center">
+      <div className="flex flex-col items-center justify-center gap-4">
         <Avatar>
           <AvatarImage
             src={imageUrl}

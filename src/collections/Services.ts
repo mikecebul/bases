@@ -1,4 +1,4 @@
-import { lucideIcons } from "@/components/icons";
+import { icons } from "lucide-react";
 import { CollectionConfig } from "payload/types";
 
 export const Services: CollectionConfig = {
@@ -29,9 +29,9 @@ export const Services: CollectionConfig = {
       label: "Icon",
       type: "select",
       required: true,
-      options: lucideIcons.map((icon) => ({
-        label: icon.label,
-        value: icon.value,
+      options: Object.keys(icons).map((name) => ({
+        label: name,
+        value: name,
       })),
       admin: {
         width: "25%",

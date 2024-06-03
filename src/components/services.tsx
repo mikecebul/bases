@@ -3,8 +3,9 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Service } from "@prisma/client";
 import { renderIcon } from "./icons";
+import { Service } from "@/payload-types";
+import Icon from "./Icon";
 
 export default function Services({ services }: { services: Service[] }) {
   const [delay, setDelay] = useState(1);
@@ -76,19 +77,27 @@ export default function Services({ services }: { services: Service[] }) {
                   delay: index * 0.05,
                   duration: 0.4,
                 }}
-                className="relative pl-16"
+                // className="relative pl-16"
               >
-                <dt className="text-base font-semibold leading-7 text-primary">
-                  <div className="absolute top-0 left-0">
-                    {!!service.icon
-                      ? renderIcon(service.icon)
-                      : renderIcon("fallback")}
-                  </div>
-                  {service.name}
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-muted-foreground">
-                  {service.description}
-                </dd>
+                <div className="relative pl-16">
+                  <dt className="text-base font-semibold leading-7 text-primary">
+                    <div className="absolute top-0 left-0">
+                      {
+                        !!service.icon ? (
+                          <Icon name={service.icon} size={4} color="white" />
+                        ) : (
+                          <Icon name="Check" size={4} color="white" />
+                        )
+                        // ? renderIcon(service.icon)
+                        // : renderIcon("fallback")
+                      }
+                    </div>
+                    {service.title}
+                  </dt>
+                  <dd className="mt-2 text-base leading-7 text-muted-foreground">
+                    {service.desc}
+                  </dd>
+                </div>
               </motion.div>
             ))}
           </dl>
@@ -105,30 +114,40 @@ export default function Services({ services }: { services: Service[] }) {
                 },
               },
             }}
-            className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3"
+            // className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3"
           >
-            {services.map((service) => (
-              <motion.div
-                key={service.id}
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: { opacity: 1 },
-                }}
-                className="relative pl-16"
-              >
-                <dt className="text-base font-semibold leading-7 text-primary">
-                  <div className="absolute top-0 left-0">
-                    {!!service.icon
-                      ? renderIcon(service.icon)
-                      : renderIcon("fallback")}
+            <div className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
+              {services.map((service) => (
+                <motion.div
+                  key={service.id}
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: { opacity: 1 },
+                  }}
+                  // className="relative pl-16"
+                >
+                  <div className="relative pl-16">
+                    <dt className="text-base font-semibold leading-7 text-primary">
+                      <div className="absolute top-0 left-0">
+                        {
+                          !!service.icon ? (
+                            <Icon name={service.icon} size={4} color="white" />
+                          ) : (
+                            <Icon name="Check" size={4} color="white" />
+                          )
+                          // ? renderIcon(service.icon)
+                          // : renderIcon("fallback")
+                        }
+                      </div>
+                      {service.title}
+                    </dt>
+                    <dd className="mt-2 text-base leading-7 text-muted-foreground">
+                      {service.desc}
+                    </dd>
                   </div>
-                  {service.name}
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-muted-foreground">
-                  {service.description}
-                </dd>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </motion.dl>
         </div>
       </div>

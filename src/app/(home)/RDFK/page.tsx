@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { oldSiteConfig } from "@/config/site";
+import Link from "next/link";
 
 export default function page() {
   const links = oldSiteConfig.wellChildVisitTools;
@@ -65,42 +66,49 @@ export default function page() {
               },
             },
           }}
-          className="mt-16 text-left sm:mt-20 lg:mt-24"
+          // className="mt-16 text-left sm:mt-20 lg:mt-24"
         >
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
             {links?.map((link) => (
-              <motion.a
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: {
-                      duration: 0.4,
-                    },
-                  },
-                }}
+              <Link
                 href={link.url}
                 key={link.name}
                 target="_blank"
                 className="p-4 rounded-md hover:bg-accent/70"
               >
-                <div className="relative pl-16">
-                  <dt className="text-base font-semibold leading-7 text-primary">
-                    <div className="absolute top-0 left-0">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-brand">
-                        <link.icon
-                          className="w-6 h-6 text-white"
-                          aria-hidden="true"
-                        />
+                <motion.a
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: {
+                        duration: 0.4,
+                      },
+                    },
+                  }}
+                  // href={link.url}
+                  // key={link.name}
+                  // target="_blank"
+                  // className="p-4 rounded-md hover:bg-accent/70"
+                >
+                  <div className="relative pl-16">
+                    <dt className="text-base font-semibold leading-7 text-primary">
+                      <div className="absolute top-0 left-0">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-brand">
+                          <link.icon
+                            className="w-6 h-6 text-white"
+                            aria-hidden="true"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    {link.name}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7 text-muted-foreground">
-                    {link.description}
-                  </dd>
-                </div>
-              </motion.a>
+                      {link.name}
+                    </dt>
+                    <dd className="mt-2 text-base leading-7 text-muted-foreground">
+                      {link.description}
+                    </dd>
+                  </div>
+                </motion.a>
+              </Link>
             ))}
           </dl>
         </motion.div>

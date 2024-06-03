@@ -1,6 +1,7 @@
 import Services from "@/components/services";
-import prisma from "@/lib/prisma";
+import payloadConfig from "@/payload.config";
 import { Metadata } from "next";
+import { getPayload } from "payload";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -8,19 +9,12 @@ export const metadata: Metadata = {
   description: "Explore all the recovery services provided at BASES.",
 };
 
-async function getServices() {
-  const services = await prisma.service.findMany({
-    where: {
-      status: "PUBLISHED",
-    },
-    orderBy: {
-      order: "asc",
-    },
-  });
-  return services;
-}
-
 export default async function Page() {
-  const services = await getServices();
+  const payload = await getPayload({
+    config: payloadConfig
+  })
+  const { docs: services} = await payload.find({
+    collection: 'services'
+  })
   return <Services services={services} />;
 }
