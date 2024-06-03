@@ -21,7 +21,6 @@
     "@payloadcms/next": "3.0.0-beta.39",
     "@payloadcms/plugin-cloud": "3.0.0-beta.39",
     "@payloadcms/richtext-lexical": "3.0.0-beta.39",
-    "@payloadcms/ui": "3.0.0-beta.29",
     "@prisma/client": "^5.5.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.4",
