@@ -22,7 +22,6 @@ import {
 import { useForm } from "react-hook-form";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
-import { toast } from "./ui/use-toast";
 
 export function ContactForm() {
   const [open, setOpen] = useState(false);
@@ -125,14 +124,14 @@ export function ContactUsForm({ onSubmitted }: ContactUsFormProps) {
     }
   }
 
-  if (status === contactStatuses.error)
-    toast({
-      variant: "destructive",
-      description:
-        "Oops, there was an error sending your email. Please try again.",
-    });
-  if (status === contactStatuses.submitted)
-    toast({ description: "Your message was sent successfully." });
+  // if (status === contactStatuses.error)
+  //   toast({
+  //     variant: "destructive",
+  //     description:
+  //       "Oops, there was an error sending your email. Please try again.",
+  //   });
+  // if (status === contactStatuses.submitted)
+  //   toast({ description: "Your message was sent successfully." });
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

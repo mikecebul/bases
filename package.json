@@ -8,7 +8,7 @@
     "generate:types": "payload generate:types",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src",
     "seed:board": "ts-node src/migrations/seed-board-members.ts"
   },
   "dependencies": {
