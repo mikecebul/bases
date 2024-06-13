@@ -17,7 +17,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      {Boolean(topThreeServices) && (
+      {!!topThreeServices && (
         <FrontPageServices services={topThreeServices as Service[]} />
       )}
       <Carf />

@@ -93,18 +93,6 @@ export const SiteConfig: GlobalConfig = {
             },
           ],
         },
-        {
-          label: "Top 3 Services",
-          description: "Choose (3) services to highlight on the home page.",
-          fields: [
-            {
-              name: "topThreeServices",
-              type: "relationship",
-              relationTo: "services",
-              hasMany: true,
-            },
-          ],
-        },
       ],
     },
   ],
