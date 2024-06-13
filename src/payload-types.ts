@@ -26,7 +26,7 @@ export interface Config {
  * via the `definition` "services".
  */
 export interface Service {
-  id: string;
+  id: number;
   title: string;
   desc: string;
   icon:
@@ -1248,7 +1248,7 @@ export interface Service {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1265,10 +1265,10 @@ export interface User {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -1288,7 +1288,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -1299,7 +1299,7 @@ export interface PayloadMigration {
  * via the `definition` "site-config".
  */
 export interface SiteConfig {
-  id: string;
+  id: number;
   phone: string;
   address: string;
   title: string;
@@ -1308,7 +1308,7 @@ export interface SiteConfig {
     title: string;
     link: string;
   };
-  topThreeServices?: (string | Service)[] | null;
+  topThreeServices?: (number | Service)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }

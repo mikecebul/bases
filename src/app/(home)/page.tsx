@@ -5,7 +5,6 @@ import Donate from "@/components/donate";
 import { getPayload } from "payload";
 import payloadConfig from "@/payload.config";
 import { Service } from "@/payload-types";
-// import prisma from "@/lib/prisma";[]
 
 export default async function Home() {
   const payload = await getPayload({
@@ -18,10 +17,8 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      {Boolean(
-        topThreeServices && (
-          <FrontPageServices services={topThreeServices as Service[]} />
-        )
+      {Boolean(topThreeServices) && (
+        <FrontPageServices services={topThreeServices as Service[]} />
       )}
       <Carf />
       <Donate />

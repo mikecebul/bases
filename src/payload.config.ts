@@ -1,5 +1,4 @@
-import { mongooseAdapter } from "@payloadcms/db-mongodb";
-// import { payloadCloud } from '@payloadcms/plugin-cloud'
+import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { resendAdapter } from "@payloadcms/email-resend";
 import path from "path";
@@ -21,13 +20,14 @@ export default buildConfig({
   collections: [Services, Users],
   globals: [SiteConfig],
   editor: lexicalEditor({}),
-  // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || "",
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.POSTGRES_URL || "",
+    },
   }),
   email:
     process.env.RESEND_DEFAULT_EMAIL && process.env.AUTH_RESEND_KEY
