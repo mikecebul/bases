@@ -1,4 +1,4 @@
-import Team from "@/components/team";
+// import Team from "@/components/team";
 import { oldSiteConfig } from "@/config/site";
 import { Metadata } from "next";
 
