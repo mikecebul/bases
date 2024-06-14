@@ -28,7 +28,7 @@ import {
   PlusCircle,
   Baby,
   PersonStanding,
-  Clock
+  Clock,
 } from "lucide-react";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
@@ -125,8 +125,12 @@ export const iconMapping = lucideIcons.reduce<Record<string, LucideIcon>>(
   {}
 );
 
-export const renderIcon = (iconValue: string, small?: "small"): ReactNode => {
-  const IconComponent = iconMapping[iconValue];
+export const renderIcon = (
+  iconValue: string,
+  small?: "small",
+  component?: string
+): ReactNode => {
+  const IconComponent = component ?? iconMapping[iconValue];
   const iconSize = small ? "w-4 h-4" : "w-6 h-6"; // Adjust the icon size
   const containerSize = small ? "w-6 h-6" : "w-10 h-10"; // Adjust the container size
 

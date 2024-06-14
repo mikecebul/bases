@@ -14,6 +14,7 @@
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2",
     "@hookform/resolvers": "^3.1.1",
+    "@innovixx/payload-icon-picker-field": "^0.0.4",
     "@payloadcms/db-postgres": "3.0.0-beta.46",
     "@payloadcms/email-resend": "3.0.0-beta.46",
     "@payloadcms/next": "3.0.0-beta.46",
@@ -43,7 +44,7 @@
     "eslint": "8.45.0",
     "eslint-config-next": "15.0.0-rc.0",
     "framer-motion": "^10.14.0",
-    "lucide-react": "^0.261.0",
+    "lucide-react": "^0.394.0",
     "next": "15.0.0-rc.0",
     "payload": "3.0.0-beta.46",
     "react": "19.0.0-rc-6d3110b4d9-20240531",

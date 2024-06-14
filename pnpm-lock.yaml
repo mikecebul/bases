@@ -18,6 +18,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.1.1
         version: 3.6.0(react-hook-form@7.51.5(react@19.0.0-rc-6d3110b4d9-20240531))
+      '@innovixx/payload-icon-picker-field':
+        specifier: ^0.0.4
+        version: 0.0.4(payload@3.0.0-beta.46(@swc/core@1.5.29(@swc/helpers@0.5.11))(@swc/types@0.1.8)(graphql@16.8.2)(typescript@5.2.2))(react-icons@4.12.0(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)
       '@payloadcms/db-postgres':
         specifier: 3.0.0-beta.46
         version: 3.0.0-beta.46(payload@3.0.0-beta.46(@swc/core@1.5.29(@swc/helpers@0.5.11))(@swc/types@0.1.8)(graphql@16.8.2)(typescript@5.2.2))(react@19.0.0-rc-6d3110b4d9-20240531)(types-react@19.0.0-beta.2)
@@ -106,8 +109,8 @@ importers:
         specifier: ^10.14.0
         version: 10.18.0(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)
       lucide-react:
-        specifier: ^0.261.0
-        version: 0.261.0(react@19.0.0-rc-6d3110b4d9-20240531)
+        specifier: ^0.394.0
+        version: 0.394.0(react@19.0.0-rc-6d3110b4d9-20240531)
       next:
         specifier: 15.0.0-rc.0
         version: 15.0.0-rc.0(@babel/core@7.24.7)(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)(sass@1.77.4)
@@ -870,6 +873,13 @@ packages:
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0', yarn: '>=3.2.0'}
     cpu: [x64]
     os: [win32]
+
+  '@innovixx/payload-icon-picker-field@0.0.4':
+    resolution: {integrity: sha512-kQHqwdAOxsXSBHnGY1RQ/SJAE1N3ksDlyEXOHfdcI+QMqR/3ldA/XR/azah08RIg9MbML8q90neilASWgbv+Lw==}
+    peerDependencies:
+      payload: ^2.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-icons: ^4.12.0
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -3491,7 +3501,6 @@ packages:
 
   libsql@0.3.19:
     resolution: {integrity: sha512-Aj5cQ5uk/6fHdmeW0TiXK42FqUlwx7ytmMLPSaUQPin5HKKKuUPD62MAbN4OEweGBBI7q1BekoEN4gPUEL6MZA==}
-    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   lilconfig@2.1.0:
@@ -3553,8 +3562,8 @@ packages:
   lru-queue@0.1.0:
     resolution: {integrity: sha512-BpdYkt9EvGl8OfWHDQPISVpcl5xZthb+XPsbELj5AQXxIC8IriDZIQYjBJPEm5rS420sjZ0TLEzRcq5KdBhYrQ==}
 
-  lucide-react@0.261.0:
-    resolution: {integrity: sha512-gzxEvIxf8+hGbm2ZQU/VP5TxTcnTu3ODDmYoS3a53wC4gkW9ukxmexKjTcZUzz3q8ema+DMwmPypx9Z0Bvvxog==}
+  lucide-react@0.394.0:
+    resolution: {integrity: sha512-PzTbJ0bsyXRhH59k5qe7MpTd5MxlpYZUcM9kGSwvPGAfnn0J6FElDwu2EX6Vuh//F7y60rcVJiFQ7EK9DCMgfw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
 
@@ -4162,6 +4171,11 @@ packages:
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
+
+  react-icons@4.12.0:
+    resolution: {integrity: sha512-IBaDuHiShdZqmfc/TwHu6+d6k2ltNCf3AszxNmjJc1KUfXdEeRJOKyNvLmAHaarhzGmTSVygNdyu8/opXv2gaw==}
+    peerDependencies:
+      react: '*'
 
   react-image-crop@10.1.8:
     resolution: {integrity: sha512-4rb8XtXNx7ZaOZarKKnckgz4xLMvds/YrU6mpJfGhGAsy2Mg4mIw1x+DCCGngVGq2soTBVVOxx2s/C6mTX9+pA==}
@@ -5554,6 +5568,13 @@ snapshots:
 
   '@img/sharp-win32-x64@0.33.4':
     optional: true
+
+  '@innovixx/payload-icon-picker-field@0.0.4(payload@3.0.0-beta.46(@swc/core@1.5.29(@swc/helpers@0.5.11))(@swc/types@0.1.8)(graphql@16.8.2)(typescript@5.2.2))(react-icons@4.12.0(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)':
+    dependencies:
+      deepmerge: 4.3.1
+      payload: 3.0.0-beta.46(@swc/core@1.5.29(@swc/helpers@0.5.11))(@swc/types@0.1.8)(graphql@16.8.2)(typescript@5.2.2)
+      react: 19.0.0-rc-6d3110b4d9-20240531
+      react-icons: 4.12.0(react@19.0.0-rc-6d3110b4d9-20240531)
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -8662,7 +8683,7 @@ snapshots:
     dependencies:
       es5-ext: 0.10.64
 
-  lucide-react@0.261.0(react@19.0.0-rc-6d3110b4d9-20240531):
+  lucide-react@0.394.0(react@19.0.0-rc-6d3110b4d9-20240531):
     dependencies:
       react: 19.0.0-rc-6d3110b4d9-20240531
 
@@ -9294,6 +9315,10 @@ snapshots:
       react: 19.0.0-rc-6d3110b4d9-20240531
 
   react-hook-form@7.51.5(react@19.0.0-rc-6d3110b4d9-20240531):
+    dependencies:
+      react: 19.0.0-rc-6d3110b4d9-20240531
+
+  react-icons@4.12.0(react@19.0.0-rc-6d3110b4d9-20240531):
     dependencies:
       react: 19.0.0-rc-6d3110b4d9-20240531
 
