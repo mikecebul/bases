@@ -1,4 +1,5 @@
 import { GlobalConfig } from "payload/types";
+import { useRowLabel } from "@payloadcms/ui/forms/RowLabel/Context";
 import IconSelect from "./IconSelect";
 
 export const Services: GlobalConfig = {
@@ -22,21 +23,21 @@ export const Services: GlobalConfig = {
           type: "textarea",
           required: true,
         },
-        // {
-        //   name: "icon",
-        //   type: "text",
-        //   admin: {
-        //     components: {
-        //       Field: IconSelect,
-        //     },
-        //   },
-        // },
+        {
+          name: "icon",
+          type: "text",
+          admin: {
+            components: {
+              Field: IconSelect,
+            },
+          },
+        },
       ],
       admin: {
         components: {
-          RowLabel: ({ data, index }) => {
-            return data?.title || `Service ${String(index).padStart(2, "0")}`;
-          },
+          // RowLabel: ({ data, index }) => {
+          //   return data.title || `Service ${String(index).padStart(2, "0")}`;
+          // },
         },
       },
     },

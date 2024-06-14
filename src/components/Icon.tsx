@@ -1,13 +1,17 @@
-import { icons } from "lucide-react";
-import { LucideProps } from "lucide-react";
+import { lucideIcons } from "./icons";
+import { User as DefaultIcon } from "lucide-react";
 
-export interface IconProps extends LucideProps {
-  name: keyof typeof icons;
-}
-const Icon = ({ name, color, size }: IconProps) => {
-  const LucideIcon = icons[name];
+type IconName = (typeof lucideIcons)[number]["value"];
 
-  return <LucideIcon color={color} size={size} aria-hidden="true" />;
+const findIconComponent = (name: IconName) => {
+  const icon = lucideIcons.find((icon) => icon.value === name);
+  return icon ? icon.component : null;
+};
+
+const Icon = ({ name }: { name: IconName }) => {
+  const IconComponent = findIconComponent(name) || DefaultIcon;
+
+  return <IconComponent />;
 };
 
 export default Icon;

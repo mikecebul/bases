@@ -82,39 +82,34 @@ export const Icons = {
   clock: Clock,
 };
 
-type LucideIconsType = {
-  component: LucideIcon;
-  label: string;
-  value: string;
-};
+export type LucideIconsType = (typeof lucideIcons)[number];
 
-export const lucideIcons: LucideIconsType[] = [
-  { component: User, label: "Fall Back", value: "fallback" },
-  { component: Menu, label: "Menu", value: "openMenu" },
-  { component: X, label: "X", value: "closeMenu" },
-  { component: ArrowRight, label: "Arrow Right", value: "arrowRight" },
-  { component: Glasses, label: "Glasses", value: "glasses" },
-  { component: FlaskConical, label: "Flask", value: "flask" },
-  { component: Users, label: "Group", value: "group" },
-  { component: Tally4, label: "Jail", value: "jail" },
-  { component: WineOff, label: "Wine Off", value: "class" },
-  { component: Car, label: "Car", value: "car" },
-  { component: Phone, label: "Phone", value: "phone" },
-  { component: Navigation, label: "Navigation", value: "navigation" },
-  { component: Printer, label: "Printer", value: "print" },
-  { component: Mail, label: "Mail", value: "mail" },
-  { component: Pencil, label: "Pencil", value: "pencil" },
-  { component: SprayCan, label: "Spray Can", value: "spray" },
-  { component: Brain, label: "Brain", value: "brain" },
-  { component: CircleOff, label: "Circle Off", value: "zero" },
-  { component: Facebook, label: "Facebook", value: "facebook" },
-  { component: CheckCircle, label: "Check Circle", value: "checkCirlce" },
-  { component: UserPlus, label: "Add User", value: "adduser" },
-  { component: User, label: "User", value: "user" },
-  { component: UserX, label: "Delete User", value: "delete" },
-  { component: Check, label: "Check", value: "check" },
-  { component: ChevronsUpDown, label: "Up Down", value: "chevronsUpDown" },
-  { component: PlusCircle, label: "Plus Circle", value: "plusCircle" },
+export const lucideIcons = [
+  { component: Menu, label: "Menu", value: "Menu" },
+  { component: X, label: "Close", value: "X" },
+  { component: ArrowRight, label: "Arrow Right", value: "ArrowRight" },
+  { component: Glasses, label: "Glasses", value: "Glasses" },
+  { component: FlaskConical, label: "Flask", value: "FlaskConical" },
+  { component: Users, label: "Group", value: "Users" },
+  { component: Tally4, label: "Jail", value: "Tally4" },
+  { component: WineOff, label: "Wine Off", value: "WineOff" },
+  { component: Car, label: "Car", value: "Car" },
+  { component: Phone, label: "Phone", value: "Phone" },
+  { component: Navigation, label: "Navigation", value: "Navigation" },
+  { component: Printer, label: "Printer", value: "Printer" },
+  { component: Mail, label: "Mail", value: "Mail" },
+  { component: Pencil, label: "Pencil", value: "Pencil" },
+  { component: SprayCan, label: "Spray Can", value: "SprayCan" },
+  { component: Brain, label: "Brain", value: "Brain" },
+  { component: CircleOff, label: "Zero", value: "CircleOff" },
+  { component: Facebook, label: "Facebook", value: "Facebook" },
+  { component: CheckCircle, label: "Check Circle", value: "CheckCircle" },
+  { component: UserPlus, label: "Add User", value: "UserPlus" },
+  { component: User, label: "User", value: "User" },
+  { component: UserX, label: "Delete User", value: "UserX" },
+  { component: Check, label: "Check", value: "Check" },
+  { component: ChevronsUpDown, label: "Up Down", value: "ChevronsUpDown" },
+  { component: PlusCircle, label: "Plus Circle", value: "PlusCircle" },
 ];
 
 export const iconMapping = lucideIcons.reduce<Record<string, LucideIcon>>(
@@ -152,3 +147,35 @@ export const renderIcon = (
     </div>
   );
 };
+
+export const lucideIconArray = [
+  Menu,
+  X,
+  ArrowRight,
+  Glasses,
+  FlaskConical,
+  Users,
+  Tally4,
+  WineOff,
+  Car,
+  Phone,
+  Navigation,
+  Printer,
+  Mail,
+  Pencil,
+  SprayCan,
+  Brain,
+  CircleOff,
+  Facebook,
+  CheckCircle,
+  UserPlus,
+  User,
+  UserX,
+  Check,
+  ChevronsUpDown,
+  PlusCircle,
+  Baby,
+  PersonStanding,
+  Clock,
+];
+export type LuicideIconArray = typeof lucideIconArray;

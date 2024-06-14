@@ -10,15 +10,21 @@ export default async function Home() {
   const payload = await getPayload({
     config: payloadConfig,
   });
-  const { topThreeServices } = await payload.findGlobal({
-    slug: "site-config",
+  const data = await payload.findGlobal({
+    slug: "services",
+    depth: 2,
   });
+
+  const services = data.services as Service["services"];
+  const firstThreeServices = !!services ? services.slice(0, 3) : null;
 
   return (
     <>
       <Hero />
-      {!!topThreeServices && (
-        <FrontPageServices services={topThreeServices as Service[]} />
+      {!!firstThreeServices && (
+        <FrontPageServices
+          services={firstThreeServices as Service["services"]}
+        />
       )}
       <Carf />
       <Donate />

@@ -10,8 +10,9 @@ import { Service } from "@/payload-types";
 export default function ServicesFrontPage({
   services,
 }: {
-  services: Service[];
+  services: Service["services"];
 }) {
+  console.log("Services", services);
   return (
     <section className="relative pt-16 pb-24 isolate lg:pt-24 lg:pb-32">
       <motion.div
@@ -107,15 +108,7 @@ export default function ServicesFrontPage({
                   <div className="relative pl-16">
                     <dt className="text-base font-semibold leading-7 text-primary">
                       <div className="absolute top-0 left-0">
-                        {
-                          !!service.icon ? (
-                            <Icon name={service.icon} size={4} color="white" />
-                          ) : (
-                            <Icon name="XSquare" size={4} color="red" />
-                          )
-                          // ? renderIcon(service.icon)
-                          // : renderIcon("fallback")
-                        }
+                        <Icon name={service.icon || ""} />
                       </div>
                       {service.title}
                     </dt>
