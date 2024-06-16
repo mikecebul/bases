@@ -7,8 +7,9 @@ import { buildConfig } from "payload/config";
 import { fileURLToPath } from "url";
 
 import { Users } from "./collections/Users";
-import { Services } from "./globals/Services/Index";
 import { SiteConfig } from "./globals/SiteConfig";
+import { ServicesPage } from "./globals/ServicesPage/Index";
+import { Services } from "./collections/Services";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -17,8 +18,8 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users],
-  globals: [Services, SiteConfig],
+  collections: [Services, Users],
+  globals: [SiteConfig, ServicesPage],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

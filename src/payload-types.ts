@@ -8,18 +8,31 @@
 
 export interface Config {
   collections: {
+    services: Service;
     users: User;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   globals: {
-    services: Service;
     'site-config': SiteConfig;
+    'services-page': ServicesPage;
   };
   locale: null;
   user: User & {
     collection: 'users';
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: number;
+  title: string;
+  desc: string;
+  icon?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -74,23 +87,6 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "services".
- */
-export interface Service {
-  id: number;
-  services?:
-    | {
-        title: string;
-        desc: string;
-        icon?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-config".
  */
 export interface SiteConfig {
@@ -103,6 +99,24 @@ export interface SiteConfig {
     title: string;
     link: string;
   };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page".
+ */
+export interface ServicesPage {
+  id: number;
+  subtitle?: string | null;
+  title?: string | null;
+  description?: string | null;
+  listOfServices?:
+    | {
+        service?: (number | null) | Service;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
