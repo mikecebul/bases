@@ -76,6 +76,7 @@ export const HomePage: GlobalConfig = {
               name: "listOfServices",
               minRows: 3,
               maxRows: 3,
+              required: true,
               fields: [
                 {
                   name: "service",

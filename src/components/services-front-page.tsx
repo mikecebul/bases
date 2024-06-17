@@ -10,9 +10,8 @@ import { Service } from "@/payload-types";
 export default function ServicesFrontPage({
   services,
 }: {
-  services: Service["services"];
+  services: Service[];
 }) {
-  console.log("Services", services);
   return (
     <section className="relative pt-16 pb-24 isolate lg:pt-24 lg:pb-32">
       <motion.div

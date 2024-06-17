@@ -4,6 +4,7 @@ import Hero from "@/components/hero";
 import Donate from "@/components/donate";
 import { getPayload } from "payload";
 import payloadConfig from "@/payload.config";
+import { Service } from "@/payload-types";
 
 export default async function Home() {
   const payload = await getPayload({
@@ -14,10 +15,9 @@ export default async function Home() {
     depth: 2,
   });
 
-  const services = listOfServices?.map((item) => {
-    const { service } = item;
-    if (!!service && typeof service !== "number") return service;
-  });
+  const services = listOfServices
+    ?.map(({ service }) => service)
+    .filter((service): service is Service => service !== undefined);
 
   return (
     <>

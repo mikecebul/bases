@@ -109,12 +109,10 @@ export interface HomePage {
     title: string;
     link: string;
   };
-  listOfServices?:
-    | {
-        service?: (number | null) | Service;
-        id?: string | null;
-      }[]
-    | null;
+  listOfServices: {
+    service?: (number | null) | Service;
+    id?: string | null;
+  }[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
