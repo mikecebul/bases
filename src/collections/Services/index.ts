@@ -9,6 +9,7 @@ export const Services: CollectionConfig = {
   },
   admin: {
     useAsTitle: "title",
+    defaultColumns: ["title", "desc", "icon", "updatedAt"],
   },
   fields: [
     {

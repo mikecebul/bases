@@ -2,7 +2,7 @@
 
 import { lucideIcons } from "@/components/icons";
 import { useField } from "@payloadcms/ui/forms/useField";
-import { SelectInput } from "@payloadcms/ui/fields/Select";
+import { Select } from "@payloadcms/ui/fields/Select";
 
 export const IconSelect = ({ path }: { path: string }) => {
   const { value, setValue } = useField<string>({ path });
@@ -17,12 +17,12 @@ export const IconSelect = ({ path }: { path: string }) => {
     <>
       <label className="field-label">Icon Select</label>
       <div className="flex items-center w-full space-x-8">
-        <SelectInput
+        <Select
           path={path}
           name={path}
           options={options}
           value={value}
-          onChange={(e) => setValue(e.value)}
+          onChange={(val) => setValue(val)}
           className="min-w-64"
         />
         {!!Icon ? <Icon className="w-12 h-12" /> : null}

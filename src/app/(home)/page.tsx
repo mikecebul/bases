@@ -4,7 +4,6 @@ import Hero from "@/components/hero";
 import Donate from "@/components/donate";
 import { getPayload } from "payload";
 import payloadConfig from "@/payload.config";
-import { Service } from "@/payload-types";
 
 export default async function Home() {
   const payload = await getPayload({
