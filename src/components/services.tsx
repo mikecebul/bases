@@ -3,20 +3,20 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { renderIcon } from "./icons";
-import { Service } from "@/payload-types";
+import { Service, ServicesPage } from "@/payload-types";
 import Icon from "./Icon";
 
-export default function Services({ services }: { services: Service[] }) {
+export default function Services({ pageData }: { pageData: ServicesPage }) {
   const [delay, setDelay] = useState(1);
+  const { listOfServices } = pageData;
 
-  const updateDelay = (isInView: boolean) => {
-    if (isInView) {
-      setDelay((prevDelay) => Math.max(prevDelay - 1, 1));
-    } else {
-      setDelay((prevDelay) => prevDelay + 1);
-    }
-  };
+  // const updateDelay = (isInView: boolean) => {
+  //   if (isInView) {
+  //     setDelay((prevDelay) => Math.max(prevDelay - 1, 1));
+  //   } else {
+  //     setDelay((prevDelay) => prevDelay + 1);
+  //   }
+  // };
 
   return (
     <section id="services" className="relative py-24 lg:pb-32 isolate">
@@ -54,52 +54,52 @@ export default function Services({ services }: { services: Service[] }) {
       <div className="flex flex-col px-4 2xl:container md:px-8 2xl:px-0 xl:items-center xl:text-center">
         <div className="max-w-2xl">
           <p className="text-base font-semibold leading-7 text-brand">
-            Redefine your recovery path
+            {pageData.subtitle}
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Everything you need for a successful recovery journey
+            {pageData.title}
           </h2>
           <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted-foreground">
-            With decades of experience, we've developed services that truly
-            serve our community's needs.
+            {pageData.description}
           </p>
         </div>
 
         <div className="mt-16 text-left sm:mt-20 lg:mt-24">
           <dl className="grid max-w-xl grid-cols-1 lg:hidden gap-y-10">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ x: 30, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true, amount: "some" }}
-                transition={{
-                  delay: index * 0.05,
-                  duration: 0.4,
-                }}
-                // className="relative pl-16"
-              >
-                <div className="relative pl-16">
-                  <dt className="text-base font-semibold leading-7 text-primary">
-                    <div className="absolute top-0 left-0">
-                      {
-                        !!service.icon ? (
-                          <Icon name={service.icon} size={4} color="white" />
-                        ) : (
-                          <Icon name="Check" size={4} color="white" />
-                        )
-                        // ? renderIcon(service.icon)
-                        // : renderIcon("fallback")
-                      }
+            {listOfServices?.map((item, index) => {
+              const { service } = item;
+              if (!!service && typeof service !== "number") {
+                return (
+                  <motion.div
+                    key={service.id}
+                    initial={{ x: 30, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    viewport={{ once: true, amount: "some" }}
+                    transition={{
+                      delay: index * 0.05,
+                      duration: 0.4,
+                    }}
+                    // className="relative pl-16"
+                  >
+                    <div className="relative pl-16">
+                      <dt className="text-base font-semibold leading-7 text-primary">
+                        <div className="absolute top-0 left-0">
+                          {!!service.icon ? (
+                            <Icon name={service.icon} size={4} color="white" />
+                          ) : (
+                            <Icon name="Check" size={4} color="white" />
+                          )}
+                        </div>
+                        {service.title}
+                      </dt>
+                      <dd className="mt-2 text-base leading-7 text-muted-foreground">
+                        {service.desc}
+                      </dd>
                     </div>
-                    {service.title}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7 text-muted-foreground">
-                    {service.desc}
-                  </dd>
-                </div>
-              </motion.div>
-            ))}
+                  </motion.div>
+                );
+              }
+            })}
           </dl>
 
           <motion.dl
@@ -117,36 +117,41 @@ export default function Services({ services }: { services: Service[] }) {
             // className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3"
           >
             <div className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
-              {services.map((service) => (
-                <motion.div
-                  key={service.id}
-                  variants={{
-                    hidden: { opacity: 0 },
-                    visible: { opacity: 1 },
-                  }}
-                  // className="relative pl-16"
-                >
-                  <div className="relative pl-16">
-                    <dt className="text-base font-semibold leading-7 text-primary">
-                      <div className="absolute top-0 left-0">
-                        {
-                          !!service.icon ? (
-                            <Icon name={service.icon} size={4} color="white" />
-                          ) : (
-                            <Icon name="Check" size={4} color="white" />
-                          )
-                          // ? renderIcon(service.icon)
-                          // : renderIcon("fallback")
-                        }
+              {listOfServices?.map((item, index) => {
+                const { service } = item;
+                if (!!service && typeof service !== "number") {
+                  return (
+                    <motion.div
+                      key={service.id}
+                      variants={{
+                        hidden: { opacity: 0 },
+                        visible: { opacity: 1 },
+                      }}
+                      // className="relative pl-16"
+                    >
+                      <div className="relative pl-16">
+                        <dt className="text-base font-semibold leading-7 text-primary">
+                          <div className="absolute top-0 left-0">
+                            {!!service.icon ? (
+                              <Icon
+                                name={service.icon}
+                                size={4}
+                                color="white"
+                              />
+                            ) : (
+                              <Icon name="Check" size={4} color="white" />
+                            )}
+                          </div>
+                          {service.title}
+                        </dt>
+                        <dd className="mt-2 text-base leading-7 text-muted-foreground">
+                          {service.desc}
+                        </dd>
                       </div>
-                      {service.title}
-                    </dt>
-                    <dd className="mt-2 text-base leading-7 text-muted-foreground">
-                      {service.desc}
-                    </dd>
-                  </div>
-                </motion.div>
-              ))}
+                    </motion.div>
+                  );
+                }
+              })}
             </div>
           </motion.dl>
         </div>

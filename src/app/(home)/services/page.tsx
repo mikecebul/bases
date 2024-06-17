@@ -11,10 +11,12 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const payload = await getPayload({
-    config: payloadConfig
-  })
-  const { docs: services} = await payload.find({
-    collection: 'services'
-  })
-  return <Services services={services} />;
+    config: payloadConfig,
+  });
+  const pageData = await payload.findGlobal({
+    slug: "services-page",
+    depth: 1,
+  });
+
+  return <Services pageData={pageData} />;
 }
