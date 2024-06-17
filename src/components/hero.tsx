@@ -4,21 +4,27 @@ import { Icons } from "./icons";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Banner from "./banner";
-import { oldSiteConfig } from "@/config/site";
 import { getPayload } from "payload";
 import payloadConfig from "@/payload.config";
 
-export default async function Hero() {
+type HeroProps = {
+  title: string;
+  description: string;
+  cta: {
+    link: string;
+    title: string;
+  };
+};
+
+export default async function Hero({
+  title: heroTitle,
+  description: heroDesc,
+  cta: { link, title: ctaTitle },
+}: HeroProps) {
   const payload = await getPayload({
     config: payloadConfig,
   });
-  const {
-    address,
-    phone,
-    title: heroTitle,
-    description: heroDesc,
-    cta: { link, title: ctaTitle },
-  } = await payload.findGlobal({
+  const { address, phone } = await payload.findGlobal({
     slug: "site-config",
   });
   const cleanedPhone = phone.replace(/\D/g, "");

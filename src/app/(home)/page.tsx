@@ -10,22 +10,20 @@ export default async function Home() {
   const payload = await getPayload({
     config: payloadConfig,
   });
-  const data = await payload.findGlobal({
-    slug: "services",
+  const { title, description, cta, listOfServices } = await payload.findGlobal({
+    slug: "home-page",
     depth: 2,
   });
 
-  const services = data.services as Service["services"];
-  const firstThreeServices = !!services ? services.slice(0, 3) : null;
+  const services = listOfServices?.map((item) => {
+    const { service } = item;
+    if (!!service && typeof service !== "number") return service;
+  });
 
   return (
     <>
-      <Hero />
-      {!!firstThreeServices && (
-        <FrontPageServices
-          services={firstThreeServices as Service["services"]}
-        />
-      )}
+      <Hero title={title} description={description} cta={cta} />
+      {!!services && <FrontPageServices services={services} />}
       <Carf />
       <Donate />
     </>

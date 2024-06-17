@@ -35,64 +35,6 @@ export const SiteConfig: GlobalConfig = {
             },
           ],
         },
-        {
-          label: "Hero",
-          description: "Hero section with call-to-action.",
-          fields: [
-            {
-              name: "title",
-              label: "Title",
-              type: "text",
-              required: true,
-              defaultValue: "Substance Use and Mental Health Counseling",
-            },
-            {
-              name: "description",
-              label: "Description",
-              type: "textarea",
-              required: true,
-              defaultValue:
-                "We bridge the gap to recovery, offering flexible and personalized services both in-person and via telehealth.",
-            },
-            {
-              type: "group",
-              name: "cta",
-              label: "Call-to-action Button",
-              fields: [
-                {
-                  type: "row",
-                  fields: [
-                    {
-                      name: "title",
-                      label: "Title",
-                      type: "text",
-                      required: true,
-                      defaultValue: "Explore Our Services",
-                      admin: { width: "50%" },
-                    },
-                    {
-                      name: "link",
-                      label: "Link",
-                      type: "text",
-                      required: true,
-                      defaultValue: "/services",
-                      admin: { width: "50%" },
-                    },
-                  ],
-                },
-                {
-                  name: "alert",
-                  type: "ui",
-                  admin: {
-                    components: {
-                      Field: AlertBox,
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-        },
       ],
     },
   ],

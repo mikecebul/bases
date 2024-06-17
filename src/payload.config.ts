@@ -10,6 +10,7 @@ import { Users } from "./collections/Users";
 import { SiteConfig } from "./globals/SiteConfig";
 import { ServicesPage } from "./globals/ServicesPage/Index";
 import { Services } from "./collections/Services";
+import { HomePage } from "./globals/HomePage";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -19,7 +20,7 @@ export default buildConfig({
     user: Users.slug,
   },
   collections: [Services, Users],
-  globals: [SiteConfig, ServicesPage],
+  globals: [SiteConfig, HomePage, ServicesPage],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

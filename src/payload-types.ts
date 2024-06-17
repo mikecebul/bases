@@ -15,6 +15,7 @@ export interface Config {
   };
   globals: {
     'site-config': SiteConfig;
+    'home-page': HomePage;
     'services-page': ServicesPage;
   };
   locale: null;
@@ -93,12 +94,27 @@ export interface SiteConfig {
   id: number;
   phone: string;
   address: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
   title: string;
   description: string;
   cta: {
     title: string;
     link: string;
   };
+  listOfServices?:
+    | {
+        service?: (number | null) | Service;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
