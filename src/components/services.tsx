@@ -135,11 +135,15 @@ export default function Services({ pageData }: { pageData: ServicesPage }) {
                             {!!service.icon ? (
                               <Icon
                                 name={service.icon}
-                                size={4}
-                                color="white"
+                                size={24}
+                                className="text-brand"
                               />
                             ) : (
-                              <Icon name="Check" size={4} color="white" />
+                              <Icon
+                                name="Check"
+                                size={24}
+                                className="text-brand"
+                              />
                             )}
                           </div>
                           {service.title}
