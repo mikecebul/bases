@@ -37,16 +37,17 @@ function RowLabel() {
       fetchData();
     }
   }, [data.service]);
+  if (!Icon) return <span>{`${rowNumber} - Service`}</span>;
 
-  if (!!Icon && !!relationshipData)
-    return (
-      <div className="flex flex-row items-center">
-        <Icon className="w-8 h-6 mr-4" />
-        <span className="text-lg font-semibold">{`${relationshipData.title} - ${rowNumber}`}</span>
-      </div>
-    );
-
-  return <span>{`Undefined - ${rowNumber}`}</span>;
+  return (
+    <div className="flex flex-row items-center">
+      <span className="text-lg font-semibold mr-8">{rowNumber}</span>
+      <Icon className="w-8 h-6" />
+      <span className="text-lg font-semibold ml-4">
+        {relationshipData?.title}
+      </span>
+    </div>
+  );
 }
 
 export default RowLabel;
