@@ -24,7 +24,7 @@ function RowLabel() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/services/${data.service}`
+          `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/services/${data.service}`
         );
         const result = await response.json();
         setRelationshipData(result);
