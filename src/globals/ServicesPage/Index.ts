@@ -1,6 +1,5 @@
 import { GlobalConfig } from "payload/types";
 import RowLabel from "./RowLabel";
-import { IconSelect } from "@/collections/Services/IconSelect";
 
 export const ServicesPage: GlobalConfig = {
   slug: "services-page",

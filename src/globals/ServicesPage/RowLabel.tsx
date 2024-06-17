@@ -2,13 +2,15 @@
 
 import { lucideIcons } from "@/components/icons";
 import { useRowLabel } from "@payloadcms/ui/forms/RowLabel/Context";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Service } from "@/payload-types";
 
 type RowData = {
   id: string;
-  service: Service;
+  service: string;
 };
+
+const serviceCache = new Map<string, Service>();
 
 function RowLabel() {
   const { data, rowNumber } = useRowLabel<RowData>();
@@ -16,20 +18,28 @@ function RowLabel() {
     null
   );
 
-  const Icon = lucideIcons.find(
-    (icon) => icon.value === relationshipData?.icon
-  )?.component;
+  const Icon = useMemo(
+    () =>
+      lucideIcons.find((icon) => icon.value === relationshipData?.icon)
+        ?.component,
+    [relationshipData]
+  );
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/services/${data.service}`
-        );
-        const result = await response.json();
-        setRelationshipData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      if (serviceCache.has(data.service)) {
+        setRelationshipData(serviceCache.get(data.service) || null);
+      } else {
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/services/${data.service}`
+          );
+          const result: Service = await response.json();
+          serviceCache.set(data.service, result);
+          setRelationshipData(result);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
       }
     };
 
@@ -37,6 +47,7 @@ function RowLabel() {
       fetchData();
     }
   }, [data.service]);
+
   if (!Icon) return <span>{`${rowNumber} - Service`}</span>;
 
   return (
