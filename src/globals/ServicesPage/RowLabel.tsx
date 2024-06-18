@@ -18,12 +18,9 @@ function RowLabel() {
     rowNumber,
   } = useRowLabel<RowData>();
 
-  const { data: service } = useSWR<Service>(
-    serviceId
-      ? `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/services/${serviceId}`
-      : null,
-    fetcher
-  );
+  const url = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/services/${serviceId}`;
+
+  const { data: service } = useSWR<Service>(url, fetcher);
 
   const Icon = useMemo(
     () => lucideIcons.find((icon) => icon.value === service?.icon)?.component,
