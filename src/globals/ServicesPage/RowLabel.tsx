@@ -32,7 +32,7 @@ function RowLabel() {
   return (
     <div className="flex flex-row items-center">
       <span className="text-lg font-semibold mr-8">{rowNumber}</span>
-      <Icon className="w-8 h-6" />
+      <Icon className="w-6 h-6" />
       <span className="text-lg font-semibold ml-4">{service.title}</span>
     </div>
   );
