@@ -2,20 +2,31 @@
 
 import { lucideIcons } from "@/components/icons";
 import { useRowLabel } from "@payloadcms/ui/forms/RowLabel/Context";
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import { Service } from "@/payload-types";
+import useSWR from "swr";
 
 type RowData = {
   id: string;
   service: string;
 };
 
-const serviceCache = new Map<string, Service>();
+const fetcher = (url: string): Promise<Service> =>
+  fetch(url).then((res) => {
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return res.json();
+  });
 
 function RowLabel() {
   const { data, rowNumber } = useRowLabel<RowData>();
-  const [relationshipData, setRelationshipData] = useState<Service | null>(
-    null
+
+  const { data: relationshipData } = useSWR<Service>(
+    data.service
+      ? `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/services/${data.service}`
+      : null,
+    fetcher
   );
 
   const Icon = useMemo(
@@ -24,29 +35,6 @@ function RowLabel() {
         ?.component,
     [relationshipData]
   );
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (serviceCache.has(data.service)) {
-        setRelationshipData(serviceCache.get(data.service) || null);
-      } else {
-        try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/services/${data.service}`
-          );
-          const result: Service = await response.json();
-          serviceCache.set(data.service, result);
-          setRelationshipData(result);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      }
-    };
-
-    if (data.service) {
-      fetchData();
-    }
-  }, [data.service]);
 
   if (!Icon) return <span>{`${rowNumber} - Service`}</span>;
 

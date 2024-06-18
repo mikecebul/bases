@@ -135,6 +135,9 @@ importers:
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
+      swr:
+        specifier: ^2.2.5
+        version: 2.2.5(react@19.0.0-rc-6d3110b4d9-20240531)
       tailwind-merge:
         specifier: ^1.14.0
         version: 1.14.0
@@ -3510,7 +3513,6 @@ packages:
 
   libsql@0.3.19:
     resolution: {integrity: sha512-Aj5cQ5uk/6fHdmeW0TiXK42FqUlwx7ytmMLPSaUQPin5HKKKuUPD62MAbN4OEweGBBI7q1BekoEN4gPUEL6MZA==}
-    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   lilconfig@2.1.0:
@@ -4578,6 +4580,11 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  swr@2.2.5:
+    resolution: {integrity: sha512-QtxqyclFeAsxEUeZIYmsaQ0UjimSq1RZ9Un7I68/0ClKK/U3LoyQunwkQfJZr2fc22DfIXLNDc2wFyTEikCUpg==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+
   tabbable@5.3.3:
     resolution: {integrity: sha512-QD9qKY3StfbZqWOPLp0++pOrAVb/HbUi5xCc8cUo4XjP19808oaMiDzn0leBY5mCespIBM0CIZePzZjgzR83kA==}
 
@@ -4808,6 +4815,11 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  use-sync-external-store@1.2.2:
+    resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   utf8-byte-length@1.0.5:
     resolution: {integrity: sha512-Xn0w3MtiQ6zoz2vFyUVruaCL53O/DwUvkEeOvj+uulMm0BkUGYWmBYVyElqZaSLhY6ZD0ulfU3aBra2aVT4xfA==}
@@ -9812,6 +9824,12 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
+  swr@2.2.5(react@19.0.0-rc-6d3110b4d9-20240531):
+    dependencies:
+      client-only: 0.0.1
+      react: 19.0.0-rc-6d3110b4d9-20240531
+      use-sync-external-store: 1.2.2(react@19.0.0-rc-6d3110b4d9-20240531)
+
   tabbable@5.3.3: {}
 
   tabbable@6.2.0: {}
@@ -10096,6 +10114,10 @@ snapshots:
       tslib: 2.6.3
     optionalDependencies:
       '@types/react': types-react@19.0.0-beta.2
+
+  use-sync-external-store@1.2.2(react@19.0.0-rc-6d3110b4d9-20240531):
+    dependencies:
+      react: 19.0.0-rc-6d3110b4d9-20240531
 
   utf8-byte-length@1.0.5: {}
 
