@@ -15,8 +15,6 @@ export const IconSelect = ({ path }: { path: string }) => {
     value: icon.value,
   }));
 
-  console.log("initial value:", initialValue);
-
   return (
     <>
       <label className="field-label">Icon Select</label>
@@ -28,7 +26,7 @@ export const IconSelect = ({ path }: { path: string }) => {
           value={value}
           onChange={(val) => {
             setValue(val);
-            setName(val);
+            if (typeof val === "string") setName(val);
           }}
           className="min-w-64"
         />
