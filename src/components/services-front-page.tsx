@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import Icon from "./Icon";
+import { Icon } from "@/components/icons/Icon";
 import { Service } from "@/payload-types";
 
 export default function ServicesFrontPage({

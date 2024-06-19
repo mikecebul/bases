@@ -31,7 +31,7 @@ export interface Service {
   id: number;
   title: string;
   desc: string;
-  icon?: string | null;
+  icon: string;
   updatedAt: string;
   createdAt: string;
 }

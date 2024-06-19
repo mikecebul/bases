@@ -27,6 +27,7 @@ export const Services: CollectionConfig = {
     {
       name: "icon",
       type: "text",
+      required: true,
       admin: {
         components: {
           Field: IconSelect,

@@ -1,11 +1,10 @@
 "use client";
 
-import { lucideIcons } from "@/components/icons";
 import { useRowLabel } from "@payloadcms/ui/forms/RowLabel/Context";
-import { useMemo } from "react";
 import type { Service } from "@/payload-types";
 import useSWR from "swr";
 import { fetcher } from "@/lib/utils";
+import { Icon } from "@/components/icons/Icon";
 
 type RowData = {
   id: string;
@@ -22,17 +21,12 @@ function RowLabel() {
 
   const { data: service } = useSWR<Service>(url, fetcher);
 
-  const Icon = useMemo(
-    () => lucideIcons.find((icon) => icon.value === service?.icon)?.component,
-    [service]
-  );
-
-  if (!Icon || !service) return <span>{`${rowNumber} - Service`}</span>;
+  if (!service) return <span>{`${rowNumber} - Service`}</span>;
 
   return (
     <div className="flex flex-row items-center">
       <span className="text-lg font-semibold mr-8">{rowNumber}</span>
-      <Icon className="w-6 h-6" />
+      <Icon name={service.icon} className="w-6 h-6" />
       <span className="text-lg font-semibold ml-4">{service.title}</span>
     </div>
   );

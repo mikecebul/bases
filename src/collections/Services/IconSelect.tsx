@@ -3,7 +3,7 @@
 import { lucideIcons } from "@/components/icons";
 import { useField } from "@payloadcms/ui/forms/useField";
 import { Select } from "@payloadcms/ui/fields/Select";
-import Icon from "@/components/Icon";
+import { Icon } from "@/components/icons/Icon";
 import { useState } from "react";
 
 export const IconSelect = ({ path }: { path: string }) => {

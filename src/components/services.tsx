@@ -1,22 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Service, ServicesPage } from "@/payload-types";
-import Icon from "./Icon";
+import type { ServicesPage } from "@/payload-types";
+import { IconWithBorder } from "@/components/icons/Icon";
 
 export default function Services({ pageData }: { pageData: ServicesPage }) {
-  const [delay, setDelay] = useState(1);
   const { listOfServices } = pageData;
-
-  // const updateDelay = (isInView: boolean) => {
-  //   if (isInView) {
-  //     setDelay((prevDelay) => Math.max(prevDelay - 1, 1));
-  //   } else {
-  //     setDelay((prevDelay) => prevDelay + 1);
-  //   }
-  // };
 
   return (
     <section id="services" className="relative py-24 lg:pb-32 isolate">
@@ -65,6 +55,7 @@ export default function Services({ pageData }: { pageData: ServicesPage }) {
         </div>
 
         <div className="mt-16 text-left sm:mt-20 lg:mt-24">
+          {/* Mobile View of Services */}
           <dl className="grid max-w-xl grid-cols-1 lg:hidden gap-y-10">
             {listOfServices?.map((item, index) => {
               const { service } = item;
@@ -84,11 +75,10 @@ export default function Services({ pageData }: { pageData: ServicesPage }) {
                     <div className="relative pl-16">
                       <dt className="text-base font-semibold leading-7 text-primary">
                         <div className="absolute top-0 left-0">
-                          {!!service.icon ? (
-                            <Icon name={service.icon} size={4} color="white" />
-                          ) : (
-                            <Icon name="Check" size={4} color="white" />
-                          )}
+                          <IconWithBorder
+                            name={service.icon ?? "Check"}
+                            color="white"
+                          />
                         </div>
                         {service.title}
                       </dt>
@@ -101,7 +91,7 @@ export default function Services({ pageData }: { pageData: ServicesPage }) {
               }
             })}
           </dl>
-
+          {/* Desktop view of Services */}
           <motion.dl
             initial="hidden"
             animate="visible"
@@ -117,7 +107,7 @@ export default function Services({ pageData }: { pageData: ServicesPage }) {
             // className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3"
           >
             <div className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
-              {listOfServices?.map((item, index) => {
+              {listOfServices?.map((item) => {
                 const { service } = item;
                 if (!!service && typeof service !== "number") {
                   return (
@@ -132,19 +122,10 @@ export default function Services({ pageData }: { pageData: ServicesPage }) {
                       <div className="relative pl-16">
                         <dt className="text-base font-semibold leading-7 text-primary">
                           <div className="absolute top-0 left-0">
-                            {!!service.icon ? (
-                              <Icon
-                                name={service.icon}
-                                size={24}
-                                className="text-brand"
-                              />
-                            ) : (
-                              <Icon
-                                name="Check"
-                                size={24}
-                                className="text-brand"
-                              />
-                            )}
+                            <IconWithBorder
+                              name={service.icon ?? "Check"}
+                              color="white"
+                            />
                           </div>
                           {service.title}
                         </dt>
