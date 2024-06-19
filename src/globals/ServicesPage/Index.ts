@@ -6,7 +6,7 @@ export const ServicesPage: GlobalConfig = {
   slug: "services-page",
   label: "Services Page",
   hooks: {
-    afterChange: [() => revalidatePath("(frontend)/services", "page")],
+    afterChange: [() => revalidatePath("/(frontend)/services", "page")],
   },
   fields: [
     {
