@@ -1,10 +1,14 @@
 import { AlertBox } from "@/components/AlertBox";
 import { GlobalConfig } from "payload/types";
 import RowLabel from "./ServicesPage/RowLabel";
+import { revalidatePath } from "next/cache";
 
 export const HomePage: GlobalConfig = {
   slug: "home-page",
   label: "Home Page",
+  hooks: {
+    afterChange: [() => revalidatePath("/", "layout")],
+  },
   fields: [
     {
       type: "tabs",

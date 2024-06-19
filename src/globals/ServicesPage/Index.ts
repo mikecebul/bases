@@ -1,9 +1,13 @@
 import { GlobalConfig } from "payload/types";
 import RowLabel from "./RowLabel";
+import { revalidatePath } from "next/cache";
 
 export const ServicesPage: GlobalConfig = {
   slug: "services-page",
   label: "Services Page",
+  hooks: {
+    afterChange: [() => revalidatePath("/", "layout")],
+  },
   fields: [
     {
       name: "subtitle",

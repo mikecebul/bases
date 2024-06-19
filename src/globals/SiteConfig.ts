@@ -1,9 +1,13 @@
 import { AlertBox } from "@/components/AlertBox";
+import { revalidatePath } from "next/cache";
 import { GlobalConfig } from "payload/types";
 
 export const SiteConfig: GlobalConfig = {
   slug: "site-config",
   label: "Site Config",
+  hooks: {
+    afterChange: [() => revalidatePath("/", "layout")],
+  },
   fields: [
     {
       type: "tabs",
