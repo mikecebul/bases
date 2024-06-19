@@ -9,7 +9,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src",
-    "seed:board": "ts-node src/migrations/seed-board-members.ts"
+    "seed:board": "ts-node src/migrations/seed-board-members.ts",
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2",
