@@ -7,7 +7,7 @@ export const HomePage: GlobalConfig = {
   slug: "home-page",
   label: "Home Page",
   hooks: {
-    afterChange: [() => revalidatePath("/", "layout")],
+    afterChange: [() => revalidatePath("/", "page")],
   },
   fields: [
     {
