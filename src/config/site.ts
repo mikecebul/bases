@@ -70,58 +70,52 @@ export const oldSiteConfig = {
       name: "Detailed Substance Use and Mental Health Assessments",
       description:
         "Our team delivers comprehensive assessments for substance use disorders, mental health, and trauma for adults and adolescents, helping to formulate the most effective personalized treatment plan.",
-      icon: Icons.glasses,
+      icon: "Glasses",
     },
     {
       name: "Individual and Group Counseling",
       description:
         "We offer individual and group counseling sessions addressing substance use, mental health, and trauma. Our therapies include DBT (Dialectical Behavior Therapy), CBT (Cognitive Behavior Therapy), and EMDR (Eye Movement Desensitization and Reprocessing).",
-      icon: Icons.brain,
+      icon: "Brain",
     },
     {
       name: "Batterer Intervention",
       href: "/services/batterer-intervention",
       description:
         "We offer a men's HEAL (Helping Explore Accountable Lifestyles) group for those needing counseling after domestic violence altercations. It is a 39 session commitment with a cost of $25 per session.",
-      icon: Icons.group,
+      icon: "Group",
     },
     {
       name: "Correctional Facility Group Therapy",
       description:
         "We facilitate CBT/DBT groups for men (Mondays) and for women (Wednesdays) at the Charlevoix County Jail.",
-      icon: Icons.jail,
+      icon: "Jail",
     },
     {
       name: "Drug Testing",
       description:
         "We offer several types of drug testing available during business hours, along with weekend appointments for an additional $20 charge. Our standard 10 panel costs $25 and EtGs cost $35.",
 
-      icon: Icons.flask,
+      icon: "Flask",
     },
     {
       name: "Alcohol Highway Safety Education Class",
       description:
         "Our Alcohol Highway Safety Education Classes are designed for first-time OWI/OUI offenders, providing crucial knowledge and insight.",
-      icon: Icons.class,
-    },
-    {
-      name: "Zero Tolerance Education Class",
-      description:
-        "Tailored for MIPs and adolescents, this class educates on strict underage alcohol and marijuana regulations and promotes responsible behavior.",
-      icon: Icons.zero,
+      icon: "Zero",
     },
     {
       name: "Driver’s License Appeal Assistance",
       description:
         "For a $250 fee, this service includes a drug test, analysis of your driving record, an evaluation, and completion of the necessary 10+ page forms for driver's license appeal hearings.",
-      icon: Icons.car,
+      icon: "Car",
     },
     {
       name: "Naloxone Nasal Kits",
       href: "/services/naloxone",
       description:
         "BASES has free naloxone nasal kits (opioid overdose reversal drug). If you or a family member have opioid concerns, you should have one of these life saving kits on hand.",
-      icon: Icons.spray,
+      icon: "Spray",
     },
   ],
   FrontPageServices: [

@@ -11,7 +11,8 @@
     "lint": "eslint src",
     "seed:board": "ts-node src/migrations/seed-board-members.ts",
     "db:up": "docker-compose up -d",
-    "db:down": "docker-compose down"
+    "db:down": "docker-compose down",
+    "seed:services": "ts-node src/lib/seed/seedServices.ts"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2",

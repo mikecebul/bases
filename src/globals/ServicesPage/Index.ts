@@ -1,6 +1,5 @@
 import { GlobalConfig } from "payload/types";
 import { revalidatePath } from "next/cache";
-import { Service } from "@/payload-types";
 
 export const ServicesPage: GlobalConfig = {
   slug: "services-page",
@@ -35,13 +34,6 @@ export const ServicesPage: GlobalConfig = {
       relationTo: "services",
       hasMany: true,
       required: true,
-      defaultValue: getServices,
     },
   ],
 };
-
-async function getServices() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/services`);
-  const data: Service[] = await res.json();
-  return data.map((service) => service.id);
-}
