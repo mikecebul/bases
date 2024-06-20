@@ -109,10 +109,7 @@ export interface HomePage {
     title: string;
     link: string;
   };
-  listOfServices: {
-    service?: (number | null) | Service;
-    id?: string | null;
-  }[];
+  topThreeServices: (number | Service)[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -122,15 +119,10 @@ export interface HomePage {
  */
 export interface ServicesPage {
   id: number;
-  subtitle?: string | null;
-  title?: string | null;
-  description?: string | null;
-  listOfServices?:
-    | {
-        service?: (number | null) | Service;
-        id?: string | null;
-      }[]
-    | null;
+  subtitle: string;
+  title: string;
+  description: string;
+  listOfServices: (number | Service)[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }

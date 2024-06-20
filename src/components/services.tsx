@@ -57,9 +57,8 @@ export default function Services({ pageData }: { pageData: ServicesPage }) {
         <div className="mt-16 text-left sm:mt-20 lg:mt-24">
           {/* Mobile View of Services */}
           <dl className="grid max-w-xl grid-cols-1 lg:hidden gap-y-10">
-            {listOfServices?.map((item, index) => {
-              const { service } = item;
-              if (!!service && typeof service !== "number") {
+            {listOfServices?.map((service, index) => {
+              if (typeof service !== "number") {
                 return (
                   <motion.div
                     key={service.id}
@@ -107,9 +106,8 @@ export default function Services({ pageData }: { pageData: ServicesPage }) {
             // className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3"
           >
             <div className="hidden lg:grid gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 xl:grid-cols-3">
-              {listOfServices?.map((item) => {
-                const { service } = item;
-                if (!!service && typeof service !== "number") {
+              {listOfServices?.map((service) => {
+                if (typeof service !== "number") {
                   return (
                     <motion.div
                       key={service.id}

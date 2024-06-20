@@ -11,6 +11,9 @@ export const Services: CollectionConfig = {
     useAsTitle: "title",
     defaultColumns: ["title", "desc", "icon", "updatedAt"],
   },
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: "title",

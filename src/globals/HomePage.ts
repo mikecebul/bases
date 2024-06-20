@@ -76,24 +76,14 @@ export const HomePage: GlobalConfig = {
           description: "Choose the top 3 services on the home page.",
           fields: [
             {
-              type: "array",
-              name: "listOfServices",
-              minRows: 3,
+              name: "topThreeServices",
+              label: "Top 3 Services",
+              type: "relationship",
+              relationTo: "services",
+              hasMany: true,
               maxRows: 3,
+              minRows: 3,
               required: true,
-              fields: [
-                {
-                  name: "service",
-                  type: "relationship",
-                  relationTo: "services",
-                  hasMany: false,
-                },
-              ],
-              admin: {
-                components: {
-                  RowLabel: RowLabel,
-                },
-              },
             },
           ],
         },

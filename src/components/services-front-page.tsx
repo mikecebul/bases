@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Icon } from "@/components/icons/Icon";
+import { IconWithBorder } from "@/components/icons/Icon";
 import { Service } from "@/payload-types";
 
 export default function ServicesFrontPage({
@@ -107,7 +107,7 @@ export default function ServicesFrontPage({
                   <div className="relative pl-16">
                     <dt className="text-base font-semibold leading-7 text-primary">
                       <div className="absolute top-0 left-0">
-                        <Icon name={service.icon || ""} />
+                        <IconWithBorder name={service.icon} color="white" />
                       </div>
                       {service.title}
                     </dt>

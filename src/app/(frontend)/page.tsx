@@ -10,13 +10,14 @@ export default async function Home() {
   const payload = await getPayload({
     config: payloadConfig,
   });
-  const { title, description, cta, listOfServices } = await payload.findGlobal({
-    slug: "home-page",
-    depth: 2,
-  });
+  const { title, description, cta, topThreeServices } =
+    await payload.findGlobal({
+      slug: "home-page",
+      depth: 2,
+    });
 
-  const services = listOfServices
-    ?.map(({ service }) => service)
+  const services = topThreeServices
+    ?.map((service) => service)
     .filter((service): service is Service => service !== undefined);
 
   return (
