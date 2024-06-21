@@ -1,0 +1,19 @@
+import React from "react";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { SeedButton } from "./SeedButton";
+
+const baseClass = "before-dashboard";
+
+export const BeforeDashboard: React.FC = () => {
+  return (
+    <div className={baseClass}>
+      <Alert>
+        <AlertTitle>Welcome to the dashboard!</AlertTitle>
+        <AlertDescription>
+          <SeedButton />
+        </AlertDescription>
+      </Alert>
+    </div>
+  );
+};

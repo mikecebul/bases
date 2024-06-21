@@ -1,7 +1,8 @@
 import Services from "@/components/services";
+import { ServicesPage } from "@/payload-types";
 import payloadConfig from "@/payload.config";
+import { getPayloadHMR } from "@payloadcms/next/utilities";
 import { Metadata } from "next";
-import { getPayload } from "payload";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -10,10 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const payload = await getPayload({
+  const payload = await getPayloadHMR({
     config: payloadConfig,
   });
-  const pageData = await payload.findGlobal({
+  const pageData: ServicePage = await payload.findGlobal({
     slug: "services-page",
     depth: 1,
   });

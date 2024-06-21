@@ -2,19 +2,19 @@ import Carf from "@/components/carf";
 import FrontPageServices from "@/components/services-front-page";
 import Hero from "@/components/hero";
 import Donate from "@/components/donate";
-import { getPayload } from "payload";
 import payloadConfig from "@/payload.config";
-import { Service } from "@/payload-types";
+import { HomePage, Service } from "@/payload-types";
+import { getPayloadHMR } from "@payloadcms/next/utilities";
 
 export default async function Home() {
-  const payload = await getPayload({
+  const payload = await getPayloadHMR({
     config: payloadConfig,
   });
-  const { title, description, cta, topThreeServices } =
-    await payload.findGlobal({
-      slug: "home-page",
-      depth: 2,
-    });
+  const data: HomePage = await payload.findGlobal({
+    slug: "home-page",
+    depth: 1,
+  });
+  const { cta, description, title, topThreeServices } = data;
 
   const services = topThreeServices
     ?.map((service) => service)

@@ -11,12 +11,17 @@ import { SiteConfig } from "./globals/SiteConfig";
 import { ServicesPage } from "./globals/ServicesPage/Index";
 import { Services } from "./collections/Services";
 import { HomePage } from "./globals/HomePage";
+import { BeforeDashboard } from "@/components/BeforeDashboard";
+import { seed } from "./app/endpoints/seed";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
+    components: {
+      beforeDashboard: [BeforeDashboard],
+    },
     user: Users.slug,
   },
   collections: [Services, Users],
@@ -31,6 +36,15 @@ export default buildConfig({
       connectionString: process.env.POSTGRES_URL || "",
     },
   }),
+  endpoints: [
+    // The seed endpoint is used to populate the database with some example data
+    // You should delete this endpoint before deploying your site to production
+    {
+      handler: seed,
+      method: "get",
+      path: "/seed",
+    },
+  ],
   email:
     process.env.RESEND_DEFAULT_EMAIL && process.env.AUTH_RESEND_KEY
       ? resendAdapter({

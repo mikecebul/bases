@@ -1,11 +1,10 @@
+import type { Payload } from "payload";
 import { oldSiteConfig } from "@/config/site";
-import payloadConfig from "@/payload.config";
-import { getPayloadHMR } from "@payloadcms/next/utilities";
 
-export async function seedServices() {
-  const payload = await getPayloadHMR({ config: payloadConfig });
+export const seedServices = async (payload: Payload) => {
+  payload.logger.info("Seeding database...");
 
-  const services = oldSiteConfig.Services.forEach(
+  oldSiteConfig.Services.forEach(
     async (service) =>
       await payload.create({
         collection: "services",
@@ -16,5 +15,6 @@ export async function seedServices() {
         },
       })
   );
-  return console.log("Services Seeded:");
-}
+
+  payload.logger.info("Seeded Services successfully!");
+};
