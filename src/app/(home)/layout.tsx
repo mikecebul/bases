@@ -13,11 +13,14 @@ export const metadata: Metadata = {
   title: "BASES",
   description:
     "Addiction treatment and education services in Charlevoix, Michigan",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000"
+  ),
   openGraph: {
     title: "Substance Use and Mental Health Counseling",
     description:
       "We bridge the gap to recovery, offering flexible and personalized services both in-person and via telehealth.",
-    // url: process.env.VERCEL_URL || 'http://localhost:3000',
+    url: process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000",
   },
 };
 
