@@ -20,7 +20,7 @@ export default function Page() {
       <div className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-16">
         {siteConfig.ADHD.map((item) => (
           <Link key={item.title} href={item.href} className="" target="_blank">
-            <Card className="px-8 py-8 shadow bg-accent hover:bg-accent/60">
+            <Card className="px-8 py-8 shadow bg-accent/60 hover:bg-accent">
               <CardContent className="w-full h-full p-0 m-0 overflow-hidden">
                 <Image
                   src="/adhd.jpg"

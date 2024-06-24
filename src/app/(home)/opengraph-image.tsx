@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "next/og";
 
 export const alt = "About BASES";
@@ -12,7 +13,7 @@ export const contentType = "image/png";
 export default async function OGImage() {
   return new ImageResponse(
     (
-      <div tw="flex flex-col p-4 text-left">
+      <div tw="flex flex-col p-4 text-left relative">
         <img
           src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/BASES_Flowers.png`}
           alt="Sign outside the BASES office."
@@ -23,7 +24,7 @@ export default async function OGImage() {
             objectPosition: "top",
           }}
         />
-        <div tw="flex flex-col pt-4">
+        <div tw="flex flex-col pt-4 absolute bottom-0 left-0">
           <p
             tw="text-base font-semibold leading-7"
             style={{ color: "hsl(237, 80%, 38%)" }}
