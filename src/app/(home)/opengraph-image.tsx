@@ -16,11 +16,11 @@ export default async function OGImage() {
         <img
           src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/BASES_Flowers.png`}
           alt="Sign outside the BASES office."
+          width={1200}
+          height={630}
           style={{
-            width: "100%",
-            height: "100%",
             objectFit: "cover",
-            objectPosition: "center",
+            objectPosition: "top",
           }}
         />
         <div tw="flex flex-col pt-4">
