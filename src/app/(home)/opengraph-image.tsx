@@ -12,22 +12,28 @@ export const contentType = "image/png";
 export default async function OGImage() {
   return new ImageResponse(
     (
-      <div className="flex flex-col p-4 text-left">
+      <div tw="flex flex-col p-4 text-left">
         <img
-          src="/BASES_Flowers.png"
+          src={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/BASES_Flowers.png`}
           alt="Sign outside the BASES office."
           width={1920}
           height={1080}
-          className="object-cover"
+          style={{ objectFit: "cover" }}
         />
-        <div className="flex flex-col pt-4">
-          <p className="text-base font-semibold leading-7 text-brand">
+        <div tw="flex flex-col pt-4">
+          <p
+            tw="text-base font-semibold leading-7"
+            style={{ color: "hsl(237, 80%, 38%)" }}
+          >
             www.BASESmi.org
           </p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 tw="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Substance Use and Mental Health Counseling
           </h2>
-          <p className="mt-6 text-md lg:text-lg lg:leading-8 text-muted-foreground">
+          <p
+            tw="mt-6 text-base lg:text-lg lg:leading-8"
+            style={{ color: "hsl(237, 80%, 38%)" }}
+          >
             We bridge the gap to recovery, offering flexible and personalized
             services both in-person and via telehealth.
           </p>
