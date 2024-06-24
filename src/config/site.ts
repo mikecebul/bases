@@ -317,6 +317,15 @@ export const siteConfig = {
       },
     ],
   },
+
+  ADHD: [
+    {
+      title: "Easing ADHD without meds",
+      description:
+        "Psychologists are using research-backed behavioral interventions that effectively treat children with ADHD.",
+      href: "https://www.apa.org/monitor/2013/02/easing-adhd",
+    },
+  ],
   AHSE: [
     {
       title: 'Beyond "Be Responsible"',
