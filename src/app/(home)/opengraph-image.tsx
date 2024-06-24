@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ImageResponse } from "next/og";
 
 export const alt = "About BASES";
@@ -14,7 +13,7 @@ export default async function OGImage() {
   return new ImageResponse(
     (
       <div className="flex flex-col p-4 text-left">
-        <Image
+        <img
           src="/BASES_Flowers.png"
           alt="Sign outside the BASES office."
           width={1920}
