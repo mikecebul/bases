@@ -19,7 +19,7 @@ export default function Page() {
       </div>
       <div className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-16">
         {siteConfig.ADHD.map((item) => (
-          <Link key={item.title} href={item.href} className="">
+          <Link key={item.title} href={item.href} className="" target="_blank">
             <Card className="px-4 py-10">
               <CardContent>
                 <Image
