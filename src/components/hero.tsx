@@ -6,15 +6,9 @@ import { cn } from "@/lib/utils";
 import Banner from "./banner";
 import { getPayload } from "payload";
 import payloadConfig from "@/payload.config";
+import { HomePage } from "@/payload-types";
 
-type HeroProps = {
-  title: string;
-  description: string;
-  cta: {
-    link: string;
-    title: string;
-  };
-};
+type HeroProps = Pick<HomePage, "title" | "description" | "cta">;
 
 export default async function Hero({
   title: heroTitle,

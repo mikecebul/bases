@@ -10,17 +10,17 @@ export interface Config {
   collections: {
     services: Service;
     users: User;
-    "payload-preferences": PayloadPreference;
-    "payload-migrations": PayloadMigration;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
   };
   globals: {
-    "site-config": SiteConfig;
-    "home-page": HomePage;
-    "services-page": ServicesPage;
+    'site-config': SiteConfig;
+    'home-page': HomePage;
+    'services-page': ServicesPage;
   };
   locale: null;
   user: User & {
-    collection: "users";
+    collection: 'users';
   };
 }
 /**
@@ -59,7 +59,7 @@ export interface User {
 export interface PayloadPreference {
   id: number;
   user: {
-    relationTo: "users";
+    relationTo: 'users';
     value: number | User;
   };
   key?: string | null;
@@ -127,6 +127,7 @@ export interface ServicesPage {
   createdAt?: string | null;
 }
 
-declare module "payload" {
+
+declare module 'payload' {
   export interface GeneratedTypes extends Config {}
 }

@@ -1,5 +1,4 @@
 import Services from "@/components/services";
-import { ServicesPage } from "@/payload-types";
 import payloadConfig from "@/payload.config";
 import { getPayloadHMR } from "@payloadcms/next/utilities";
 import { Metadata } from "next";
@@ -14,7 +13,7 @@ export default async function Page() {
   const payload = await getPayloadHMR({
     config: payloadConfig,
   });
-  const pageData: ServicePage = await payload.findGlobal({
+  const pageData = await payload.findGlobal({
     slug: "services-page",
     depth: 1,
   });
