@@ -6,7 +6,7 @@ import { buildConfig } from "payload";
 // import sharp from 'sharp'
 import { fileURLToPath } from "url";
 
-import { Users } from "./collections/Users";
+import { Users } from "./collections/Users/Index";
 import { SiteConfig } from "./globals/SiteConfig";
 import { ServicesPage } from "./globals/ServicesPage/Index";
 import { Services } from "./collections/Services";

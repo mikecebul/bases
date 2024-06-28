@@ -83,26 +83,26 @@ export const oldSiteConfig = {
       href: "/services/batterer-intervention",
       description:
         "We offer a men's HEAL (Helping Explore Accountable Lifestyles) group for those needing counseling after domestic violence altercations. It is a 39 session commitment with a cost of $25 per session.",
-      icon: "Group",
+      icon: "Users",
     },
     {
       name: "Correctional Facility Group Therapy",
       description:
         "We facilitate CBT/DBT groups for men (Mondays) and for women (Wednesdays) at the Charlevoix County Jail.",
-      icon: "Jail",
+      icon: "Tally4",
     },
     {
       name: "Drug Testing",
       description:
         "We offer several types of drug testing available during business hours, along with weekend appointments for an additional $20 charge. Our standard 10 panel costs $25 and EtGs cost $35.",
 
-      icon: "Flask",
+      icon: "FlaskConical",
     },
     {
       name: "Alcohol Highway Safety Education Class",
       description:
         "Our Alcohol Highway Safety Education Classes are designed for first-time OWI/OUI offenders, providing crucial knowledge and insight.",
-      icon: "Zero",
+      icon: "CircleOff",
     },
     {
       name: "Driver’s License Appeal Assistance",
@@ -115,7 +115,7 @@ export const oldSiteConfig = {
       href: "/services/naloxone",
       description:
         "BASES has free naloxone nasal kits (opioid overdose reversal drug). If you or a family member have opioid concerns, you should have one of these life saving kits on hand.",
-      icon: "Spray",
+      icon: "SprayCan",
     },
   ],
   FrontPageServices: [

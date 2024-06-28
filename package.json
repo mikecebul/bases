@@ -12,7 +12,7 @@
     "seed:board": "ts-node src/migrations/seed-board-members.ts",
     "db:up": "docker-compose up -d",
     "db:down": "docker-compose down",
-    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "payload": "payload",
     "seed:services": "tsx src/lib/seed/seedServices.ts"
   },
   "dependencies": {

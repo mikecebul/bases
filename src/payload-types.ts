@@ -41,6 +41,8 @@ export interface Service {
  */
 export interface User {
   id: number;
+  name?: string | null;
+  roles: 'admin' | 'user';
   updatedAt: string;
   createdAt: string;
   email: string;

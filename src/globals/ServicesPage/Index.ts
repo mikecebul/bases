@@ -24,7 +24,7 @@ export const ServicesPage: GlobalConfig = {
       name: "description",
       type: "text",
       defaultValue:
-        "With decades of experience, we&apos;ve developed services that truly serve our community&apos;s needs.",
+        "With decades of experience, we've developed services that truly serve our community's needs.",
       required: true,
     },
     {
