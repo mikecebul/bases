@@ -1,8 +1,8 @@
 "use client";
 
 import { lucideIcons } from "@/components/icons";
-import { useField } from "@payloadcms/ui/forms/useField";
-import { Select } from "@payloadcms/ui/fields/Select";
+import { useField } from "@payloadcms/ui";
+import { SelectField } from "@payloadcms/ui";
 import { Icon } from "@/components/icons/Icon";
 import { useState } from "react";
 
@@ -19,7 +19,7 @@ export const IconSelect = ({ path }: { path: string }) => {
     <>
       <label className="field-label">Icon Select</label>
       <div className="flex items-center w-full space-x-8">
-        <Select
+        <SelectField
           path={path}
           name={path}
           options={options}

@@ -1,4 +1,4 @@
-import type { PayloadHandler } from "payload/config";
+import type { PayloadHandler } from "payload";
 
 import { seedServices } from "@/lib/seed/seedServices";
 

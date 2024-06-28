@@ -1,5 +1,5 @@
 import { AlertBox } from "@/components/AlertBox";
-import { GlobalConfig } from "payload/types";
+import { GlobalConfig } from "payload";
 import RowLabel from "./ServicesPage/RowLabel";
 import { revalidatePath } from "next/cache";
 import { truncate } from "fs";

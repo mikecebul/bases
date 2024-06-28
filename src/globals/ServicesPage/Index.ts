@@ -1,4 +1,4 @@
-import { GlobalConfig } from "payload/types";
+import { GlobalConfig } from "payload";
 import { revalidatePath } from "next/cache";
 
 export const ServicesPage: GlobalConfig = {

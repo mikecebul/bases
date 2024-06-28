@@ -2,7 +2,7 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { resendAdapter } from "@payloadcms/email-resend";
 import path from "path";
-import { buildConfig } from "payload/config";
+import { buildConfig } from "payload";
 // import sharp from 'sharp'
 import { fileURLToPath } from "url";
 

@@ -1,6 +1,6 @@
 import { AlertBox } from "@/components/AlertBox";
 import { revalidatePath } from "next/cache";
-import { GlobalConfig } from "payload/types";
+import { GlobalConfig } from "payload";
 
 export const SiteConfig: GlobalConfig = {
   slug: "site-config",

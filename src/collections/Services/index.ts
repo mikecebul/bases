@@ -1,4 +1,4 @@
-import { CollectionConfig } from "payload/types";
+import { CollectionConfig } from "payload";
 import { IconSelect } from "./IconSelect";
 
 export const Services: CollectionConfig = {
