@@ -1,7 +1,7 @@
-import Carf from "@/components/carf";
-import FrontPageServices from "@/components/services-front-page";
-import Hero from "@/components/hero";
-import Donate from "@/components/donate";
+import Carf from "@/app/components/carf";
+import FrontPageServices from "@/app/components/services-front-page";
+import Hero from "@/app/components/hero";
+import Donate from "@/app/components/donate";
 import payloadConfig from "@/payload.config";
 import { Service } from "@/payload-types";
 import { getPayloadHMR } from "@payloadcms/next/utilities";

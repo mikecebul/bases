@@ -3,7 +3,7 @@
 
 import { motion } from "framer-motion";
 import type { ServicesPage } from "@/payload-types";
-import { IconWithBorder } from "@/components/icons/Icon";
+import { IconWithBorder } from "@/app/components/icons/Icon";
 
 export default function Services({ pageData }: { pageData: ServicesPage }) {
   const { listOfServices } = pageData;

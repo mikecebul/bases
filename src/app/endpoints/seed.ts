@@ -1,6 +1,6 @@
 import type { PayloadHandler } from "payload";
 
-import { seedServices } from "@/lib/seed/seedServices";
+import { seedServices } from "@/payload/seed/seedServices";
 
 export const seed: PayloadHandler = async (req): Promise<Response> => {
   const { payload, user } = req;

@@ -1,4 +1,4 @@
-import Services from "@/components/services";
+import Services from "@/app/components/services";
 import payloadConfig from "@/payload.config";
 import { getPayloadHMR } from "@payloadcms/next/utilities";
 import { Metadata } from "next";

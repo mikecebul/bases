@@ -1,4 +1,4 @@
-import { AlertBox } from "@/components/AlertBox";
+import { AlertBox } from "@/app/components/AlertBox";
 import { revalidatePath } from "next/cache";
 import { GlobalConfig } from "payload";
 

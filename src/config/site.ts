@@ -1,4 +1,4 @@
-import { Icons } from "@/components/icons";
+import { Icons } from "@/app/components/icons";
 
 export type OldSiteConfig = typeof oldSiteConfig;
 

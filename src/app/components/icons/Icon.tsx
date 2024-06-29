@@ -1,7 +1,7 @@
-import { lucideIcons } from "@/components/icons";
+import { lucideIcons } from "@/app/components/icons";
 import { Check as DefaultIcon } from "lucide-react";
 import { useMemo } from "react";
-import type { LucideIconsType } from "@/components/icons";
+import type { LucideIconsType } from "@/app/components/icons";
 import { IconContainer } from "./IconContainer";
 
 type IconName = LucideIconsType["value"];

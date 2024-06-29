@@ -1,9 +1,9 @@
 "use client";
 
-import { lucideIcons } from "@/components/icons";
+import { lucideIcons } from "@/app/components/icons";
 import { useField } from "@payloadcms/ui";
 import { SelectField } from "@payloadcms/ui";
-import { Icon } from "@/components/icons/Icon";
+import { Icon } from "@/app/components/icons/Icon";
 import { useState } from "react";
 
 export const IconSelect = ({ path }: { path: string }) => {

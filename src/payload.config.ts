@@ -6,12 +6,12 @@ import { buildConfig } from "payload";
 // import sharp from 'sharp'
 import { fileURLToPath } from "url";
 
-import { Users } from "./collections/Users/Index";
-import { SiteConfig } from "./globals/SiteConfig";
-import { ServicesPage } from "./globals/ServicesPage/Index";
-import { Services } from "./collections/Services";
-import { HomePage } from "./globals/HomePage";
-import { BeforeDashboard } from "@/components/BeforeDashboard";
+import { Users } from "./payload/collections/Users/Index";
+import { SiteConfig } from "./payload/globals/SiteConfig";
+import { ServicesPage } from "./payload/globals/ServicesPage/Index";
+import { Services } from "./payload/collections/Services";
+import { HomePage } from "./payload/globals/HomePage";
+import { BeforeDashboard } from "@/app/components/BeforeDashboard";
 import { seed } from "./app/endpoints/seed";
 
 const filename = fileURLToPath(import.meta.url);
