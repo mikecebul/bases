@@ -1,4 +1,4 @@
-import { getErrorMessage } from "@/lib/utils";
+import { getErrorMessage } from "@/shared/lib/utils";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

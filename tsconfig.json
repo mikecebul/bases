@@ -20,8 +20,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@payload-config": ["./src/payload.config.ts"]
+      "@/shared/*": ["./src/shared/*"],
+      "@/app/*": ["./src/app/*"],
+      "@/payload/*": ["./src/payload/*"],
+      "@payload-config": ["./src/payload.config.ts"],
+      "@payload-types": ["./src/payload-types.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

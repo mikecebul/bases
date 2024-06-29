@@ -11,7 +11,7 @@ import { SiteConfig } from "./payload/globals/SiteConfig";
 import { ServicesPage } from "./payload/globals/ServicesPage/Index";
 import { Services } from "./payload/collections/Services";
 import { HomePage } from "./payload/globals/HomePage";
-import { BeforeDashboard } from "@/app/components/BeforeDashboard";
+import { BeforeDashboard } from "@/components/BeforeDashboard";
 import { seed } from "./app/endpoints/seed";
 
 const filename = fileURLToPath(import.meta.url);

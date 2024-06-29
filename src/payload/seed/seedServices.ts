@@ -1,5 +1,5 @@
 import type { Payload } from "payload";
-import { oldSiteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/app/config/site";
 
 export const seedServices = async (payload: Payload) => {
   payload.logger.info("Seeding database...");
