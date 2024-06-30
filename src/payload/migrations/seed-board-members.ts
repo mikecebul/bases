@@ -1,4 +1,4 @@
-// import { oldSiteConfig } from "@/config/site";
+// import { oldSiteConfig } from "@/app/config/site";
 // import { PrismaClient } from "@prisma/client";
 
 // const boardMembers = oldSiteConfig.team.boardMembers;

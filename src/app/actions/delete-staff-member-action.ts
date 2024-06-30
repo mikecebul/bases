@@ -1,7 +1,7 @@
 // "use server";
 
-// import prisma from "@/lib/prisma";
-// import { getErrorMessage } from "@/lib/utils";
+// import prisma from "@/shared/lib/prisma";
+// import { getErrorMessage } from "@/shared/lib/utils";
 // import { revalidatePath } from "next/cache";
 
 // export async function DeleteStaffMemberAction(id: string) {

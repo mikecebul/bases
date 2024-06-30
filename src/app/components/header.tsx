@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Icons } from "./icons";
 import { MobileNav } from "./mobile-nav";
 import { buttonVariants } from "./ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import { MainNav } from "./main-nav";
 import { getPayload } from "payload";
-import payloadConfig from "@/payload.config";
+import payloadConfig from "@payload-config";
 
 export async function Header() {
   const payload = await getPayload({

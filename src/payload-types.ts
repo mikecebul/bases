@@ -42,7 +42,7 @@ export interface Service {
 export interface User {
   id: number;
   name?: string | null;
-  roles: 'admin' | 'user';
+  role: string;
   updatedAt: string;
   createdAt: string;
   email: string;

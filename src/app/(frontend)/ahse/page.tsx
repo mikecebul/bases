@@ -1,4 +1,4 @@
-import { oldSiteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/app/config/site";
 
 export default function Page() {
   return (

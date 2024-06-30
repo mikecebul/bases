@@ -1,12 +1,21 @@
 import type { CollectionConfig } from "payload";
-import { ensureFirstUserIsAdmin } from "./hooks/ensureFirstUserIsAdmin";
+import { ensureFirstUserIsSuperAdmin } from "./hooks/ensureFirstUserIsSuperAdmin";
+import { anyone, fieldLevelAnyone } from "@/payload/access/anyone";
+import { admins } from "@/payload/access/admins";
+import { checkRole } from "./access/checkRole";
+import { RoleSelect } from "./RoleSelect";
+import { roleSelectMutate } from "./access/roleSelectMutate";
 
 export const Users: CollectionConfig = {
   slug: "users",
-  // access: {
-  // admin: ({ req: { user } }) => (!!user?.role ? checkRole(user.role) : false),
-  // create: anyone,
-  // },
+  access: {
+    admin: ({ req: { user } }) =>
+      !!user?.role ? checkRole(user.role, user) : false,
+    create: admins,
+    read: anyone,
+    update: admins,
+    delete: admins,
+  },
   admin: {
     useAsTitle: "email",
   },
@@ -17,28 +26,23 @@ export const Users: CollectionConfig = {
       type: "text",
     },
     {
-      name: "roles",
-      type: "select",
-      // access: {
-      //   create: admins,
-      //   read: admins,
-      //   update: admins,
-      // },
+      name: "role",
+      type: "text",
       defaultValue: "user",
       required: true,
-      hooks: {
-        beforeChange: [ensureFirstUserIsAdmin],
+      access: {
+        create: roleSelectMutate,
+        read: fieldLevelAnyone,
+        update: roleSelectMutate,
       },
-      options: [
-        {
-          label: "admin",
-          value: "admin",
+      admin: {
+        components: {
+          Field: RoleSelect,
         },
-        {
-          label: "user",
-          value: "user",
-        },
-      ],
+      },
+      hooks: {
+        beforeChange: [ensureFirstUserIsSuperAdmin],
+      },
     },
   ],
 };

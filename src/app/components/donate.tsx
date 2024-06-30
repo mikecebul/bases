@@ -1,8 +1,8 @@
 import { Icons } from "./icons";
 import { DonateForm } from "./donate-form";
-import FadeInFromTop from "@/lib/framer/fadeInFromTop";
-import FadeInFromLeft from "@/lib/framer/fadeInFromLeft";
-import FadeInFromRight from "@/lib/framer/fadeInFromRight";
+import FadeInFromTop from "@/shared/lib/framer/fadeInFromTop";
+import FadeInFromLeft from "@/shared/lib/framer/fadeInFromLeft";
+import FadeInFromRight from "@/shared/lib/framer/fadeInFromRight";
 
 const includedFeatures = [
   "Teen & Adult Counseling Scholarship Program",

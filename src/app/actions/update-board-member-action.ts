@@ -1,6 +1,6 @@
 // "use server";
-// import prisma from "@/lib/prisma";
-// import { generateSlug, getErrorMessage } from "@/lib/utils";
+// import prisma from "@/shared/lib/prisma";
+// import { generateSlug, getErrorMessage } from "@/shared/lib/utils";
 // import { revalidatePath } from "next/cache";
 
 // type FormBoardMember = {

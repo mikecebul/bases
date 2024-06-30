@@ -10,7 +10,7 @@ import {
   AlertDialogTitle,
 } from "./ui/alert-dialog";
 import { buttonVariants } from "./ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 
 export function CompanyAlert() {
   const [isOpen, setIsOpen] = useState(true);

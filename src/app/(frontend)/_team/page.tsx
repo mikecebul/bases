@@ -1,5 +1,5 @@
 // import Team from "@/components/team";
-import { oldSiteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/app/config/site";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

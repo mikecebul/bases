@@ -31,7 +31,7 @@ import {
   Clock,
 } from "lucide-react";
 import { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 
 export const Icons = {
   logo: ({ className }: { className: string }) => (

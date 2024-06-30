@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
-import { oldSiteConfig } from "@/config/site";
-// import prisma from "@/lib/prisma";
+import { oldSiteConfig } from "@/app/config/site";
+// import prisma from "@/shared/lib/prisma";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const URL = process.env.NEXT_PUBLIC_DOMAIN_URL;

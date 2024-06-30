@@ -2,7 +2,7 @@ import "../globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Header } from "@/app/components/header";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import Footer from "@/app/components/footer";
 import { Analytics } from "@vercel/analytics/react";
 

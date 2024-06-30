@@ -1,6 +1,6 @@
 // "use server";
-// import prisma, { BoardMember } from "@/lib/prisma";
-// import { generateSlug, getErrorMessage } from "@/lib/utils";
+// import prisma, { BoardMember } from "@/shared/lib/prisma";
+// import { generateSlug, getErrorMessage } from "@/shared/lib/utils";
 // import { revalidatePath } from "next/cache";
 
 // export async function UpdateBoardMemberOrderAction(reorderedItems: BoardMember[]) {

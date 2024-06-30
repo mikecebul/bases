@@ -1,6 +1,6 @@
 // "use server";
-// import prisma, { Service } from "@/lib/prisma";
-// import { getErrorMessage } from "@/lib/utils";
+// import prisma, { Service } from "@/shared/lib/prisma";
+// import { getErrorMessage } from "@/shared/lib/utils";
 
 // type NewServicesOrder = {
 // id: string;

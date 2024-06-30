@@ -5,7 +5,7 @@ import type { FieldHook } from "payload";
 // 2. if there are no users found, append `admin` to the roles array
 // access control is already handled by this fields `access` property
 // it ensures that only admins can create and update the `roles` field
-export const ensureFirstUserIsAdmin: FieldHook = async ({
+export const ensureFirstUserIsSuperAdmin: FieldHook = async ({
   operation,
   req,
   value,
@@ -17,9 +17,8 @@ export const ensureFirstUserIsAdmin: FieldHook = async ({
       limit: 0,
     });
     if (users.totalDocs === 0) {
-      // if `admin` not in array of values, add it
-      if (!(value || []).includes("admin")) {
-        return [...(value || []), "admin"];
+      if (value !== "superAdmin") {
+        return "superAdmin";
       }
     }
   }

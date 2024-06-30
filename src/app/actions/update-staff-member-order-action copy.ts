@@ -1,6 +1,6 @@
 // "use server";
-// import prisma, { StaffMember } from "@/lib/prisma";
-// import { getErrorMessage } from "@/lib/utils";
+// import prisma, { StaffMember } from "@/shared/lib/prisma";
+// import { getErrorMessage } from "@/shared/lib/utils";
 
 // export async function UpdateStaffMemberOrderAction(reorderedItems: StaffMember[]) {
 //   const updateStaffMemberOrderPromises = reorderedItems.map((item, index) =>

@@ -2,11 +2,11 @@ import Image from "next/image";
 import { buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import Banner from "./banner";
 import { getPayload } from "payload";
-import payloadConfig from "@/payload.config";
-import { HomePage } from "@/payload-types";
+import payloadConfig from "@payload-config";
+import { HomePage } from "@payload-types";
 
 type HeroProps = Pick<HomePage, "title" | "description" | "cta">;
 

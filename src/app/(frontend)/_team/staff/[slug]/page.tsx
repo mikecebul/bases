@@ -1,4 +1,4 @@
-// import prisma from "@/lib/prisma";
+// import prisma from "@/shared/lib/prisma";
 // import StaffBio from "@/components/staff-bio";
 // import { Metadata } from "next";
 

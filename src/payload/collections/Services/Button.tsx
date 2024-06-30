@@ -1,14 +1,15 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import Link from "next/link";
 import React, { Fragment, useCallback, useState } from "react";
-import { buttonVariants } from "../ui/button";
+import { Button as PayloadButton } from "@payloadcms/ui";
+import { useRouter } from "next/navigation";
 
-export const SeedButton: React.FC = () => {
+export const Button: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [seeded, setSeeded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const handleClick = useCallback(
     async (e: { preventDefault: () => void }) => {
@@ -28,9 +29,10 @@ export const SeedButton: React.FC = () => {
         }
       } finally {
         setLoading(false);
+        router.refresh();
       }
     },
-    [loading, seeded]
+    [loading, seeded, router]
   );
 
   let message = "";
@@ -40,16 +42,14 @@ export const SeedButton: React.FC = () => {
 
   return (
     <Fragment>
-      <Link
-        className={cn(buttonVariants({ variant: "brand" }))}
-        href="/api/seed"
+      <PayloadButton
+        buttonStyle="secondary"
+        className="w-52"
         onClick={handleClick}
-        rel="noopener noreferrer"
-        target="_blank"
       >
-        Seed your database
-      </Link>
-      {message}
+        Seed Services
+      </PayloadButton>
+      <p>{message}</p>
     </Fragment>
   );
 };

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Separator } from "./ui/separator";
 import { buttonVariants } from "./ui/button";
-import { cn } from "@/lib/utils";
-import { oldSiteConfig } from "@/config/site";
+import { cn } from "@/shared/lib/utils";
+import { oldSiteConfig } from "@/app/config/site";
 import Image from "next/image";
 import { Clock } from "lucide-react";
 

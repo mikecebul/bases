@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import { Icons } from "./icons";
-import { SiteConfig } from "@/payload-types";
+import { SiteConfig } from "@payload-types";
 
 type BannerProps = Pick<SiteConfig, "address">;
 

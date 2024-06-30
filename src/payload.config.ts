@@ -11,7 +11,7 @@ import { SiteConfig } from "./payload/globals/SiteConfig";
 import { ServicesPage } from "./payload/globals/ServicesPage/Index";
 import { Services } from "./payload/collections/Services";
 import { HomePage } from "./payload/globals/HomePage";
-import { BeforeDashboard } from "@/components/BeforeDashboard";
+import { BeforeDashboard } from "@/payload/components/BeforeDashboard";
 import { seed } from "./app/endpoints/seed";
 
 const filename = fileURLToPath(import.meta.url);
@@ -20,7 +20,7 @@ const dirname = path.dirname(filename);
 export default buildConfig({
   admin: {
     components: {
-      beforeDashboard: [BeforeDashboard],
+      beforeDashboard: [],
     },
     user: Users.slug,
   },

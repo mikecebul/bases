@@ -1,6 +1,6 @@
 // /* eslint-disable react/no-unescaped-entities */
 // import BoardMemberBio from "@/components/board-member-bio";
-// import { oldSiteConfig } from "@/config/site";
+// import { oldSiteConfig } from "@/app/config/site";
 // import { Metadata } from "next";
 
 // interface Params {

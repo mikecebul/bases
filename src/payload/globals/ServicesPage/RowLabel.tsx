@@ -1,9 +1,9 @@
 "use client";
 
 import { useRowLabel } from "@payloadcms/ui/forms/RowLabel/Context";
-import type { Service } from "@/payload-types";
+import type { Service } from "@payload-types";
 import useSWR from "swr";
-import { fetcher } from "@/lib/utils";
+import { fetcher } from "@/shared/lib/utils";
 import { Icon } from "@/app/components/icons/Icon";
 
 type RowData = {

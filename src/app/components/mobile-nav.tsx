@@ -5,10 +5,10 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Button, buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
 import { ScrollArea } from "./ui/scroll-area";
-import { oldSiteConfig } from "@/config/site";
+import { oldSiteConfig } from "../config/site";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { cn, isActiveRoute } from "@/lib/utils";
+import { cn, isActiveRoute } from "@/shared/lib/utils";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);

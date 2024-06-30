@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 
-import { cn, isActiveRoute } from "@/lib/utils";
+import { cn, isActiveRoute } from "@/shared/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -12,7 +12,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/app/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
-import { oldSiteConfig } from "@/config/site";
+import { oldSiteConfig } from "../config/site";
 
 export function MainNav() {
   const currentPathName = usePathname();

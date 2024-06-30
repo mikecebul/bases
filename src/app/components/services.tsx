@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ServicesPage } from "@/payload-types";
+import type { ServicesPage } from "@payload-types";
 import { IconWithBorder } from "@/app/components/icons/Icon";
 
 export default function Services({ pageData }: { pageData: ServicesPage }) {

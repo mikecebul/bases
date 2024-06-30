@@ -3,7 +3,7 @@
 // import { Separator } from "./ui/separator";
 // import Link from "next/link";
 // import { motion } from "framer-motion";
-// import { cn } from "@/lib/utils";
+// import { cn } from "@/shared/lib/utils";
 // import { buttonVariants } from "./ui/button";
 // import { BoardMember, StaffMember } from "@prisma/client";
 // import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";

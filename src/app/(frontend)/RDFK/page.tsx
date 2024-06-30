@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { oldSiteConfig } from "@/config/site";
+import { oldSiteConfig } from "@/app/config/site";
 import Link from "next/link";
 
 export default function page() {

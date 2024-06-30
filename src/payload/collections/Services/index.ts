@@ -1,5 +1,6 @@
 import { CollectionConfig } from "payload";
 import { IconSelect } from "./IconSelect";
+import { SeedButton } from "./SeedButton/Index";
 
 export const Services: CollectionConfig = {
   slug: "services",
@@ -10,6 +11,9 @@ export const Services: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "desc", "icon", "updatedAt"],
+    components: {
+      afterListTable: [SeedButton],
+    },
   },
   access: {
     read: () => true,
