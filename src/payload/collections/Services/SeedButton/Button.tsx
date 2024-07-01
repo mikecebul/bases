@@ -3,6 +3,7 @@
 import React, { Fragment, useCallback, useState } from "react";
 import { Button as PayloadButton } from "@payloadcms/ui";
 import { useRouter } from "next/navigation";
+import { createServices } from "./action";
 
 export const Button: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -11,29 +12,24 @@ export const Button: React.FC = () => {
 
   const router = useRouter();
 
-  const handleClick = useCallback(
-    async (e: { preventDefault: () => void }) => {
-      e.preventDefault();
-      if (loading || seeded) return;
+  const handleClick = async () => {
+    if (loading || seeded) return;
 
-      setLoading(true);
+    setLoading(true);
+    setError("");
 
-      try {
-        await fetch("/api/seed");
-        setSeeded(true);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError(String(err));
-        }
-      } finally {
-        setLoading(false);
-        router.refresh();
+    try {
+      await createServices();
+      setSeeded(true);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
       }
-    },
-    [loading, seeded, router]
-  );
+    } finally {
+      setLoading(false);
+      router.refresh();
+    }
+  };
 
   let message = "";
   if (loading) message = " (seeding...)";

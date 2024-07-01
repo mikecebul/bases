@@ -1,5 +1,5 @@
 import { CustomComponent, Payload } from "payload";
-import { Button } from "../Button";
+import { Button } from "./Button";
 
 export const SeedButton: CustomComponent = async ({
   payload,
