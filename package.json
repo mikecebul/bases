@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && pnpm run migrate",
+    "build": "migrate && pnpm run build && pnpm run migrate",
     "start": "next start",
     "lint": "eslint src",
     "seed:board": "ts-node src/migrations/seed-board-members.ts",
