@@ -35,6 +35,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.POSTGRES_URL || "",
     },
+    migrationDir: "./src/payload/migrations",
   }),
   endpoints: [
     // The seed endpoint is used to populate the database with some example data
