@@ -1,5 +1,5 @@
 import Services from "@/app/components/services";
-import payloadConfig from "@/@payload-config";
+import payloadConfig from "@payload-config";
 import { getPayloadHMR } from "@payloadcms/next/utilities";
 import { Metadata } from "next";
 import React from "react";

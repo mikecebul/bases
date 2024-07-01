@@ -1,4 +1,4 @@
-import payloadConfig from "@/@payload-config";
+import payloadConfig from "@payload-config";
 import { getPayloadHMR } from "@payloadcms/next/utilities";
 
 export async function GetRowRelationshipData(id: string) {

@@ -17,7 +17,7 @@ export default async function Home() {
   const { cta, description, title, topThreeServices } = data;
 
   const isServices = (list: (number | Service)[]): list is Service[] => {
-    return list.every((item) => (item as Service).title !== undefined);
+    return list?.every((item) => (item as Service).title !== undefined);
   };
 
   return (

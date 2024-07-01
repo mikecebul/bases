@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/app/components/ui/alert";
-import { SeedButton } from "../../collections/Services/Button";
+import { SeedButton } from "@/payload/collections/Services/SeedButton/Index";
 
 const baseClass = "before-dashboard";
 
