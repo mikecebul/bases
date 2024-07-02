@@ -1,15 +1,13 @@
-"use server";
-
-import { oldSiteConfig } from "@/app/config/site";
-import payloadConfig from "@payload-config";
-import { getPayloadHMR } from "@payloadcms/next/utilities";
+import type { PayloadHandler } from "payload";
+import { oldSiteConfig } from "../config/site";
 import { revalidatePath } from "next/cache";
 
-export async function createServices(req: any) {
-  console.log("Req:", req);
-  const payload = await getPayloadHMR({
-    config: payloadConfig,
-  });
+export const seedServices: PayloadHandler = async (req): Promise<Response> => {
+  const { payload, user } = req;
+
+  if (user?.role !== "superAdmin") {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   try {
     oldSiteConfig.Services.forEach(
@@ -24,10 +22,10 @@ export async function createServices(req: any) {
         })
     );
     revalidatePath("/(payload)/admin/collections/services", "page");
-    return { success: true };
+    return Response.json({ success: true });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
     payload.logger.error(message);
-    return { error: message };
+    return Response.json({ error: message }, { status: 500 });
   }
-}
+};

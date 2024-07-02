@@ -14,9 +14,5 @@ export const SeedButton: CustomComponent = async ({
 
   if (services.length > 0) return null;
 
-  return (
-    <div>
-      <Button />
-    </div>
-  );
+  return <Button />;
 };

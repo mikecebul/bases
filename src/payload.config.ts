@@ -3,7 +3,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { resendAdapter } from "@payloadcms/email-resend";
 import path from "path";
 import { buildConfig } from "payload";
-// import sharp from 'sharp'
+import sharp from "sharp";
 import { fileURLToPath } from "url";
 
 import { Users } from "./payload/collections/Users/Index";
@@ -11,17 +11,13 @@ import { SiteConfig } from "./payload/globals/SiteConfig";
 import { ServicesPage } from "./payload/globals/ServicesPage/Index";
 import { Services } from "./payload/collections/Services";
 import { HomePage } from "./payload/globals/HomePage";
-import { BeforeDashboard } from "@/payload/components/BeforeDashboard";
-import { seed } from "./app/endpoints/seed";
+import { seedServices } from "./app/endpoints/seedServices";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
-    components: {
-      beforeDashboard: [],
-    },
     user: Users.slug,
   },
   collections: [Services, Users],
@@ -38,12 +34,10 @@ export default buildConfig({
     migrationDir: "./src/payload/migrations",
   }),
   endpoints: [
-    // The seed endpoint is used to populate the database with some example data
-    // You should delete this endpoint before deploying your site to production
     {
-      handler: seed,
+      handler: seedServices,
       method: "get",
-      path: "/seed",
+      path: "/seed-services",
     },
   ],
   email:
@@ -54,13 +48,5 @@ export default buildConfig({
           apiKey: process.env.AUTH_RESEND_KEY || "",
         })
       : undefined,
-
-  // Sharp is now an optional dependency -
-  // if you want to resize images, crop, set focal point, etc.
-  // make sure to install it and pass it to the config.
-
-  // This is temporary - we may make an adapter pattern
-  // for this before reaching 3.0 stable
-
-  // sharp,
+  sharp,
 });

@@ -1,30 +1,37 @@
 "use client";
 
-import React, { Fragment, useActionState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Button as PayloadButton } from "@payloadcms/ui";
-import { createServices } from "./action";
+import useSWR from "swr";
+import { fetcher } from "@/shared/lib/utils";
+import { useRouter } from "next/navigation";
+import { toast } from "@payloadcms/ui";
 
 export const Button = () => {
-  const [state, action, isPending] = useActionState(createServices, null);
+  const [shouldFetch, setShouldFetch] = useState(false);
+  const router = useRouter();
+
+  const url = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/seed-services/`;
+  const { data, isLoading, error } = useSWR(shouldFetch ? url : null, fetcher);
+
+  useEffect(() => {
+    if (data) {
+      toast.success("Successfully seeded services!");
+      router.refresh();
+    }
+    if (error) toast.error(`${error}`);
+  }, [data, error, router]);
 
   return (
     <Fragment>
       <PayloadButton
         buttonStyle="secondary"
         className="w-52"
-        onClick={() => {
-          action();
-        }}
-        disabled={isPending}
+        onClick={() => setShouldFetch(true)}
+        disabled={isLoading}
       >
-        {isPending ? "Seeding..." : "Seed Services"}
+        {isLoading ? "Seeding..." : "Seed Services"}
       </PayloadButton>
-      {!!state?.error ? (
-        <p className="text-red-500">Error: {state.error}</p>
-      ) : null}
-      {!!state?.success ? (
-        <p className="text-green-500">Success: {state.success}</p>
-      ) : null}
     </Fragment>
   );
 };
