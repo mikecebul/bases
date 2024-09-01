@@ -12,16 +12,11 @@ import React, { useEffect, useState } from 'react'
 
 export const ThemeSelector = () => {
   const [mounted, setMounted] = useState(false)
-  const [value, setValue] = useState('')
   const { theme, setTheme } = useTheme()
-  const onThemeChange = (themeToSet: 'light' | 'dark' | 'auto') => {
-    if (themeToSet === 'auto') {
-      setTheme('system')
-      setValue('auto')
-    } else {
-      setTheme(themeToSet)
-      setValue(themeToSet)
-    }
+  const [value, setValue] = useState(theme)
+  const onThemeChange = (themeToSet: 'light' | 'dark' | 'system') => {
+    setTheme(themeToSet)
+    setValue(themeToSet)
   }
 
   // useEffect only runs on the client, so now we can safely show the UI
@@ -39,7 +34,7 @@ export const ThemeSelector = () => {
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="auto">Auto</SelectItem>
+        <SelectItem value="system">Auto</SelectItem>
         <SelectItem value="light">Light</SelectItem>
         <SelectItem value="dark">Dark</SelectItem>
       </SelectContent>
