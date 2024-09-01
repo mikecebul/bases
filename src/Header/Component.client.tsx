@@ -7,6 +7,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/Icons'
 import { MainNav } from './MainNav'
 import { MobileNav } from './MobileNav'
+import { HeaderNav } from './Nav'
 
 export const HeaderClient = ({ header }: { header: Header }) => {
   const navItems = header?.navItems || []

@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { cn } from '@/utilities/cn'
 import { isActiveRoute } from '@/utilities/isActiveRoute'
 import { Header } from '@/payload-types'
+import { CMSLink } from '@/components/Link'
 
 export type NavItem = NonNullable<Header['navItems']>[number]
 
@@ -40,7 +41,25 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
           <ScrollArea className="my-4 h-[calc(100vh-9rem)] pb-10">
             <div className="flex flex-col items-center justify-center gap-10 py-2">
               <nav className="flex flex-col items-center justify-center flex-1 space-y-4">
-                {navItems.map(({ link }) => (
+                {navItems.map(({ link }, i) => {
+                  const slug =
+                    typeof link.reference?.value === 'object' &&
+                    typeof link.reference.value.slug === 'string'
+                      ? link.reference.value.slug
+                      : ''
+                  return (
+                    <CMSLink
+                      key={i}
+                      {...link}
+                      appearance="text"
+                      className={cn('hover:no-underline hover:text-muted-foreground font-medium', {
+                        'border-b-2 border-b-brand border-opacity-100 rounded-b-none text-brand':
+                          isActiveRoute(currentPathName as string, slug),
+                      })}
+                    />
+                  )
+                })}
+                {/* {navItems.map(({ link }) => (
                   <Link
                     key={link.label}
                     href={link.url ?? ''}
@@ -58,7 +77,7 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
                   >
                     {link.label}
                   </Link>
-                ))}
+                ))} */}
               </nav>
               <div className="absolute bottom-0 right-0"></div>
             </div>

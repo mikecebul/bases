@@ -1,14 +1,9 @@
 'use client'
 
-import React from 'react'
-
-import type { Header as HeaderType } from '@/payload-types'
-
 import { CMSLink } from '@/components/Link'
+import { NavItem } from '../MobileNav'
 
-export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
-  const navItems = header?.navItems || []
-
+export const HeaderNav = ({ navItems }: { navItems: NavItem[] }) => {
   return (
     <nav className="flex gap-3 items-center">
       {navItems.map(({ link }, i) => {
