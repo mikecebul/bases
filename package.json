@@ -44,6 +44,7 @@
     "lexical": "0.17.0",
     "lucide-react": "^0.378.0",
     "next": "15.0.0-canary.104",
+    "next-themes": "^0.3.0",
     "payload": "beta",
     "payload-admin-bar": "^1.0.6",
     "prism-react-renderer": "^2.3.1",

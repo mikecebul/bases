@@ -4,7 +4,7 @@ import React from 'react'
 
 import type { Footer } from '@/payload-types'
 
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
+import { ThemeSelector } from '@/Footer/ThemeSelector'
 import { CMSLink } from '@/components/Link'
 
 export async function Footer() {
