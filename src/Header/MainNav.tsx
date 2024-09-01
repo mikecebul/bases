@@ -13,9 +13,9 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { usePathname } from 'next/navigation'
-import { oldSiteConfig } from '@/config'
+import type { NavItem } from './MobileNav'
 
-export function MainNav() {
+export function MainNav({ navItems }: { navItems: NavItem[] }) {
   const currentPathName = usePathname()
 
   return (
@@ -23,16 +23,16 @@ export function MainNav() {
       <nav className="justify-around hidden p-8 md:flex">
         <NavigationMenu>
           <NavigationMenuList>
-            {oldSiteConfig.NavLinks.map((item) => (
-              <NavigationMenuItem key={item.title}>
-                <Link href={item.href} legacyBehavior passHref>
+            {navItems.map(({ link }) => (
+              <NavigationMenuItem key={link.label}>
+                <Link href={link.url ?? ''} legacyBehavior passHref>
                   <NavigationMenuLink
                     className={cn(navigationMenuTriggerStyle(), 'text-lg', {
                       'border-b-2 border-b-brand border-opacity-100 rounded-b-none text-brand':
-                        isActiveRoute(currentPathName as string, item.href),
+                        isActiveRoute(currentPathName as string, link.url ?? ''),
                     })}
                   >
-                    {item.title}
+                    {link.label}
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>

@@ -3,15 +3,18 @@
 import { useState } from 'react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { Icons } from '../Icons'
+import { Icons } from '../components/Icons'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { oldSiteConfig } from '@/config'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { cn } from '@/utilities/cn'
 import { isActiveRoute } from '@/utilities/isActiveRoute'
+import { Header } from '@/payload-types'
 
-export function MobileNav() {
+export type NavItem = NonNullable<Header['navItems']>[number]
+
+export function MobileNav({ navItems }: { navItems: NavItem[] }) {
   const [open, setOpen] = useState(false)
   const currentPathName = usePathname()
 
@@ -37,23 +40,23 @@ export function MobileNav() {
           <ScrollArea className="my-4 h-[calc(100vh-9rem)] pb-10">
             <div className="flex flex-col items-center justify-center gap-10 py-2">
               <nav className="flex flex-col items-center justify-center flex-1 space-y-4">
-                {oldSiteConfig.NavLinks.map((item, index) => (
+                {navItems.map(({ link }) => (
                   <Link
-                    key={index}
-                    href={item.href}
+                    key={link.label}
+                    href={link.url ?? ''}
                     className={cn(
                       buttonVariants({ variant: 'link' }),
                       ' hover:no-underline hover:text-muted-foreground font-medium',
                       {
                         'border-b-2 border-b-brand border-opacity-100 rounded-b-none text-brand':
-                          isActiveRoute(currentPathName as string, item.href),
+                          isActiveRoute(currentPathName as string, link.url ?? ''),
                       },
                     )}
                     onClick={() => {
                       setOpen(false)
                     }}
                   >
-                    {item.title}
+                    {link.label}
                   </Link>
                 ))}
               </nav>

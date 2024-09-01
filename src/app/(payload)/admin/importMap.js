@@ -16,8 +16,6 @@ import { PreviewComponent as PreviewComponent_14 } from '@payloadcms/plugin-seo/
 import { SlugComponent as SlugComponent_15 } from '@/fields/slug/SlugComponent'
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_16 } from '@payloadcms/richtext-lexical/client'
 import { BlocksFeatureClient as BlocksFeatureClient_17 } from '@payloadcms/richtext-lexical/client'
-import { default as default_18 } from '@/components/BeforeDashboard'
-import { default as default_19 } from '@/components/BeforeLogin'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/client#RichTextCell": RichTextCell_0,
@@ -37,7 +35,5 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_14,
   "@/fields/slug/SlugComponent#SlugComponent": SlugComponent_15,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_16,
-  "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_17,
-  "@/components/BeforeDashboard#default": default_18,
-  "@/components/BeforeLogin#default": default_19
+  "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_17
 }

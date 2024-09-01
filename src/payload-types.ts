@@ -634,6 +634,8 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  phone?: string | null;
+  address?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
