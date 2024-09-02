@@ -8,6 +8,7 @@ import { CMSLink } from '@/components/Link'
 
 export function MainNav({ navItems }: { navItems: NavItem[] }) {
   const currentPathName = usePathname()
+
   return (
     <div className="flex-1">
       <div className=" justify-center hidden px-8 gap-8 md:flex">
