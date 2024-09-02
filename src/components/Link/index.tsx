@@ -11,6 +11,7 @@ type CMSLinkType = {
   className?: string
   label?: string | null
   newTab?: boolean | null
+  onClick?: React.MouseEventHandler<HTMLAnchorElement> | React.MouseEventHandler<HTMLButtonElement>
   reference?: {
     relationTo: 'pages' | 'posts'
     value: Page | Post | string | number
@@ -28,6 +29,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     className,
     label,
     newTab,
+    onClick,
     reference,
     size: sizeFromProps,
     url,
@@ -48,7 +50,12 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   /* Ensure we don't break any styles set by richText */
   if (appearance === 'inline') {
     return (
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+      <Link
+        className={cn(className)}
+        href={href || url || ''}
+        {...newTabProps}
+        onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+      >
         {label && label}
         {children && children}
       </Link>
@@ -56,7 +63,13 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   }
 
   return (
-    <Button asChild className={className} size={size} variant={appearance}>
+    <Button
+      asChild
+      className={className}
+      size={size}
+      variant={appearance}
+      onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
+    >
       <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
         {label && label}
         {children && children}

@@ -1,11 +1,12 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 
-import { payloadCloudPlugin } from '@payloadcms/plugin-cloud'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
+import { s3Storage as s3StoragePlugin } from '@payloadcms/storage-s3'
+import { S3_PLUGIN_CONFIG } from './plugins/s3'
 import {
   BoldFeature,
   FixedToolbarFeature,
@@ -32,6 +33,10 @@ import { revalidateRedirects } from './hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { Page, Post } from 'src/payload-types'
 import { CompanyInfo } from './CompanyInfo/config'
+import { Avatars } from './collections/Avatars'
+import { Landcapes } from './collections/Landscapes'
+import { Cards } from './collections/Cards'
+import { Portraits } from './collections/Portraits'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -118,7 +123,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Media, Avatars, Cards, Landcapes, Portraits, Categories, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   endpoints: [
@@ -187,7 +192,39 @@ export default buildConfig({
         },
       },
     }),
-    payloadCloudPlugin(), // storage-adapter-placeholder
+    s3StoragePlugin({
+      ...S3_PLUGIN_CONFIG,
+      collections: {
+        avatars: {
+          disableLocalStorage: true,
+          generateFileURL: (args: any) => {
+            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
+          },
+          prefix: 'avatars',
+        },
+        cards: {
+          disableLocalStorage: true,
+          generateFileURL: (args: any) => {
+            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
+          },
+          prefix: 'cards',
+        },
+        landscapes: {
+          disableLocalStorage: true,
+          generateFileURL: (args: any) => {
+            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
+          },
+          prefix: 'landscapes',
+        },
+        portraits: {
+          disableLocalStorage: true,
+          generateFileURL: (args: any) => {
+            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
+          },
+          prefix: 'portraits',
+        },
+      },
+    }),
   ],
   secret: process.env.PAYLOAD_SECRET!,
   sharp,

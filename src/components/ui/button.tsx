@@ -17,8 +17,10 @@ const buttonVariants = cva(
         icon: 'h-10 w-10',
         lg: 'h-11 rounded px-8',
         sm: 'h-9 rounded px-3',
+        xl: 'h-12 rounded-md px-8',
       },
       variant: {
+        brand: 'bg-brand text-primary-foreground hover:bg-brand/90',
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         ghost: 'hover:bg-card hover:text-accent-foreground',

@@ -24,7 +24,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
-      <body>
+      <body className="min-h-dvh flex flex-col">
         <ThemeProvider>
           <AdminBar
             adminBarProps={{
@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           />
           <LivePreviewListener />
           <Header />
-          {children}
+          <div className="grow">{children}</div>
           <Footer />
         </ThemeProvider>
       </body>

@@ -56,28 +56,12 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
                         'border-b-2 border-b-brand border-opacity-100 rounded-b-none text-brand':
                           isActiveRoute(currentPathName as string, slug),
                       })}
+                      onClick={() => {
+                        setOpen(false)
+                      }}
                     />
                   )
                 })}
-                {/* {navItems.map(({ link }) => (
-                  <Link
-                    key={link.label}
-                    href={link.url ?? ''}
-                    className={cn(
-                      buttonVariants({ variant: 'link' }),
-                      ' hover:no-underline hover:text-muted-foreground font-medium',
-                      {
-                        'border-b-2 border-b-brand border-opacity-100 rounded-b-none text-brand':
-                          isActiveRoute(currentPathName as string, link.url ?? ''),
-                      },
-                    )}
-                    onClick={() => {
-                      setOpen(false)
-                    }}
-                  >
-                    {link.label}
-                  </Link>
-                ))} */}
               </nav>
               <div className="absolute bottom-0 right-0"></div>
             </div>

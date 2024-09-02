@@ -1,7 +1,7 @@
 {
-  "name": "",
+  "name": "basesmi",
   "version": "1.0.0",
-  "description": "Website template for Payload",
+  "description": "BASESmi.org website.",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -27,6 +27,7 @@
     "@payloadcms/plugin-redirects": "beta",
     "@payloadcms/plugin-seo": "beta",
     "@payloadcms/richtext-lexical": "beta",
+    "@payloadcms/storage-s3": "beta",
     "@payloadcms/ui": "beta",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dialog": "^1.1.1",

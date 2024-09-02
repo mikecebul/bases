@@ -5,12 +5,10 @@ import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import { homeStatic } from '@/endpoints/seed/home-static'
 
 import type { Page as PageType } from '@/payload-types'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
-import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 
 export async function generateStaticParams() {
@@ -47,16 +45,14 @@ export default async function Page({ params: { slug = 'home' } }) {
     return <PayloadRedirects url={url} />
   }
 
-  const { hero, layout } = page
+  const { layout } = page
 
   return (
-    <article className="pt-16 pb-24">
+    <main className="">
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
-
-      <RenderHero {...hero} />
       <RenderBlocks blocks={layout} />
-    </article>
+    </main>
   )
 }
 
