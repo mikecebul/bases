@@ -10,6 +10,7 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { HeroBlock } from '@/blocks/Hero/Component'
 import { ServicesBlock } from './Services/Component'
+import { CarfBlock } from './Carf/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -19,6 +20,7 @@ const blockComponents = {
   hero: HeroBlock,
   mediaBlock: MediaBlock,
   services: ServicesBlock,
+  carf: CarfBlock,
 }
 
 export const RenderBlocks: React.FC<{

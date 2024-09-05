@@ -35,15 +35,12 @@ export const HeroBlock: Block = {
           label: 'Title',
           type: 'text',
           required: true,
-          defaultValue: 'Substance Use and Mental Health Counseling',
         },
         {
           name: 'description',
           label: 'Description',
           type: 'textarea',
           required: true,
-          defaultValue:
-            'We bridge the gap to recovery, offering flexible and personalized services both in-person and via telehealth.',
         },
         linkGroup({
           overrides: {
@@ -69,20 +66,16 @@ export const HeroBlock: Block = {
         {
           name: 'subtitle',
           type: 'text',
-          defaultValue: 'Redefine your recovery path',
           required: true,
         },
         {
           name: 'title',
           type: 'text',
-          defaultValue: 'Everything you need for a successful recovery journey',
           required: true,
         },
         {
           name: 'description',
           type: 'textarea',
-          defaultValue:
-            "With decades of experience, we've developed services that truly serve our community's needs.",
           required: true,
         },
       ],
