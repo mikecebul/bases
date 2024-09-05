@@ -37,6 +37,8 @@ import { Avatars } from './collections/Avatars'
 import { Landcapes } from './collections/Landscapes'
 import { Cards } from './collections/Cards'
 import { Portraits } from './collections/Portraits'
+import { Services } from './collections/Services'
+import { seedServices } from './endpoints/seedServices'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -123,7 +125,18 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Avatars, Cards, Landcapes, Portraits, Categories, Users],
+  collections: [
+    Pages,
+    Services,
+    Posts,
+    Media,
+    Avatars,
+    Cards,
+    Landcapes,
+    Portraits,
+    Categories,
+    Users,
+  ],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   endpoints: [
@@ -133,6 +146,11 @@ export default buildConfig({
       handler: seedHandler,
       method: 'get',
       path: '/seed',
+    },
+    {
+      handler: seedServices,
+      method: 'get',
+      path: '/seed-services',
     },
   ],
   globals: [Header, Footer, CompanyInfo],

@@ -20,13 +20,13 @@ export async function Hero({ title, description, image, links }: Props) {
   const cleanedPhone = phone.replace(/\D/g, '')
 
   return (
-    <section className="grid lg:gap-8 lg:grid-cols-12 2xl:px-0 2xl:container pb-16">
-      <div className="mr-auto place-self-center lg:col-span-6">
-        <h1 className="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight lg:mb-8 sm:text-4xl xl:text-6xl 2xl:text-7xl">
+    <section className="grid lg:gap-8 lg:grid-cols-12 2xl:px-0 2xl:container">
+      <div className="mr-auto lg:col-span-6 flex flex-col">
+        <h1 className="max-w-2xl pb-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:pb-8 xl:text-6xl 2xl:text-7xl">
           {title}
         </h1>
-        <p className="max-w-xl mb-4 lg:mb-8 text-muted-foreground text-lg">{description}</p>
-        <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 xl:space-x-0">
+        <p className="max-w-xl pb-8 lg:pb-0 text-muted-foreground text-lg">{description}</p>
+        <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 xl:space-x-0 lg:grow lg:items-end">
           {/* Mobile Links */}
           <Link
             href={`tel:${cleanedPhone}`}
@@ -46,7 +46,7 @@ export async function Hero({ title, description, image, links }: Props) {
                 {...link}
                 size="xl"
                 appearance={index === 0 ? 'brand' : link.appearance}
-                className="hidden xl:flex lg:min-w-64"
+                className="hidden xl:flex lg:min-w-64 rounded-lg"
               />
             ))}
         </div>
@@ -57,7 +57,7 @@ export async function Hero({ title, description, image, links }: Props) {
             <Image
               src={image.url ?? 'Woman_Laptop.webp'}
               alt={image.alt ?? 'Woman using telehealth services from home.'}
-              className="object-cover w-full rounded-md"
+              className="object-cover w-full rounded-lg"
               width={1080}
               height={1980}
               priority

@@ -22,9 +22,9 @@ export function MainNav({ navItems }: { navItems: NavItem[] }) {
             <CMSLink
               key={i}
               {...link}
-              appearance="text"
+              appearance="nav"
               className={cn('text-lg', {
-                'border-b-2 border-b-brand border-opacity-100 rounded-b-none text-brand':
+                'border-b-2 border-b-brand border-opacity-100 rounded-br-lg rounded-bl-lg text-brand':
                   isActiveRoute(currentPathName as string, slug),
               })}
             />

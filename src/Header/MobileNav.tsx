@@ -2,12 +2,10 @@
 
 import { useState } from 'react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { Icons } from '../components/Icons'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { oldSiteConfig } from '@/config'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
 import { cn } from '@/utilities/cn'
 import { isActiveRoute } from '@/utilities/isActiveRoute'
 import { Header } from '@/payload-types'
@@ -51,9 +49,9 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
                     <CMSLink
                       key={i}
                       {...link}
-                      appearance="text"
-                      className={cn('hover:no-underline hover:text-muted-foreground font-medium', {
-                        'border-b-2 border-b-brand border-opacity-100 rounded-b-none text-brand':
+                      appearance="nav"
+                      className={cn('text-lg', {
+                        'border-b-2 border-b-brand border-opacity-100 rounded-br-lg rounded-bl-lg text-brand':
                           isActiveRoute(currentPathName as string, slug),
                       })}
                       onClick={() => {
