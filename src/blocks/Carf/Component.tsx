@@ -1,3 +1,4 @@
+import Container from '@/components/Container'
 import { Icons } from '@/components/Icons'
 import type { CarfBlock as CarfBlockType } from '@/payload-types'
 import * as motion from 'framer-motion/client'
@@ -5,8 +6,8 @@ import Image from 'next/image'
 
 export const CarfBlock = ({ subtitle, title, description, image }: CarfBlockType) => {
   return (
-    <section className="bg-brand">
-      <div className="grid px-4 py-24 xl:container 2xl:px-0 lg:grid-cols-2 lg:py-32 md:px-8 xl:items-center xl:text-center">
+    <Container className="bg-brand">
+      <div className="grid px-4 xl:container 2xl:px-0 lg:grid-cols-2 md:px-8 xl:items-center xl:text-center">
         <motion.div
           initial={{ opacity: 0, x: 'var(--x-from)' }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -39,6 +40,6 @@ export const CarfBlock = ({ subtitle, title, description, image }: CarfBlockType
           </p>
         </motion.div>
       </div>
-    </section>
+    </Container>
   )
 }

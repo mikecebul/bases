@@ -48,7 +48,7 @@ export default async function Page({ params: { slug = 'home' } }) {
   const { layout } = page
 
   return (
-    <main className="my-12">
+    <main className="">
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
       <RenderBlocks blocks={layout} />
