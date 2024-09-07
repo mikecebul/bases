@@ -24,7 +24,7 @@ export default function DonateBlock({ subtitle, title, description, programs }: 
           {!!description && <Description text={description} />}
           <ul
             role="list"
-            className="grid grid-cols-1 gap-4 p-8 mt-8 text-sm leading-6 rounded-md lg:grid-cols-2 lg:gap-6 bg-accent"
+            className="grid grid-cols-1 gap-4 p-8 mt-8 text-sm leading-6 rounded-lg lg:grid-cols-2 lg:gap-6 bg-accent"
           >
             {!!programs &&
               programs.map(({ id, title }) => (
@@ -36,18 +36,16 @@ export default function DonateBlock({ subtitle, title, description, programs }: 
           </ul>
         </FadeInFromLeft>
         <FadeInFromRight className="sm:w-96 lg:max-w-sm shrink-0">
-          <div className="pt-12 lg:pt-0">
-            <div className="w-md p-8 mx-auto rounded-md lg:flex-shrink-0 bg-brand lg:flex lg:flex-col lg:justify-center">
-              <div className="text-accent">
-                <p className="pb-6 text-base font-medium">
-                  Contribute $100 or more to support our vital community services.
-                </p>
-                <DonateForm />
+          <div className="mt-12 lg:mt-0 w-md p-8 mx-auto rounded-lg lg:flex-shrink-0 bg-brand lg:flex lg:flex-col lg:justify-center">
+            <div className="text-accent">
+              <p className="pb-6 text-base font-medium">
+                Contribute $100 or more to support our vital community services.
+              </p>
+              <DonateForm />
 
-                <p className="pt-2 text-xs leading-5 text-accent/70">
-                  Thank you letters sent to all our donors.
-                </p>
-              </div>
+              <p className="pt-2 text-xs leading-5 text-accent/70">
+                Thank you letters sent to all our donors.
+              </p>
             </div>
           </div>
         </FadeInFromRight>
