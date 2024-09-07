@@ -17,14 +17,14 @@ const includedFeatures = [
 export default function DonateBlock({ subtitle, title, description, programs }: DonateBlockType) {
   return (
     <Container>
-      <div className="gap-16 lg:flex xl:mx-auto xl:justify-center xl:max-w-7xl lg:items-end">
-        <FadeInFromLeft className="flex flex-col md:max-w-4xl">
+      <div className="gap-16 lg:flex lg:items-end">
+        <FadeInFromLeft className="flex flex-col ">
           {!!subtitle && <Subtitle text={subtitle} />}
           {!!title && <Title text={title} />}
           {!!description && <Description text={description} />}
           <ul
             role="list"
-            className="grid grid-cols-1 gap-4 p-8 mt-8 text-sm leading-6 rounded-lg lg:grid-cols-2 lg:gap-6 bg-accent"
+            className="grid grid-cols-1 gap-4 p-8 mt-8 text-sm leading-6 rounded-lg lg:grid-cols-2 lg:gap-6 bg-accent md:max-w-4xl"
           >
             {!!programs &&
               programs.map(({ id, title }) => (
@@ -35,8 +35,8 @@ export default function DonateBlock({ subtitle, title, description, programs }: 
               ))}
           </ul>
         </FadeInFromLeft>
-        <FadeInFromRight className="sm:w-96 lg:max-w-sm shrink-0">
-          <div className="mt-12 lg:mt-0 w-md p-8 mx-auto rounded-lg lg:flex-shrink-0 bg-brand lg:flex lg:flex-col lg:justify-center">
+        <FadeInFromRight className="flex justify-center grow">
+          <div className="mt-12 lg:mt-0 w-md p-8 mx-auto rounded-lg lg:flex-shrink-0 bg-brand lg:flex lg:flex-col lg:justify-center sm:w-96 lg:max-w-sm">
             <div className="text-accent">
               <p className="pb-6 text-base font-medium">
                 Contribute $100 or more to support our vital community services.

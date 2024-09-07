@@ -8,7 +8,7 @@ export function ServicesList({ services }: { services: Service[] }) {
   return (
     <>
       {/* Mobile View */}
-      <dl className="grid max-w-xl grid-cols-1 lg:hidden gap-y-10">
+      <dl className="grid max-w-xl grid-cols-1 lg:hidden gap-y-10 md:mx-auto">
         {services?.map((service, index) => (
           <motion.div
             key={service.id}
@@ -34,7 +34,8 @@ export function ServicesList({ services }: { services: Service[] }) {
       {/* Desktop View */}
       <motion.dl
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 'some' }}
         variants={{
           hidden: { opacity: 0 },
           visible: {

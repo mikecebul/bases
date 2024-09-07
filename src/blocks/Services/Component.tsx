@@ -43,7 +43,7 @@ export async function ServicesBlock({
           <ServicesList services={topThreeServices} />
           {services?.links != null
             ? services.links.map(({ link }) => (
-                <div key={link.label} className="flex md:flex-row pt-12 lg:justify-center">
+                <div key={link.label} className="flex md:flex-row pt-12 justify-center">
                   <CMSLink
                     key={link.label}
                     {...link}
