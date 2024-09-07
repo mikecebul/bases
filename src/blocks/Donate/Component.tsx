@@ -25,7 +25,7 @@ export default function DonateBlock({ subtitle, title, description, programs }: 
             {!!description && <Description text={description} />}
             <ul
               role="list"
-              className="grid grid-cols-1 gap-4 p-8 mt-4 text-sm leading-6 rounded-md lg:grid-cols-2 lg:gap-6 bg-accent"
+              className="grid grid-cols-1 gap-4 p-8 mt-8 text-sm leading-6 rounded-md lg:grid-cols-2 lg:gap-6 bg-accent"
             >
               {!!programs &&
                 programs.map(({ id, title }) => (

@@ -35,9 +35,9 @@ export const HeaderClient = ({ header }: { header: Header }) => {
           </div>
           <Link
             href="https://goo.gl/maps/X956fmf511Fef9Pr7"
-            className={cn(buttonVariants({ variant: 'outline' }), 'hidden xl:inline-flex')}
+            className={cn(buttonVariants({ variant: 'outline' }), 'hidden xl:inline-flex text-lg')}
           >
-            <Icons.navigation className="mr-2 text-lg" size={20} />
+            <Icons.navigation className="mr-2" size={20} />
             {address}
           </Link>
         </div>
