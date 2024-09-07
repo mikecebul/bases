@@ -1,7 +1,7 @@
 import type { Block } from 'payload'
 import { linkGroup } from '../../fields/linkGroup'
 
-export const HeroBlock: Block = {
+export const Hero: Block = {
   slug: 'hero',
   interfaceName: 'Hero',
   fields: [

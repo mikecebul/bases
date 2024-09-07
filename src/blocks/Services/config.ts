@@ -1,8 +1,12 @@
 import type { Block } from 'payload'
 import { linkGroup } from '../../fields/linkGroup'
 
-export const ServicesBlock: Block = {
+export const Services: Block = {
   slug: 'services',
+  labels: {
+    plural: 'Services',
+    singular: 'Services',
+  },
   interfaceName: 'ServicesBlock',
   fields: [
     {

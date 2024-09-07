@@ -2,8 +2,8 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { HeroBlock } from '@/blocks/Hero/config'
-import { ServicesBlock } from '@/blocks/Services/config'
+import { Hero } from '@/blocks/Hero/config'
+import { Services } from '@/blocks/Services/config'
 import { Carf } from '@/blocks/Carf/config'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
@@ -22,6 +22,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import { Donate } from '@/blocks/Donate/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -60,14 +61,15 @@ export const Pages: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               blocks: [
-                HeroBlock,
-                ServicesBlock,
+                Hero,
+                Services,
                 Carf,
-                CallToAction,
-                Content,
-                MediaBlock,
-                Archive,
-                FormBlock,
+                Donate,
+                // CallToAction,
+                // Content,
+                // MediaBlock,
+                // Archive,
+                // FormBlock,
               ],
               required: true,
             },

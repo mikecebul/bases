@@ -11,6 +11,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { HeroBlock } from '@/blocks/Hero/Component'
 import { ServicesBlock } from './Services/Component'
 import { CarfBlock } from './Carf/Component'
+import DonateBlock from './Donate/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -21,6 +22,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   services: ServicesBlock,
   carf: CarfBlock,
+  donate: DonateBlock,
 }
 
 export const RenderBlocks: React.FC<{
