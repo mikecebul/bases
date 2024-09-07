@@ -23,7 +23,7 @@ export function MainNav({ navItems }: { navItems: NavItem[] }) {
               key={i}
               {...link}
               appearance="nav"
-              className={cn('text-lg', {
+              className={cn('', {
                 'border-b-2 border-b-brand border-opacity-100 rounded-br-lg rounded-bl-lg text-brand':
                   isActiveRoute(currentPathName as string, slug),
               })}
