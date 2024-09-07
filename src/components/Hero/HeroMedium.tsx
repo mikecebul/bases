@@ -18,11 +18,11 @@ export const Subtitle = ({ text }: { text: string }) => {
 }
 export const Title = ({ text }: { text: string }) => {
   return (
-    <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 capitalize">
+    <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 capitalize text-pretty">
       {text}
     </h2>
   )
 }
 export const Description = ({ text }: { text: string }) => {
-  return <p className="pt-4 text-lg leading-7 text-muted-foreground">{text}</p>
+  return <p className="pt-4 text-lg leading-7 text-muted-foreground max-w-prose">{text}</p>
 }

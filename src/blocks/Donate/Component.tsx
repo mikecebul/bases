@@ -18,29 +18,24 @@ export default function DonateBlock({ subtitle, title, description, programs }: 
   return (
     <Container>
       <div className="gap-16 lg:flex xl:mx-auto xl:justify-center xl:max-w-7xl lg:items-end">
-        <FadeInFromLeft>
-          <div className="flex flex-col md:max-w-2xl">
-            {!!subtitle && <Subtitle text={subtitle} />}
-            {!!title && <Title text={title} />}
-            {!!description && <Description text={description} />}
-            <ul
-              role="list"
-              className="grid grid-cols-1 gap-4 p-8 mt-8 text-sm leading-6 rounded-md lg:grid-cols-2 lg:gap-6 bg-accent"
-            >
-              {!!programs &&
-                programs.map(({ id, title }) => (
-                  <li key={id} className="flex gap-x-3">
-                    <Icons.checkCirlce
-                      className="flex-none w-5 h-6 text-brand"
-                      aria-hidden="true"
-                    />
-                    <p className="font-semibold">{title}</p>
-                  </li>
-                ))}
-            </ul>
-          </div>
+        <FadeInFromLeft className="flex flex-col md:max-w-4xl">
+          {!!subtitle && <Subtitle text={subtitle} />}
+          {!!title && <Title text={title} />}
+          {!!description && <Description text={description} />}
+          <ul
+            role="list"
+            className="grid grid-cols-1 gap-4 p-8 mt-8 text-sm leading-6 rounded-md lg:grid-cols-2 lg:gap-6 bg-accent"
+          >
+            {!!programs &&
+              programs.map(({ id, title }) => (
+                <li key={id} className="flex gap-x-3">
+                  <Icons.checkCirlce className="flex-none w-5 h-6 text-brand" aria-hidden="true" />
+                  <p className="font-semibold">{title}</p>
+                </li>
+              ))}
+          </ul>
         </FadeInFromLeft>
-        <FadeInFromRight className="sm:w-96 lg:max-w-sm">
+        <FadeInFromRight className="sm:w-96 lg:max-w-sm shrink-0">
           <div className="pt-12 lg:pt-0">
             <div className="w-md p-8 mx-auto rounded-md lg:flex-shrink-0 bg-brand lg:flex lg:flex-col lg:justify-center">
               <div className="text-accent">
