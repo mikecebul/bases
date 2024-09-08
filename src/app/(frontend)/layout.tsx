@@ -5,12 +5,12 @@ import { Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
-import { Footer } from '@/Footer/Component'
+import { Footer } from '@/globals/Footer/Component'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
 import { draftMode } from 'next/headers'
-import { Header } from '@/Header/Component'
+import { Header } from '@/globals/Header/Component'
 import { ThemeProvider } from 'next-themes'
 
 const inter = Inter({ subsets: ['latin'] })

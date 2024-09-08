@@ -45,6 +45,11 @@ export const Hero: Block = {
         linkGroup({
           overrides: {
             maxRows: 2,
+            admin: {
+              components: {
+                RowLabel: '@/fields/LinkRowLabel',
+              },
+            },
           },
         }),
         {

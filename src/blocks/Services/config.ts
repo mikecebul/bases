@@ -77,6 +77,11 @@ export const Services: Block = {
         linkGroup({
           overrides: {
             maxRows: 1,
+            admin: {
+              components: {
+                RowLabel: '@/fields/LinkRowLabel',
+              },
+            },
           },
         }),
       ],

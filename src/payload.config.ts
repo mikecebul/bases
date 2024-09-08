@@ -27,18 +27,19 @@ import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
 import { seedHandler } from './endpoints/seedHandler'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
+import { Footer } from './globals/Footer/config'
+import { Header } from './globals/Header/config'
 import { revalidateRedirects } from './hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { Page, Post } from 'src/payload-types'
-import { CompanyInfo } from './CompanyInfo/config'
+import { CompanyInfo } from './globals/CompanyInfo/config'
 import { Avatars } from './collections/Avatars'
 import { Landcapes } from './collections/Landscapes'
 import { Cards } from './collections/Cards'
 import { Portraits } from './collections/Portraits'
 import { Services } from './collections/Services'
 import { seedServices } from './endpoints/seedServices'
+import { Files } from './collections/Files'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -134,6 +135,7 @@ export default buildConfig({
     Cards,
     Landcapes,
     Portraits,
+    Files,
     Categories,
     Users,
   ],
@@ -240,6 +242,13 @@ export default buildConfig({
             return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
           },
           prefix: 'portraits',
+        },
+        files: {
+          disableLocalStorage: true,
+          generateFileURL: (args: any) => {
+            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
+          },
+          prefix: 'files',
         },
       },
     }),

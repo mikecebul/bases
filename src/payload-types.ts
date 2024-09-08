@@ -19,6 +19,7 @@ export interface Config {
     cards: Card;
     landscapes: Landscape;
     portraits: Portrait;
+    files: File;
     categories: Category;
     users: User;
     redirects: Redirect;
@@ -92,10 +93,15 @@ export interface Hero {
           link: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
-            reference?: {
-              relationTo: 'pages';
-              value: string | Page;
-            } | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'files';
+                  value: string | File;
+                } | null);
             url?: string | null;
             label: string;
             appearance?: ('default' | 'outline') | null;
@@ -113,6 +119,24 @@ export interface Hero {
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "files".
+ */
+export interface File {
+  id: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -160,10 +184,15 @@ export interface ServicesBlock {
           link: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
-            reference?: {
-              relationTo: 'pages';
-              value: string | Page;
-            } | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'files';
+                  value: string | File;
+                } | null);
             url?: string | null;
             label: string;
             appearance?: ('default' | 'outline') | null;
@@ -659,18 +688,21 @@ export interface Header {
         link: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: string | Page;
-          } | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'files';
+                value: string | File;
+              } | null);
           url?: string | null;
           label: string;
         };
         id?: string | null;
       }[]
     | null;
-  phone?: string | null;
-  address?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -685,10 +717,15 @@ export interface Footer {
         link: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: string | Page;
-          } | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'files';
+                value: string | File;
+              } | null);
           url?: string | null;
           label: string;
         };
@@ -704,8 +741,40 @@ export interface Footer {
  */
 export interface CompanyInfo {
   id: string;
-  phone: string;
-  address: string;
+  phone?: string | null;
+  address?: string | null;
+  email?: string | null;
+  fax?: string | null;
+  social?:
+    | {
+        platform?: string | null;
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'files';
+                value: string | File;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  hours?:
+    | {
+        type?: ('default' | 'custom') | null;
+        day?: string | null;
+        hours?: string | null;
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }

@@ -19,6 +19,11 @@ export const Donate: Block = {
     {
       name: 'programs',
       type: 'array',
+      admin: {
+        components: {
+          RowLabel: '@/blocks/Donate/RowLabel',
+        },
+      },
       fields: [
         {
           name: 'title',

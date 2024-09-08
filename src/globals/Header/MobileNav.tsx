@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
-import { Icons } from '../components/Icons'
+import { Icons } from '../../components/Icons'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/utilities/cn'
