@@ -712,22 +712,52 @@ export interface Header {
  */
 export interface Footer {
   id: string;
-  navItems?:
+  columns?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'files';
-                value: string | File;
-              } | null);
-          url?: string | null;
-          label: string;
+        columnType: 'pageLinks' | 'contactInfo' | 'socialLinks' | 'businessHours' | 'googleMap';
+        pageLinks?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'files';
+                      value: string | File;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        contact?: {
+          phone?: string | null;
+          fax?: string | null;
+          address?: string | null;
+          email?: string | null;
+        };
+        socialLinks?:
+          | {
+              platform?: string | null;
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        businessHours?:
+          | {
+              day?: string | null;
+              hours?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        googleMap?: {
+          apiKey?: string | null;
+          location?: string | null;
         };
         id?: string | null;
       }[]
@@ -741,10 +771,12 @@ export interface Footer {
  */
 export interface CompanyInfo {
   id: string;
-  phone?: string | null;
-  address?: string | null;
-  email?: string | null;
-  fax?: string | null;
+  contact?: {
+    phone?: string | null;
+    fax?: string | null;
+    address?: string | null;
+    email?: string | null;
+  };
   social?:
     | {
         platform?: string | null;

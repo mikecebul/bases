@@ -11,13 +11,13 @@ import { cn } from '@/utilities/cn'
 import { buttonVariants } from '@/components/ui/button'
 import { Clock } from 'lucide-react'
 import Image from 'next/image'
+import { col } from 'framer-motion/client'
 
 export async function Footer() {
   const footer: Footer = await getCachedGlobal('footer')()
   const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
 
-  const navItems = footer?.navItems || []
-
+  const columns = footer?.columns || []
   return (
     <footer className="pt-4 rounded-t-md bg-background/50">
       <div className="w-full px-4 pt-4 mx-auto 2xl:container md:px-8 md:pt-8 2xl:px-0">

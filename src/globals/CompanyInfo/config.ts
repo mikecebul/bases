@@ -15,40 +15,50 @@ export const CompanyInfo: GlobalConfig = {
   },
   fields: [
     {
-      type: 'row',
+      name: 'contact',
+      type: 'group',
+      admin: {
+        hideGutter: true,
+        description: 'Company contact information.',
+      },
       fields: [
         {
-          name: 'phone',
-          label: 'Phone Number',
-          type: 'text',
-          defaultValue: '(231) 547-1144',
-          admin: { width: '50%' },
+          type: 'row',
+          fields: [
+            {
+              name: 'phone',
+              label: 'Phone Number',
+              type: 'text',
+              defaultValue: '(231) 547-1144',
+              admin: { width: '45%' },
+            },
+            {
+              name: 'fax',
+              label: 'Fax',
+              type: 'text',
+              defaultValue: '(231) 547-4970',
+              admin: { width: '45%' },
+            },
+          ],
         },
         {
-          name: 'address',
-          label: 'Address',
-          type: 'text',
-          defaultValue: '101 M-66 | Charlevoix, MI',
-          admin: { width: '50%' },
-        },
-      ],
-    },
-    {
-      type: 'row',
-      fields: [
-        {
-          name: 'email',
-          label: 'Email',
-          type: 'text',
-          defaultValue: 'info@basesmi.org',
-          admin: { width: '50%' },
-        },
-        {
-          name: 'fax',
-          label: 'Fax',
-          type: 'text',
-          defaultValue: '(231) 547-4970',
-          admin: { width: '50%' },
+          type: 'row',
+          fields: [
+            {
+              name: 'address',
+              label: 'Address',
+              type: 'text',
+              defaultValue: '101 M-66 | Charlevoix, MI',
+              admin: { width: '45%' },
+            },
+            {
+              name: 'email',
+              label: 'Email',
+              type: 'text',
+              defaultValue: 'info@basesmi.org',
+              admin: { width: '45%' },
+            },
+          ],
         },
       ],
     },
