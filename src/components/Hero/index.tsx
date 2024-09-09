@@ -4,9 +4,10 @@ import { Icons } from '@/components/Icons'
 import Link from 'next/link'
 import { cn } from '@/utilities/cn'
 import payloadConfig from '@payload-config'
-import type { Hero as HeroType } from '@/payload-types'
+import type { CompanyInfo, Hero as HeroType } from '@/payload-types'
 import { CMSLink } from '../Link'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getCachedGlobal } from '@/utilities/getGlobals'
 
 type Props = NonNullable<HeroType['highImpact']>
 
@@ -14,29 +15,39 @@ export async function Hero({ title, description, image, links }: Props) {
   const payload = await getPayloadHMR({
     config: payloadConfig,
   })
-  const { phone } = await payload.findGlobal({
-    slug: 'company-info',
-  })
-  const cleanedPhone = phone.replace(/\D/g, '')
+
+  const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
+  const { contact } = companyInfo
+  const cleanedPhone = contact?.phone ? contact?.phone.replace(/\D/g, '') : null
 
   return (
     <section className="grid lg:gap-8 lg:grid-cols-12 2xl:px-0 2xl:container">
-      <div className="mr-auto lg:col-span-6 flex flex-col">
+      <div className="flex flex-col mr-auto lg:col-span-6">
         <h1 className="max-w-2xl pb-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:pb-8 xl:text-6xl 2xl:text-7xl">
           {title}
         </h1>
-        <p className="max-w-xl pb-8 lg:pb-0 text-muted-foreground text-lg">{description}</p>
-        <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 xl:space-x-0 lg:grow lg:items-end">
+        <p className="max-w-xl pb-8 text-lg text-muted-foreground">{description}</p>
+        <div className="flex flex-col space-y-4 md:mr-4 xl:flex-row xl:space-x-0 xl:items-start">
           {/* Mobile Links */}
           <Link
-            href={`tel:${cleanedPhone}`}
+            href={cleanedPhone ? `tel:${cleanedPhone}` : '#'}
             className={cn(
               buttonVariants({ variant: 'brand', size: 'xl' }),
-              'xl:hidden min-w-full md:min-w-64',
+              'xl:hidden min-w-full lg:min-w-64',
             )}
           >
             <Icons.phone className="mr-2" />
             Call Now
+          </Link>
+          <Link
+            href={contact?.googleMapLink ?? '#'}
+            className={cn(
+              buttonVariants({ variant: 'brandOutline', size: 'xl' }),
+              'xl:hidden min-w-full lg:min-w-64',
+            )}
+          >
+            <Icons.navigation className="mr-2" />
+            Directions to our Building
           </Link>
           {/* Desktop Links */}
           {links != null &&
@@ -46,12 +57,12 @@ export async function Hero({ title, description, image, links }: Props) {
                 {...link}
                 size="xl"
                 appearance={index === 0 ? 'brand' : link.appearance}
-                className="hidden xl:flex lg:min-w-64 rounded-lg"
+                className="hidden rounded-lg xl:flex lg:min-w-64"
               />
             ))}
         </div>
       </div>
-      <div className="hidden lg:mt-0 lg:col-span-6 lg:flex relative">
+      <div className="relative hidden lg:mt-0 lg:col-span-6 lg:flex">
         {image != null && typeof image === 'object' && (
           <>
             <Image

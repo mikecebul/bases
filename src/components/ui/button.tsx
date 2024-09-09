@@ -21,6 +21,8 @@ const buttonVariants = cva(
       },
       variant: {
         brand: 'bg-brand text-primary-foreground hover:bg-brand/90',
+        brandOutline:
+          'border border-brand border-2 bg-background font-semibold text-brand hover:bg-card hover:text-accent-foreground',
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         ghost: 'hover:bg-card hover:text-accent-foreground',

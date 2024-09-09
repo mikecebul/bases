@@ -42,6 +42,16 @@ export const Hero: Block = {
           type: 'textarea',
           required: true,
         },
+        {
+          name: 'phoneNumber',
+          label: 'Phone Number',
+          type: 'text',
+          required: true,
+          defaultValue: '(231) 547-1144',
+          admin: {
+            description: "Phone number for 'Call Now' cta on mobile.",
+          },
+        },
         linkGroup({
           overrides: {
             maxRows: 2,

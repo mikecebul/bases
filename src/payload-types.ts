@@ -88,6 +88,7 @@ export interface Hero {
   highImpact?: {
     title: string;
     description: string;
+    phoneNumber: string;
     links?:
       | {
           link: {
@@ -736,11 +737,7 @@ export interface Footer {
             }[]
           | null;
         contact?: {
-          phone?: string | null;
-          fax?: string | null;
-          address?: string | null;
-          googleMapLink?: string | null;
-          email?: string | null;
+          showContact?: boolean | null;
         };
         socialLinks?:
           | {
@@ -777,6 +774,7 @@ export interface CompanyInfo {
     phone?: string | null;
     fax?: string | null;
     address?: string | null;
+    googleMapLink?: string | null;
     email?: string | null;
   };
   social?:

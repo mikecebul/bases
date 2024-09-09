@@ -10,9 +10,7 @@ type LinkProps = {
 const LinkRowLabel: PayloadClientReactComponent<RowLabelComponent> = () => {
   const { data, rowNumber } = useRowLabel<LinkProps>()
 
-  return (
-    <div className="text-orange-400 capitalize">{`${rowNumber} - ${data.link.label || 'Untitled'}`}</div>
-  )
+  return <div className="capitalize">{`${rowNumber} - ${data?.link?.label || 'Untitled'}`}</div>
 }
 
 export default LinkRowLabel

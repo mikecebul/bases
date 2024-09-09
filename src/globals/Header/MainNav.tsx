@@ -11,12 +11,14 @@ export function MainNav({ navItems }: { navItems: NavItem[] }) {
 
   return (
     <div className="flex-1">
-      <div className=" justify-center hidden px-8 gap-8 md:flex">
+      <div className="justify-center hidden gap-8 px-8  md:flex">
         {navItems.map(({ link }, i) => {
           const slug =
-            typeof link.reference?.value === 'object' &&
-            typeof link.reference.value.slug === 'string'
-              ? link.reference.value.slug
+            typeof link.reference?.value === 'object'
+              ? link.reference?.relationTo === 'pages' &&
+                typeof link.reference.value.slug === 'string'
+                ? link.reference.value.slug
+                : ''
               : ''
           return (
             <CMSLink

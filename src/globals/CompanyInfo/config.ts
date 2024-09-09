@@ -52,6 +52,18 @@ export const CompanyInfo: GlobalConfig = {
               admin: { width: '45%' },
             },
             {
+              name: 'googleMapLink',
+              type: 'text',
+              label: 'Google Map Link',
+              defaultValue: 'https://goo.gl/maps/X956fmf511Fef9Pr7',
+              admin: { width: '45%' },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            {
               name: 'email',
               label: 'Email',
               type: 'text',

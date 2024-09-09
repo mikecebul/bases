@@ -52,13 +52,21 @@ export const Footer: GlobalConfig = {
             },
           },
         },
-        contactInfo({
-          overrides: {
-            admin: {
-              condition: (_, siblingData) => siblingData.columnType === 'contactInfo',
+        {
+          name: 'contact',
+          type: 'group',
+          fields: [
+            {
+              name: 'showContact',
+              type: 'checkbox',
+              defaultValue: 'true',
+              label: 'Add column for business contact information.',
             },
+          ],
+          admin: {
+            condition: (_, siblingData) => siblingData.columnType === 'contactInfo',
           },
-        }),
+        },
         {
           name: 'socialLinks',
           type: 'array',
@@ -82,29 +90,6 @@ export const Footer: GlobalConfig = {
             },
           },
         },
-        // {
-        //   name: 'businessHours',
-        //   type: 'array',
-        //   label: 'Business Hours',
-        //   fields: [
-        //     {
-        //       name: 'day',
-        //       type: 'text',
-        //       label: 'Day',
-        //     },
-        //     {
-        //       name: 'hours',
-        //       type: 'text',
-        //       label: 'Hours',
-        //     },
-        //   ],
-        //   admin: {
-        //     condition: (_, siblingData) => siblingData.columnType === 'businessHours',
-        //     components: {
-        //       RowLabel: '@/globals/Footer/rowLabels/HoursRowLabel',
-        //     },
-        //   },
-        // },
         {
           name: 'hours',
           type: 'array',
