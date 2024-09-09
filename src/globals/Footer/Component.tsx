@@ -142,7 +142,7 @@ export async function Footer() {
           )}
 
           {/* Map Section */}
-          <div className="col-span-1">
+          <div className="col-span-2 lg:col-span-1">
             <p className="text-lg font-bold">Location</p>
             <Separator className="my-4" />
             <Link href="https://goo.gl/maps/X956fmf511Fef9Pr7">
@@ -151,7 +151,7 @@ export async function Footer() {
                 alt="Google maps of our address"
                 width={1000}
                 height={1000}
-                className="h-[264px] object-cover"
+                className="h-[350px] object-cover"
               ></Image>
             </Link>
           </div>

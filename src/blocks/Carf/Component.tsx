@@ -6,14 +6,14 @@ import Image from 'next/image'
 
 export const CarfBlock = ({ subtitle, title, description, image }: CarfBlockType) => {
   return (
-    <Container className="bg-brand">
-      <div className="grid px-4 xl:container 2xl:px-0 lg:grid-cols-2 md:px-8 xl:items-center xl:text-center">
+    <Container className="2xl:max-w-full bg-brand">
+      <div className="grid px-4 2xl:container 2xl:px-0 lg:grid-cols-2 md:px-8 xl:items-center xl:text-center">
         <motion.div
           initial={{ opacity: 0, x: 'var(--x-from)' }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center justify-start max-w-2xl pb-8 lg:justify-center [--x-from:40px] sm:[--x-from:-40px]"
+          className="flex items-center justify-start max-w-2xl pb-8 lg:pb-0 lg:justify-center [--x-from:40px] sm:[--x-from:-40px]"
         >
           {!!image && typeof image === 'object' && (
             <Image
