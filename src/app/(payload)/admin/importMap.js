@@ -22,10 +22,9 @@ import { ItalicFeatureClient as ItalicFeatureClient_20 } from '@payloadcms/richt
 import { LinkFeatureClient as LinkFeatureClient_21 } from '@payloadcms/richtext-lexical/client'
 import { HeadingFeatureClient as HeadingFeatureClient_22 } from '@payloadcms/richtext-lexical/client'
 import { default as default_23 } from '@/globals/Footer/rowLabels/SocialRowLabel'
-import { default as default_24 } from '@/globals/Footer/rowLabels/HoursRowLabel'
+import { default as default_24 } from '@/globals/CompanyInfo/HoursRowLabel'
 import { default as default_25 } from '@/globals/Footer/rowLabels/ColumnRowLabel'
 import { default as default_26 } from '@/globals/CompanyInfo/SocialRowLabel'
-import { default as default_27 } from '@/globals/CompanyInfo/HoursRowLabel'
 
 export const importMap = {
   "@/fields/LinkRowLabel#default": default_0,
@@ -52,8 +51,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#LinkFeatureClient": LinkFeatureClient_21,
   "@payloadcms/richtext-lexical/client#HeadingFeatureClient": HeadingFeatureClient_22,
   "@/globals/Footer/rowLabels/SocialRowLabel#default": default_23,
-  "@/globals/Footer/rowLabels/HoursRowLabel#default": default_24,
+  "@/globals/CompanyInfo/HoursRowLabel#default": default_24,
   "@/globals/Footer/rowLabels/ColumnRowLabel#default": default_25,
-  "@/globals/CompanyInfo/SocialRowLabel#default": default_26,
-  "@/globals/CompanyInfo/HoursRowLabel#default": default_27
+  "@/globals/CompanyInfo/SocialRowLabel#default": default_26
 }

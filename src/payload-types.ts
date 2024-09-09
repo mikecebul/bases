@@ -739,6 +739,7 @@ export interface Footer {
           phone?: string | null;
           fax?: string | null;
           address?: string | null;
+          googleMapLink?: string | null;
           email?: string | null;
         };
         socialLinks?:
@@ -748,16 +749,17 @@ export interface Footer {
               id?: string | null;
             }[]
           | null;
-        businessHours?:
+        hours?:
           | {
+              type?: ('default' | 'custom') | null;
               day?: string | null;
               hours?: string | null;
+              note?: string | null;
               id?: string | null;
             }[]
           | null;
         googleMap?: {
-          apiKey?: string | null;
-          location?: string | null;
+          apiKey: string;
         };
         id?: string | null;
       }[]

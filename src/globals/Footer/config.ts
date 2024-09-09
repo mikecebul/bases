@@ -2,6 +2,8 @@ import type { GlobalConfig } from 'payload'
 import { link } from '@/fields/link'
 import { revalidateFooter } from './hooks/revalidateFooter'
 import contactInfo from './fields/contactInfo'
+import { encryptField } from './hooks/encryptField'
+import { decryptField } from './hooks/decryptField'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
@@ -80,28 +82,90 @@ export const Footer: GlobalConfig = {
             },
           },
         },
+        // {
+        //   name: 'businessHours',
+        //   type: 'array',
+        //   label: 'Business Hours',
+        //   fields: [
+        //     {
+        //       name: 'day',
+        //       type: 'text',
+        //       label: 'Day',
+        //     },
+        //     {
+        //       name: 'hours',
+        //       type: 'text',
+        //       label: 'Hours',
+        //     },
+        //   ],
+        //   admin: {
+        //     condition: (_, siblingData) => siblingData.columnType === 'businessHours',
+        //     components: {
+        //       RowLabel: '@/globals/Footer/rowLabels/HoursRowLabel',
+        //     },
+        //   },
+        // },
         {
-          name: 'businessHours',
+          name: 'hours',
           type: 'array',
           label: 'Business Hours',
-          fields: [
-            {
-              name: 'day',
-              type: 'text',
-              label: 'Day',
-            },
-            {
-              name: 'hours',
-              type: 'text',
-              label: 'Hours',
-            },
-          ],
           admin: {
             condition: (_, siblingData) => siblingData.columnType === 'businessHours',
             components: {
-              RowLabel: '@/globals/Footer/rowLabels/HoursRowLabel',
+              RowLabel: '@/globals/CompanyInfo/HoursRowLabel',
             },
           },
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'type',
+                  type: 'radio',
+                  admin: {
+                    layout: 'horizontal',
+                    width: '50%',
+                  },
+                  defaultValue: 'default',
+                  options: [
+                    {
+                      label: 'Day/Hours',
+                      value: 'default',
+                    },
+                    {
+                      label: 'Custom Note',
+                      value: 'custom',
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              type: 'row',
+              admin: {
+                condition: (_, siblingData) => siblingData?.type === 'default',
+              },
+              fields: [
+                {
+                  name: 'day',
+                  type: 'text',
+                  admin: { width: '50%' },
+                },
+                {
+                  name: 'hours',
+                  type: 'text',
+                  admin: { width: '50%' },
+                },
+              ],
+            },
+            {
+              name: 'note',
+              type: 'text',
+              admin: {
+                condition: (_, siblingData) => siblingData?.type === 'custom',
+              },
+            },
+          ],
         },
         {
           name: 'googleMap',
@@ -112,11 +176,11 @@ export const Footer: GlobalConfig = {
               name: 'apiKey',
               type: 'text',
               label: 'Google Maps API Key',
-            },
-            {
-              name: 'location',
-              type: 'text',
-              label: 'Location (Latitude, Longitude)',
+              required: true,
+              hooks: {
+                beforeChange: [encryptField],
+                afterRead: [decryptField],
+              },
             },
           ],
           admin: {

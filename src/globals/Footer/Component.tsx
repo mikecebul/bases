@@ -2,106 +2,156 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 
-import type { CompanyInfo, Footer } from '@/payload-types'
-
-import { ThemeSelector } from '@/globals/Footer/ThemeSelector'
-import { CMSLink } from '@/components/Link'
-import { oldSiteConfig } from '@/config'
+import type { Footer } from '@/payload-types'
 import { cn } from '@/utilities/cn'
 import { buttonVariants } from '@/components/ui/button'
-import { Clock } from 'lucide-react'
+import { Clock, Facebook, Mail, Navigation, Phone, Printer } from 'lucide-react'
 import Image from 'next/image'
-import { col } from 'framer-motion/client'
 
 export async function Footer() {
   const footer: Footer = await getCachedGlobal('footer')()
-  const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
-
   const columns = footer?.columns || []
+  const pageLinks = columns.find(({ pageLinks }) => pageLinks && pageLinks.length > 0)?.pageLinks
+  const contact = columns.find(({ contact }) => contact)?.contact
+  const businessHours = columns.find(({ hours }) => hours && hours.length > 0)?.hours
+  const socialLinks = columns.find(
+    ({ socialLinks }) => socialLinks && socialLinks.length > 0,
+  )?.socialLinks
+
   return (
     <footer className="pt-4 rounded-t-md bg-background/50">
       <div className="w-full px-4 pt-4 mx-auto 2xl:container md:px-8 md:pt-8 2xl:px-0">
-        <div className="grid md:grid-cols-3 md:gap-4">
-          {/* Website Sections */}
-          <div className="col-span-1">
-            <p className="text-lg font-bold">Website</p>
-            <Separator className="my-4" />
-            <ul className="flex flex-col mb-8 space-y-4 font-medium text-gray-500">
-              {navItems.map(({ link, id }) => (
-                <li key={id}>
-                  <Link
-                    href={link.url ?? '/'}
-                    className={cn(buttonVariants({ variant: 'ghost' }), 'flex justify-start')}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Section */}
-          <div className="col-span-1 mb-6">
-            <p className="text-lg font-bold">Contact</p>
-            <Separator className="my-4" />
-            <ul className="mb-8 space-y-4 text-gray-500">
-              {oldSiteConfig.footer.Contact.map((item) =>
-                item.href ? (
-                  <li key={item.title} className="group">
+        <div className="grid gap-4 lg:auto-cols-[minmax(2,_1fr)] lg:grid-flow-col mb-6">
+          {/* PageLinks */}
+          {!!pageLinks && pageLinks.length > 0 && (
+            <div className="col-span-1">
+              <p className="text-lg font-bold">Website</p>
+              <Separator className="my-4" />
+              <ul className="flex flex-col mb-8 space-y-4 font-medium text-gray-500">
+                {pageLinks.map(({ link, id }) => (
+                  <li key={id}>
+                    <Link
+                      href={link.url ?? '/'}
+                      className={cn(buttonVariants({ variant: 'ghost' }), 'flex justify-start')}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {/* Contact Info */}
+          {!!contact && (
+            <div className="col-span-1">
+              <p className="text-lg font-bold">Contact</p>
+              <Separator className="my-4" />
+              <ul className="mb-8 space-y-4 text-gray-500">
+                {typeof contact?.phone === 'string' && (
+                  <li key={contact.phone} className="group">
                     <a
-                      href={item.href}
+                      href={`tel:${contact.phone.replace(/\D/g, '')}`}
                       className={cn(
                         buttonVariants({ variant: 'ghost' }),
                         'flex justify-start group-hover:text-primary',
                       )}
                     >
-                      <item.icon className="flex-shrink-0 mr-2" size={20} />
-                      {item.title}
+                      <Phone className="flex-shrink-0 mr-2" size={20} />
+                      {contact.phone}
                     </a>
                   </li>
-                ) : (
+                )}
+                {typeof contact?.address === 'string' && (
+                  <li key={contact.address} className="group">
+                    <a
+                      href={contact.googleMapLink ?? '#'}
+                      className={cn(
+                        buttonVariants({ variant: 'ghost' }),
+                        'flex justify-start group-hover:text-primary',
+                      )}
+                    >
+                      <Navigation className="flex-shrink-0 mr-2" size={20} />
+                      {contact.address}
+                    </a>
+                  </li>
+                )}
+                {typeof contact?.email === 'string' && (
+                  <li key={contact.address} className="group">
+                    <a
+                      href={`mailto:${contact.email}`}
+                      className={cn(
+                        buttonVariants({ variant: 'ghost' }),
+                        'flex justify-start group-hover:text-primary',
+                      )}
+                    >
+                      <Mail className="flex-shrink-0 mr-2" size={20} />
+                      {contact.email}
+                    </a>
+                  </li>
+                )}
+                {typeof contact?.fax === 'string' && (
                   <li
-                    key={item.title}
+                    key={contact.fax}
                     className={cn(buttonVariants({ variant: 'text' }), 'text-gray-500')}
                   >
-                    <item.icon className="mr-2" size={20} />
-                    {item.title}
+                    <Printer className="mr-2" size={20} />
+                    {contact.fax}
                   </li>
-                ),
-              )}
-              {oldSiteConfig.footer.Social.map((item) => (
-                <li key={item.title} className="group">
-                  <a
-                    href={item.href}
-                    className={cn(
-                      buttonVariants({ variant: 'ghost' }),
-                      'flex justify-start group-hover:text-primary',
-                    )}
-                  >
-                    <item.icon className="mr-2" size={20} />
-                    {item.title}
-                  </a>
+                )}
+              </ul>
+            </div>
+          )}
+          {/* Business Hours */}
+          {!!businessHours && (
+            <div className="col-span-1">
+              <p className="text-lg font-bold">Business Hours</p>
+              <Separator className="my-4" />
+              <ul className="mb-8 space-y-4 text-gray-500">
+                <li className={cn(buttonVariants({ variant: 'text' }), 'text-gray-500')}>
+                  <div className="flex items-start pt-8">
+                    <Clock className="mt-1 mr-2" size={20} />
+                    <ul className="">
+                      {businessHours?.map(({ day, hours, id, note, type }) => (
+                        <li key={id}>
+                          {type === 'default' ? (
+                            <span>
+                              <strong>{`${day}: `}</strong>
+                              {hours}
+                            </span>
+                          ) : (
+                            <span>{note}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </li>
-              ))}
-
-              {/* Hours */}
-              <li className={cn(buttonVariants({ variant: 'text' }), 'text-gray-500')}>
-                <div className="flex items-start pt-8">
-                  <Clock className="mt-1 mr-2" size={20} />
-                  <ul className="">
-                    <li>
-                      <strong>Mon - Thu:</strong> 10am - 6pm
-                    </li>
-                    <li>
-                      <strong>Fri:</strong> 10am - 5pm
-                    </li>
-                    <li>After hours by appointment only</li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-
+              </ul>
+            </div>
+          )}
+          {/* Social Links */}
+          {!!socialLinks && (
+            <div className="col-span-1">
+              <p className="text-lg font-bold">Social</p>
+              <Separator className="my-4" />
+              <ul className="mb-8 space-y-4 text-gray-500">
+                {socialLinks?.map((link) => (
+                  <li key={link.id} className="group">
+                    <a
+                      href={link.url ?? ''}
+                      className={cn(
+                        buttonVariants({ variant: 'ghost' }),
+                        'flex justify-start group-hover:text-primary',
+                      )}
+                    >
+                      <Facebook className="mr-2" size={20} />
+                      {link.platform}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           {/* Map Section */}
           <div className="col-span-1">
             <p className="text-lg font-bold">Location</p>
@@ -132,25 +182,3 @@ export async function Footer() {
     </footer>
   )
 }
-// <footer className="border-t border-border bg-black dark:bg-card text-white">
-//   <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
-//     <Link className="flex items-center" href="/">
-//       <picture>
-//         <img
-//           alt="Payload Logo"
-//           className="max-w-[6rem] invert-0"
-//           src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/payload/src/admin/assets/images/payload-logo-light.svg"
-//         />
-//       </picture>
-//     </Link>
-
-//     <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-//       <ThemeSelector />
-//       <nav className="flex flex-col md:flex-row gap-4">
-//         {navItems.map(({ link }, i) => {
-//           return <CMSLink className="text-white" key={i} {...link} />
-//         })}
-//       </nav>
-//     </div>
-//   </div>
-// </footer>
