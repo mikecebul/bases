@@ -2,7 +2,7 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 
-import type { Footer } from '@/payload-types'
+import type { CompanyInfo, Footer } from '@/payload-types'
 import { cn } from '@/utilities/cn'
 import { buttonVariants } from '@/components/ui/button'
 import { Clock, Facebook, Mail, Navigation, Phone, Printer } from 'lucide-react'
@@ -12,19 +12,17 @@ export async function Footer() {
   const footer: Footer = await getCachedGlobal('footer')()
   const columns = footer?.columns || []
   const pageLinks = columns.find(({ pageLinks }) => pageLinks && pageLinks.length > 0)?.pageLinks
-  const contact = columns.find(({ contact }) => contact)?.contact
-  const businessHours = columns.find(({ hours }) => hours && hours.length > 0)?.hours
-  const socialLinks = columns.find(
-    ({ socialLinks }) => socialLinks && socialLinks.length > 0,
-  )?.socialLinks
+
+  const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
+  const { contact, social, hours } = companyInfo
 
   return (
     <footer className="pt-4 rounded-t-md bg-background/50">
       <div className="w-full px-4 pt-4 mx-auto 2xl:container md:px-8 md:pt-8 2xl:px-0">
-        <div className="grid gap-4 lg:auto-cols-[minmax(2,_1fr)] lg:grid-flow-col mb-6">
+        <div className="grid gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* PageLinks */}
           {!!pageLinks && pageLinks.length > 0 && (
-            <div className="col-span-1">
+            <div className="flex flex-col col-span-1">
               <p className="text-lg font-bold">Website</p>
               <Separator className="my-4" />
               <ul className="flex flex-col mb-8 space-y-4 font-medium text-gray-500">
@@ -43,10 +41,10 @@ export async function Footer() {
           )}
           {/* Contact Info */}
           {!!contact && (
-            <div className="col-span-1">
+            <div className="flex flex-col col-span-1">
               <p className="text-lg font-bold">Contact</p>
               <Separator className="my-4" />
-              <ul className="mb-8 space-y-4 text-gray-500">
+              <ul className="flex flex-col mb-8 space-y-4 text-gray-500 ">
                 {typeof contact?.phone === 'string' && (
                   <li key={contact.phone} className="group">
                     <a
@@ -90,28 +88,41 @@ export async function Footer() {
                   </li>
                 )}
                 {typeof contact?.fax === 'string' && (
-                  <li
-                    key={contact.fax}
-                    className={cn(buttonVariants({ variant: 'text' }), 'text-gray-500')}
-                  >
-                    <Printer className="mr-2" size={20} />
-                    {contact.fax}
+                  <li key={contact.fax} className="group">
+                    <div className={cn(buttonVariants({ variant: 'text' }), 'text-gray-500')}>
+                      <Printer className="mr-2" size={20} />
+                      {contact.fax}
+                    </div>
                   </li>
                 )}
-              </ul>
-            </div>
-          )}
-          {/* Business Hours */}
-          {!!businessHours && (
-            <div className="col-span-1">
-              <p className="text-lg font-bold">Business Hours</p>
-              <Separator className="my-4" />
-              <ul className="mb-8 space-y-4 text-gray-500">
-                <li className={cn(buttonVariants({ variant: 'text' }), 'text-gray-500')}>
-                  <div className="flex items-start pt-8">
-                    <Clock className="mt-1 mr-2" size={20} />
+                {/* Social Links */}
+                {!!social &&
+                  social?.map(({ link }) => (
+                    <li key={link.label} className="group">
+                      <a
+                        href={link.url ?? ''}
+                        className={cn(
+                          buttonVariants({ variant: 'ghost' }),
+                          'flex justify-start group-hover:text-primary',
+                        )}
+                      >
+                        <Facebook className="mr-2" size={20} />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+
+                {/* Business Hours */}
+                <li className="group">
+                  <div
+                    className={cn(
+                      buttonVariants({ variant: 'text' }),
+                      'text-gray-500 flex items-start justify-start',
+                    )}
+                  >
+                    <Clock className="mr-2" size={20} />
                     <ul className="">
-                      {businessHours?.map(({ day, hours, id, note, type }) => (
+                      {hours?.map(({ day, hours, id, note, type }) => (
                         <li key={id}>
                           {type === 'default' ? (
                             <span>
@@ -129,29 +140,7 @@ export async function Footer() {
               </ul>
             </div>
           )}
-          {/* Social Links */}
-          {!!socialLinks && (
-            <div className="col-span-1">
-              <p className="text-lg font-bold">Social</p>
-              <Separator className="my-4" />
-              <ul className="mb-8 space-y-4 text-gray-500">
-                {socialLinks?.map((link) => (
-                  <li key={link.id} className="group">
-                    <a
-                      href={link.url ?? ''}
-                      className={cn(
-                        buttonVariants({ variant: 'ghost' }),
-                        'flex justify-start group-hover:text-primary',
-                      )}
-                    >
-                      <Facebook className="mr-2" size={20} />
-                      {link.platform}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+
           {/* Map Section */}
           <div className="col-span-1">
             <p className="text-lg font-bold">Location</p>

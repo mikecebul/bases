@@ -14,8 +14,8 @@ export const Footer: GlobalConfig = {
     {
       name: 'columns',
       type: 'array',
-      unique: true,
       minRows: 1,
+      maxRows: 4,
       admin: {
         components: {
           RowLabel: '@/globals/Footer/rowLabels/ColumnRowLabel',
@@ -26,12 +26,9 @@ export const Footer: GlobalConfig = {
           name: 'columnType',
           label: 'Column Type',
           type: 'select',
-          unique: true,
           options: [
             { label: 'Page Links', value: 'pageLinks' },
             { label: 'Contact Info', value: 'contactInfo' },
-            { label: 'Social Links', value: 'socialLinks' },
-            { label: 'Business Hours', value: 'businessHours' },
             { label: 'Google Map', value: 'googleMap' },
           ],
           required: true,
@@ -68,91 +65,6 @@ export const Footer: GlobalConfig = {
           },
         },
         {
-          name: 'socialLinks',
-          type: 'array',
-          label: 'Social Links',
-          fields: [
-            {
-              name: 'platform',
-              type: 'text',
-              label: 'Platform',
-            },
-            {
-              name: 'url',
-              type: 'text',
-              label: 'URL',
-            },
-          ],
-          admin: {
-            condition: (_, siblingData) => siblingData.columnType === 'socialLinks',
-            components: {
-              RowLabel: '@/globals/Footer/rowLabels/SocialRowLabel',
-            },
-          },
-        },
-        {
-          name: 'hours',
-          type: 'array',
-          label: 'Business Hours',
-          admin: {
-            condition: (_, siblingData) => siblingData.columnType === 'businessHours',
-            components: {
-              RowLabel: '@/globals/CompanyInfo/HoursRowLabel',
-            },
-          },
-          fields: [
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'type',
-                  type: 'radio',
-                  admin: {
-                    layout: 'horizontal',
-                    width: '50%',
-                  },
-                  defaultValue: 'default',
-                  options: [
-                    {
-                      label: 'Day/Hours',
-                      value: 'default',
-                    },
-                    {
-                      label: 'Custom Note',
-                      value: 'custom',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              type: 'row',
-              admin: {
-                condition: (_, siblingData) => siblingData?.type === 'default',
-              },
-              fields: [
-                {
-                  name: 'day',
-                  type: 'text',
-                  admin: { width: '50%' },
-                },
-                {
-                  name: 'hours',
-                  type: 'text',
-                  admin: { width: '50%' },
-                },
-              ],
-            },
-            {
-              name: 'note',
-              type: 'text',
-              admin: {
-                condition: (_, siblingData) => siblingData?.type === 'custom',
-              },
-            },
-          ],
-        },
-        {
           name: 'googleMap',
           type: 'group',
           label: 'Google Map',
@@ -173,7 +85,6 @@ export const Footer: GlobalConfig = {
           },
         },
       ],
-      maxRows: 6, // Limit the number of columns (you can adjust this as needed)
     },
   ],
   hooks: {

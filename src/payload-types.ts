@@ -715,7 +715,7 @@ export interface Footer {
   id: string;
   columns?:
     | {
-        columnType: 'pageLinks' | 'contactInfo' | 'socialLinks' | 'businessHours' | 'googleMap';
+        columnType: 'pageLinks' | 'contactInfo' | 'googleMap';
         pageLinks?:
           | {
               link: {
@@ -739,22 +739,6 @@ export interface Footer {
         contact?: {
           showContact?: boolean | null;
         };
-        socialLinks?:
-          | {
-              platform?: string | null;
-              url?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        hours?:
-          | {
-              type?: ('default' | 'custom') | null;
-              day?: string | null;
-              hours?: string | null;
-              note?: string | null;
-              id?: string | null;
-            }[]
-          | null;
         googleMap?: {
           apiKey: string;
         };
