@@ -11,6 +11,7 @@ import {
   BoldFeature,
   FixedToolbarFeature,
   HeadingFeature,
+  InlineToolbarFeature,
   ItalicFeature,
   LinkFeature,
   lexicalEditor,
@@ -40,6 +41,7 @@ import { Portraits } from './collections/Portraits'
 import { Services } from './collections/Services'
 import { seedServices } from './endpoints/seedServices'
 import { Files } from './collections/Files'
+import { Team } from './collections/Team'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -56,14 +58,6 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 
 export default buildConfig({
   admin: {
-    components: {
-      // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
-      // beforeLogin: ['@/components/BeforeLogin'],
-      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
-      // beforeDashboard: ['@/components/BeforeDashboard'],
-    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -95,11 +89,14 @@ export default buildConfig({
   editor: lexicalEditor({
     features: () => {
       return [
+        FixedToolbarFeature(),
+        InlineToolbarFeature(),
+        HeadingFeature({ enabledHeadingSizes: ['h2'] }),
         UnderlineFeature(),
         BoldFeature(),
         ItalicFeature(),
         LinkFeature({
-          enabledCollections: ['pages', 'posts'],
+          enabledCollections: ['pages', 'files'],
           fields: ({ defaultFields }) => {
             const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
               if ('name' in field && field.name === 'url') return false
@@ -129,6 +126,7 @@ export default buildConfig({
   collections: [
     Pages,
     Services,
+    Team,
     Posts,
     Media,
     Avatars,
