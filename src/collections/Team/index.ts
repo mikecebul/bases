@@ -8,7 +8,7 @@ export const Team: CollectionConfig = {
     plural: 'Team Members',
   },
   admin: {
-    defaultColumns: ['name', 'avatar', 'role', 'updatedAt'],
+    defaultColumns: ['name', 'type', 'avatar', 'role', 'updatedAt'],
     description: 'A collection of staff and board members.',
   },
   fields: [

@@ -67,7 +67,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout: (Hero | ServicesBlock | CarfBlock | DonateBlock)[];
+  layout: (Hero | ServicesBlock | CarfBlock | DonateBlock | TeamBlock)[];
   meta?: {
     title?: string | null;
     image?: (string | null) | Media;
@@ -268,6 +268,19 @@ export interface DonateBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'donate';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlock".
+ */
+export interface TeamBlock {
+  type?: ('staff' | 'board') | null;
+  title?: string | null;
+  description?: string | null;
+  reverse?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'team';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

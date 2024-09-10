@@ -23,6 +23,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { Donate } from '@/blocks/Donate/config'
+import { Team } from '@/blocks/Team/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -65,6 +66,7 @@ export const Pages: CollectionConfig = {
                 Services,
                 Carf,
                 Donate,
+                Team,
                 // CallToAction,
                 // Content,
                 // MediaBlock,

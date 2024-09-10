@@ -31,6 +31,7 @@ const buttonVariants = cva(
         nav: 'text-lg font-medium transition-colors hover:bg-accent/50 hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 rounded-lg',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         text: '',
+        card: 'hover:bg-accent hover:text-accent-foreground',
       },
     },
   },
