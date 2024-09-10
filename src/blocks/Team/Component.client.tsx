@@ -1,24 +1,22 @@
+'use client'
+
+import Link from 'next/link'
+import * as motion from 'framer-motion/client'
+import { cn } from '@/utilities/cn'
+
 import { Icons } from '@/components/Icons'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { buttonVariants } from '@/components/ui/button'
+
 import type { Team as TeamType, TeamBlock as TeamBlockType } from '@/payload-types'
-import { cn } from '@/utilities/cn'
-import payloadConfig from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
-import * as motion from 'framer-motion/client'
-import Link from 'next/link'
 
-export const Team = async ({ title, description, type, reverse }: TeamBlockType) => {
-  const payload = await getPayloadHMR({ config: payloadConfig })
-  const { docs } = await payload.find({
-    collection: 'team',
-    depth: 1,
-    limit: 100,
-    where: {
-      type: { equals: type },
-    },
-  })
-
+export const Team = async ({
+  teamBlock: { title, description, type, reverse },
+  team,
+}: {
+  teamBlock: TeamBlockType
+  team: TeamType[]
+}) => {
   const avatarUrlIfExists = (person: TeamType) => {
     if (typeof person.avatar === 'object' && !!person.avatar.url) return person.avatar.url
   }
@@ -45,8 +43,8 @@ export const Team = async ({ title, description, type, reverse }: TeamBlockType)
         role="list"
         className={cn('grid gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-y-12 xl:col-span-2 xl:w-7/12')}
       >
-        {docs &&
-          docs.map((person, index) => (
+        {team &&
+          team.map((person, index) => (
             <motion.div
               key={person.id}
               initial={{ x: 'var(--x-from)', opacity: 0 }}
