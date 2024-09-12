@@ -1,37 +1,37 @@
 'use client'
 
 import { lucideIcons } from '@/components/Icons'
-import { SelectInput, useField } from '@payloadcms/ui'
+import { SelectField, SelectInput, useField, useFieldProps } from '@payloadcms/ui'
 import { Icon } from '@/components/Icons/Icon'
 import { useState } from 'react'
+import { Option, TextFieldClientComponent } from 'payload'
 
-export default function IconSelect({ path }: { path: string }) {
-  const { initialValue, value, setValue } = useField<string>({ path })
-  const [name, setName] = useState<string>(initialValue ?? '')
-
+export const IconSelect = () => {
+  const { path } = useFieldProps()
+  const { setValue, value } = useField<string>({ path })
   const options = lucideIcons.map((icon) => ({
     label: icon.label,
     value: icon.value,
   }))
+  const onChange = (option: Option | Option[]) => {
+    setValue(option)
+  }
 
   return (
-    <>
+    <div>
       <label className="field-label">Icon Select</label>
-      <div className="flex items-center w-full space-x-8">
-        <SelectInput
-          label="Select Icon"
-          path={path}
-          name={path}
-          options={options}
-          value={value}
-          onChange={(val) => {
-            setValue(val)
-            if (typeof val === 'string') setName(val)
-          }}
-          className="min-w-64"
-        />
-        <Icon name={name} className="w-12 h-12" />
-      </div>
-    </>
+      <SelectField
+        field={{
+          name: path,
+          hasMany: false,
+          options,
+        }}
+        value={value}
+        onChange={onChange}
+      />
+      <Icon name={value} />
+    </div>
   )
 }
+
+export default IconSelect

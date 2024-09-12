@@ -37,7 +37,9 @@ export const Services: CollectionConfig = {
       required: true,
       admin: {
         components: {
-          Field: '@/collections/Services/IconSelect',
+          Field: {
+            path: '@/collections/Services/IconSelect',
+          },
           Cell: '@/collections/Services/CellIcon',
         },
       },
