@@ -343,6 +343,11 @@ export interface Team {
     };
     [k: string]: unknown;
   };
+  meta?: {
+    title?: string | null;
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;

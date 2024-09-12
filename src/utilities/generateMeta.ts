@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 
-import type { Page, Post } from '../payload-types'
+import type { Page, Post, Team } from '../payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
 
-export const generateMeta = async (args: { doc: Page | Post }): Promise<Metadata> => {
+export const generateMeta = async (args: { doc: Page | Post | Team }): Promise<Metadata> => {
   const { doc } = args || {}
 
   const ogImage =
