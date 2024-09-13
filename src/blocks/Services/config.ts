@@ -36,7 +36,7 @@ export const Services: Block = {
       defaultValue: true,
     },
     {
-      name: 'type',
+      name: 'howMany',
       type: 'select',
       defaultValue: 'topThreeServices',
       label: 'Type',

@@ -7,18 +7,18 @@ import Container from '@/components/Container'
 
 export const TeamBlock = async (teamBlock: TeamBlockType) => {
   const payload = await getPayloadHMR({ config: payloadConfig })
-  const { docs } = await payload.find({
+  const { docs: team } = await payload.find({
     collection: 'team',
     depth: 1,
     limit: 100,
     where: {
-      type: { equals: teamBlock.type },
+      memberType: { equals: teamBlock.memberType },
     },
   })
 
   return (
     <Container>
-      <Team teamBlock={teamBlock} team={docs} />
+      <Team teamBlock={teamBlock} team={team} />
     </Container>
   )
 }

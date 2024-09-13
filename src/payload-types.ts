@@ -178,7 +178,7 @@ export interface ServicesBlock {
   title: string;
   description: string;
   gridSVG: boolean;
-  type: 'topThreeServices' | 'allServices';
+  howMany: 'topThreeServices' | 'allServices';
   services?: {
     topThreeServices: (string | Service)[];
     links?:
@@ -274,7 +274,7 @@ export interface DonateBlock {
  * via the `definition` "TeamBlock".
  */
 export interface TeamBlock {
-  type?: ('staff' | 'board') | null;
+  memberType?: ('staff' | 'board') | null;
   title?: string | null;
   description?: string | null;
   reverse?: boolean | null;
@@ -322,7 +322,7 @@ export interface Media {
  */
 export interface Team {
   id: string;
-  type?: ('staff' | 'board') | null;
+  memberType?: ('staff' | 'board') | null;
   name: string;
   avatar: string | Avatar;
   image: string | Portrait;

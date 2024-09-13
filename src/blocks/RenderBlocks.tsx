@@ -13,6 +13,7 @@ import { ServicesBlock } from './Services/Component'
 import { CarfBlock } from './Carf/Component'
 import DonateBlock from './Donate/Component'
 import { TeamBlock } from './Team/Component'
+import { TeamMemberBlock } from './TeamMember/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -25,6 +26,7 @@ const blockComponents = {
   carf: CarfBlock,
   donate: DonateBlock,
   team: TeamBlock,
+  teamMember: TeamMemberBlock,
 }
 
 export const RenderBlocks: React.FC<{

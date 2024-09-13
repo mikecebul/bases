@@ -17,7 +17,7 @@ export async function generateStaticParams() {
     collection: 'pages',
     draft: false,
     limit: 1000,
-    overrideAccess: false,
+    overrideAccess: true,
   })
 
   return pages.docs

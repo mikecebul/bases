@@ -11,7 +11,7 @@ import { buttonVariants } from '@/components/ui/button'
 import type { Team as TeamType, TeamBlock as TeamBlockType } from '@/payload-types'
 
 export const Team = async ({
-  teamBlock: { title, description, type, reverse },
+  teamBlock: { title, description, memberType, reverse },
   team,
 }: {
   teamBlock: TeamBlockType
@@ -74,7 +74,7 @@ export const Team = async ({
                       <p className="text-base font-semibold leading-7 tracking-tight">
                         {person.name}
                       </p>
-                      {type === 'staff' && (
+                      {memberType === 'staff' && (
                         <p className="text-sm leading-6 text-muted-foreground">
                           {person.qualifications}
                         </p>

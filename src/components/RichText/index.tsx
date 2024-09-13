@@ -13,7 +13,7 @@ type Props = {
 const RichText: React.FC<Props> = ({
   className,
   content,
-  enableGutter = true,
+  enableGutter = false,
   enableProse = true,
 }) => {
   if (!content) {

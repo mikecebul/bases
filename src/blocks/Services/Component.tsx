@@ -12,7 +12,7 @@ export async function ServicesBlock({
   title,
   description,
   gridSVG,
-  type,
+  howMany,
   services,
 }: ServicesBlockType) {
   const payload = await getPayloadHMR({
@@ -37,8 +37,10 @@ export async function ServicesBlock({
         {!!title && <Title text={title} />}
         {!!description && <Description text={description} />}
       </div>
-      {type === 'allServices' && allServices.length > 0 && <ServicesList services={allServices} />}
-      {type === 'topThreeServices' && topThreeServices.length > 0 && (
+      {howMany === 'allServices' && allServices.length > 0 && (
+        <ServicesList services={allServices} />
+      )}
+      {howMany === 'topThreeServices' && topThreeServices.length > 0 && (
         <>
           <ServicesList services={topThreeServices} />
           {services?.links != null

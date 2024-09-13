@@ -5,7 +5,7 @@ export const Team: Block = {
   interfaceName: 'TeamBlock',
   fields: [
     {
-      name: 'type',
+      name: 'memberType',
       type: 'radio',
       defaultValue: 'staff',
       options: [

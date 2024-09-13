@@ -17,7 +17,7 @@ export async function generateStaticParams() {
     collection: 'pages',
     draft: false,
     limit: 1,
-    overrideAccess: false,
+    overrideAccess: true,
     where: {
       slug: { equals: '/team' },
     },

@@ -23,7 +23,7 @@ export const Team: CollectionConfig = {
     plural: 'Team Members',
   },
   admin: {
-    defaultColumns: ['name', 'type', 'avatar', 'role', 'updatedAt'],
+    defaultColumns: ['name', 'memberType', 'avatar', 'role', 'updatedAt'],
     description: 'A collection of staff and board members.',
   },
   fields: [
@@ -33,7 +33,7 @@ export const Team: CollectionConfig = {
         {
           fields: [
             {
-              name: 'type',
+              name: 'memberType',
               type: 'radio',
               defaultValue: 'staff',
               options: [
@@ -84,7 +84,7 @@ export const Team: CollectionConfig = {
               name: 'qualifications',
               type: 'text',
               admin: {
-                condition: (_, { type } = {}) => ['staff'].includes(type),
+                condition: (_, { memberType } = {}) => ['staff'].includes(memberType),
               },
             },
             {

@@ -17,19 +17,23 @@ export const IconSelect = () => {
   }
 
   return (
-    <div>
+    <>
       <label className="field-label">Icon Select</label>
-      <SelectField
-        field={{
-          name: path,
-          hasMany: false,
-          options,
-        }}
-        value={value}
-        onChange={onChange}
-      />
-      <Icon name={value} />
-    </div>
+      <div className="flex gap-4 items-center">
+        <Icon name={value} className="shrink-0" />
+        <div className="w-full sm:w-auto min-w-64">
+          <SelectField
+            field={{
+              name: path,
+              hasMany: false,
+              options,
+            }}
+            value={value}
+            onChange={onChange}
+          />
+        </div>
+      </div>
+    </>
   )
 }
 
