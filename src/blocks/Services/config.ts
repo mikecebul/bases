@@ -57,7 +57,7 @@ export const Services: Block = {
       name: 'services',
       admin: {
         hideGutter: true,
-        condition: (_, { type } = {}) => ['topThreeServices'].includes(type),
+        condition: (_, { howMany } = {}) => ['topThreeServices'].includes(howMany),
       },
 
       fields: [

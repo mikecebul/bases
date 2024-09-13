@@ -10,7 +10,7 @@ import { buttonVariants } from '@/components/ui/button'
 
 import type { Team as TeamType, TeamBlock as TeamBlockType } from '@/payload-types'
 
-export const Team = async ({
+export const Team = ({
   teamBlock: { title, description, memberType, reverse },
   team,
 }: {

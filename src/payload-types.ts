@@ -67,7 +67,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout: (Hero | ServicesBlock | CarfBlock | DonateBlock | TeamBlock)[];
+  layout: (Hero | ServicesBlock | CarfBlock | DonateBlock | TeamBlock | AboutUsBlock)[];
   meta?: {
     title?: string | null;
     image?: (string | null) | Media;
@@ -281,6 +281,32 @@ export interface TeamBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'team';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsBlock".
+ */
+export interface AboutUsBlock {
+  subtitle?: string | null;
+  richContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  images?: (string | Landscape)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'about-us';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

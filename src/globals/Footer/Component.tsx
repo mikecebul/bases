@@ -74,7 +74,7 @@ export async function Footer() {
                   </li>
                 )}
                 {typeof contact?.email === 'string' && (
-                  <li key={contact.address} className="group">
+                  <li key={contact.email} className="group">
                     <a
                       href={`mailto:${contact.email}`}
                       className={cn(

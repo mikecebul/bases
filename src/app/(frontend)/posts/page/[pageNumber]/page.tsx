@@ -50,7 +50,7 @@ export default async function Page({ params: { pageNumber = 2 } }) {
 
 export function generateMetadata({ params: { pageNumber = 2 } }): Metadata {
   return {
-    title: `Payload Website Template Posts Page ${pageNumber}`,
+    title: `BASES Posts Page ${pageNumber}`,
   }
 }
 

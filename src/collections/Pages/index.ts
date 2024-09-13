@@ -19,6 +19,7 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { Donate } from '@/blocks/Donate/config'
 import { Team } from '@/blocks/Team/config'
+import { AboutUs } from '@/blocks/AboutUs/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -62,6 +63,7 @@ export const Pages: CollectionConfig = {
                 Carf,
                 Donate,
                 Team,
+                AboutUs,
                 // CallToAction,
                 // Content,
                 // MediaBlock,

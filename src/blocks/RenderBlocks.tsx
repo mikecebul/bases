@@ -1,5 +1,5 @@
 import { cn } from 'src/utilities/cn'
-import React, { Fragment } from 'react'
+import React, { FC, Fragment } from 'react'
 
 import type { Page } from '@/payload-types'
 
@@ -14,6 +14,7 @@ import { CarfBlock } from './Carf/Component'
 import DonateBlock from './Donate/Component'
 import { TeamBlock } from './Team/Component'
 import { TeamMemberBlock } from './TeamMember/Component'
+import { AboutUsBlock } from './AboutUs/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -27,6 +28,7 @@ const blockComponents = {
   donate: DonateBlock,
   team: TeamBlock,
   teamMember: TeamMemberBlock,
+  aboutUs: AboutUsBlock,
 }
 
 export const RenderBlocks: React.FC<{
