@@ -1,3 +1,5 @@
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { slugField } from '@/fields/slug'
 import {
   MetaDescriptionField,
@@ -10,6 +12,12 @@ import { CollectionConfig } from 'payload'
 
 export const Team: CollectionConfig = {
   slug: 'team',
+  access: {
+    create: authenticated,
+    delete: authenticated,
+    read: authenticatedOrPublished,
+    update: authenticated,
+  },
   labels: {
     singular: 'Team Member',
     plural: 'Team Members',

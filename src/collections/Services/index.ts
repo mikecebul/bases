@@ -1,3 +1,5 @@
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { CollectionConfig } from 'payload'
 // import { superAdmin } from '@/payload/access/superAdmin'
 
@@ -16,7 +18,10 @@ export const Services: CollectionConfig = {
     // hideAPIURL: !superAdmin,
   },
   access: {
-    read: () => true,
+    create: authenticated,
+    delete: authenticated,
+    read: authenticatedOrPublished,
+    update: authenticated,
   },
   fields: [
     {
