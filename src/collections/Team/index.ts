@@ -9,6 +9,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { CollectionConfig } from 'payload'
+import { revalidateTeam } from './hooks/revalidateTeam'
 
 export const Team: CollectionConfig = {
   slug: 'team',
@@ -93,6 +94,13 @@ export const Team: CollectionConfig = {
               type: 'richText',
               required: true,
             },
+            {
+              name: 'publishedAt',
+              type: 'date',
+              admin: {
+                position: 'sidebar',
+              },
+            },
           ],
           label: 'Content',
         },
@@ -109,7 +117,7 @@ export const Team: CollectionConfig = {
               hasGenerateFn: true,
             }),
             MetaImageField({
-              relationTo: 'media',
+              relationTo: 'cards',
             }),
 
             MetaDescriptionField({}),
@@ -128,4 +136,8 @@ export const Team: CollectionConfig = {
 
     ...slugField('name'),
   ],
+  hooks: {
+    afterChange: [revalidateTeam],
+    afterRead: [],
+  },
 }

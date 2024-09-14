@@ -1,8 +1,6 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 
-import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
-import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { s3Storage as s3StoragePlugin } from '@payloadcms/storage-s3'
@@ -22,35 +20,33 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
-import Categories from './collections/Categories'
-import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
-import { Posts } from './collections/Posts'
 import Users from './collections/Users'
-import { seedHandler } from './endpoints/seedHandler'
 import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
 import { revalidateRedirects } from './hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import { Page, Post } from 'src/payload-types'
+import { Page, Team as TeamType } from 'src/payload-types'
 import { CompanyInfo } from './globals/CompanyInfo/config'
 import { Avatars } from './collections/Avatars'
 import { Landcapes } from './collections/Landscapes'
 import { Cards } from './collections/Cards'
 import { Portraits } from './collections/Portraits'
 import { Services } from './collections/Services'
-import { seedServices } from './endpoints/seedServices'
 import { Files } from './collections/Files'
 import { Team } from './collections/Team'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
+const generateTitle: GenerateTitle<TeamType | Page> = ({ doc }) => {
+  if ('name' in doc) {
+    return doc.name ? `${doc.name} | BASES` : 'BASES'
+  }
   return doc?.title ? `${doc.title} | BASES` : 'BASES'
 }
 
-const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
+const generateURL: GenerateURL<TeamType | Page> = ({ doc }) => {
   return doc?.slug
     ? `${process.env.NEXT_PUBLIC_SERVER_URL!}/${doc.slug}`
     : process.env.NEXT_PUBLIC_SERVER_URL!
@@ -123,40 +119,14 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [
-    Pages,
-    Services,
-    Team,
-    Posts,
-    Media,
-    Avatars,
-    Cards,
-    Landcapes,
-    Portraits,
-    Files,
-    Categories,
-    Users,
-  ],
+  collections: [Pages, Services, Team, Avatars, Cards, Landcapes, Portraits, Files, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
-  endpoints: [
-    // The seed endpoint is used to populate the database with some example data
-    // You should delete this endpoint before deploying your site to production
-    {
-      handler: seedHandler,
-      method: 'get',
-      path: '/seed',
-    },
-    {
-      handler: seedServices,
-      method: 'get',
-      path: '/seed-services',
-    },
-  ],
+  endpoints: [],
   globals: [Header, Footer, CompanyInfo],
   plugins: [
     redirectsPlugin({
-      collections: ['pages', 'posts'],
+      collections: ['pages', 'team'],
       overrides: {
         // @ts-expect-error
         fields: ({ defaultFields }) => {
@@ -177,38 +147,9 @@ export default buildConfig({
         },
       },
     }),
-    nestedDocsPlugin({
-      collections: ['categories'],
-    }),
     seoPlugin({
       generateTitle,
       generateURL,
-    }),
-    formBuilderPlugin({
-      fields: {
-        payment: false,
-      },
-      formOverrides: {
-        fields: ({ defaultFields }) => {
-          return defaultFields.map((field) => {
-            if ('name' in field && field.name === 'confirmationMessage') {
-              return {
-                ...field,
-                editor: lexicalEditor({
-                  features: ({ rootFeatures }) => {
-                    return [
-                      ...rootFeatures,
-                      FixedToolbarFeature(),
-                      HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    ]
-                  },
-                }),
-              }
-            }
-            return field
-          })
-        },
-      },
     }),
     s3StoragePlugin({
       ...S3_PLUGIN_CONFIG,

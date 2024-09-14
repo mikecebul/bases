@@ -1,6 +1,12 @@
 import { CollectionConfig } from 'payload'
 import { anyone } from '../../access/anyone'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { authenticated } from '@/access/authenticated'
 // import { superAdmin } from '@/payload/access/superAdmin'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export const Avatars: CollectionConfig = {
   slug: 'avatars',
@@ -9,7 +15,10 @@ export const Avatars: CollectionConfig = {
     plural: 'Avatars',
   },
   access: {
+    create: authenticated,
+    delete: authenticated,
     read: anyone,
+    update: authenticated,
   },
   admin: {
     defaultColumns: ['filename', 'alt', 'updatedAt'],
@@ -37,6 +46,7 @@ export const Avatars: CollectionConfig = {
       },
     ],
     adminThumbnail: 'thumbnail',
+    staticDir: path.resolve(dirname, '../../public/avatars'),
   },
   fields: [
     {

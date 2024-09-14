@@ -11,12 +11,12 @@ export const FormBlock: Block = {
   slug: 'formBlock',
   interfaceName: 'FormBlock',
   fields: [
-    {
-      name: 'form',
-      type: 'relationship',
-      relationTo: 'forms',
-      required: true,
-    },
+    // {
+    //   name: 'form',
+    //   type: 'relationship',
+    //   relationTo: 'forms',
+    //   required: true,
+    // },
     {
       name: 'enableIntro',
       type: 'checkbox',

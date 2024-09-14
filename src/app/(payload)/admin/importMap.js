@@ -20,11 +20,9 @@ import { default as default_18 } from '@/collections/Services/CellIcon'
 import { default as default_19 } from '@/collections/Services/IconSelect'
 import { default as default_20 } from '@/collections/Services/SeedButton'
 import { default as default_21 } from '@/collections/Team/AvatarCell'
-import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_22 } from '@payloadcms/richtext-lexical/client'
-import { BlocksFeatureClient as BlocksFeatureClient_23 } from '@payloadcms/richtext-lexical/client'
-import { default as default_24 } from '@/globals/Footer/rowLabels/ColumnRowLabel'
-import { default as default_25 } from '@/globals/CompanyInfo/SocialRowLabel'
-import { default as default_26 } from '@/globals/CompanyInfo/HoursRowLabel'
+import { default as default_22 } from '@/globals/Footer/rowLabels/ColumnRowLabel'
+import { default as default_23 } from '@/globals/CompanyInfo/SocialRowLabel'
+import { default as default_24 } from '@/globals/CompanyInfo/HoursRowLabel'
 
 export const importMap = {
   "@/fields/LinkRowLabel#default": default_0,
@@ -49,9 +47,7 @@ export const importMap = {
   "@/collections/Services/IconSelect#default": default_19,
   "@/collections/Services/SeedButton#default": default_20,
   "@/collections/Team/AvatarCell#default": default_21,
-  "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_22,
-  "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_23,
-  "@/globals/Footer/rowLabels/ColumnRowLabel#default": default_24,
-  "@/globals/CompanyInfo/SocialRowLabel#default": default_25,
-  "@/globals/CompanyInfo/HoursRowLabel#default": default_26
+  "@/globals/Footer/rowLabels/ColumnRowLabel#default": default_22,
+  "@/globals/CompanyInfo/SocialRowLabel#default": default_23,
+  "@/globals/CompanyInfo/HoursRowLabel#default": default_24
 }
