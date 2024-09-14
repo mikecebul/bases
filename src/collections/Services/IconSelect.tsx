@@ -3,9 +3,9 @@
 import { lucideIcons } from '@/components/Icons'
 import { SelectField, useField, useFieldProps } from '@payloadcms/ui'
 import { Icon } from '@/components/Icons/Icon'
-import { Option } from 'payload'
+import { Option, TextFieldClientComponent } from 'payload'
 
-export const IconSelect = () => {
+export const IconSelect: TextFieldClientComponent = () => {
   const { path } = useFieldProps()
   const { setValue, value } = useField<string>({ path })
   const options = lucideIcons.map((icon) => ({

@@ -4,7 +4,6 @@ import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
 
 import type { Page as PageType } from '@/payload-types'
 
@@ -13,7 +12,7 @@ import { generateMeta } from '@/utilities/generateMeta'
 
 export async function generateStaticParams() {
   const payload = await getPayloadHMR({ config: configPromise })
-  const pages = await payload.find({
+  const { docs: pages } = await payload.find({
     collection: 'pages',
     draft: false,
     limit: 1,
@@ -22,16 +21,15 @@ export async function generateStaticParams() {
       slug: { equals: '/team' },
     },
   })
+  return pages
 }
 
-export default async function Page({ params: { slug = 'team' } }) {
-  const url = '/' + slug
+export default async function Page() {
+  const url = '/team'
 
   let page: PageType | null
 
-  page = await queryPageBySlug({
-    slug,
-  })
+  page = await queryTeamPage()
 
   if (!page) {
     return <PayloadRedirects url={url} />
@@ -48,15 +46,11 @@ export default async function Page({ params: { slug = 'team' } }) {
   )
 }
 
-export async function generateMetadata({ params: { slug = 'team' } }): Promise<Metadata> {
-  const page = await queryPageBySlug({
-    slug,
-  })
-
-  return generateMeta({ doc: page })
+export async function generateMetadata(): Promise<Metadata> {
+  return generateMeta({ doc: 'team' })
 }
 
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+const queryTeamPage = async () => {
   const { isEnabled: draft } = draftMode()
 
   const payload = await getPayloadHMR({ config: configPromise })
@@ -68,10 +62,10 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
     overrideAccess: true,
     where: {
       slug: {
-        equals: slug,
+        equals: 'team',
       },
     },
   })
 
   return result.docs?.[0] || null
-})
+}

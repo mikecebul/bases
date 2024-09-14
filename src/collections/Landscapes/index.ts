@@ -1,6 +1,10 @@
 import { CollectionConfig } from 'payload'
 import { anyone } from '../../access/anyone'
-// import { superAdmin } from '@/payload/access/superAdmin'
+import { fileURLToPath } from 'url'
+import path from 'path'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export const Landcapes: CollectionConfig = {
   slug: 'landscapes',
@@ -15,7 +19,7 @@ export const Landcapes: CollectionConfig = {
     description: 'Images with a 16:9 ratio.',
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
-    // hideAPIURL: !superAdmin,
+    hideAPIURL: true,
   },
   upload: {
     formatOptions: {
@@ -36,6 +40,7 @@ export const Landcapes: CollectionConfig = {
       },
     ],
     adminThumbnail: 'thumbnail',
+    staticDir: path.resolve(dirname, '../../../public/landscapes'),
   },
   fields: [
     {

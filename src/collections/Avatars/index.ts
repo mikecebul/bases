@@ -3,7 +3,6 @@ import { anyone } from '../../access/anyone'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { authenticated } from '@/access/authenticated'
-// import { superAdmin } from '@/payload/access/superAdmin'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,6 +20,7 @@ export const Avatars: CollectionConfig = {
     update: authenticated,
   },
   admin: {
+    hideAPIURL: true,
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
     // hideAPIURL: !superAdmin,
@@ -46,7 +46,7 @@ export const Avatars: CollectionConfig = {
       },
     ],
     adminThumbnail: 'thumbnail',
-    staticDir: path.resolve(dirname, '../../public/avatars'),
+    staticDir: path.resolve(dirname, '../../../public/avatars'),
   },
   fields: [
     {

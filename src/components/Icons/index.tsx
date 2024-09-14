@@ -36,7 +36,7 @@ import { cn } from '@/utilities/cn'
 export const Icons = {
   logo: ({ className }: { className: string }) => (
     <Image
-      src="/BasesLogo.png"
+      src="/bases-logo.png"
       width={1024}
       height={252}
       className={className}

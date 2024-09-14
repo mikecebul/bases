@@ -35,6 +35,8 @@ import { Portraits } from './collections/Portraits'
 import { Services } from './collections/Services'
 import { Files } from './collections/Files'
 import { Team } from './collections/Team'
+import { superAdmin } from './access/superAdmin'
+import { seedServices } from './endpoints/seedServices'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -54,8 +56,19 @@ const generateURL: GenerateURL<TeamType | Page> = ({ doc }) => {
 
 export default buildConfig({
   admin: {
+    avatar: 'default',
+    components: {
+      graphics: {
+        Icon: '@/graphics/Icon',
+        Logo: '@/graphics/Logo',
+      },
+    },
     importMap: {
       baseDir: path.resolve(dirname),
+    },
+    meta: {
+      icons: [{ url: '/favicon.ico' }],
+      titleSuffix: ' - BASES',
     },
     user: Users.slug,
     livePreview: {
@@ -122,12 +135,19 @@ export default buildConfig({
   collections: [Pages, Services, Team, Avatars, Cards, Landcapes, Portraits, Files, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
-  endpoints: [],
+  endpoints: [{ handler: seedServices, method: 'get', path: '/seed-services' }],
   globals: [Header, Footer, CompanyInfo],
   plugins: [
     redirectsPlugin({
       collections: ['pages', 'team'],
       overrides: {
+        access: {
+          admin: superAdmin,
+          read: superAdmin,
+          delete: superAdmin,
+          update: superAdmin,
+          create: superAdmin,
+        },
         // @ts-expect-error
         fields: ({ defaultFields }) => {
           return defaultFields.map((field) => {

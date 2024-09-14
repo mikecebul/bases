@@ -12,6 +12,7 @@ export const Cards: CollectionConfig = {
     read: anyone,
   },
   admin: {
+    hideAPIURL: true,
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
     // hideAPIURL: !superAdmin,

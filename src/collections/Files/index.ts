@@ -1,6 +1,10 @@
 import { CollectionConfig } from 'payload'
 import { anyone } from '../../access/anyone'
-// import { superAdmin } from "@/payload/access/superAdmin";
+import { fileURLToPath } from 'url'
+import path from 'path'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export const Files: CollectionConfig = {
   slug: 'files',
@@ -15,12 +19,13 @@ export const Files: CollectionConfig = {
     description: 'Only PDF formats.',
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
-    // hideAPIURL: !superAdmin,
+    hideAPIURL: true,
   },
   upload: {
     formatOptions: {
       format: 'pdf',
     },
+    staticDir: path.resolve(dirname, '../../../public/files'),
   },
   fields: [],
 }

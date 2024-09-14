@@ -10,6 +10,7 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { CollectionConfig } from 'payload'
 import { revalidateTeam } from './hooks/revalidateTeam'
+import { populatePublishedAt } from '@/hooks/populatePublishedAt'
 
 export const Team: CollectionConfig = {
   slug: 'team',
@@ -24,6 +25,8 @@ export const Team: CollectionConfig = {
     plural: 'Team Members',
   },
   admin: {
+    useAsTitle: 'name',
+    hideAPIURL: true,
     defaultColumns: ['name', 'memberType', 'avatar', 'role', 'updatedAt'],
     description: 'A collection of staff and board members.',
   },
@@ -94,13 +97,6 @@ export const Team: CollectionConfig = {
               type: 'richText',
               required: true,
             },
-            {
-              name: 'publishedAt',
-              type: 'date',
-              admin: {
-                position: 'sidebar',
-              },
-            },
           ],
           label: 'Content',
         },
@@ -133,11 +129,25 @@ export const Team: CollectionConfig = {
         },
       ],
     },
-
+    {
+      name: 'publishedAt',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+      },
+    },
     ...slugField('name'),
   ],
   hooks: {
     afterChange: [revalidateTeam],
-    afterRead: [],
+    beforeChange: [populatePublishedAt],
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 100, // We set this interval for optimal live preview
+      },
+    },
+    maxPerDoc: 50,
   },
 }

@@ -1,6 +1,10 @@
 import { CollectionConfig } from 'payload'
 import { anyone } from '../../access/anyone'
-// import { superAdmin } from "@/payload/access/superAdmin";
+import { fileURLToPath } from 'url'
+import path from 'path'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export const Portraits: CollectionConfig = {
   slug: 'portraits',
@@ -15,7 +19,7 @@ export const Portraits: CollectionConfig = {
     description: 'Images with a 8:10 ratio.',
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
-    // hideAPIURL: !superAdmin,
+    hideAPIURL: true,
   },
   upload: {
     formatOptions: {
@@ -24,6 +28,7 @@ export const Portraits: CollectionConfig = {
     resizeOptions: {
       width: 800,
       height: 1000,
+      position: 'top',
     },
     imageSizes: [
       {
@@ -36,6 +41,7 @@ export const Portraits: CollectionConfig = {
       },
     ],
     adminThumbnail: 'thumbnail',
+    staticDir: path.resolve(dirname, '../../../public/portraits'),
   },
   fields: [
     {

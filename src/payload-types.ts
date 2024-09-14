@@ -330,16 +330,17 @@ export interface Team {
     };
     [k: string]: unknown;
   };
-  publishedAt?: string | null;
   meta?: {
     title?: string | null;
     image?: (string | null) | Card;
     description?: string | null;
   };
+  publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -406,6 +407,7 @@ export interface Portrait {
 export interface User {
   id: string;
   name?: string | null;
+  role: string;
   updatedAt: string;
   createdAt: string;
   email: string;

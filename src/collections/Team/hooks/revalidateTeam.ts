@@ -9,22 +9,21 @@ export const revalidateTeam: CollectionAfterChangeHook<Team> = ({
   previousDoc,
   req: { payload },
 }) => {
-  // if (doc._status === 'published') {
-  //   const path = `/posts/${doc.slug}`
+  if (doc._status === 'published') {
+    const path = `/team/${doc.slug}`
 
-  //   payload.logger.info(`Revalidating post at path: ${path}`)
+    payload.logger.info(`Revalidating team member at path: ${path}`)
 
-  //   revalidatePath(path)
-  // }
+    revalidatePath(path)
+  }
 
-  // // If the post was previously published, we need to revalidate the old path
-  // if (previousDoc._status === 'published' && doc._status !== 'published') {
-  //   const oldPath = `/posts/${previousDoc.slug}`
+  // If the post was previously published, we need to revalidate the old path
+  if (previousDoc._status === 'published' && doc._status !== 'published') {
+    const oldPath = `/team/${previousDoc.slug}`
 
-  //   payload.logger.info(`Revalidating old post at path: ${oldPath}`)
+    payload.logger.info(`Revalidating old team member at path: ${oldPath}`)
 
-  //   revalidatePath(oldPath)
-  // }
-  revalidatePath(`/team/${doc.slug}`)
+    revalidatePath(oldPath)
+  }
   return doc
 }
