@@ -1,8 +1,6 @@
-import { CodeBlockProps } from '@/blocks/Code/Component'
 import React, { Fragment, JSX } from 'react'
 import { CMSLink } from '@/components/Link'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
-import type { BannerBlock as BannerBlockProps } from '@/payload-types'
 
 import {
   IS_BOLD,
@@ -13,17 +11,8 @@ import {
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
 } from './nodeFormat'
-import type { Page } from '@/payload-types'
 
-export type NodeTypes =
-  | DefaultNodeTypes
-  | SerializedBlockNode<
-      // @ts-ignore // TODO: Fix this
-      | Extract<Page['layout'][0], { blockType: 'cta' }>
-      | Extract<Page['layout'][0], { blockType: 'mediaBlock' }>
-      | BannerBlockProps
-      | CodeBlockProps
-    >
+export type NodeTypes = DefaultNodeTypes | SerializedBlockNode
 
 type Props = {
   nodes: NodeTypes[]
@@ -125,6 +114,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
           //   default:
           //     return null
           // }
+          return null
         } else {
           switch (node.type) {
             case 'linebreak': {
