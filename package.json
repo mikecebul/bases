@@ -20,7 +20,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@payloadcms/db-mongodb": "beta",
-    "@payloadcms/email-resend": "3.0.0-beta.29",
+    "@payloadcms/email-resend": "beta",
     "@payloadcms/live-preview-react": "beta",
     "@payloadcms/next": "beta",
     "@payloadcms/plugin-cloud": "beta",
@@ -79,7 +79,7 @@
     "copyfiles": "^2.4.1",
     "eslint": "^8.57.0",
     "eslint-config-next": "15.0.0-canary.104",
-    "postcss": "^8.4.45",
+    "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.11",
     "typescript": "5.5.4"
