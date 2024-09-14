@@ -66,11 +66,11 @@ export async function Hero({ title, description, image, links }: Props) {
         {image != null && typeof image === 'object' && (
           <>
             <Image
-              src={image.url ?? 'Woman_Laptop.webp'}
+              src={image.url ?? '/woman-laptop.avif'}
               alt={image.alt ?? 'Woman using telehealth services from home.'}
               className="object-cover w-full rounded-lg"
-              width={1080}
-              height={1980}
+              width={1920}
+              height={1080}
               priority
             />
             <SVG />

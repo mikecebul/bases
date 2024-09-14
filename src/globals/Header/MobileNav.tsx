@@ -41,9 +41,14 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
               <nav className="flex flex-col items-center justify-center flex-1 space-y-4">
                 {navItems.map(({ link }, i) => {
                   const slug =
-                    typeof link.reference?.value === 'object' &&
-                    typeof link.reference.value.slug === 'string'
-                      ? link.reference.value.slug
+                    typeof link.reference?.value === 'object'
+                      ? link.reference?.relationTo === 'pages' &&
+                        typeof link.reference.value.slug === 'string'
+                        ? link.reference.value.slug
+                        : link.reference?.relationTo === 'files' &&
+                            typeof link.reference.value.url === 'string'
+                          ? link.reference.value.url
+                          : ''
                       : ''
                   return (
                     <CMSLink
