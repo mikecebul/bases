@@ -1,6 +1,10 @@
 import { CollectionConfig } from 'payload'
 import { anyone } from '../../access/anyone'
-// import { superAdmin } from "@/payload/access/superAdmin";
+import { fileURLToPath } from 'url'
+import path from 'path'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export const Cards: CollectionConfig = {
   slug: 'cards',
@@ -15,7 +19,6 @@ export const Cards: CollectionConfig = {
     hideAPIURL: true,
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
-    // hideAPIURL: !superAdmin,
   },
   upload: {
     crop: true,
@@ -26,6 +29,18 @@ export const Cards: CollectionConfig = {
       height: 800,
       width: 800,
     },
+    imageSizes: [
+      {
+        name: 'thumbnail',
+        width: 300,
+        height: 300,
+        formatOptions: {
+          format: 'avif',
+        },
+      },
+    ],
+    adminThumbnail: 'thumbnail',
+    staticDir: path.resolve(dirname, '../../../public/landscapes'),
   },
   fields: [
     {

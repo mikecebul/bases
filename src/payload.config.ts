@@ -1,5 +1,6 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { resendAdapter } from '@payloadcms/email-resend'
 
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
@@ -135,6 +136,11 @@ export default buildConfig({
   collections: [Pages, Services, Team, Avatars, Cards, Landcapes, Portraits, Files, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
+  email: resendAdapter({
+    defaultFromAddress: process.env.RESEND_DEFAULT_EMAIL || '',
+    defaultFromName: 'BASES Admin',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
   endpoints: [{ handler: seedServices, method: 'get', path: '/seed-services' }],
   globals: [Header, Footer, CompanyInfo],
   plugins: [
