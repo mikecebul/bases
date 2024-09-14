@@ -1,7 +1,7 @@
 import { Block } from 'payload'
 
 export const AboutUs: Block = {
-  slug: 'about-us',
+  slug: 'aboutUs',
   interfaceName: 'AboutUsBlock',
   fields: [
     {
