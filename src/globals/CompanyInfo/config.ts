@@ -18,7 +18,6 @@ export const CompanyInfo: GlobalConfig = {
       name: 'contact',
       type: 'group',
       admin: {
-        hideGutter: true,
         description: 'Company contact information.',
       },
       fields: [
