@@ -23,6 +23,7 @@
     "@payloadcms/email-resend": "beta",
     "@payloadcms/live-preview-react": "beta",
     "@payloadcms/next": "beta",
+    "@payloadcms/plugin-form-builder": "beta",
     "@payloadcms/plugin-redirects": "beta",
     "@payloadcms/plugin-seo": "beta",
     "@payloadcms/richtext-lexical": "beta",
