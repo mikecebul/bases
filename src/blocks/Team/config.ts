@@ -28,6 +28,17 @@ export const Team: Block = {
       type: 'textarea',
     },
     {
+      name: 'teamMembers',
+      type: 'relationship',
+      relationTo: 'team',
+      filterOptions: ({ siblingData }: { siblingData: any }) => {
+        return {
+          memberType: { equals: siblingData.memberType },
+        }
+      },
+      hasMany: true,
+    },
+    {
       name: 'reverse',
       type: 'checkbox',
       label: 'Block on opposite side',

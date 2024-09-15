@@ -11,11 +11,9 @@ import { buttonVariants } from '@/components/ui/button'
 import type { Team as TeamType, TeamBlock as TeamBlockType } from '@/payload-types'
 
 export const Team = ({
-  teamBlock: { title, description, memberType, reverse },
-  team,
+  teamBlock: { title, description, memberType, teamMembers, reverse },
 }: {
   teamBlock: TeamBlockType
-  team: TeamType[]
 }) => {
   const avatarUrlIfExists = (person: TeamType) => {
     if (typeof person.avatar === 'object' && !!person.avatar.url) return person.avatar.url
@@ -43,49 +41,58 @@ export const Team = ({
         role="list"
         className={cn('grid gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-y-12 xl:col-span-2 xl:w-7/12')}
       >
-        {team &&
-          team.map((person, index) => (
-            <motion.div
-              key={person.id}
-              initial={{ x: 'var(--x-from)', opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-              className={cn('[--x-from:30px] sm:[--translate-x-from:-40] max-w-lg', {
-                '[--x-from:-30px] sm:[--translate-x-from:40]': reverse,
-              })}
-            >
-              <Link
-                href={`/team/${person.slug}`}
-                className={cn(
-                  buttonVariants({ variant: 'card' }),
-                  'px-2 w-full justify-start py-4 h-24 max-sm:hover:bg-brand/10',
-                )}
-              >
-                <li>
-                  <div className="flex items-center gap-x-6">
-                    <Avatar className="w-16 h-16">
-                      <AvatarImage src={avatarUrlIfExists(person)} alt="profile of staff member." />
-                      <AvatarFallback>
-                        <Icons.user className="size-8" />
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-base font-semibold leading-7 tracking-tight">
-                        {person.name}
-                      </p>
-                      {memberType === 'staff' && (
-                        <p className="text-sm leading-6 text-muted-foreground">
-                          {person.qualifications}
-                        </p>
-                      )}
-                      <p className="text-sm font-semibold leading-6 text-brand">{person.role}</p>
-                    </div>
-                  </div>
-                </li>
-              </Link>
-            </motion.div>
-          ))}
+        {teamMembers &&
+          Array.isArray(teamMembers) &&
+          teamMembers.map((person, index) => {
+            if (typeof person !== 'string')
+              return (
+                <motion.div
+                  key={person.id}
+                  initial={{ x: 'var(--x-from)', opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.05 }}
+                  className={cn('[--x-from:30px] sm:[--translate-x-from:-40] max-w-lg', {
+                    '[--x-from:-30px] sm:[--translate-x-from:40]': reverse,
+                  })}
+                >
+                  <Link
+                    href={`/team/${person.slug}`}
+                    className={cn(
+                      buttonVariants({ variant: 'card' }),
+                      'px-2 w-full justify-start py-4 h-24 max-sm:hover:bg-brand/10',
+                    )}
+                  >
+                    <li>
+                      <div className="flex items-center gap-x-6">
+                        <Avatar className="w-16 h-16">
+                          <AvatarImage
+                            src={avatarUrlIfExists(person)}
+                            alt="profile of staff member."
+                          />
+                          <AvatarFallback>
+                            <Icons.user className="size-8" />
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="text-base font-semibold leading-7 tracking-tight">
+                            {person.name}
+                          </p>
+                          {memberType === 'staff' && (
+                            <p className="text-sm leading-6 text-muted-foreground">
+                              {person.qualifications}
+                            </p>
+                          )}
+                          <p className="text-sm font-semibold leading-6 text-brand">
+                            {person.role}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  </Link>
+                </motion.div>
+              )
+          })}
       </ul>
     </div>
   )

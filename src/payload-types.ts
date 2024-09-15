@@ -282,36 +282,11 @@ export interface TeamBlock {
   memberType?: ('staff' | 'board') | null;
   title?: string | null;
   description?: string | null;
+  teamMembers?: (string | Team)[] | null;
   reverse?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'team';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AboutUsBlock".
- */
-export interface AboutUsBlock {
-  subtitle?: string | null;
-  richContent?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  images?: (string | Landscape)[] | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'aboutUs';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -409,6 +384,32 @@ export interface Portrait {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsBlock".
+ */
+export interface AboutUsBlock {
+  subtitle?: string | null;
+  richContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  images?: (string | Landscape)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'aboutUs';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
