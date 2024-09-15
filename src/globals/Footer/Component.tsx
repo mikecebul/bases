@@ -7,6 +7,7 @@ import { cn } from '@/utilities/cn'
 import { buttonVariants } from '@/components/ui/button'
 import { Clock, Facebook, Mail, Navigation, Phone, Printer } from 'lucide-react'
 import Image from 'next/image'
+import Container from '@/components/Container'
 
 export async function Footer() {
   const footer: Footer = await getCachedGlobal('footer')()
@@ -17,8 +18,8 @@ export async function Footer() {
   const { contact, social, hours } = companyInfo
 
   return (
-    <footer className="pt-4 rounded-t-md bg-background/50">
-      <div className="w-full px-4 pt-4 mx-auto 2xl:container md:px-8 md:pt-8 2xl:px-0">
+    <footer>
+      <Container className="py-0">
         <div className="grid gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* PageLinks */}
           {!!pageLinks && pageLinks.length > 0 && (
@@ -113,36 +114,34 @@ export async function Footer() {
                   ))}
 
                 {/* Business Hours */}
-                <li className="group">
-                  <div
-                    className={cn(
-                      buttonVariants({ variant: 'text' }),
-                      'text-gray-500 flex items-start justify-start',
-                    )}
-                  >
-                    <Clock className="mr-2" size={20} />
-                    <ul className="">
-                      {hours?.map(({ day, hours, id, note, type }) => (
-                        <li key={id}>
-                          {type === 'default' ? (
-                            <span>
-                              <strong>{`${day}: `}</strong>
-                              {hours}
-                            </span>
-                          ) : (
-                            <span>{note}</span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <li
+                  className={cn(
+                    buttonVariants({ variant: 'text' }),
+                    'text-gray-500 flex items-start justify-start h-full',
+                  )}
+                >
+                  <Clock className="mr-2" size={20} />
+                  <ul>
+                    {hours?.map(({ day, hours, id, note, type }) => (
+                      <li key={id}>
+                        {type === 'default' ? (
+                          <span>
+                            <strong>{`${day}: `}</strong>
+                            {hours}
+                          </span>
+                        ) : (
+                          <span>{note}</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
                 </li>
               </ul>
             </div>
           )}
 
           {/* Map Section */}
-          <div className="col-span-2 lg:col-span-1">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
             <p className="text-lg font-bold">Location</p>
             <Separator className="my-4" />
             <Link href="https://goo.gl/maps/X956fmf511Fef9Pr7">
@@ -167,7 +166,7 @@ export async function Footer() {
             . All Rights Reserved.
           </span>
         </div>
-      </div>
+      </Container>
     </footer>
   )
 }
