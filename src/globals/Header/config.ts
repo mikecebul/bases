@@ -14,7 +14,7 @@ export const Header: GlobalConfig = {
       type: 'array',
       admin: {
         components: {
-          RowLabel: '@/fields/LinkRowLabel',
+          RowLabel: '@/fields/link/LinkRowLabel',
         },
       },
       fields: [

@@ -1,4 +1,4 @@
-import { default as default_0 } from '@/fields/LinkRowLabel'
+import { default as default_0 } from '@/fields/link/LinkRowLabel'
 import { default as default_1 } from '@/blocks/Donate/RowLabel'
 import { RichTextCell as RichTextCell_2 } from '@payloadcms/richtext-lexical/client'
 import { RichTextField as RichTextField_3 } from '@payloadcms/richtext-lexical/client'
@@ -10,26 +10,27 @@ import { UnderlineFeatureClient as UnderlineFeatureClient_8 } from '@payloadcms/
 import { HeadingFeatureClient as HeadingFeatureClient_9 } from '@payloadcms/richtext-lexical/client'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_10 } from '@payloadcms/richtext-lexical/client'
 import { FixedToolbarFeatureClient as FixedToolbarFeatureClient_11 } from '@payloadcms/richtext-lexical/client'
-import { OverviewComponent as OverviewComponent_12 } from '@payloadcms/plugin-seo/client'
-import { MetaTitleComponent as MetaTitleComponent_13 } from '@payloadcms/plugin-seo/client'
-import { MetaImageComponent as MetaImageComponent_14 } from '@payloadcms/plugin-seo/client'
-import { MetaDescriptionComponent as MetaDescriptionComponent_15 } from '@payloadcms/plugin-seo/client'
-import { PreviewComponent as PreviewComponent_16 } from '@payloadcms/plugin-seo/client'
-import { SlugComponent as SlugComponent_17 } from '@/fields/slug/SlugComponent'
-import { default as default_18 } from '@/collections/Services/CellIcon'
-import { default as default_19 } from '@/collections/Services/IconSelect'
-import { default as default_20 } from '@/collections/Services/SeedButton'
-import { default as default_21 } from '@/collections/Team/AvatarCell'
-import { default as default_22 } from '@/collections/Users/RoleCell'
-import { default as default_23 } from '@/collections/Users/RoleSelect'
-import { default as default_24 } from '@/globals/Footer/rowLabels/ColumnRowLabel'
-import { default as default_25 } from '@/globals/CompanyInfo/SocialRowLabel'
-import { default as default_26 } from '@/globals/CompanyInfo/HoursRowLabel'
-import { default as default_27 } from '@/graphics/Icon'
-import { default as default_28 } from '@/graphics/Logo'
+import { default as default_12 } from '@/blocks/Links/RowLabel'
+import { OverviewComponent as OverviewComponent_13 } from '@payloadcms/plugin-seo/client'
+import { MetaTitleComponent as MetaTitleComponent_14 } from '@payloadcms/plugin-seo/client'
+import { MetaImageComponent as MetaImageComponent_15 } from '@payloadcms/plugin-seo/client'
+import { MetaDescriptionComponent as MetaDescriptionComponent_16 } from '@payloadcms/plugin-seo/client'
+import { PreviewComponent as PreviewComponent_17 } from '@payloadcms/plugin-seo/client'
+import { SlugComponent as SlugComponent_18 } from '@/fields/slug/SlugComponent'
+import { default as default_19 } from '@/collections/Services/CellIcon'
+import { default as default_20 } from '@/collections/Services/IconSelect'
+import { default as default_21 } from '@/collections/Services/SeedButton'
+import { default as default_22 } from '@/collections/Team/AvatarCell'
+import { default as default_23 } from '@/collections/Users/RoleCell'
+import { default as default_24 } from '@/collections/Users/RoleSelect'
+import { default as default_25 } from '@/globals/Footer/rowLabels/ColumnRowLabel'
+import { default as default_26 } from '@/globals/CompanyInfo/SocialRowLabel'
+import { default as default_27 } from '@/globals/CompanyInfo/HoursRowLabel'
+import { default as default_28 } from '@/graphics/Icon'
+import { default as default_29 } from '@/graphics/Logo'
 
 export const importMap = {
-  "@/fields/LinkRowLabel#default": default_0,
+  "@/fields/link/LinkRowLabel#default": default_0,
   "@/blocks/Donate/RowLabel#default": default_1,
   "@payloadcms/richtext-lexical/client#RichTextCell": RichTextCell_2,
   "@payloadcms/richtext-lexical/client#RichTextField": RichTextField_3,
@@ -41,21 +42,22 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#HeadingFeatureClient": HeadingFeatureClient_9,
   "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_10,
   "@payloadcms/richtext-lexical/client#FixedToolbarFeatureClient": FixedToolbarFeatureClient_11,
-  "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_12,
-  "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_13,
-  "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_14,
-  "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_15,
-  "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_16,
-  "@/fields/slug/SlugComponent#SlugComponent": SlugComponent_17,
-  "@/collections/Services/CellIcon#default": default_18,
-  "@/collections/Services/IconSelect#default": default_19,
-  "@/collections/Services/SeedButton#default": default_20,
-  "@/collections/Team/AvatarCell#default": default_21,
-  "@/collections/Users/RoleCell#default": default_22,
-  "@/collections/Users/RoleSelect#default": default_23,
-  "@/globals/Footer/rowLabels/ColumnRowLabel#default": default_24,
-  "@/globals/CompanyInfo/SocialRowLabel#default": default_25,
-  "@/globals/CompanyInfo/HoursRowLabel#default": default_26,
-  "@/graphics/Icon#default": default_27,
-  "@/graphics/Logo#default": default_28
+  "@/blocks/Links/RowLabel#default": default_12,
+  "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_13,
+  "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_14,
+  "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_15,
+  "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_16,
+  "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_17,
+  "@/fields/slug/SlugComponent#SlugComponent": SlugComponent_18,
+  "@/collections/Services/CellIcon#default": default_19,
+  "@/collections/Services/IconSelect#default": default_20,
+  "@/collections/Services/SeedButton#default": default_21,
+  "@/collections/Team/AvatarCell#default": default_22,
+  "@/collections/Users/RoleCell#default": default_23,
+  "@/collections/Users/RoleSelect#default": default_24,
+  "@/globals/Footer/rowLabels/ColumnRowLabel#default": default_25,
+  "@/globals/CompanyInfo/SocialRowLabel#default": default_26,
+  "@/globals/CompanyInfo/HoursRowLabel#default": default_27,
+  "@/graphics/Icon#default": default_28,
+  "@/graphics/Logo#default": default_29
 }

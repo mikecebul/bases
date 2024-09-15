@@ -3,7 +3,7 @@ import { Hero } from '@/payload-types'
 export function HeroMedium(props: Hero['mediumImpact']) {
   const { subtitle, title, description } = props || {}
   return (
-    <div className="flex justify-center max-w-prose text-left text-pretty lg:text-center">
+    <div className="mx-auto flex flex-col justify-center max-w-prose text-left text-pretty lg:text-center pb-16">
       {!!subtitle && <Subtitle text={subtitle} />}
       {!!title && <Title text={title} />}
       {!!description && <Description text={description} />}

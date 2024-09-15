@@ -1,5 +1,5 @@
 import type { Block } from 'payload'
-import { linkGroup } from '../../fields/linkGroup'
+import { linkGroup } from '@/fields/link/linkGroup'
 
 export const Hero: Block = {
   slug: 'hero',
@@ -57,7 +57,7 @@ export const Hero: Block = {
             maxRows: 2,
             admin: {
               components: {
-                RowLabel: '@/fields/LinkRowLabel',
+                RowLabel: '@/fields/link/LinkRowLabel',
               },
             },
           },
@@ -81,7 +81,6 @@ export const Hero: Block = {
         {
           name: 'subtitle',
           type: 'text',
-          required: true,
         },
         {
           name: 'title',
@@ -91,7 +90,6 @@ export const Hero: Block = {
         {
           name: 'description',
           type: 'textarea',
-          required: true,
         },
       ],
     },

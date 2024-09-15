@@ -62,11 +62,14 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout: (Hero | ServicesBlock | CarfBlock | DonateBlock | TeamBlock | AboutUsBlock)[];
+  layout: (Hero | ServicesBlock | CarfBlock | DonateBlock | TeamBlock | AboutUsBlock | LinksBlock)[];
   meta?: {
-    title?: string | null;
-    image?: (string | null) | Card;
-    description?: string | null;
+    hideFromSearchEngines?: boolean | null;
+    metadata?: {
+      title?: string | null;
+      image?: (string | null) | Card;
+      description?: string | null;
+    };
   };
   publishedAt?: string | null;
   slug?: string | null;
@@ -109,9 +112,9 @@ export interface Hero {
     image: string | Landscape;
   };
   mediumImpact?: {
-    subtitle: string;
+    subtitle?: string | null;
     title: string;
-    description: string;
+    description?: string | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -410,6 +413,30 @@ export interface AboutUsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'aboutUs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinksBlock".
+ */
+export interface LinksBlock {
+  hero?: Hero[] | null;
+  linkCards?:
+    | {
+        title: string;
+        description: string;
+        linkType?: ('link' | 'video') | null;
+        resource?: {
+          imageUploadOption?: ('generate' | 'manual') | null;
+          keywords?: string | null;
+          image?: (string | null) | Card;
+        };
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'linksBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

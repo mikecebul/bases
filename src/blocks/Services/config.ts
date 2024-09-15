@@ -1,5 +1,5 @@
 import type { Block } from 'payload'
-import { linkGroup } from '../../fields/linkGroup'
+import { linkGroup } from '@/fields/link/linkGroup'
 
 export const Services: Block = {
   slug: 'services',
@@ -79,7 +79,7 @@ export const Services: Block = {
             maxRows: 1,
             admin: {
               components: {
-                RowLabel: '@/fields/LinkRowLabel',
+                RowLabel: '@/fields/link/LinkRowLabel',
               },
             },
           },

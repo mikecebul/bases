@@ -45,7 +45,7 @@ export const Footer: GlobalConfig = {
           admin: {
             condition: (_, siblingData) => siblingData.columnType === 'pageLinks',
             components: {
-              RowLabel: '@/fields/LinkRowLabel',
+              RowLabel: '@/fields/link/LinkRowLabel',
             },
           },
         },

@@ -3,7 +3,7 @@ import { ServicesList } from '@/components/ServicesList'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import payloadConfig from '@payload-config'
 import { CMSLink } from '@/components/Link'
-import { Description, Subtitle, Title } from '@/components/Hero/HeroMedium'
+import { Description, HeroMedium, Subtitle, Title } from '@/components/Hero/HeroMedium'
 import { GridSVG } from '@/components/GridSVG'
 import Container from '@/components/Container'
 
@@ -32,11 +32,7 @@ export async function ServicesBlock({
   return (
     <Container className="">
       {gridSVG && <GridSVG />}
-      <div className="mx-auto flex flex-col justify-center max-w-prose text-left text-pretty lg:text-center pb-16">
-        {!!subtitle && <Subtitle text={subtitle} />}
-        {!!title && <Title text={title} />}
-        {!!description && <Description text={description} />}
-      </div>
+      <HeroMedium subtitle={subtitle} title={title} description={description} />
       {howMany === 'allServices' && allServices.length > 0 && (
         <ServicesList services={allServices} />
       )}

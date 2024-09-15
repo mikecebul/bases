@@ -9,6 +9,7 @@ import DonateBlock from './Donate/Component'
 import { TeamBlock } from './Team/Component'
 import { TeamMemberBlock } from './TeamMember/Component'
 import { AboutUsBlock } from './AboutUs/Component'
+import { LinksBlock } from './Links/Component'
 
 const blockComponents = {
   hero: HeroBlock,
@@ -18,6 +19,7 @@ const blockComponents = {
   team: TeamBlock,
   teamMember: TeamMemberBlock,
   aboutUs: AboutUsBlock,
+  linksBlock: LinksBlock,
 }
 
 export const RenderBlocks: React.FC<{

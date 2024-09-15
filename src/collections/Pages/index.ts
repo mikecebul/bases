@@ -20,7 +20,7 @@ import {
 import { Donate } from '@/blocks/Donate/config'
 import { Team } from '@/blocks/Team/config'
 import { AboutUs } from '@/blocks/AboutUs/config'
-import { superAdmin } from '@/access/superAdmin'
+import { Links } from '@/blocks/Links/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -59,7 +59,7 @@ export const Pages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Hero, Services, Carf, Donate, Team, AboutUs],
+              blocks: [Hero, Services, Carf, Donate, Team, AboutUs, Links],
               required: true,
             },
           ],
@@ -69,27 +69,42 @@ export const Pages: CollectionConfig = {
           name: 'meta',
           label: 'SEO',
           fields: [
-            OverviewField({
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-              imagePath: 'meta.image',
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'cards',
-            }),
+            {
+              name: 'hideFromSearchEngines',
+              type: 'checkbox',
+              defaultValue: false,
+              label: 'Hide from search engines',
+            },
+            {
+              name: 'metadata',
+              type: 'group',
+              admin: {
+                condition: (data) => data.meta.hideFromSearchEngines === false,
+              },
+              fields: [
+                OverviewField({
+                  titlePath: 'meta.title',
+                  descriptionPath: 'meta.description',
+                  imagePath: 'meta.image',
+                }),
+                MetaTitleField({
+                  hasGenerateFn: true,
+                }),
+                MetaImageField({
+                  relationTo: 'cards',
+                }),
 
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
+                MetaDescriptionField({}),
+                PreviewField({
+                  // if the `generateUrl` function is configured
+                  hasGenerateFn: true,
 
-              // field paths to match the target field for data
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-            }),
+                  // field paths to match the target field for data
+                  titlePath: 'meta.title',
+                  descriptionPath: 'meta.description',
+                }),
+              ],
+            },
           ],
         },
       ],
