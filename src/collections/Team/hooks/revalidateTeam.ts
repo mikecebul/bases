@@ -15,6 +15,7 @@ export const revalidateTeam: CollectionAfterChangeHook<Team> = ({
     payload.logger.info(`Revalidating team member at path: ${path}`)
 
     revalidatePath(path)
+    revalidatePath('/team')
   }
 
   // If the post was previously published, we need to revalidate the old path
@@ -24,6 +25,7 @@ export const revalidateTeam: CollectionAfterChangeHook<Team> = ({
     payload.logger.info(`Revalidating old team member at path: ${oldPath}`)
 
     revalidatePath(oldPath)
+    revalidatePath('/team')
   }
   return doc
 }
