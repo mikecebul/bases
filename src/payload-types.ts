@@ -319,9 +319,12 @@ export interface Team {
     [k: string]: unknown;
   };
   meta?: {
-    title?: string | null;
-    image?: (string | null) | Card;
-    description?: string | null;
+    hideFromSearchEngines?: boolean | null;
+    metadata?: {
+      title?: string | null;
+      image?: (string | null) | Card;
+      description?: string | null;
+    };
   };
   publishedAt?: string | null;
   slug?: string | null;

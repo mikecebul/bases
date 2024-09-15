@@ -104,27 +104,42 @@ export const Team: CollectionConfig = {
           name: 'meta',
           label: 'SEO',
           fields: [
-            OverviewField({
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-              imagePath: 'meta.image',
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'cards',
-            }),
+            {
+              name: 'hideFromSearchEngines',
+              type: 'checkbox',
+              defaultValue: false,
+              label: 'Hide from search engines',
+            },
+            {
+              name: 'metadata',
+              type: 'group',
+              admin: {
+                condition: (data) => data.meta.hideFromSearchEngines === false,
+              },
+              fields: [
+                OverviewField({
+                  titlePath: 'meta.title',
+                  descriptionPath: 'meta.description',
+                  imagePath: 'meta.image',
+                }),
+                MetaTitleField({
+                  hasGenerateFn: true,
+                }),
+                MetaImageField({
+                  relationTo: 'cards',
+                }),
 
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
+                MetaDescriptionField({}),
+                PreviewField({
+                  // if the `generateUrl` function is configured
+                  hasGenerateFn: true,
 
-              // field paths to match the target field for data
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-            }),
+                  // field paths to match the target field for data
+                  titlePath: 'meta.title',
+                  descriptionPath: 'meta.description',
+                }),
+              ],
+            },
           ],
         },
       ],
