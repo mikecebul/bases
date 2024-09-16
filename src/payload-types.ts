@@ -25,7 +25,7 @@ export interface Config {
     'payload-migrations': PayloadMigration;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {
     header: Header;
@@ -60,14 +60,14 @@ export interface UserAuthOperations {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: number;
+  id: string;
   title: string;
   layout: (Hero | ServicesBlock | CarfBlock | DonateBlock | TeamBlock | AboutUsBlock | LinksBlock)[];
   meta?: {
     hideFromSearchEngines?: boolean | null;
     metadata?: {
       title?: string | null;
-      image?: (number | null) | Card;
+      image?: (string | null) | Card;
       description?: string | null;
     };
   };
@@ -96,11 +96,11 @@ export interface Hero {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'files';
-                  value: number | File;
+                  value: string | File;
                 } | null);
             url?: string | null;
             label: string;
@@ -109,7 +109,7 @@ export interface Hero {
           id?: string | null;
         }[]
       | null;
-    image: number | Landscape;
+    image: string | Landscape;
   };
   mediumImpact?: {
     subtitle?: string | null;
@@ -125,7 +125,7 @@ export interface Hero {
  * via the `definition` "files".
  */
 export interface File {
-  id: number;
+  id: string;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -143,7 +143,7 @@ export interface File {
  * via the `definition` "landscapes".
  */
 export interface Landscape {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -178,7 +178,7 @@ export interface ServicesBlock {
   gridSVG: boolean;
   howMany: 'topThreeServices' | 'allServices';
   services?: {
-    topThreeServices: (number | Service)[];
+    topThreeServices: (string | Service)[];
     links?:
       | {
           link: {
@@ -187,11 +187,11 @@ export interface ServicesBlock {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'files';
-                  value: number | File;
+                  value: string | File;
                 } | null);
             url?: string | null;
             label: string;
@@ -210,7 +210,7 @@ export interface ServicesBlock {
  * via the `definition` "services".
  */
 export interface Service {
-  id: number;
+  id: string;
   title: string;
   desc: string;
   icon: string;
@@ -225,7 +225,7 @@ export interface CarfBlock {
   subtitle?: string | null;
   title?: string | null;
   description?: string | null;
-  image?: (number | null) | Card;
+  image?: (string | null) | Card;
   id?: string | null;
   blockName?: string | null;
   blockType: 'carf';
@@ -235,7 +235,7 @@ export interface CarfBlock {
  * via the `definition` "cards".
  */
 export interface Card {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -285,7 +285,7 @@ export interface TeamBlock {
   memberType?: ('staff' | 'board') | null;
   title?: string | null;
   description?: string | null;
-  teamMembers?: (number | Team)[] | null;
+  teamMembers?: (string | Team)[] | null;
   reverse?: boolean | null;
   id?: string | null;
   blockName?: string | null;
@@ -296,11 +296,11 @@ export interface TeamBlock {
  * via the `definition` "team".
  */
 export interface Team {
-  id: number;
+  id: string;
   memberType?: ('staff' | 'board') | null;
   name: string;
-  avatar: number | Avatar;
-  image: number | Portrait;
+  avatar: string | Avatar;
+  image: string | Portrait;
   role: string;
   qualifications?: string | null;
   bio: {
@@ -322,7 +322,7 @@ export interface Team {
     hideFromSearchEngines?: boolean | null;
     metadata?: {
       title?: string | null;
-      image?: (number | null) | Card;
+      image?: (string | null) | Card;
       description?: string | null;
     };
   };
@@ -338,7 +338,7 @@ export interface Team {
  * via the `definition` "avatars".
  */
 export interface Avatar {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -367,7 +367,7 @@ export interface Avatar {
  * via the `definition` "portraits".
  */
 export interface Portrait {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -412,7 +412,7 @@ export interface AboutUsBlock {
     };
     [k: string]: unknown;
   } | null;
-  images?: (number | Landscape)[] | null;
+  images?: (string | Landscape)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'aboutUs';
@@ -431,7 +431,7 @@ export interface LinksBlock {
         resource?: {
           imageUploadOption?: ('generate' | 'manual') | null;
           keywords?: string | null;
-          image?: (number | null) | Card;
+          image?: (string | null) | Card;
         };
         href: string;
         id?: string | null;
@@ -446,7 +446,7 @@ export interface LinksBlock {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   name?: string | null;
   role: string;
   updatedAt: string;
@@ -465,18 +465,18 @@ export interface User {
  * via the `definition` "redirects".
  */
 export interface Redirect {
-  id: number;
+  id: string;
   from: string;
   to?: {
     type?: ('reference' | 'custom') | null;
     reference?:
       | ({
           relationTo: 'pages';
-          value: number | Page;
+          value: string | Page;
         } | null)
       | ({
           relationTo: 'team';
-          value: number | Team;
+          value: string | Team;
         } | null);
     url?: string | null;
   };
@@ -488,10 +488,10 @@ export interface Redirect {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -511,7 +511,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -522,7 +522,7 @@ export interface PayloadMigration {
  * via the `definition` "header".
  */
 export interface Header {
-  id: number;
+  id: string;
   navItems?:
     | {
         link: {
@@ -531,11 +531,11 @@ export interface Header {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: number | Page;
+                value: string | Page;
               } | null)
             | ({
                 relationTo: 'files';
-                value: number | File;
+                value: string | File;
               } | null);
           url?: string | null;
           label: string;
@@ -551,7 +551,7 @@ export interface Header {
  * via the `definition` "footer".
  */
 export interface Footer {
-  id: number;
+  id: string;
   columns?:
     | {
         columnType: 'pageLinks' | 'contactInfo' | 'googleMap';
@@ -563,11 +563,11 @@ export interface Footer {
                 reference?:
                   | ({
                       relationTo: 'pages';
-                      value: number | Page;
+                      value: string | Page;
                     } | null)
                   | ({
                       relationTo: 'files';
-                      value: number | File;
+                      value: string | File;
                     } | null);
                 url?: string | null;
                 label: string;
@@ -592,7 +592,7 @@ export interface Footer {
  * via the `definition` "company-info".
  */
 export interface CompanyInfo {
-  id: number;
+  id: string;
   contact?: {
     phone?: string | null;
     fax?: string | null;
@@ -609,11 +609,11 @@ export interface CompanyInfo {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: number | Page;
+                value: string | Page;
               } | null)
             | ({
                 relationTo: 'files';
-                value: number | File;
+                value: string | File;
               } | null);
           url?: string | null;
           label: string;

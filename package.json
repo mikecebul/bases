@@ -22,7 +22,6 @@
     "@lexical/headless": "0.17.0",
     "@lexical/markdown": "0.17.0",
     "@payloadcms/db-mongodb": "3.0.0-beta.107",
-    "@payloadcms/db-sqlite": "3.0.0-beta.107",
     "@payloadcms/email-resend": "3.0.0-beta.107",
     "@payloadcms/live-preview-react": "3.0.0-beta.107",
     "@payloadcms/next": "3.0.0-beta.107",
