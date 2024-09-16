@@ -1,5 +1,5 @@
-// storage-adapter-import-placeholder
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+// import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
@@ -38,6 +38,7 @@ import { Files } from './collections/Files'
 import { Team } from './collections/Team'
 import { superAdmin } from './access/superAdmin'
 import { seedServices } from './endpoints/seedServices'
+import { seedTeam } from './endpoints/seedTeam'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -130,9 +131,17 @@ export default buildConfig({
       ]
     },
   }),
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+  db: sqliteAdapter({
+    client: {
+      // for turso you can do this:
+      url: process.env.LOCAL_DATABASE_URL ?? process.env.TURSO_DATABASE_URL!,
+      authToken: process.env.LOCAL_DATABASE_URL ? undefined : process.env.TURSO_AUTH_TOKEN,
+    },
+    // logger: true,
   }),
+  // db: mongooseAdapter({
+  //   url: process.env.DATABASE_URI || '',
+  // }),
   collections: [Pages, Services, Team, Avatars, Cards, Landcapes, Portraits, Files, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
@@ -141,7 +150,10 @@ export default buildConfig({
     defaultFromName: 'BASES Admin',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
-  endpoints: [{ handler: seedServices, method: 'get', path: '/seed-services' }],
+  endpoints: [
+    { handler: seedServices, method: 'get', path: '/seed-services' },
+    { handler: seedTeam, method: 'get', path: '/seed-team' },
+  ],
   globals: [Header, Footer, CompanyInfo],
   plugins: [
     redirectsPlugin({

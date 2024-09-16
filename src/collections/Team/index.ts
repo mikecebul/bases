@@ -29,6 +29,9 @@ export const Team: CollectionConfig = {
     hideAPIURL: true,
     defaultColumns: ['name', 'memberType', 'avatar', 'role', 'updatedAt'],
     description: 'A collection of staff and board members.',
+    components: {
+      afterListTable: ['@/collections/Team/SeedButton'],
+    },
   },
   fields: [
     {

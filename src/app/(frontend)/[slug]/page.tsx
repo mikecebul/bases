@@ -49,7 +49,6 @@ export default async function Page({ params: { slug = 'home' } }) {
 
   return (
     <main className="">
-      <p>Hello WOrld</p>
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
       <RenderBlocks blocks={layout} />

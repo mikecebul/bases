@@ -1,5 +1,5 @@
 import type { PayloadHandler } from 'payload'
-import { oldSiteConfig } from '@/config'
+import { siteConfig } from '@/config'
 import { revalidatePath } from 'next/cache'
 
 export const seedServices: PayloadHandler = async (req): Promise<Response> => {
@@ -10,7 +10,7 @@ export const seedServices: PayloadHandler = async (req): Promise<Response> => {
   }
 
   try {
-    const createServicesPromises = oldSiteConfig.Services.map(
+    const createServicesPromises = siteConfig.Services.map(
       async (service) =>
         await payload.create({
           collection: 'services',
