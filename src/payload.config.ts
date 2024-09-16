@@ -1,5 +1,4 @@
-// import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
@@ -131,17 +130,9 @@ export default buildConfig({
       ]
     },
   }),
-  db: sqliteAdapter({
-    client: {
-      // for turso you can do this:
-      url: process.env.LOCAL_DATABASE_URL ?? process.env.TURSO_DATABASE_URL!,
-      authToken: process.env.LOCAL_DATABASE_URL ? undefined : process.env.TURSO_AUTH_TOKEN,
-    },
-    // logger: true,
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URI || '',
   }),
-  // db: mongooseAdapter({
-  //   url: process.env.DATABASE_URI || '',
-  // }),
   collections: [Pages, Services, Team, Avatars, Cards, Landcapes, Portraits, Files, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
