@@ -8,8 +8,8 @@ node_modules
 
 # Payload default media upload directory
 public/media/
-# public/files
-# public/landscapes
-# public/cards
-# public/portraits
-# public/avatars
+public/files
+public/landscapes
+public/cards
+public/portraits
+public/avatars
