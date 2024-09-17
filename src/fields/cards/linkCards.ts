@@ -16,6 +16,7 @@ export const linkCards = (keywords: string[]): Field => {
       },
       {
         name: 'description',
+        label: 'Description',
         type: 'textarea',
         required: true,
       },

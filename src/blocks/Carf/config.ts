@@ -15,6 +15,7 @@ export const Carf: Block = {
     {
       name: 'description',
       type: 'textarea',
+      label: 'Description',
     },
     {
       name: 'image',

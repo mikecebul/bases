@@ -34,6 +34,7 @@ export const Links: Block = {
         {
           name: 'description',
           type: 'textarea',
+          label: 'Description',
           required: true,
         },
         {

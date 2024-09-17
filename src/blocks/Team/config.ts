@@ -26,6 +26,7 @@ export const Team: Block = {
     {
       name: 'description',
       type: 'textarea',
+      label: 'Description',
     },
     {
       name: 'teamMembers',

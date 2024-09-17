@@ -15,6 +15,7 @@ export const Donate: Block = {
     {
       name: 'description',
       type: 'textarea',
+      label: 'Description',
     },
     {
       name: 'programs',

@@ -24,6 +24,7 @@ export const Services: Block = {
     {
       name: 'description',
       type: 'textarea',
+      label: 'Description',
       defaultValue:
         "With decades of experience, we've developed services that truly serve our community's needs.",
       required: true,

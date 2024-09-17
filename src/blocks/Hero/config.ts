@@ -89,6 +89,7 @@ export const Hero: Block = {
         },
         {
           name: 'description',
+          label: 'Description',
           type: 'textarea',
         },
       ],
