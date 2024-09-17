@@ -139,8 +139,8 @@ export default buildConfig({
     // logger: true,
   }),
   collections: [Pages, Services, Team, Avatars, Cards, Landcapes, Portraits, Files, Users],
-  cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
-  csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
+  cors: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
+  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
   email: resendAdapter({
     defaultFromAddress: process.env.RESEND_DEFAULT_EMAIL || '',
     defaultFromName: 'BASES Admin',

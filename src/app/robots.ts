@@ -1,9 +1,17 @@
-import type { Page } from '@/payload-types'
 import { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
+  if (process.env.NEXT_PUBLIC_IS_LIVE === 'false') {
+    return {
+      rules: {
+        userAgent: '*',
+        disallow: ['/'],
+      },
+    }
+  }
+
   const payload = await getPayload({ config: configPromise })
   const { docs: pages } = await payload.find({
     collection: 'pages',
@@ -34,6 +42,6 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       allow: '/',
       disallow: ['/admin', ...disallowedPages, ...disallowedTeamPages],
     },
-    sitemap: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/sitemap.xml`,
+    sitemap: `${process.env.NEXT_PUBLIC_SERVER_URL}/sitemap.xml`,
   }
 }

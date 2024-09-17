@@ -3,7 +3,11 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const URL = process.env.NEXT_PUBLIC_DOMAIN_URL
+  if (process.env.NEXT_PUBLIC_IS_LIVE === 'false') {
+    return []
+  }
+
+  const URL = process.env.NEXT_PUBLIC_SERVER_URL
   const payload = await getPayload({ config: configPromise })
   const { docs: pages } = await payload.find({
     collection: 'pages',
