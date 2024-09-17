@@ -114,28 +114,30 @@ export async function Footer() {
                   ))}
 
                 {/* Business Hours */}
-                <li
-                  className={cn(
-                    buttonVariants({ variant: 'text' }),
-                    'text-gray-500 flex items-start justify-start h-full',
-                  )}
-                >
-                  <Clock className="mr-2" size={20} />
-                  <ul>
-                    {hours?.map(({ day, hours, id, note, type }) => (
-                      <li key={id}>
-                        {type === 'default' ? (
-                          <span>
-                            <strong>{`${day}: `}</strong>
-                            {hours}
-                          </span>
-                        ) : (
-                          <span>{note}</span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </li>
+                {!!hours && hours?.length > 0 && (
+                  <li
+                    className={cn(
+                      buttonVariants({ variant: 'text' }),
+                      'text-gray-500 flex items-start justify-start h-full',
+                    )}
+                  >
+                    <Clock className="mr-2" size={20} />
+                    <ul>
+                      {hours?.map(({ day, hours, id, note, type }) => (
+                        <li key={id}>
+                          {type === 'default' ? (
+                            <span>
+                              <strong>{`${day}: `}</strong>
+                              {hours}
+                            </span>
+                          ) : (
+                            <span>{note}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                )}
               </ul>
             </div>
           )}

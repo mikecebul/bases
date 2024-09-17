@@ -44,7 +44,7 @@ export const Team = ({
         {teamMembers &&
           Array.isArray(teamMembers) &&
           teamMembers.map((person, index) => {
-            if (typeof person !== 'string')
+            if (typeof person === 'object')
               return (
                 <motion.div
                   key={person.id}

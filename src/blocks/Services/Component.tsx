@@ -25,7 +25,7 @@ export async function ServicesBlock({
   })
   const topThreeServices =
     services?.topThreeServices != null &&
-    services.topThreeServices.every((item) => typeof item !== 'string')
+    services.topThreeServices.every((item) => typeof item === 'object')
       ? services.topThreeServices
       : []
 

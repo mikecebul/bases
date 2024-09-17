@@ -20,7 +20,7 @@ export async function generateStaticParams() {
   return team.docs?.map(({ slug }) => slug)
 }
 
-export default async function TeamMember({ params: { slug = '' } }) {
+export default async function TeamMember({ params: { slug } }) {
   const url = '/team/' + slug
   const teamMember = await queryTeamMemberBySlug({ slug })
 
@@ -62,5 +62,5 @@ const queryTeamMemberBySlug = cache(async ({ slug }: { slug: string }) => {
     },
   })
 
-  return result.docs?.[0] || null
+  return result?.docs?.[0] || null
 })

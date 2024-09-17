@@ -13,3 +13,6 @@ public/landscapes
 public/cards
 public/portraits
 public/avatars
+
+# sqlite db
+payload.db
