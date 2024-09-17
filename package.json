@@ -24,7 +24,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@lexical/headless": "0.17.0",
     "@lexical/markdown": "0.17.0",
-    "@libsql/client": "^0.12.0",
+    "@libsql/client": "^0.6.2",
     "@payloadcms/db-sqlite": "3.0.0-beta.107",
     "@payloadcms/email-resend": "3.0.0-beta.107",
     "@payloadcms/live-preview-react": "3.0.0-beta.107",
