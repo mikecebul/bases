@@ -10,7 +10,7 @@ import { UnderlineFeatureClient as UnderlineFeatureClient_8 } from '@payloadcms/
 import { HeadingFeatureClient as HeadingFeatureClient_9 } from '@payloadcms/richtext-lexical/client'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_10 } from '@payloadcms/richtext-lexical/client'
 import { FixedToolbarFeatureClient as FixedToolbarFeatureClient_11 } from '@payloadcms/richtext-lexical/client'
-import { default as default_12 } from '@/blocks/Links/RowLabel'
+import { default as default_12 } from '@/fields/cards/RowLabel'
 import { OverviewComponent as OverviewComponent_13 } from '@payloadcms/plugin-seo/client'
 import { MetaTitleComponent as MetaTitleComponent_14 } from '@payloadcms/plugin-seo/client'
 import { MetaImageComponent as MetaImageComponent_15 } from '@payloadcms/plugin-seo/client'
@@ -43,7 +43,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#HeadingFeatureClient": HeadingFeatureClient_9,
   "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_10,
   "@payloadcms/richtext-lexical/client#FixedToolbarFeatureClient": FixedToolbarFeatureClient_11,
-  "@/blocks/Links/RowLabel#default": default_12,
+  "@/fields/cards/RowLabel#default": default_12,
   "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_13,
   "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_14,
   "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_15,

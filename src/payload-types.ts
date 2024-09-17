@@ -6,6 +6,23 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinkCards".
+ */
+export type LinkCards =
+  | {
+      linkType?: ('link' | 'video') | null;
+      title: string;
+      description: string;
+      imageUploadOption?: ('generate' | 'manual') | null;
+      keywords?: string | null;
+      image?: (string | null) | Card;
+      href: string;
+      id?: string | null;
+    }[]
+  | null;
+
 export interface Config {
   auth: {
     users: UserAuthOperations;
@@ -423,20 +440,7 @@ export interface AboutUsBlock {
  */
 export interface LinksBlock {
   hero?: Hero[] | null;
-  linkCards?:
-    | {
-        title: string;
-        description: string;
-        linkType?: ('link' | 'video') | null;
-        resource?: {
-          imageUploadOption?: ('generate' | 'manual') | null;
-          keywords?: string | null;
-          image?: (string | null) | Card;
-        };
-        href: string;
-        id?: string | null;
-      }[]
-    | null;
+  links?: LinkCards;
   id?: string | null;
   blockName?: string | null;
   blockType: 'linksBlock';
