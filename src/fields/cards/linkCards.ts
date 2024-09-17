@@ -3,7 +3,7 @@ import { addHTTPS } from '@/hooks/addHTTPS'
 import { fetchRandomImage } from './fetchRandomImage'
 
 export const linkCards: ArrayField = {
-  name: 'links',
+  name: 'linkCards',
   type: 'array',
   label: 'Link and YouTube Cards',
   interfaceName: 'LinkCards',

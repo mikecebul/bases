@@ -10,11 +10,11 @@ export const LinkCard = ({ card }: { card: LinkCardType }) => {
       <Card className="flex flex-col h-full max-w-lg px-0 py-0 text-left shadow bg-accent/60 hover:bg-accent group">
         <CardContent className="p-0 overflow-hidden rounded-t-md">
           {card.linkType === 'link' &&
-            typeof card.resource?.image === 'object' &&
-            typeof card.resource.image?.url === 'string' && (
+            typeof card.image === 'object' &&
+            typeof card.image?.url === 'string' && (
               <Image
-                src={card.resource.image.url}
-                alt={card.resource.image.alt}
+                src={card.image.url}
+                alt={card.image.alt}
                 width={800}
                 height={800}
                 className="object-cover transition-transform duration-300 ease-in-out max-h-60 group-hover:scale-105"

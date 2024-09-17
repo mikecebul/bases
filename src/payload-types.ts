@@ -440,7 +440,7 @@ export interface AboutUsBlock {
  */
 export interface LinksBlock {
   hero?: Hero[] | null;
-  links?: LinkCards;
+  linkCards?: LinkCards;
   id?: string | null;
   blockName?: string | null;
   blockType: 'linksBlock';
