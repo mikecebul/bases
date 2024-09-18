@@ -13,34 +13,29 @@ export async function ServicesBlock({
   description,
   gridSVG,
   howMany,
-  services,
+  allServices,
+  topThreeServices,
+  links,
 }: ServicesBlockType) {
-  const payload = await getPayloadHMR({
-    config: payloadConfig,
-  })
-
-  const { docs: allServices } = await payload.find({
-    collection: 'services',
-    limit: 100,
-  })
-  const topThreeServices =
-    services?.topThreeServices != null &&
-    services.topThreeServices.every((item) => typeof item === 'object')
-      ? services.topThreeServices
+  const sanitizedAllServices =
+    allServices != null && allServices.every((item) => typeof item === 'object') ? allServices : []
+  const sanitizedTopThreeServices =
+    topThreeServices != null && topThreeServices.every((item) => typeof item === 'object')
+      ? topThreeServices
       : []
 
   return (
     <Container className="">
       {gridSVG && <GridSVG />}
       <HeroMedium subtitle={subtitle} title={title} description={description} />
-      {howMany === 'allServices' && allServices.length > 0 && (
-        <ServicesList services={allServices} />
+      {howMany === 'allServices' && sanitizedAllServices.length > 0 && (
+        <ServicesList services={sanitizedAllServices} />
       )}
-      {howMany === 'topThreeServices' && topThreeServices.length > 0 && (
+      {howMany === 'topThreeServices' && sanitizedTopThreeServices.length > 0 && (
         <>
-          <ServicesList services={topThreeServices} />
-          {services?.links != null
-            ? services.links.map(({ link }) => (
+          <ServicesList services={sanitizedTopThreeServices} />
+          {links != null
+            ? links.map(({ link }) => (
                 <div key={link.label} className="flex md:flex-row pt-12 justify-center">
                   <CMSLink
                     key={link.label}

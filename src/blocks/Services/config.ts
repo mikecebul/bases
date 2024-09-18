@@ -54,38 +54,43 @@ export const Services: Block = {
       required: true,
     },
     {
-      type: 'group',
-      name: 'services',
+      name: 'topThreeServices',
+      label: 'Services',
+      type: 'relationship',
       admin: {
-        hideGutter: true,
         condition: (_, { howMany } = {}) => ['topThreeServices'].includes(howMany),
+        description: 'Select and sort the top 3 services',
+        width: '350px',
       },
-
-      fields: [
-        {
-          name: 'topThreeServices',
-          label: 'Top 3 Services',
-          type: 'relationship',
-          admin: {
-            width: '350px',
-          },
-          relationTo: 'services',
-          hasMany: true,
-          maxRows: 3,
-          minRows: 3,
-          required: true,
-        },
-        linkGroup({
-          overrides: {
-            maxRows: 1,
-            admin: {
-              components: {
-                RowLabel: '@/fields/link/LinkRowLabel',
-              },
-            },
-          },
-        }),
-      ],
+      relationTo: 'services',
+      hasMany: true,
+      maxRows: 3,
+      minRows: 3,
+      required: true,
     },
+    {
+      name: 'allServices',
+      label: 'Services',
+      type: 'relationship',
+      admin: {
+        condition: (_, { howMany } = {}) => ['allServices'].includes(howMany),
+        description: 'Select and sort all your available services',
+        width: '350px',
+      },
+      relationTo: 'services',
+      hasMany: true,
+      required: true,
+    },
+    linkGroup({
+      overrides: {
+        maxRows: 1,
+        admin: {
+          condition: (_, { howMany } = {}) => ['topThreeServices'].includes(howMany),
+          components: {
+            RowLabel: '@/fields/link/LinkRowLabel',
+          },
+        },
+      },
+    }),
   ],
 }

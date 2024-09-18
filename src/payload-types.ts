@@ -196,30 +196,29 @@ export interface ServicesBlock {
   description: string;
   gridSVG: boolean;
   howMany: 'topThreeServices' | 'allServices';
-  services?: {
-    topThreeServices: (number | Service)[];
-    links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: number | Page;
-                } | null)
-              | ({
-                  relationTo: 'files';
-                  value: number | File;
-                } | null);
-            url?: string | null;
-            label: string;
-            appearance?: ('default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
-  };
+  topThreeServices?: (number | Service)[] | null;
+  allServices?: (number | Service)[] | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'files';
+                value: number | File;
+              } | null);
+          url?: string | null;
+          label: string;
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'services';
