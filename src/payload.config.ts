@@ -38,6 +38,7 @@ import { Team } from './collections/Team'
 import { superAdmin } from './access/superAdmin'
 import { seedServices } from './endpoints/seedServices'
 import { seedTeam } from './endpoints/seedTeam'
+import { MetaImages } from './collections/MetaImages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -138,7 +139,18 @@ export default buildConfig({
     },
     // logger: true,
   }),
-  collections: [Pages, Services, Team, Avatars, Cards, Landcapes, Portraits, Files, Users],
+  collections: [
+    Pages,
+    Services,
+    Team,
+    Avatars,
+    Cards,
+    Landcapes,
+    Portraits,
+    MetaImages,
+    Files,
+    Users,
+  ],
   cors: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
   email: resendAdapter({
@@ -215,6 +227,13 @@ export default buildConfig({
             return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
           },
           prefix: 'portraits',
+        },
+        'meta-images': {
+          disableLocalStorage: true,
+          generateFileURL: (args: any) => {
+            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
+          },
+          prefix: 'meta',
         },
         files: {
           disableLocalStorage: true,

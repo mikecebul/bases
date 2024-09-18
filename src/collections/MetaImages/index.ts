@@ -6,17 +6,17 @@ import path from 'path'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-export const Portraits: CollectionConfig = {
-  slug: 'portraits',
+export const MetaImages: CollectionConfig = {
+  slug: 'meta-images',
   labels: {
-    singular: 'Portrait',
-    plural: 'Portraits',
+    singular: 'Meta Image',
+    plural: 'Meta Images',
   },
   access: {
     read: anyone,
   },
   admin: {
-    description: 'Images with a 8:10 ratio.',
+    description: 'Images with a 16:9 ratio.',
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
     hideAPIURL: true,
@@ -26,9 +26,8 @@ export const Portraits: CollectionConfig = {
       format: 'avif',
     },
     resizeOptions: {
-      width: 800,
-      height: 1000,
-      position: 'top',
+      width: 1200,
+      height: 630,
     },
     imageSizes: [
       {
@@ -41,7 +40,7 @@ export const Portraits: CollectionConfig = {
       },
     ],
     adminThumbnail: 'thumbnail',
-    staticDir: path.resolve(dirname, '../../../public/portraits'),
+    staticDir: path.resolve(dirname, '../../../public/meta'),
   },
   fields: [
     {
