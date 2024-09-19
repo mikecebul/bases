@@ -23,7 +23,7 @@ export const Cards: CollectionConfig = {
   upload: {
     crop: true,
     formatOptions: {
-      format: 'avif',
+      format: 'webp',
     },
     resizeOptions: {
       height: 800,
@@ -35,7 +35,7 @@ export const Cards: CollectionConfig = {
         width: 300,
         height: 300,
         formatOptions: {
-          format: 'avif',
+          format: 'webp',
         },
       },
     ],

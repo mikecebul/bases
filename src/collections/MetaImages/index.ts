@@ -23,7 +23,7 @@ export const MetaImages: CollectionConfig = {
   },
   upload: {
     formatOptions: {
-      format: 'avif',
+      format: 'webp',
     },
     resizeOptions: {
       width: 1200,
@@ -35,7 +35,7 @@ export const MetaImages: CollectionConfig = {
         width: 300,
         height: 300,
         formatOptions: {
-          format: 'avif',
+          format: 'webp',
         },
       },
     ],

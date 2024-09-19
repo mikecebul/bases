@@ -23,7 +23,7 @@ export const Portraits: CollectionConfig = {
   },
   upload: {
     formatOptions: {
-      format: 'avif',
+      format: 'webp',
     },
     resizeOptions: {
       width: 800,
@@ -36,7 +36,7 @@ export const Portraits: CollectionConfig = {
         width: 300,
         height: 300,
         formatOptions: {
-          format: 'avif',
+          format: 'webp',
         },
       },
     ],

@@ -29,7 +29,7 @@ export const Avatars: CollectionConfig = {
   upload: {
     crop: true,
     formatOptions: {
-      format: 'avif',
+      format: 'webp',
     },
     resizeOptions: {
       width: 400,
@@ -41,7 +41,7 @@ export const Avatars: CollectionConfig = {
         width: 300,
         height: 300,
         formatOptions: {
-          format: 'avif',
+          format: 'webp',
         },
       },
     ],

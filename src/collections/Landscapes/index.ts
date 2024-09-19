@@ -23,7 +23,7 @@ export const Landcapes: CollectionConfig = {
   },
   upload: {
     formatOptions: {
-      format: 'avif',
+      format: 'webp',
     },
     resizeOptions: {
       width: 1600,
@@ -35,7 +35,7 @@ export const Landcapes: CollectionConfig = {
         width: 300,
         height: 300,
         formatOptions: {
-          format: 'avif',
+          format: 'webp',
         },
       },
     ],

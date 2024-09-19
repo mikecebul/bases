@@ -66,7 +66,7 @@ export async function Hero({ title, description, image, links }: Props) {
         {image != null && typeof image === 'object' && (
           <>
             <Image
-              src={image.url ?? '/woman-laptop.avif'}
+              src={image.url ?? '/woman-laptop.webp'}
               alt={image.alt ?? 'Woman using telehealth services from home.'}
               className="object-cover w-full rounded-lg"
               width={1920}
