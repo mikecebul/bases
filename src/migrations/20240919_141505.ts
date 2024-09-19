@@ -31,7 +31,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`pages\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await payload.db.drizzle.run(sql`CREATE TABLE \`pages_blocks_services_services_links\` (
+  await payload.db.drizzle.run(sql`CREATE TABLE \`pages_blocks_services_links\` (
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` text NOT NULL,
   	\`id\` text PRIMARY KEY NOT NULL,
@@ -152,7 +152,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`_status\` text DEFAULT 'draft',
-  	FOREIGN KEY (\`meta_metadata_image_id\`) REFERENCES \`cards\`(\`id\`) ON UPDATE no action ON DELETE set null
+  	FOREIGN KEY (\`meta_metadata_image_id\`) REFERENCES \`meta_images\`(\`id\`) ON UPDATE no action ON DELETE set null
   );
   `)
   await payload.db.drizzle.run(sql`CREATE TABLE \`pages_rels\` (
@@ -205,7 +205,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`_pages_v\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await payload.db.drizzle.run(sql`CREATE TABLE \`_pages_v_blocks_services_services_links\` (
+  await payload.db.drizzle.run(sql`CREATE TABLE \`_pages_v_blocks_services_links\` (
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
   	\`id\` integer PRIMARY KEY NOT NULL,
@@ -341,7 +341,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	\`latest\` integer,
   	\`autosave\` integer,
   	FOREIGN KEY (\`parent_id\`) REFERENCES \`pages\`(\`id\`) ON UPDATE no action ON DELETE set null,
-  	FOREIGN KEY (\`version_meta_metadata_image_id\`) REFERENCES \`cards\`(\`id\`) ON UPDATE no action ON DELETE set null
+  	FOREIGN KEY (\`version_meta_metadata_image_id\`) REFERENCES \`meta_images\`(\`id\`) ON UPDATE no action ON DELETE set null
   );
   `)
   await payload.db.drizzle.run(sql`CREATE TABLE \`_pages_v_rels\` (
@@ -428,6 +428,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   await payload.db.drizzle.run(sql`CREATE TABLE \`avatars\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`alt\` text NOT NULL,
+  	\`prefix\` text DEFAULT 'avatars',
   	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`url\` text,
@@ -450,6 +451,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   await payload.db.drizzle.run(sql`CREATE TABLE \`cards\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`alt\` text NOT NULL,
+  	\`prefix\` text DEFAULT 'cards',
   	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`url\` text,
@@ -472,6 +474,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   await payload.db.drizzle.run(sql`CREATE TABLE \`landscapes\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`alt\` text NOT NULL,
+  	\`prefix\` text DEFAULT 'landscapes',
   	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`url\` text,
@@ -494,6 +497,30 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   await payload.db.drizzle.run(sql`CREATE TABLE \`portraits\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`alt\` text NOT NULL,
+  	\`prefix\` text DEFAULT 'portraits',
+  	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
+  	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
+  	\`url\` text,
+  	\`thumbnail_u_r_l\` text,
+  	\`filename\` text,
+  	\`mime_type\` text,
+  	\`filesize\` numeric,
+  	\`width\` numeric,
+  	\`height\` numeric,
+  	\`focal_x\` numeric,
+  	\`focal_y\` numeric,
+  	\`sizes_thumbnail_url\` text,
+  	\`sizes_thumbnail_width\` numeric,
+  	\`sizes_thumbnail_height\` numeric,
+  	\`sizes_thumbnail_mime_type\` text,
+  	\`sizes_thumbnail_filesize\` numeric,
+  	\`sizes_thumbnail_filename\` text
+  );
+  `)
+  await payload.db.drizzle.run(sql`CREATE TABLE \`meta_images\` (
+  	\`id\` integer PRIMARY KEY NOT NULL,
+  	\`alt\` text NOT NULL,
+  	\`prefix\` text DEFAULT 'meta',
   	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`url\` text,
@@ -515,6 +542,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   `)
   await payload.db.drizzle.run(sql`CREATE TABLE \`files\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
+  	\`prefix\` text DEFAULT 'files',
   	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`url\` text,
@@ -709,8 +737,8 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_hero_order_idx\` ON \`pages_blocks_hero\` (\`_order\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_hero_parent_id_idx\` ON \`pages_blocks_hero\` (\`_parent_id\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_hero_path_idx\` ON \`pages_blocks_hero\` (\`_path\`);`)
-  await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_services_services_links_order_idx\` ON \`pages_blocks_services_services_links\` (\`_order\`);`)
-  await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_services_services_links_parent_id_idx\` ON \`pages_blocks_services_services_links\` (\`_parent_id\`);`)
+  await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_services_links_order_idx\` ON \`pages_blocks_services_links\` (\`_order\`);`)
+  await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_services_links_parent_id_idx\` ON \`pages_blocks_services_links\` (\`_parent_id\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_services_order_idx\` ON \`pages_blocks_services\` (\`_order\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_services_parent_id_idx\` ON \`pages_blocks_services\` (\`_parent_id\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`pages_blocks_services_path_idx\` ON \`pages_blocks_services\` (\`_path\`);`)
@@ -744,8 +772,8 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_hero_order_idx\` ON \`_pages_v_blocks_hero\` (\`_order\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_hero_parent_id_idx\` ON \`_pages_v_blocks_hero\` (\`_parent_id\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_hero_path_idx\` ON \`_pages_v_blocks_hero\` (\`_path\`);`)
-  await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_services_services_links_order_idx\` ON \`_pages_v_blocks_services_services_links\` (\`_order\`);`)
-  await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_services_services_links_parent_id_idx\` ON \`_pages_v_blocks_services_services_links\` (\`_parent_id\`);`)
+  await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_services_links_order_idx\` ON \`_pages_v_blocks_services_links\` (\`_order\`);`)
+  await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_services_links_parent_id_idx\` ON \`_pages_v_blocks_services_links\` (\`_parent_id\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_services_order_idx\` ON \`_pages_v_blocks_services\` (\`_order\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_services_parent_id_idx\` ON \`_pages_v_blocks_services\` (\`_parent_id\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`_pages_v_blocks_services_path_idx\` ON \`_pages_v_blocks_services\` (\`_path\`);`)
@@ -801,6 +829,9 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   await payload.db.drizzle.run(sql`CREATE INDEX \`portraits_created_at_idx\` ON \`portraits\` (\`created_at\`);`)
   await payload.db.drizzle.run(sql`CREATE UNIQUE INDEX \`portraits_filename_idx\` ON \`portraits\` (\`filename\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`portraits_sizes_thumbnail_sizes_thumbnail_filename_idx\` ON \`portraits\` (\`sizes_thumbnail_filename\`);`)
+  await payload.db.drizzle.run(sql`CREATE INDEX \`meta_images_created_at_idx\` ON \`meta_images\` (\`created_at\`);`)
+  await payload.db.drizzle.run(sql`CREATE UNIQUE INDEX \`meta_images_filename_idx\` ON \`meta_images\` (\`filename\`);`)
+  await payload.db.drizzle.run(sql`CREATE INDEX \`meta_images_sizes_thumbnail_sizes_thumbnail_filename_idx\` ON \`meta_images\` (\`sizes_thumbnail_filename\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`files_created_at_idx\` ON \`files\` (\`created_at\`);`)
   await payload.db.drizzle.run(sql`CREATE UNIQUE INDEX \`files_filename_idx\` ON \`files\` (\`filename\`);`)
   await payload.db.drizzle.run(sql`CREATE INDEX \`users_created_at_idx\` ON \`users\` (\`created_at\`);`)
@@ -840,7 +871,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
 export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
   await payload.db.drizzle.run(sql`DROP TABLE \`pages_blocks_hero_high_impact_links\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`pages_blocks_hero\`;`)
-  await payload.db.drizzle.run(sql`DROP TABLE \`pages_blocks_services_services_links\`;`)
+  await payload.db.drizzle.run(sql`DROP TABLE \`pages_blocks_services_links\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`pages_blocks_services\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`pages_blocks_carf\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`pages_blocks_donate_programs\`;`)
@@ -853,7 +884,7 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
   await payload.db.drizzle.run(sql`DROP TABLE \`pages_rels\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`_pages_v_blocks_hero_high_impact_links\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`_pages_v_blocks_hero\`;`)
-  await payload.db.drizzle.run(sql`DROP TABLE \`_pages_v_blocks_services_services_links\`;`)
+  await payload.db.drizzle.run(sql`DROP TABLE \`_pages_v_blocks_services_links\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`_pages_v_blocks_services\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`_pages_v_blocks_carf\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`_pages_v_blocks_donate_programs\`;`)
@@ -871,6 +902,7 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
   await payload.db.drizzle.run(sql`DROP TABLE \`cards\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`landscapes\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`portraits\`;`)
+  await payload.db.drizzle.run(sql`DROP TABLE \`meta_images\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`files\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`users\`;`)
   await payload.db.drizzle.run(sql`DROP TABLE \`redirects\`;`)

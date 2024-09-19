@@ -1277,10 +1277,10 @@
         }
       },
       "foreignKeys": {
-        "pages_meta_metadata_image_id_cards_id_fk": {
-          "name": "pages_meta_metadata_image_id_cards_id_fk",
+        "pages_meta_metadata_image_id_meta_images_id_fk": {
+          "name": "pages_meta_metadata_image_id_meta_images_id_fk",
           "tableFrom": "pages",
-          "tableTo": "cards",
+          "tableTo": "meta_images",
           "columnsFrom": [
             "meta_metadata_image_id"
           ],
@@ -2895,10 +2895,10 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "_pages_v_version_meta_metadata_image_id_cards_id_fk": {
-          "name": "_pages_v_version_meta_metadata_image_id_cards_id_fk",
+        "_pages_v_version_meta_metadata_image_id_meta_images_id_fk": {
+          "name": "_pages_v_version_meta_metadata_image_id_meta_images_id_fk",
           "tableFrom": "_pages_v",
-          "tableTo": "cards",
+          "tableTo": "meta_images",
           "columnsFrom": [
             "version_meta_metadata_image_id"
           ],
@@ -4314,6 +4314,180 @@
         },
         "portraits_sizes_thumbnail_sizes_thumbnail_filename_idx": {
           "name": "portraits_sizes_thumbnail_sizes_thumbnail_filename_idx",
+          "columns": [
+            "sizes_thumbnail_filename"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "meta_images": {
+      "name": "meta_images",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "alt": {
+          "name": "alt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "prefix": {
+          "name": "prefix",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": "'meta'"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))"
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "thumbnail_u_r_l": {
+          "name": "thumbnail_u_r_l",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "filename": {
+          "name": "filename",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "mime_type": {
+          "name": "mime_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "filesize": {
+          "name": "filesize",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "width": {
+          "name": "width",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "height": {
+          "name": "height",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "focal_x": {
+          "name": "focal_x",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "focal_y": {
+          "name": "focal_y",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "sizes_thumbnail_url": {
+          "name": "sizes_thumbnail_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "sizes_thumbnail_width": {
+          "name": "sizes_thumbnail_width",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "sizes_thumbnail_height": {
+          "name": "sizes_thumbnail_height",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "sizes_thumbnail_mime_type": {
+          "name": "sizes_thumbnail_mime_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "sizes_thumbnail_filesize": {
+          "name": "sizes_thumbnail_filesize",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "sizes_thumbnail_filename": {
+          "name": "sizes_thumbnail_filename",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "meta_images_created_at_idx": {
+          "name": "meta_images_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "meta_images_filename_idx": {
+          "name": "meta_images_filename_idx",
+          "columns": [
+            "filename"
+          ],
+          "isUnique": true
+        },
+        "meta_images_sizes_thumbnail_sizes_thumbnail_filename_idx": {
+          "name": "meta_images_sizes_thumbnail_sizes_thumbnail_filename_idx",
           "columns": [
             "sizes_thumbnail_filename"
           ],
@@ -5862,6 +6036,6 @@
   "internal": {
     "indexes": {}
   },
-  "id": "ea1c3dff-d525-49df-aa51-1b03bfa596f2",
+  "id": "58654a39-f94a-4c20-991c-3be1453cef6f",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }
