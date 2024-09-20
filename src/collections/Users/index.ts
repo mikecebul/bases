@@ -4,6 +4,7 @@ import { authenticated } from '../../access/authenticated'
 import { roleSelectMutate } from './access/roleSelectMutate'
 import { ensureFirstUserIsSuperAdmin } from './hooks/ensureFirstUserIsSuperAdmin'
 import { revalidatePath } from 'next/cache'
+import { superAdmin } from '@/access/superAdmin'
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -15,7 +16,7 @@ const Users: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    hideAPIURL: true,
+    hideAPIURL: !superAdmin,
     defaultColumns: ['name', 'email'],
     useAsTitle: 'name',
   },

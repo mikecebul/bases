@@ -11,6 +11,7 @@ import {
 import { CollectionConfig } from 'payload'
 import { revalidateTeam } from './hooks/revalidateTeam'
 import { populatePublishedAt } from '@/hooks/populatePublishedAt'
+import { superAdmin } from '@/access/superAdmin'
 
 export const Team: CollectionConfig = {
   slug: 'team',
@@ -26,7 +27,7 @@ export const Team: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    hideAPIURL: true,
+    hideAPIURL: !superAdmin,
     defaultColumns: ['name', 'memberType', 'avatar', 'role', 'updatedAt'],
     description: 'A collection of staff and board members.',
     components: {

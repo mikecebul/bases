@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 import { anyone } from '../../access/anyone'
 import { fileURLToPath } from 'url'
 import path from 'path'
+import { superAdmin } from '@/access/superAdmin'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -16,7 +17,7 @@ export const Cards: CollectionConfig = {
     read: anyone,
   },
   admin: {
-    hideAPIURL: true,
+    hideAPIURL: !superAdmin,
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
   },

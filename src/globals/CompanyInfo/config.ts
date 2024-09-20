@@ -1,14 +1,14 @@
+import { superAdmin } from '@/access/superAdmin'
 import { link } from '@/fields/link'
 import { revalidatePath } from 'next/cache'
 import { GlobalConfig } from 'payload'
-// import { superAdmin } from "../access/superAdmin";
 
 export const CompanyInfo: GlobalConfig = {
   slug: 'company-info',
   label: 'Company Info',
   admin: {
     description: 'Update business information.',
-    // hideAPIURL: !superAdmin,
+    hideAPIURL: !superAdmin,
   },
   hooks: {
     afterChange: [() => revalidatePath('/', 'layout')],

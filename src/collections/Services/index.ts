@@ -1,5 +1,6 @@
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { superAdmin } from '@/access/superAdmin'
 import { CollectionConfig } from 'payload'
 
 export const Services: CollectionConfig = {
@@ -14,7 +15,7 @@ export const Services: CollectionConfig = {
     components: {
       afterListTable: ['@/collections/Services/SeedButton'],
     },
-    hideAPIURL: true,
+    hideAPIURL: !superAdmin,
   },
   access: {
     create: authenticated,

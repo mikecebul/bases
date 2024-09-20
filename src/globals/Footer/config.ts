@@ -1,7 +1,6 @@
 import type { GlobalConfig } from 'payload'
 import { link } from '@/fields/link'
 import { revalidateFooter } from './hooks/revalidateFooter'
-import contactInfo from './fields/contactInfo'
 import { encryptField } from './hooks/encryptField'
 import { decryptField } from './hooks/decryptField'
 
@@ -10,6 +9,7 @@ export const Footer: GlobalConfig = {
   access: {
     read: () => true,
   },
+  admin: { hideAPIURL: true },
   fields: [
     {
       name: 'columns',

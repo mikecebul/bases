@@ -3,6 +3,7 @@ import { anyone } from '../../access/anyone'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { authenticated } from '@/access/authenticated'
+import { superAdmin } from '@/access/superAdmin'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,10 +21,9 @@ export const Avatars: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    hideAPIURL: true,
+    hideAPIURL: !superAdmin,
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
-    // hideAPIURL: !superAdmin,
     description: 'Images with a 1:1 ratio. Crop only their face with some padding.',
   },
   upload: {

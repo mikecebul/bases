@@ -21,6 +21,7 @@ import { Donate } from '@/blocks/Donate/config'
 import { Team } from '@/blocks/Team/config'
 import { AboutUs } from '@/blocks/AboutUs/config'
 import { Links } from '@/blocks/Links/config'
+import { superAdmin } from '@/access/superAdmin'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -32,7 +33,7 @@ export const Pages: CollectionConfig = {
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    hideAPIURL: true,
+    hideAPIURL: !superAdmin,
     livePreview: {
       url: ({ data }) => {
         const path = generatePreviewPath({
