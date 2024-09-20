@@ -10,7 +10,11 @@ import useSWR from 'swr'
 export default function AvatarCell() {
   const { cellData } = useTableCell()
 
-  const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/avatars/${cellData}`
+  const url =
+    process.env.S3_ENABLED === 'true'
+      ? `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/avatars/${cellData}`
+      : `${process.env.NEXT_PUBLIC_SERVER_URL}/api/avatars/${cellData}`
+
   const { data } = useSWR<Avatar>(url, fetcher)
 
   if (!data?.url) return <User size={40} className="p-2 rounded-full bg-zinc-900" />
