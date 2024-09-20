@@ -1,7 +1,6 @@
 import type { FieldHook } from 'payload'
 import fs from 'fs'
 import { extname } from 'path'
-import { formatSlug } from '../slug/formatSlug'
 
 async function storeFileLocally(url: string, fileName: string): Promise<string> {
   const response = await fetch(url)
@@ -24,7 +23,7 @@ const formatFilename = (val: string): string =>
     .toLowerCase()
 
 export const fetchRandomImage: FieldHook = async ({ value, req, siblingData, data: pageData }) => {
-  if (!value && pageData?._status === 'published') {
+  if (!value && pageData?._status === 'published' && siblingData.linkType === 'link') {
     const url = `https://api.unsplash.com/photos/random?client_id=${
       process.env.UNSPLASH_ACCESS_KEY
     }&query=${siblingData?.keywords}`
