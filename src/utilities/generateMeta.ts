@@ -6,6 +6,7 @@ import { mergeOpenGraph } from './mergeOpenGraph'
 
 export const generateMeta = async (args: { doc: Page | Team }): Promise<Metadata> => {
   const { doc } = args || {}
+  console.log('doc', doc)
 
   const ogImage =
     typeof doc?.meta?.metadata?.image === 'object' &&

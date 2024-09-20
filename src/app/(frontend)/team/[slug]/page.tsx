@@ -40,7 +40,8 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const teamMember = await queryTeamMemberBySlug({ slug })
+  const url = '/team/' + slug
+  const teamMember = await queryTeamMemberBySlug({ slug: url })
 
   return generateMeta({ doc: teamMember })
 }
