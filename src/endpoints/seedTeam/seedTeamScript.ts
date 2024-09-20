@@ -65,63 +65,67 @@ export const seedTeamScript = async ({
   })
 
   const teamMembers = siteConfig.team
-  const promises = teamMembers.map(async (person) => {
-    try {
-      const imagePath = path.join(process.cwd(), 'public', person.imageUrl)
+  const promises = teamMembers.map((person) => {
+    return (async () => {
+      try {
+        const imagePath = path.join(process.cwd(), 'public', person.imageUrl)
+        const profileFilename = `${formatSlug(person.name)}-profile`
+        const avatarFilename = `${formatSlug(person.name)}-avatar`
 
-      const image = await req.payload.create({
-        collection: 'portraits',
-        data: {
-          alt: `${person.name} profile`,
-          filename: `${formatSlug(person.name)}-profile`,
-        },
-        filePath: imagePath,
-        req,
-      })
+        const image = await req.payload.create({
+          collection: 'portraits',
+          data: {
+            alt: `${person.name} profile`,
+            filename: profileFilename,
+          },
+          filePath: imagePath,
+          req,
+        })
 
-      const avatar = await req.payload.create({
-        collection: 'avatars',
-        data: {
-          alt: `${person.name} avatar`,
-          filename: `${formatSlug(person.name)}-avatar`,
-        },
-        filePath: imagePath,
-        req,
-      })
+        const avatar = await req.payload.create({
+          collection: 'avatars',
+          data: {
+            alt: `${person.name} avatar`,
+            filename: avatarFilename,
+          },
+          filePath: imagePath,
+          req,
+        })
 
-      headlessEditor.update(
-        () => {
-          $convertFromMarkdownString(
-            person.bio,
-            yourSanitizedEditorConfig.features.markdownTransformers,
-          )
-        },
-        { discrete: true },
-      )
+        headlessEditor.update(
+          () => {
+            $convertFromMarkdownString(
+              person.bio,
+              yourSanitizedEditorConfig.features.markdownTransformers,
+            )
+          },
+          { discrete: true },
+        )
 
-      const editorJSON = headlessEditor.getEditorState().toJSON()
+        const editorJSON = headlessEditor.getEditorState().toJSON()
 
-      await payload.create({
-        collection: 'team',
-        data: {
-          memberType: person.memberType as Team['memberType'],
-          name: person.name,
-          role: person.role,
-          qualifications: person.qualifications ?? undefined,
-          image: image.id,
-          bio: editorJSON as Team['bio'],
-          slug: String(formatSlug(person.name)),
-          avatar: avatar.id,
-          publishedAt: new Date().toJSON(),
-        },
-      })
+        await payload.create({
+          collection: 'team',
+          data: {
+            memberType: person.memberType as Team['memberType'],
+            name: person.name,
+            role: person.role,
+            qualifications: person.qualifications ?? undefined,
+            image: image.id,
+            bio: editorJSON as Team['bio'],
+            slug: String(formatSlug(person.name)),
+            avatar: avatar.id,
+            publishedAt: new Date().toJSON(),
+          },
+        })
 
-      return Response.json({ success: true })
-    } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : 'Unknown error'
-      payload.logger.error(message)
-      return Response.json({ error: message }, { status: 500 })
-    }
+        return Response.json({ success: true })
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : 'Unknown error'
+        payload.logger.error(message)
+        return Response.json({ error: message }, { status: 500 })
+      }
+    })()
   })
 
   await Promise.allSettled(promises)
