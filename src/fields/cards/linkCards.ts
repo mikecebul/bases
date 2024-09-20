@@ -72,7 +72,7 @@ export const linkCards: ArrayField = {
       type: 'upload',
       relationTo: 'cards',
       hooks: {
-        afterChange: [fetchRandomImage],
+        beforeChange: [fetchRandomImage],
       },
       admin: {
         condition: (_, siblingData) =>

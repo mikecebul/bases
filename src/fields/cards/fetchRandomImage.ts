@@ -16,6 +16,13 @@ async function storeFileLocally(url: string, fileName: string): Promise<string> 
   return filePath
 }
 
+const formatFilename = (val: string): string =>
+  val
+    .trim() // Remove leading/trailing spaces
+    .replace(/\s+/g, '-') // Replace spaces with hyphens (handle multiple spaces)
+    .replace(/[^\w-.]+/g, '') // Keep letters, numbers, hyphens, and periods (for extensions)
+    .toLowerCase()
+
 export const fetchRandomImage: FieldHook = async ({ value, req, siblingData, data: pageData }) => {
   if (!value && pageData?._status === 'published') {
     const url = `https://api.unsplash.com/photos/random?client_id=${
@@ -40,7 +47,7 @@ export const fetchRandomImage: FieldHook = async ({ value, req, siblingData, dat
       const imageFile = {
         data: fileBuffer,
         mimetype: mimeType,
-        name: formatSlug(siblingData?.title ?? 'card'),
+        name: formatFilename(siblingData?.title ?? 'card'),
         size: fileBuffer.length,
       }
 
