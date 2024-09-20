@@ -76,7 +76,8 @@ export const linkCards: ArrayField = {
       },
       admin: {
         condition: (_, siblingData) =>
-          !!siblingData.image || siblingData.imageUploadOption === 'manual',
+          siblingData.linkType === 'link' &&
+          (!!siblingData.image || siblingData.imageUploadOption === 'manual'),
       },
     },
     {
