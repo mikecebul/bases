@@ -3,19 +3,13 @@ import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/Icons'
 import Link from 'next/link'
 import { cn } from '@/utilities/cn'
-import payloadConfig from '@payload-config'
 import type { CompanyInfo, Hero as HeroType } from '@/payload-types'
 import { CMSLink } from '../Link'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 
 type Props = NonNullable<HeroType['highImpact']>
 
 export async function Hero({ title, description, image, links }: Props) {
-  const payload = await getPayloadHMR({
-    config: payloadConfig,
-  })
-
   const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
   const { contact } = companyInfo
   const cleanedPhone = contact?.phone ? contact?.phone.replace(/\D/g, '') : null

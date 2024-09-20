@@ -29,6 +29,7 @@ export const MetaImages: CollectionConfig = {
     resizeOptions: {
       width: 1200,
       height: 630,
+      position: 'top',
     },
     imageSizes: [
       {
