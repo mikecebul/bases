@@ -1,4 +1,4 @@
-# Business Website for Substance and Mental Health Counseling
+# Payload CMS Marketing Template
 
 This project was built with [PayloadCMS](https://payloadcms.com/) and [Next.js 15](https://nextjs.org/), focusing on providing substance and mental health counseling services.
 
