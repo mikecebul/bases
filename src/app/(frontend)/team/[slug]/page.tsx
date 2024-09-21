@@ -40,8 +40,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const url = '/team/' + slug
-  const teamMember = await queryTeamMemberBySlug({ slug: url })
+  const teamMember = await queryTeamMemberBySlug({ slug })
 
   return generateMeta({ doc: teamMember })
 }
@@ -51,7 +50,7 @@ const queryTeamMemberBySlug = cache(async ({ slug }: { slug: string }) => {
 
   const payload = await getPayloadHMR({ config: configPromise })
 
-  const result = await payload.find({
+  const { docs: team } = await payload.find({
     collection: 'team',
     draft,
     limit: 1,
@@ -63,5 +62,5 @@ const queryTeamMemberBySlug = cache(async ({ slug }: { slug: string }) => {
     },
   })
 
-  return result?.docs?.[0] || null
+  return team?.[0] || null
 })

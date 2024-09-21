@@ -30,6 +30,7 @@ export const MetaImages: CollectionConfig = {
       width: 1200,
       height: 630,
       position: 'top',
+      fit: 'inside',
     },
     imageSizes: [
       {

@@ -122,15 +122,15 @@ export const Team: CollectionConfig = {
               },
               fields: [
                 OverviewField({
-                  titlePath: 'meta.title',
-                  descriptionPath: 'meta.description',
-                  imagePath: 'meta.image',
+                  titlePath: 'meta.metadata.title',
+                  descriptionPath: 'meta.metadata.description',
+                  imagePath: 'meta.metadata.image',
                 }),
                 MetaTitleField({
                   hasGenerateFn: true,
                 }),
                 MetaImageField({
-                  relationTo: 'cards',
+                  relationTo: 'meta-images',
                 }),
 
                 MetaDescriptionField({}),
@@ -139,8 +139,8 @@ export const Team: CollectionConfig = {
                   hasGenerateFn: true,
 
                   // field paths to match the target field for data
-                  titlePath: 'meta.title',
-                  descriptionPath: 'meta.description',
+                  titlePath: 'meta.metadata.title',
+                  descriptionPath: 'meta.metadata.description',
                 }),
               ],
             },

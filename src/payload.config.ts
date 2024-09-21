@@ -25,7 +25,7 @@ import Users from './collections/Users'
 import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
 import { revalidateRedirects } from './hooks/revalidateRedirects'
-import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
+import { GenerateTitle, GenerateURL, GenerateImage } from '@payloadcms/plugin-seo/types'
 import { Page, Team as TeamType } from 'src/payload-types'
 import { CompanyInfo } from './globals/CompanyInfo/config'
 import { Avatars } from './collections/Avatars'
@@ -51,9 +51,15 @@ const generateTitle: GenerateTitle<TeamType | Page> = ({ doc }) => {
 }
 
 const generateURL: GenerateURL<TeamType | Page> = ({ doc }) => {
-  return doc?.slug
-    ? `${process.env.NEXT_PUBLIC_SERVER_URL!}/${doc.slug}`
-    : process.env.NEXT_PUBLIC_SERVER_URL!
+  if (!doc.slug) return process.env.NEXT_PUBLIC_SERVER_URL!
+  if ('memberType' in doc) return `${process.env.NEXT_PUBLIC_SERVER_URL!}/team/${doc.slug}`
+  return `${process.env.NEXT_PUBLIC_SERVER_URL!}/${doc.slug}`
+}
+const generateImage: GenerateImage<TeamType | Page> = ({ doc }) => {
+  if (typeof doc.meta?.metadata?.image === 'object' && doc.meta?.metadata?.image) {
+    return doc.meta.metadata.image.url || '/flowers-sign.webp'
+  }
+  return '/flowers-sign.webp'
 }
 
 export default buildConfig({
@@ -196,6 +202,7 @@ export default buildConfig({
     seoPlugin({
       generateTitle,
       generateURL,
+      generateImage,
     }),
     s3StoragePlugin({
       ...S3_PLUGIN_CONFIG,
