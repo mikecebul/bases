@@ -1,27 +1,35 @@
-import { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
-import prisma from "@/lib/prisma";
+import { MetadataRoute } from 'next'
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const URL = process.env.NEXT_PUBLIC_DOMAIN_URL;
-  const newDate = new Date().toISOString();
+  if (process.env.NEXT_PUBLIC_IS_LIVE === 'false') {
+    return []
+  }
 
-  const staff = await prisma.staffMember.findMany();
-  const staffPages = staff.map((person) => ({
-    url: `${URL}/team/staff/${person.slug}`,
-    lastModified: newDate,
-  }));
+  const URL = process.env.NEXT_PUBLIC_SERVER_URL
+  const payload = await getPayload({ config: configPromise })
+  const { docs: pages } = await payload.find({
+    collection: 'pages',
+    draft: false,
+    limit: 1000,
+    overrideAccess: true,
+  })
+  const { docs: teamPages } = await payload.find({
+    collection: 'team',
+    draft: false,
+    limit: 1000,
+    overrideAccess: true,
+  })
 
-  const boardMembers = siteConfig.team.boardMembers;
-  const boardMemberPages = boardMembers.map((person) => ({
-    url: `${URL}/team/board/${person.slug}`,
-    lastModified: newDate,
-  }));
+  const routes = pages.map((route) => ({
+    url: `${URL}${route.slug}`,
+    lastModified: route.updatedAt,
+  }))
+  const teamRoutes = teamPages.map((route) => ({
+    url: `${URL}/team/${route.slug}`,
+    lastModified: route.updatedAt,
+  }))
 
-  const routes = siteConfig.NavLinks.map((route) => ({
-    url: `${URL}${route.href}`,
-    lastModified: newDate,
-  }));
-
-  return [...routes, ...boardMemberPages, ...staffPages];
+  return [...routes, ...teamRoutes]
 }
