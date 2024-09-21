@@ -1,6 +1,19 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-sqlite'
 
 export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
+  // Update existing references to cards table
+  await payload.db.drizzle.run(sql`
+    UPDATE team
+    SET meta_metadata_image_id = NULL
+    WHERE meta_metadata_image_id NOT IN (SELECT id FROM meta_images);
+  `)
+
+  await payload.db.drizzle.run(sql`
+    UPDATE _team_v
+    SET version_meta_metadata_image_id = NULL
+    WHERE version_meta_metadata_image_id NOT IN (SELECT id FROM meta_images);
+  `)
+
   // Remove old foreign key constraint from team table
   await payload.db.drizzle.run(sql`
     PRAGMA foreign_keys=off;
@@ -103,6 +116,19 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
 }
 
 export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
+  // Update existing references to meta_images table
+  await payload.db.drizzle.run(sql`
+    UPDATE team
+    SET meta_metadata_image_id = NULL
+    WHERE meta_metadata_image_id NOT IN (SELECT id FROM cards);
+  `)
+
+  await payload.db.drizzle.run(sql`
+    UPDATE _team_v
+    SET version_meta_metadata_image_id = NULL
+    WHERE version_meta_metadata_image_id NOT IN (SELECT id FROM cards);
+  `)
+
   // Revert changes if needed
   await payload.db.drizzle.run(sql`
     PRAGMA foreign_keys=off;
