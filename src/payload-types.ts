@@ -145,6 +145,7 @@ export interface Hero {
  */
 export interface File {
   id: number;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -164,6 +165,7 @@ export interface File {
 export interface Landscape {
   id: number;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -255,6 +257,7 @@ export interface CarfBlock {
 export interface Card {
   id: number;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -358,6 +361,7 @@ export interface Team {
 export interface Avatar {
   id: number;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -387,6 +391,7 @@ export interface Avatar {
 export interface Portrait {
   id: number;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -416,6 +421,7 @@ export interface Portrait {
 export interface MetaImage {
   id: number;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -645,38 +651,28 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  columns?:
+  pageLinks?:
     | {
-        columnType: 'pageLinks' | 'contactInfo' | 'googleMap';
-        pageLinks?:
-          | {
-              link: {
-                type?: ('reference' | 'custom') | null;
-                newTab?: boolean | null;
-                reference?:
-                  | ({
-                      relationTo: 'pages';
-                      value: number | Page;
-                    } | null)
-                  | ({
-                      relationTo: 'files';
-                      value: number | File;
-                    } | null);
-                url?: string | null;
-                label: string;
-              };
-              id?: string | null;
-            }[]
-          | null;
-        contact?: {
-          showContact?: boolean | null;
-        };
-        googleMap?: {
-          apiKey: string;
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'files';
+                value: number | File;
+              } | null);
+          url?: string | null;
+          label: string;
         };
         id?: string | null;
       }[]
     | null;
+  showContact?: boolean | null;
+  showGoogleMap?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }

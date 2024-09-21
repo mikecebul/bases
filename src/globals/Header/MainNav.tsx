@@ -11,7 +11,7 @@ export function MainNav({ navItems }: { navItems: NavItem[] }) {
 
   return (
     <div className="flex-1">
-      <div className="justify-center hidden gap-8 px-8  md:flex">
+      <div className="justify-center hidden gap-8 px-8 md:flex">
         {navItems.map(({ link }, i) => {
           const slug =
             typeof link.reference?.value === 'object'

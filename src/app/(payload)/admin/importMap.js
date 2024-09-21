@@ -25,11 +25,10 @@ import { default as default_23 } from '@/collections/Team/AvatarCell'
 import { default as default_24 } from '@/collections/Team/SeedButton'
 import { default as default_25 } from '@/collections/Users/RoleCell'
 import { default as default_26 } from '@/collections/Users/RoleSelect'
-import { default as default_27 } from '@/globals/Footer/rowLabels/ColumnRowLabel'
-import { default as default_28 } from '@/globals/CompanyInfo/SocialRowLabel'
-import { default as default_29 } from '@/globals/CompanyInfo/HoursRowLabel'
-import { default as default_30 } from '@/graphics/Icon'
-import { default as default_31 } from '@/graphics/Logo'
+import { default as default_27 } from '@/globals/CompanyInfo/SocialRowLabel'
+import { default as default_28 } from '@/globals/CompanyInfo/HoursRowLabel'
+import { default as default_29 } from '@/graphics/Icon'
+import { default as default_30 } from '@/graphics/Logo'
 
 export const importMap = {
   "@/fields/link/LinkRowLabel#default": default_0,
@@ -59,9 +58,8 @@ export const importMap = {
   "@/collections/Team/SeedButton#default": default_24,
   "@/collections/Users/RoleCell#default": default_25,
   "@/collections/Users/RoleSelect#default": default_26,
-  "@/globals/Footer/rowLabels/ColumnRowLabel#default": default_27,
-  "@/globals/CompanyInfo/SocialRowLabel#default": default_28,
-  "@/globals/CompanyInfo/HoursRowLabel#default": default_29,
-  "@/graphics/Icon#default": default_30,
-  "@/graphics/Logo#default": default_31
+  "@/globals/CompanyInfo/SocialRowLabel#default": default_27,
+  "@/globals/CompanyInfo/HoursRowLabel#default": default_28,
+  "@/graphics/Icon#default": default_29,
+  "@/graphics/Logo#default": default_30
 }

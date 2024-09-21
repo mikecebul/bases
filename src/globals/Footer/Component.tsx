@@ -1,4 +1,3 @@
-import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 
@@ -8,36 +7,37 @@ import { buttonVariants } from '@/components/ui/button'
 import { Clock, Facebook, Mail, Navigation, Phone, Printer } from 'lucide-react'
 import Image from 'next/image'
 import Container from '@/components/Container'
+import { CMSLink } from '@/components/Link'
+import { getPayloadHMR } from '@payloadcms/next/utilities'
+import payloadConfig from '@payload-config'
 
 export async function Footer() {
-  const footer: Footer = await getCachedGlobal('footer')()
-  const columns = footer?.columns || []
-  const pageLinks = columns.find(({ pageLinks }) => pageLinks && pageLinks.length > 0)?.pageLinks
+  const payload = await getPayloadHMR({ config: payloadConfig })
 
-  const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
-  const { contact, social, hours } = companyInfo
+  const { pageLinks, showContact, showGoogleMap } = await payload.findGlobal({
+    slug: 'footer',
+    depth: 1,
+  })
+
+  const { contact, social, hours } = await payload.findGlobal({
+    slug: 'company-info',
+    depth: 1,
+  })
 
   return (
     <footer>
       <Container className="py-0">
         <div className="grid gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* PageLinks */}
-          {!!pageLinks && pageLinks.length > 0 && (
+          {pageLinks && pageLinks.length > 0 && (
             <div className="flex flex-col col-span-1">
               <p className="text-lg font-bold">Website</p>
               <Separator className="my-4" />
               <ul className="flex flex-col mb-8 space-y-4 font-medium text-gray-500">
-                {pageLinks?.map(({ link, id }) => {
+                {pageLinks.map(({ link }, id) => {
                   return (
                     <li key={id}>
-                      <Link
-                        href={link.url ?? '/'}
-                        className={cn(buttonVariants({ variant: 'ghost' }), 'flex justify-start')}
-                        target={link.newTab ? '_blank' : undefined}
-                        rel={link.newTab ? 'noopener noreferrer' : undefined}
-                      >
-                        {link.label}
-                      </Link>
+                      <CMSLink {...link} appearance="nav" className={cn('text-sm')} />
                     </li>
                   )
                 })}
@@ -45,7 +45,7 @@ export async function Footer() {
             </div>
           )}
           {/* Contact Info */}
-          {!!contact && (
+          {showContact && contact && (
             <div className="flex flex-col col-span-1">
               <p className="text-lg font-bold">Contact</p>
               <Separator className="my-4" />
@@ -147,19 +147,21 @@ export async function Footer() {
           )}
 
           {/* Map Section */}
-          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
-            <p className="text-lg font-bold">Location</p>
-            <Separator className="my-4" />
-            <Link href="https://goo.gl/maps/X956fmf511Fef9Pr7">
-              <Image
-                src={`https://maps.googleapis.com/maps/api/staticmap?center=45.3035201,-85.2598514&zoom=16&size=400x400&markers=color:blue%7Clabel:B%7C45.3035201,-85.2598514&key=${process.env.GOOGLE_MAPS_API_KEY}`}
-                alt="Google maps of our address"
-                width={1000}
-                height={1000}
-                className="h-[350px] object-cover"
-              ></Image>
-            </Link>
-          </div>
+          {showGoogleMap && (
+            <div className="col-span-1 sm:col-span-2 lg:col-span-1">
+              <p className="text-lg font-bold">Location</p>
+              <Separator className="my-4" />
+              <Link href="https://goo.gl/maps/X956fmf511Fef9Pr7">
+                <Image
+                  src={`https://maps.googleapis.com/maps/api/staticmap?center=45.3035201,-85.2598514&zoom=16&size=400x400&markers=color:blue%7Clabel:B%7C45.3035201,-85.2598514&key=${process.env.GOOGLE_MAPS_API_KEY}`}
+                  alt="Google maps of our address"
+                  width={1000}
+                  height={1000}
+                  className="h-[350px] object-cover"
+                ></Image>
+              </Link>
+            </div>
+          )}
         </div>
 
         <Separator />
