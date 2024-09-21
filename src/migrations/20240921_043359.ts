@@ -1,32 +1,11 @@
-import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-sqlite'
+import { MigrateDownArgs, MigrateUpArgs, sql } from '@payloadcms/db-sqlite'
 
 export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
-  // Update existing references to cards table
-  await payload.db.drizzle.run(sql`
-    UPDATE team
-    SET meta_metadata_image_id = NULL
-    WHERE meta_metadata_image_id NOT IN (SELECT id FROM meta_images);
-  `)
+  // Drop existing tables
+  await payload.db.drizzle.run(sql`DROP TABLE IF EXISTS team;`)
+  await payload.db.drizzle.run(sql`DROP TABLE IF EXISTS _team_v;`)
 
-  await payload.db.drizzle.run(sql`
-    UPDATE _team_v
-    SET version_meta_metadata_image_id = NULL
-    WHERE version_meta_metadata_image_id NOT IN (SELECT id FROM meta_images);
-  `)
-
-  // Remove old foreign key constraint from team table
-  await payload.db.drizzle.run(sql`
-    PRAGMA foreign_keys=off;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    CREATE TABLE team_temp AS SELECT * FROM team;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    DROP TABLE team;
-  `)
-
+  // Recreate team table
   await payload.db.drizzle.run(sql`
     CREATE TABLE \`team\` (
       \`id\` integer PRIMARY KEY NOT NULL,
@@ -53,23 +32,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
     );
   `)
 
-  await payload.db.drizzle.run(sql`
-    INSERT INTO team SELECT * FROM team_temp;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    DROP TABLE team_temp;
-  `)
-
-  // Update _team_v table
-  await payload.db.drizzle.run(sql`
-    CREATE TABLE _team_v_temp AS SELECT * FROM _team_v;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    DROP TABLE _team_v;
-  `)
-
+  // Recreate _team_v table
   await payload.db.drizzle.run(sql`
     CREATE TABLE \`_team_v\` (
       \`id\` integer PRIMARY KEY NOT NULL,
@@ -101,48 +64,14 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
       FOREIGN KEY (\`version_meta_metadata_image_id\`) REFERENCES \`meta_images\`(\`id\`) ON UPDATE no action ON DELETE set null
     );
   `)
-
-  await payload.db.drizzle.run(sql`
-    INSERT INTO _team_v SELECT * FROM _team_v_temp;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    DROP TABLE _team_v_temp;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    PRAGMA foreign_keys=on;
-  `)
 }
 
 export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
-  // Update existing references to meta_images table
-  await payload.db.drizzle.run(sql`
-    UPDATE team
-    SET meta_metadata_image_id = NULL
-    WHERE meta_metadata_image_id NOT IN (SELECT id FROM cards);
-  `)
+  // Drop tables created in the up migration
+  await payload.db.drizzle.run(sql`DROP TABLE IF EXISTS team;`)
+  await payload.db.drizzle.run(sql`DROP TABLE IF EXISTS _team_v;`)
 
-  await payload.db.drizzle.run(sql`
-    UPDATE _team_v
-    SET version_meta_metadata_image_id = NULL
-    WHERE version_meta_metadata_image_id NOT IN (SELECT id FROM cards);
-  `)
-
-  // Revert changes if needed
-  await payload.db.drizzle.run(sql`
-    PRAGMA foreign_keys=off;
-  `)
-
-  // Revert team table
-  await payload.db.drizzle.run(sql`
-    CREATE TABLE team_temp AS SELECT * FROM team;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    DROP TABLE team;
-  `)
-
+  // Recreate original team table
   await payload.db.drizzle.run(sql`
     CREATE TABLE \`team\` (
       \`id\` integer PRIMARY KEY NOT NULL,
@@ -169,23 +98,7 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
     );
   `)
 
-  await payload.db.drizzle.run(sql`
-    INSERT INTO team SELECT * FROM team_temp;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    DROP TABLE team_temp;
-  `)
-
-  // Revert _team_v table
-  await payload.db.drizzle.run(sql`
-    CREATE TABLE _team_v_temp AS SELECT * FROM _team_v;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    DROP TABLE _team_v;
-  `)
-
+  // Recreate original _team_v table
   await payload.db.drizzle.run(sql`
     CREATE TABLE \`_team_v\` (
       \`id\` integer PRIMARY KEY NOT NULL,
@@ -216,17 +129,5 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
       FOREIGN KEY (\`version_image_id\`) REFERENCES \`portraits\`(\`id\`) ON UPDATE no action ON DELETE set null,
       FOREIGN KEY (\`version_meta_metadata_image_id\`) REFERENCES \`cards\`(\`id\`) ON UPDATE no action ON DELETE set null
     );
-  `)
-
-  await payload.db.drizzle.run(sql`
-    INSERT INTO _team_v SELECT * FROM _team_v_temp;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    DROP TABLE _team_v_temp;
-  `)
-
-  await payload.db.drizzle.run(sql`
-    PRAGMA foreign_keys=on;
   `)
 }
