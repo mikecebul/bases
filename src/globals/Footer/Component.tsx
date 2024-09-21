@@ -34,14 +34,16 @@ export async function Footer() {
                   } else if (link.type === 'reference' && link.reference) {
                     if (
                       link.reference.relationTo === 'pages' &&
-                      typeof link.reference.value !== 'number'
+                      typeof link.reference.value === 'object' &&
+                      link.reference.value.slug
                     ) {
-                      href = link.reference.value.slug || '/'
+                      href = `/${link.reference.value.slug}`
                     } else if (
                       link.reference.relationTo === 'files' &&
-                      typeof link.reference.value !== 'number'
+                      typeof link.reference.value === 'object' &&
+                      link.reference.value.url
                     ) {
-                      href = link.reference.value.url || '/'
+                      href = link.reference.value.url
                     }
                   }
 
