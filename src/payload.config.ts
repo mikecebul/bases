@@ -12,6 +12,7 @@ import {
   InlineToolbarFeature,
   ItalicFeature,
   LinkFeature,
+  UnorderedListFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp' // editor-import
@@ -112,6 +113,7 @@ export default buildConfig({
         UnderlineFeature(),
         BoldFeature(),
         ItalicFeature(),
+        UnorderedListFeature(),
         LinkFeature({
           enabledCollections: ['pages', 'files'],
           fields: ({ defaultFields }) => {
