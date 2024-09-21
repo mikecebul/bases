@@ -1,0 +1,195 @@
+import { getCachedGlobal } from '@/utilities/getGlobals'
+import { Separator } from '@/components/ui/separator'
+import Link from 'next/link'
+
+import type { CompanyInfo, Footer } from '@/payload-types'
+import { cn } from '@/utilities/cn'
+import { buttonVariants } from '@/components/ui/button'
+import { Clock, Facebook, Mail, Navigation, Phone, Printer } from 'lucide-react'
+import Image from 'next/image'
+import Container from '@/components/Container'
+
+export async function Footer() {
+  const footer: Footer = await getCachedGlobal('footer')()
+  const columns = footer?.columns || []
+  const pageLinks = columns.find(({ pageLinks }) => pageLinks && pageLinks.length > 0)?.pageLinks
+
+  const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
+  const { contact, social, hours } = companyInfo
+
+  return (
+    <footer>
+      <Container className="py-0">
+        <div className="grid gap-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* PageLinks */}
+          {!!pageLinks && pageLinks.length > 0 && (
+            <div className="flex flex-col col-span-1">
+              <p className="text-lg font-bold">Website</p>
+              <Separator className="my-4" />
+              <ul className="flex flex-col mb-8 space-y-4 font-medium text-gray-500">
+                {pageLinks?.map(({ link, id }) => {
+                  let href = '/'
+                  if (link.type === 'custom' && link.url) {
+                    href = link.url
+                  } else if (link.type === 'reference' && link.reference) {
+                    if (
+                      link.reference.relationTo === 'pages' &&
+                      typeof link.reference.value !== 'number'
+                    ) {
+                      href = link.reference.value.slug || '/'
+                    } else if (
+                      link.reference.relationTo === 'files' &&
+                      typeof link.reference.value !== 'number'
+                    ) {
+                      href = link.reference.value.url || '/'
+                    }
+                  }
+
+                  return (
+                    <li key={id}>
+                      <Link
+                        href={href}
+                        className={cn(buttonVariants({ variant: 'ghost' }), 'flex justify-start')}
+                        target={link.newTab ? '_blank' : undefined}
+                        rel={link.newTab ? 'noopener noreferrer' : undefined}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          )}
+          {/* Contact Info */}
+          {!!contact && (
+            <div className="flex flex-col col-span-1">
+              <p className="text-lg font-bold">Contact</p>
+              <Separator className="my-4" />
+              <ul className="flex flex-col mb-8 space-y-4 text-gray-500 ">
+                {typeof contact?.phone === 'string' && (
+                  <li key={contact.phone} className="group">
+                    <a
+                      href={`tel:${contact.phone.replace(/\D/g, '')}`}
+                      className={cn(
+                        buttonVariants({ variant: 'ghost' }),
+                        'flex justify-start group-hover:text-primary',
+                      )}
+                    >
+                      <Phone className="flex-shrink-0 mr-2" size={20} />
+                      {contact.phone}
+                    </a>
+                  </li>
+                )}
+                {typeof contact?.address === 'string' && (
+                  <li key={contact.address} className="group">
+                    <a
+                      href={contact.googleMapLink ?? '#'}
+                      className={cn(
+                        buttonVariants({ variant: 'ghost' }),
+                        'flex justify-start group-hover:text-primary',
+                      )}
+                    >
+                      <Navigation className="flex-shrink-0 mr-2" size={20} />
+                      {contact.address}
+                    </a>
+                  </li>
+                )}
+                {typeof contact?.email === 'string' && (
+                  <li key={contact.email} className="group">
+                    <a
+                      href={`mailto:${contact.email}`}
+                      className={cn(
+                        buttonVariants({ variant: 'ghost' }),
+                        'flex justify-start group-hover:text-primary',
+                      )}
+                    >
+                      <Mail className="flex-shrink-0 mr-2" size={20} />
+                      {contact.email}
+                    </a>
+                  </li>
+                )}
+                {typeof contact?.fax === 'string' && (
+                  <li key={contact.fax} className="group">
+                    <div className={cn(buttonVariants({ variant: 'text' }), 'text-gray-500')}>
+                      <Printer className="mr-2" size={20} />
+                      {contact.fax}
+                    </div>
+                  </li>
+                )}
+                {/* Social Links */}
+                {!!social &&
+                  social?.map(({ link }) => (
+                    <li key={link.label} className="group">
+                      <a
+                        href={link.url ?? ''}
+                        className={cn(
+                          buttonVariants({ variant: 'ghost' }),
+                          'flex justify-start group-hover:text-primary',
+                        )}
+                      >
+                        <Facebook className="mr-2" size={20} />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+
+                {/* Business Hours */}
+                {!!hours && hours?.length > 0 && (
+                  <li
+                    className={cn(
+                      buttonVariants({ variant: 'text' }),
+                      'text-gray-500 flex items-start justify-start h-full',
+                    )}
+                  >
+                    <Clock className="mr-2" size={20} />
+                    <ul>
+                      {hours?.map(({ day, hours, id, note, type }) => (
+                        <li key={id}>
+                          {type === 'default' ? (
+                            <span>
+                              <strong>{`${day}: `}</strong>
+                              {hours}
+                            </span>
+                          ) : (
+                            <span>{note}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
+
+          {/* Map Section */}
+          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
+            <p className="text-lg font-bold">Location</p>
+            <Separator className="my-4" />
+            <Link href="https://goo.gl/maps/X956fmf511Fef9Pr7">
+              <Image
+                src={`https://maps.googleapis.com/maps/api/staticmap?center=45.3035201,-85.2598514&zoom=16&size=400x400&markers=color:blue%7Clabel:B%7C45.3035201,-85.2598514&key=${process.env.GOOGLE_MAPS_API_KEY}`}
+                alt="Google maps of our address"
+                width={1000}
+                height={1000}
+                className="h-[350px] object-cover"
+              ></Image>
+            </Link>
+          </div>
+        </div>
+
+        <Separator />
+        <div className="flex items-center justify-center">
+          <span className="block text-sm text-center text-gray-500">
+            © {new Date().getFullYear()}{' '}
+            <Link href="/" className={cn(buttonVariants({ variant: 'ghost' }), 'p-0')}>
+              BASES
+            </Link>
+            . All Rights Reserved.
+          </span>
+        </div>
+      </Container>
+    </footer>
+  )
+}

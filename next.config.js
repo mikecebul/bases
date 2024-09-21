@@ -1,42 +1,37 @@
+import { withPayload } from '@payloadcms/next/withPayload'
+
+import redirects from './redirects.js'
+
+const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "tailwindui.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "maps.googleapis.com",
-      },
-      {
-        protocol: "https",
-        hostname: "uploadthing.com",
-      },
+      ...[
+        NEXT_PUBLIC_SERVER_URL,
+        'https://images.unsplash.com',
+        'https://maps.googleapis.com',
+        'https://bases.mikecebul.dev',
+      ].map((item) => {
+        const url = new URL(item)
+        return {
+          hostname: url.hostname,
+          protocol: url.protocol.replace(':', ''),
+        }
+      }),
     ],
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  async redirects() {
+  reactStrictMode: true,
+  redirects,
+  async rewrites() {
     return [
       {
-        source: "/wp/:path*",
-        destination: "/",
-        permanent: true,
+        source: '/RDFK',
+        destination: '/rdfk',
       },
-      {
-        // Redirect for 'rdfk' with an extension
-        source: '/rdfk:extension(\\.[^.]+)',
-        destination: '/RDFK',
-        permanent: false,
-      },
-    ];
+    ]
   },
-};
-module.exports = nextConfig;
+}
+
+export default withPayload(nextConfig)
