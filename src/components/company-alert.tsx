@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -8,16 +8,16 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "./ui/alert-dialog";
-import { buttonVariants } from "./ui/button";
-import { cn } from "@/lib/utils";
+} from './ui/alert-dialog'
+import { buttonVariants } from './ui/button'
+import { cn } from '@/utilities/cn'
 
 export function CompanyAlert() {
-  const [isOpen, setIsOpen] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const [isOpen, setIsOpen] = useState(true)
+  const [mounted, setMounted] = useState(false)
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
   return (
     mounted && (
       <AlertDialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
@@ -36,23 +36,18 @@ export function CompanyAlert() {
           <div>
             <p className="font-semibold">Note</p>
             <p>
-              While we are closed we will be scheduling after-hours drug tests.
-              Call Scott at{" "}
+              While we are closed we will be scheduling after-hours drug tests. Call Scott at{' '}
               <span className="whitespace-nowrap hover:font-semibold">
                 <a href="tel:2318810810" className="hover:underline">
                   (231) 881-0810
                 </a>
-              </span>{" "}
-              first thing in the morning to schedule an appointment time for an
-              aditional $20 fee.
+              </span>{' '}
+              first thing in the morning to schedule an appointment time for an aditional $20 fee.
             </p>
           </div>
           <AlertDialogFooter>
             <AlertDialogCancel
-              className={cn(
-                buttonVariants({ variant: "brand" }),
-                "hover:text-primary-foreground"
-              )}
+              className={cn(buttonVariants({ variant: 'brand' }), 'hover:text-primary-foreground')}
             >
               Close
             </AlertDialogCancel>
@@ -60,5 +55,5 @@ export function CompanyAlert() {
         </AlertDialogContent>
       </AlertDialog>
     )
-  );
+  )
 }
