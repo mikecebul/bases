@@ -1,11 +1,11 @@
 import type { GlobalAfterChangeHook } from 'payload'
 
-import { revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 
 export const revalidateFooter: GlobalAfterChangeHook = ({ doc, req: { payload } }) => {
   payload.logger.info(`Revalidating footer`)
 
-  revalidateTag('global_footer')
+  revalidatePath('/(frontend)', 'layout')
 
   return doc
 }
