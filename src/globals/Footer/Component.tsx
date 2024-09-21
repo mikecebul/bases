@@ -28,29 +28,10 @@ export async function Footer() {
               <Separator className="my-4" />
               <ul className="flex flex-col mb-8 space-y-4 font-medium text-gray-500">
                 {pageLinks?.map(({ link, id }) => {
-                  let href = '/'
-                  if (link.type === 'custom' && link.url) {
-                    href = link.url
-                  } else if (link.type === 'reference' && link.reference) {
-                    if (
-                      link.reference.relationTo === 'pages' &&
-                      typeof link.reference.value === 'object' &&
-                      link.reference.value.slug
-                    ) {
-                      href = `/${link.reference.value.slug}`
-                    } else if (
-                      link.reference.relationTo === 'files' &&
-                      typeof link.reference.value === 'object' &&
-                      link.reference.value.url
-                    ) {
-                      href = link.reference.value.url
-                    }
-                  }
-
                   return (
                     <li key={id}>
                       <Link
-                        href={href}
+                        href={link.url ?? '/'}
                         className={cn(buttonVariants({ variant: 'ghost' }), 'flex justify-start')}
                         target={link.newTab ? '_blank' : undefined}
                         rel={link.newTab ? 'noopener noreferrer' : undefined}
