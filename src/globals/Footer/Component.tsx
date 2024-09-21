@@ -27,16 +27,37 @@ export async function Footer() {
               <p className="text-lg font-bold">Website</p>
               <Separator className="my-4" />
               <ul className="flex flex-col mb-8 space-y-4 font-medium text-gray-500">
-                {pageLinks.map(({ link, id }) => (
-                  <li key={id}>
-                    <Link
-                      href={link.url ?? '/'}
-                      className={cn(buttonVariants({ variant: 'ghost' }), 'flex justify-start')}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                {pageLinks?.map(({ link, id }) => {
+                  let href = '/'
+                  if (link.type === 'custom' && link.url) {
+                    href = link.url
+                  } else if (link.type === 'reference' && link.reference) {
+                    if (
+                      link.reference.relationTo === 'pages' &&
+                      typeof link.reference.value !== 'number'
+                    ) {
+                      href = link.reference.value.slug || '/'
+                    } else if (
+                      link.reference.relationTo === 'files' &&
+                      typeof link.reference.value !== 'number'
+                    ) {
+                      href = link.reference.value.url || '/'
+                    }
+                  }
+
+                  return (
+                    <li key={id}>
+                      <Link
+                        href={href}
+                        className={cn(buttonVariants({ variant: 'ghost' }), 'flex justify-start')}
+                        target={link.newTab ? '_blank' : undefined}
+                        rel={link.newTab ? 'noopener noreferrer' : undefined}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           )}

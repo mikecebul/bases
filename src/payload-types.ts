@@ -145,7 +145,6 @@ export interface Hero {
  */
 export interface File {
   id: number;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -165,7 +164,6 @@ export interface File {
 export interface Landscape {
   id: number;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -257,7 +255,6 @@ export interface CarfBlock {
 export interface Card {
   id: number;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -361,7 +358,6 @@ export interface Team {
 export interface Avatar {
   id: number;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -391,7 +387,6 @@ export interface Avatar {
 export interface Portrait {
   id: number;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -421,7 +416,6 @@ export interface Portrait {
 export interface MetaImage {
   id: number;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
