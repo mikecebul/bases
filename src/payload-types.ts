@@ -391,7 +391,6 @@ export interface Avatar {
 export interface Portrait {
   id: number;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
