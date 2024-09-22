@@ -24,10 +24,10 @@ export default function AboutUsCarousel({ images }: { images: Landscape[] }) {
           <CarouselItem key={image.id}>
             <Image
               className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
-              src={image.url || ''}
+              src={image.url ?? ''}
               alt="BASES Sign"
-              width={1080}
-              height={1980}
+              width={960}
+              height={640}
               priority
             />
           </CarouselItem>
