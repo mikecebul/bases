@@ -31,7 +31,7 @@ export function DonateForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { amount } = values
-    window.location.href = `https://www.usaepay.com/interface/epayform/?UMkey=57n3S92mdvKT3NtjtQNN645B24b52741&UMcommand=sale&UMamount=${amount}`
+    window.location.href = `https://www.usaepay.com/interface/epayform/?UMkey=${process.env.NEXT_PUBLIC_USAEPAY_KEY}&UMcommand=sale&UMamount=${amount}`
     form.reset()
   }
 

@@ -34,12 +34,15 @@ export const Hero: Block = {
           name: 'title',
           label: 'Title',
           type: 'text',
+          defaultValue: 'Substance Use and Mental Health Counseling',
           required: true,
         },
         {
           name: 'description',
           label: 'Description',
           type: 'textarea',
+          defaultValue:
+            'We bridge the gap to recovery, offering flexible and personalized services both in-person and via telehealth.',
           required: true,
         },
         {
@@ -67,6 +70,12 @@ export const Hero: Block = {
           type: 'upload',
           relationTo: 'landscapes',
           required: true,
+        },
+        {
+          name: 'svg',
+          type: 'checkbox',
+          defaultValue: true,
+          label: 'Show decorative SVG',
         },
       ],
     },

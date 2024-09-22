@@ -10,10 +10,9 @@ import {
   useFormFields,
 } from '@payloadcms/ui'
 
-import type { TextFieldClientProps } from 'payload'
-
 import { formatSlug } from './formatSlug'
 import './index.scss'
+import { TextFieldClientProps } from 'payload'
 
 type SlugComponentProps = {
   fieldToUse: string

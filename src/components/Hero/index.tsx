@@ -9,7 +9,7 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 
 type Props = NonNullable<HeroType['highImpact']>
 
-export async function Hero({ title, description, image, links }: Props) {
+export async function Hero({ title, description, image, links, svg }: Props) {
   const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
   const { contact } = companyInfo
   const cleanedPhone = contact?.phone ? contact?.phone.replace(/\D/g, '') : null
@@ -67,7 +67,7 @@ export async function Hero({ title, description, image, links }: Props) {
               height={1080}
               priority
             />
-            <SVG />
+            {svg && <SVG />}
           </>
         )}
       </div>

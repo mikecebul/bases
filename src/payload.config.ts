@@ -141,10 +141,10 @@ export default buildConfig({
   }),
   db: sqliteAdapter({
     client: {
-      // for turso you can do this:
       url: process.env.LOCAL_DATABASE_URL || process.env.TURSO_DATABASE_URL!,
       authToken: process.env.LOCAL_DATABASE_URL ? undefined : process.env.TURSO_AUTH_TOKEN,
     },
+    push: false,
     // logger: true,
   }),
   collections: [

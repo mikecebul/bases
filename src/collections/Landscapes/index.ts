@@ -27,8 +27,8 @@ export const Landcapes: CollectionConfig = {
       format: 'webp',
     },
     resizeOptions: {
-      width: 1600,
-      height: 900,
+      width: 960,
+      height: 640,
     },
     imageSizes: [
       {
