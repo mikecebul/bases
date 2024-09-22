@@ -144,13 +144,13 @@ In development you simply use the S3_ENABLED=false in the .env file and all your
 - NEXT_PUBLIC_S3_HOSTNAME=
 - NEXT_PUBLIC_UPLOAD_PREFIX=media
 
-I'm not using the NEXT_PUBLIC_UPLOAD_PREFIX as I have all my images that use different formats in their own collection with their own prefix. It makes it similar to individual folders and more effectient than having 6 different formats for every image. Plus, type checking those nested image sizes is a pain in the ass.
+I'm not using the NEXT_PUBLIC_UPLOAD_PREFIX as I have all my images that use different formats in their own collection with their own prefix. It makes it similar to individual folders and more effecient than having 6 different formats for every image. Plus, type checking those nested image sizes is a pain in the ass.
 
 Cloudflare R2 is convient if you already use them for DNS as you simply click a button and you have a subdomain for your bucket. Love it.
 
 ## Database
 
-I'm using Turso which is really the icing on the cake for my dream stack for small websites like this. Right now the Payload SQLite adapter is in beta and I've found using migrations in development is the only usable form right now (Ritsu was right). Plus it lets you make sure your scripts work before you push them to production. Once stable I'm sure we can bo back to using DB Push in development.
+I'm using Turso which is really the icing on the cake for my dream stack for small websites like this. Right now the Payload SQLite adapter is in beta and I've found using migrations in development is the only usable form right now (Ritsu was right). Plus it lets you make sure your scripts work before you push them to production. Once stable I'm sure we can go back to using DB Push in development.
 
 In development make sure to have the env var LOCAL_DATABASE_URL as it will save a local sqlite db. Super cool to not need to use docker to setup a postgres instance. To create a migration after finishing a fetaure use `payload migrate:create`.
 
