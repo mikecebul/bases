@@ -150,7 +150,11 @@ Cloudflare R2 is convient if you already use them for DNS as you simply click a 
 
 ## Database
 
-I'm using Turso which is really the icing on the cake for my dream stack for small websites like this. Right now the Payload SQLite adapter is in beta and I've found using migrations in development is the only usable form right now. Once stable I'm sure we can bo back to using DB Push in development. Also, remember in development to have the env var LOCAL_DATABASE_URL as it will save a local sqlite db. Super cool to not need to use docker to setup a postgres instance. To create a migration after finishing a fetaure use `payload migrate:create`. One caveat to using SQLite is updating a table's foreign key. I found a [great video](https://youtu.be/qTp3VA-9DYc?si=7KSHOC8HoteU11r2) that explains how to overcome this drawback.
+I'm using Turso which is really the icing on the cake for my dream stack for small websites like this. Right now the Payload SQLite adapter is in beta and I've found using migrations in development is the only usable form right now (Ritsu was right). Plus it lets you make sure your scripts work before you push them to production. Once stable I'm sure we can bo back to using DB Push in development.
+
+In development make sure to have the env var LOCAL_DATABASE_URL as it will save a local sqlite db. Super cool to not need to use docker to setup a postgres instance. To create a migration after finishing a fetaure use `payload migrate:create`.
+
+Some caveats to using SQLite is not all migrations are supported. Such as updating a table's foreign key. For this one in particualar I found a [great video](https://youtu.be/qTp3VA-9DYc?si=7KSHOC8HoteU11r2) that explains how to properly handle it.
 
 ## Deployment
 
