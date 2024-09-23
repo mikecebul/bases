@@ -77,7 +77,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      icons: [{ url: '/favicon.ico' }],
+      icons: [{ url: '/public/favicon.ico' }],
       titleSuffix: ' - BASES',
     },
     user: Users.slug,
