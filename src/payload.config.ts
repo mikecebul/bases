@@ -40,6 +40,7 @@ import { superAdmin } from './access/superAdmin'
 import { seedServices } from './endpoints/seedServices'
 import { seedTeam } from './endpoints/seedTeam'
 import { MetaImages } from './collections/MetaImages'
+import { dbHeartBeat } from './endpoints/dbHeartBeat'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -169,6 +170,7 @@ export default buildConfig({
   endpoints: [
     { handler: seedServices, method: 'get', path: '/seed-services' },
     { handler: seedTeam, method: 'get', path: '/seed-team' },
+    { handler: dbHeartBeat, method: 'get', path: '/db-heartbeat' },
   ],
   globals: [Header, Footer, CompanyInfo],
   plugins: [
