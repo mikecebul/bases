@@ -13,6 +13,7 @@ const nextConfig = {
         'https://images.unsplash.com',
         'https://maps.googleapis.com',
         'https://bases.mikecebul.dev',
+        'https://bases-dev.mikecebul.dev',
       ].map((item) => {
         const url = new URL(item)
         return {

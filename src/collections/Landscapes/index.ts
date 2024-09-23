@@ -17,7 +17,7 @@ export const Landcapes: CollectionConfig = {
     read: anyone,
   },
   admin: {
-    description: 'Images with a 16:9 ratio.',
+    description: 'Images with a 3:2 ratio.',
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
     hideAPIURL: !superAdmin,

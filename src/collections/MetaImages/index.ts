@@ -17,7 +17,7 @@ export const MetaImages: CollectionConfig = {
     read: anyone,
   },
   admin: {
-    description: 'Images with a 16:9 ratio.',
+    description: 'SEO meta images are resized to 1200x630px.',
     defaultColumns: ['filename', 'alt', 'updatedAt'],
     group: 'Media',
     hideAPIURL: !superAdmin,
