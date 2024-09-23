@@ -170,7 +170,6 @@ export default buildConfig({
   endpoints: [
     { handler: seedServices, method: 'get', path: '/seed-services' },
     { handler: seedTeam, method: 'get', path: '/seed-team' },
-    { handler: dbHeartBeat, method: 'get', path: '/db-heartbeat' },
   ],
   globals: [Header, Footer, CompanyInfo],
   plugins: [
