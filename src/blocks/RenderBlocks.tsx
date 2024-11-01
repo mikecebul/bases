@@ -10,6 +10,8 @@ import { TeamBlock } from './Team/Component'
 import { TeamMemberBlock } from './TeamMember/Component'
 import { AboutUsBlock } from './AboutUs/Component'
 import { LinksBlock } from './Links/Component'
+import { FormBlock } from './Form/Component'
+// import { MediaBlock } from './MediaBlock/Component'
 
 const blockComponents = {
   hero: HeroBlock,
@@ -20,6 +22,8 @@ const blockComponents = {
   teamMember: TeamMemberBlock,
   aboutUs: AboutUsBlock,
   linksBlock: LinksBlock,
+  formBlock: FormBlock,
+  // mediaBlock: MediaBlock,
 }
 
 export const RenderBlocks: React.FC<{

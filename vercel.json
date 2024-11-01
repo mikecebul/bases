@@ -1,8 +1,0 @@
-{
-  "crons": [
-    {
-      "path": "/api/db-heartbeat",
-      "schedule": "0 0 * * 0"
-    }
-  ]
-}

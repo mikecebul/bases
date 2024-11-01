@@ -22,6 +22,7 @@ import { Team } from '@/blocks/Team/config'
 import { AboutUs } from '@/blocks/AboutUs/config'
 import { Links } from '@/blocks/Links/config'
 import { superAdmin } from '@/access/superAdmin'
+import { FormBlock } from '@/blocks/Form/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -60,7 +61,7 @@ export const Pages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Hero, Services, Carf, Donate, Team, AboutUs, Links],
+              blocks: [Hero, Services, Carf, Donate, Team, AboutUs, Links, FormBlock],
               required: true,
             },
           ],

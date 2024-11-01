@@ -17,7 +17,7 @@ export type LinkCards =
       description: string;
       imageUploadOption?: ('generate' | 'manual') | null;
       keywords?: string | null;
-      image?: (number | null) | Card;
+      image?: (string | null) | Card;
       href: string;
       id?: string | null;
     }[]
@@ -43,17 +43,42 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
+  collectionsSelect?: {
+    pages: PagesSelect<false> | PagesSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    team: TeamSelect<false> | TeamSelect<true>;
+    avatars: AvatarsSelect<false> | AvatarsSelect<true>;
+    cards: CardsSelect<false> | CardsSelect<true>;
+    landscapes: LandscapesSelect<false> | LandscapesSelect<true>;
+    portraits: PortraitsSelect<false> | PortraitsSelect<true>;
+    'meta-images': MetaImagesSelect<false> | MetaImagesSelect<true>;
+    files: FilesSelect<false> | FilesSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
+    redirects: RedirectsSelect<false> | RedirectsSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {
     header: Header;
     footer: Footer;
     'company-info': CompanyInfo;
   };
+  globalsSelect?: {
+    header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    'company-info': CompanyInfoSelect<false> | CompanyInfoSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
+  };
+  jobs?: {
+    tasks: unknown;
+    workflows?: unknown;
   };
 }
 export interface UserAuthOperations {
@@ -79,14 +104,14 @@ export interface UserAuthOperations {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: number;
+  id: string;
   title: string;
-  layout: (Hero | ServicesBlock | CarfBlock | DonateBlock | TeamBlock | AboutUsBlock | LinksBlock)[];
+  layout: (Hero | ServicesBlock | CarfBlock | DonateBlock | TeamBlock | AboutUsBlock | LinksBlock | FormBlock)[];
   meta?: {
     hideFromSearchEngines?: boolean | null;
     metadata?: {
       title?: string | null;
-      image?: (number | null) | MetaImage;
+      image?: (string | null) | MetaImage;
       description?: string | null;
     };
   };
@@ -115,11 +140,11 @@ export interface Hero {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'files';
-                  value: number | File;
+                  value: string | File;
                 } | null);
             url?: string | null;
             label: string;
@@ -128,7 +153,7 @@ export interface Hero {
           id?: string | null;
         }[]
       | null;
-    image: number | Landscape;
+    image: string | Landscape;
     svg?: boolean | null;
   };
   mediumImpact?: {
@@ -145,8 +170,7 @@ export interface Hero {
  * via the `definition` "files".
  */
 export interface File {
-  id: number;
-  prefix?: string | null;
+  id: string;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -164,9 +188,8 @@ export interface File {
  * via the `definition` "landscapes".
  */
 export interface Landscape {
-  id: number;
+  id: string;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -199,8 +222,8 @@ export interface ServicesBlock {
   description: string;
   gridSVG: boolean;
   howMany: 'topThreeServices' | 'allServices';
-  topThreeServices?: (number | Service)[] | null;
-  allServices?: (number | Service)[] | null;
+  topThreeServices?: (string | Service)[] | null;
+  allServices?: (string | Service)[] | null;
   links?:
     | {
         link: {
@@ -209,11 +232,11 @@ export interface ServicesBlock {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: number | Page;
+                value: string | Page;
               } | null)
             | ({
                 relationTo: 'files';
-                value: number | File;
+                value: string | File;
               } | null);
           url?: string | null;
           label: string;
@@ -231,7 +254,7 @@ export interface ServicesBlock {
  * via the `definition` "services".
  */
 export interface Service {
-  id: number;
+  id: string;
   title: string;
   desc: string;
   icon: string;
@@ -246,7 +269,7 @@ export interface CarfBlock {
   subtitle?: string | null;
   title?: string | null;
   description?: string | null;
-  image?: (number | null) | Card;
+  image?: (string | null) | Card;
   id?: string | null;
   blockName?: string | null;
   blockType: 'carf';
@@ -256,9 +279,8 @@ export interface CarfBlock {
  * via the `definition` "cards".
  */
 export interface Card {
-  id: number;
+  id: string;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -307,7 +329,7 @@ export interface TeamBlock {
   memberType?: ('staff' | 'board') | null;
   title?: string | null;
   description?: string | null;
-  teamMembers?: (number | Team)[] | null;
+  teamMembers?: (string | Team)[] | null;
   reverse?: boolean | null;
   id?: string | null;
   blockName?: string | null;
@@ -318,11 +340,11 @@ export interface TeamBlock {
  * via the `definition` "team".
  */
 export interface Team {
-  id: number;
+  id: string;
   memberType?: ('staff' | 'board') | null;
   name: string;
-  avatar: number | Avatar;
-  image: number | Portrait;
+  avatar: string | Avatar;
+  image: string | Portrait;
   role: string;
   qualifications?: string | null;
   bio: {
@@ -344,7 +366,7 @@ export interface Team {
     hideFromSearchEngines?: boolean | null;
     metadata?: {
       title?: string | null;
-      image?: (number | null) | MetaImage;
+      image?: (string | null) | MetaImage;
       description?: string | null;
     };
   };
@@ -360,9 +382,8 @@ export interface Team {
  * via the `definition` "avatars".
  */
 export interface Avatar {
-  id: number;
+  id: string;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -390,9 +411,8 @@ export interface Avatar {
  * via the `definition` "portraits".
  */
 export interface Portrait {
-  id: number;
+  id: string;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -420,9 +440,8 @@ export interface Portrait {
  * via the `definition` "meta-images".
  */
 export interface MetaImage {
-  id: number;
+  id: string;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -466,7 +485,7 @@ export interface AboutUsBlock {
     };
     [k: string]: unknown;
   } | null;
-  images?: (number | Landscape)[] | null;
+  images?: (string | Landscape)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'aboutUs';
@@ -484,10 +503,35 @@ export interface LinksBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormBlock".
+ */
+export interface FormBlock {
+  enableIntro?: boolean | null;
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'formBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   name?: string | null;
   role: string;
   updatedAt: string;
@@ -506,18 +550,18 @@ export interface User {
  * via the `definition` "redirects".
  */
 export interface Redirect {
-  id: number;
+  id: string;
   from: string;
   to?: {
     type?: ('reference' | 'custom') | null;
     reference?:
       | ({
           relationTo: 'pages';
-          value: number | Page;
+          value: string | Page;
         } | null)
       | ({
           relationTo: 'team';
-          value: number | Team;
+          value: string | Team;
         } | null);
     url?: string | null;
   };
@@ -529,56 +573,56 @@ export interface Redirect {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'pages';
-        value: number | Page;
+        value: string | Page;
       } | null)
     | ({
         relationTo: 'services';
-        value: number | Service;
+        value: string | Service;
       } | null)
     | ({
         relationTo: 'team';
-        value: number | Team;
+        value: string | Team;
       } | null)
     | ({
         relationTo: 'avatars';
-        value: number | Avatar;
+        value: string | Avatar;
       } | null)
     | ({
         relationTo: 'cards';
-        value: number | Card;
+        value: string | Card;
       } | null)
     | ({
         relationTo: 'landscapes';
-        value: number | Landscape;
+        value: string | Landscape;
       } | null)
     | ({
         relationTo: 'portraits';
-        value: number | Portrait;
+        value: string | Portrait;
       } | null)
     | ({
         relationTo: 'meta-images';
-        value: number | MetaImage;
+        value: string | MetaImage;
       } | null)
     | ({
         relationTo: 'files';
-        value: number | File;
+        value: string | File;
       } | null)
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'redirects';
-        value: number | Redirect;
+        value: string | Redirect;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -588,10 +632,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -611,7 +655,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -619,10 +663,506 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              type?: T;
+              highImpact?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    phoneNumber?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                appearance?: T;
+                              };
+                          id?: T;
+                        };
+                    image?: T;
+                    svg?: T;
+                  };
+              mediumImpact?:
+                | T
+                | {
+                    subtitle?: T;
+                    title?: T;
+                    description?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        services?:
+          | T
+          | {
+              subtitle?: T;
+              title?: T;
+              description?: T;
+              gridSVG?: T;
+              howMany?: T;
+              topThreeServices?: T;
+              allServices?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        carf?:
+          | T
+          | {
+              subtitle?: T;
+              title?: T;
+              description?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+        donate?:
+          | T
+          | {
+              subtitle?: T;
+              title?: T;
+              description?: T;
+              programs?:
+                | T
+                | {
+                    title?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        team?:
+          | T
+          | {
+              memberType?: T;
+              title?: T;
+              description?: T;
+              teamMembers?: T;
+              reverse?: T;
+              id?: T;
+              blockName?: T;
+            };
+        aboutUs?:
+          | T
+          | {
+              subtitle?: T;
+              richContent?: T;
+              images?: T;
+              id?: T;
+              blockName?: T;
+            };
+        linksBlock?:
+          | T
+          | {
+              hero?:
+                | T
+                | {
+                    hero?:
+                      | T
+                      | {
+                          type?: T;
+                          highImpact?:
+                            | T
+                            | {
+                                title?: T;
+                                description?: T;
+                                phoneNumber?: T;
+                                links?:
+                                  | T
+                                  | {
+                                      link?:
+                                        | T
+                                        | {
+                                            type?: T;
+                                            newTab?: T;
+                                            reference?: T;
+                                            url?: T;
+                                            label?: T;
+                                            appearance?: T;
+                                          };
+                                      id?: T;
+                                    };
+                                image?: T;
+                                svg?: T;
+                              };
+                          mediumImpact?:
+                            | T
+                            | {
+                                subtitle?: T;
+                                title?: T;
+                                description?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              linkCards?:
+                | T
+                | {
+                    linkType?: T;
+                    title?: T;
+                    description?: T;
+                    imageUploadOption?: T;
+                    keywords?: T;
+                    image?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        formBlock?:
+          | T
+          | {
+              enableIntro?: T;
+              introContent?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  meta?:
+    | T
+    | {
+        hideFromSearchEngines?: T;
+        metadata?:
+          | T
+          | {
+              overview?: T;
+              title?: T;
+              image?: T;
+              description?: T;
+              preview?: T;
+            };
+      };
+  publishedAt?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T;
+  desc?: T;
+  icon?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team_select".
+ */
+export interface TeamSelect<T extends boolean = true> {
+  memberType?: T;
+  name?: T;
+  avatar?: T;
+  image?: T;
+  role?: T;
+  qualifications?: T;
+  bio?: T;
+  meta?:
+    | T
+    | {
+        hideFromSearchEngines?: T;
+        metadata?:
+          | T
+          | {
+              overview?: T;
+              title?: T;
+              image?: T;
+              description?: T;
+              preview?: T;
+            };
+      };
+  publishedAt?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "avatars_select".
+ */
+export interface AvatarsSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cards_select".
+ */
+export interface CardsSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landscapes_select".
+ */
+export interface LandscapesSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portraits_select".
+ */
+export interface PortraitsSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "meta-images_select".
+ */
+export interface MetaImagesSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "files_select".
+ */
+export interface FilesSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects_select".
+ */
+export interface RedirectsSelect<T extends boolean = true> {
+  from?: T;
+  to?:
+    | T
+    | {
+        type?: T;
+        reference?: T;
+        url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents_select".
+ */
+export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences_select".
+ */
+export interface PayloadPreferencesSelect<T extends boolean = true> {
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations_select".
+ */
+export interface PayloadMigrationsSelect<T extends boolean = true> {
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header".
  */
 export interface Header {
-  id: number;
+  id: string;
   navItems?:
     | {
         link: {
@@ -631,11 +1171,11 @@ export interface Header {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: number | Page;
+                value: string | Page;
               } | null)
             | ({
                 relationTo: 'files';
-                value: number | File;
+                value: string | File;
               } | null);
           url?: string | null;
           label: string;
@@ -651,7 +1191,7 @@ export interface Header {
  * via the `definition` "footer".
  */
 export interface Footer {
-  id: number;
+  id: string;
   pageLinks?:
     | {
         link: {
@@ -660,11 +1200,11 @@ export interface Footer {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: number | Page;
+                value: string | Page;
               } | null)
             | ({
                 relationTo: 'files';
-                value: number | File;
+                value: string | File;
               } | null);
           url?: string | null;
           label: string;
@@ -682,7 +1222,7 @@ export interface Footer {
  * via the `definition` "company-info".
  */
 export interface CompanyInfo {
-  id: number;
+  id: string;
   contact?: {
     phone?: string | null;
     fax?: string | null;
@@ -699,11 +1239,11 @@ export interface CompanyInfo {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: number | Page;
+                value: string | Page;
               } | null)
             | ({
                 relationTo: 'files';
-                value: number | File;
+                value: string | File;
               } | null);
           url?: string | null;
           label: string;
@@ -722,6 +1262,96 @@ export interface CompanyInfo {
     | null;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  navItems?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  pageLinks?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  showContact?: T;
+  showGoogleMap?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "company-info_select".
+ */
+export interface CompanyInfoSelect<T extends boolean = true> {
+  contact?:
+    | T
+    | {
+        phone?: T;
+        fax?: T;
+        address?: T;
+        googleMapLink?: T;
+        email?: T;
+      };
+  social?:
+    | T
+    | {
+        platform?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  hours?:
+    | T
+    | {
+        type?: T;
+        day?: T;
+        hours?: T;
+        note?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,4 +1,4 @@
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
@@ -6,12 +6,14 @@ import { seoPlugin } from '@payloadcms/plugin-seo'
 import { s3Storage as s3StoragePlugin } from '@payloadcms/storage-s3'
 import { S3_PLUGIN_CONFIG } from './plugins/s3'
 import {
+  BlocksFeature,
   BoldFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   ItalicFeature,
   LinkFeature,
+  OrderedListFeature,
   UnorderedListFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
@@ -29,18 +31,13 @@ import { revalidateRedirects } from './hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL, GenerateImage } from '@payloadcms/plugin-seo/types'
 import { Page, Team as TeamType } from 'src/payload-types'
 import { CompanyInfo } from './globals/CompanyInfo/config'
-import { Avatars } from './collections/Avatars'
-import { Landcapes } from './collections/Landscapes'
-import { Cards } from './collections/Cards'
-import { Portraits } from './collections/Portraits'
 import { Services } from './collections/Services'
-import { Files } from './collections/Files'
 import { Team } from './collections/Team'
 import { superAdmin } from './access/superAdmin'
 import { seedServices } from './endpoints/seedServices'
 import { seedTeam } from './endpoints/seedTeam'
-import { MetaImages } from './collections/MetaImages'
-import { dbHeartBeat } from './endpoints/dbHeartBeat'
+import { MediaBlock } from './blocks/MediaBlock/config'
+import { Media } from './collections/Media'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -115,8 +112,12 @@ export default buildConfig({
         BoldFeature(),
         ItalicFeature(),
         UnorderedListFeature(),
+        OrderedListFeature(),
+        BlocksFeature({
+          blocks: [MediaBlock],
+        }),
         LinkFeature({
-          enabledCollections: ['pages', 'files'],
+          enabledCollections: ['pages'],
           fields: ({ defaultFields }) => {
             const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
               if ('name' in field && field.name === 'url') return false
@@ -140,24 +141,14 @@ export default buildConfig({
       ]
     },
   }),
-  db: sqliteAdapter({
-    client: {
-      url: process.env.LOCAL_DATABASE_URL || process.env.TURSO_DATABASE_URL!,
-      authToken: process.env.LOCAL_DATABASE_URL ? undefined : process.env.TURSO_AUTH_TOKEN,
-    },
-    push: false,
-    // logger: true,
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URI!,
   }),
   collections: [
     Pages,
     Services,
     Team,
-    Avatars,
-    Cards,
-    Landcapes,
-    Portraits,
-    MetaImages,
-    Files,
+    Media,
     Users,
   ],
   cors: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
@@ -210,47 +201,12 @@ export default buildConfig({
     s3StoragePlugin({
       ...S3_PLUGIN_CONFIG,
       collections: {
-        avatars: {
+        media: {
           disableLocalStorage: true,
           generateFileURL: (args: any) => {
             return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
           },
-          prefix: 'avatars',
-        },
-        cards: {
-          disableLocalStorage: true,
-          generateFileURL: (args: any) => {
-            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
-          },
-          prefix: 'cards',
-        },
-        landscapes: {
-          disableLocalStorage: true,
-          generateFileURL: (args: any) => {
-            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
-          },
-          prefix: 'landscapes',
-        },
-        portraits: {
-          disableLocalStorage: true,
-          generateFileURL: (args: any) => {
-            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
-          },
-          prefix: 'portraits',
-        },
-        'meta-images': {
-          disableLocalStorage: true,
-          generateFileURL: (args: any) => {
-            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
-          },
-          prefix: 'meta',
-        },
-        files: {
-          disableLocalStorage: true,
-          generateFileURL: (args: any) => {
-            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
-          },
-          prefix: 'files',
+          prefix: 'media',
         },
       },
     }),
