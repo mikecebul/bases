@@ -17,7 +17,7 @@ export type LinkCards =
       description: string;
       imageUploadOption?: ('generate' | 'manual') | null;
       keywords?: string | null;
-      image?: (string | null) | Card;
+      image?: (string | null) | Media;
       href: string;
       id?: string | null;
     }[]
@@ -31,12 +31,7 @@ export interface Config {
     pages: Page;
     services: Service;
     team: Team;
-    avatars: Avatar;
-    cards: Card;
-    landscapes: Landscape;
-    portraits: Portrait;
-    'meta-images': MetaImage;
-    files: File;
+    media: Media;
     users: User;
     redirects: Redirect;
     'payload-locked-documents': PayloadLockedDocument;
@@ -47,12 +42,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     team: TeamSelect<false> | TeamSelect<true>;
-    avatars: AvatarsSelect<false> | AvatarsSelect<true>;
-    cards: CardsSelect<false> | CardsSelect<true>;
-    landscapes: LandscapesSelect<false> | LandscapesSelect<true>;
-    portraits: PortraitsSelect<false> | PortraitsSelect<true>;
-    'meta-images': MetaImagesSelect<false> | MetaImagesSelect<true>;
-    files: FilesSelect<false> | FilesSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -106,12 +96,22 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout: (Hero | ServicesBlock | CarfBlock | DonateBlock | TeamBlock | AboutUsBlock | LinksBlock | FormBlock)[];
+  layout: (
+    | Hero
+    | RichTextBlock
+    | ServicesBlock
+    | CarfBlock
+    | DonateBlock
+    | TeamBlock
+    | AboutUsBlock
+    | LinksBlock
+    | FormBlock
+  )[];
   meta?: {
     hideFromSearchEngines?: boolean | null;
     metadata?: {
       title?: string | null;
-      image?: (string | null) | MetaImage;
+      image?: (string | null) | Media;
       description?: string | null;
     };
   };
@@ -143,8 +143,8 @@ export interface Hero {
                   value: string | Page;
                 } | null)
               | ({
-                  relationTo: 'files';
-                  value: string | File;
+                  relationTo: 'media';
+                  value: string | Media;
                 } | null);
             url?: string | null;
             label: string;
@@ -153,7 +153,7 @@ export interface Hero {
           id?: string | null;
         }[]
       | null;
-    image: string | Landscape;
+    image: string | Media;
     svg?: boolean | null;
   };
   mediumImpact?: {
@@ -167,29 +167,13 @@ export interface Hero {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "files".
+ * via the `definition` "media".
  */
-export interface File {
-  id: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "landscapes".
- */
-export interface Landscape {
+export interface Media {
   id: string;
   alt: string;
+  caption?: string | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -210,7 +194,49 @@ export interface Landscape {
       filesize?: number | null;
       filename?: string | null;
     };
+    portrait?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    meta?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock".
+ */
+export interface RichTextBlock {
+  subtitle?: string | null;
+  richContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  images?: (string | Media)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richText';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -235,8 +261,8 @@ export interface ServicesBlock {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'files';
-                value: string | File;
+                relationTo: 'media';
+                value: string | Media;
               } | null);
           url?: string | null;
           label: string;
@@ -269,39 +295,10 @@ export interface CarfBlock {
   subtitle?: string | null;
   title?: string | null;
   description?: string | null;
-  image?: (string | null) | Card;
+  image?: (string | null) | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'carf';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cards".
- */
-export interface Card {
-  id: string;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -343,8 +340,7 @@ export interface Team {
   id: string;
   memberType?: ('staff' | 'board') | null;
   name: string;
-  avatar: string | Avatar;
-  image: string | Portrait;
+  image: string | Media;
   role: string;
   qualifications?: string | null;
   bio: {
@@ -366,7 +362,7 @@ export interface Team {
     hideFromSearchEngines?: boolean | null;
     metadata?: {
       title?: string | null;
-      image?: (string | null) | MetaImage;
+      image?: (string | null) | Media;
       description?: string | null;
     };
   };
@@ -376,93 +372,6 @@ export interface Team {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "avatars".
- */
-export interface Avatar {
-  id: string;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "portraits".
- */
-export interface Portrait {
-  id: string;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "meta-images".
- */
-export interface MetaImage {
-  id: string;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -485,7 +394,7 @@ export interface AboutUsBlock {
     };
     [k: string]: unknown;
   } | null;
-  images?: (string | Landscape)[] | null;
+  images?: (string | Media)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'aboutUs';
@@ -588,28 +497,8 @@ export interface PayloadLockedDocument {
         value: string | Team;
       } | null)
     | ({
-        relationTo: 'avatars';
-        value: string | Avatar;
-      } | null)
-    | ({
-        relationTo: 'cards';
-        value: string | Card;
-      } | null)
-    | ({
-        relationTo: 'landscapes';
-        value: string | Landscape;
-      } | null)
-    | ({
-        relationTo: 'portraits';
-        value: string | Portrait;
-      } | null)
-    | ({
-        relationTo: 'meta-images';
-        value: string | MetaImage;
-      } | null)
-    | ({
-        relationTo: 'files';
-        value: string | File;
+        relationTo: 'media';
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'users';
@@ -705,6 +594,15 @@ export interface PagesSelect<T extends boolean = true> {
                     title?: T;
                     description?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              subtitle?: T;
+              richContent?: T;
+              images?: T;
               id?: T;
               blockName?: T;
             };
@@ -889,7 +787,6 @@ export interface ServicesSelect<T extends boolean = true> {
 export interface TeamSelect<T extends boolean = true> {
   memberType?: T;
   name?: T;
-  avatar?: T;
   image?: T;
   role?: T;
   qualifications?: T;
@@ -917,10 +814,12 @@ export interface TeamSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "avatars_select".
+ * via the `definition` "media_select".
  */
-export interface AvatarsSelect<T extends boolean = true> {
+export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  caption?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -945,29 +844,17 @@ export interface AvatarsSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cards_select".
- */
-export interface CardsSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
+        portrait?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        meta?:
           | T
           | {
               url?: T;
@@ -978,119 +865,6 @@ export interface CardsSelect<T extends boolean = true> {
               filename?: T;
             };
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "landscapes_select".
- */
-export interface LandscapesSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "portraits_select".
- */
-export interface PortraitsSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "meta-images_select".
- */
-export interface MetaImagesSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "files_select".
- */
-export interface FilesSelect<T extends boolean = true> {
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1174,8 +948,8 @@ export interface Header {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'files';
-                value: string | File;
+                relationTo: 'media';
+                value: string | Media;
               } | null);
           url?: string | null;
           label: string;
@@ -1203,8 +977,8 @@ export interface Footer {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'files';
-                value: string | File;
+                relationTo: 'media';
+                value: string | Media;
               } | null);
           url?: string | null;
           label: string;
@@ -1242,8 +1016,8 @@ export interface CompanyInfo {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'files';
-                value: string | File;
+                relationTo: 'media';
+                value: string | Media;
               } | null);
           url?: string | null;
           label: string;
@@ -1352,6 +1126,17 @@ export interface CompanyInfoSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  position?: ('default' | 'fullscreen') | null;
+  media: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

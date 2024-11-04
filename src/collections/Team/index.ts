@@ -28,7 +28,7 @@ export const Team: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     hideAPIURL: !superAdmin,
-    defaultColumns: ['name', 'memberType', 'avatar', 'role', 'updatedAt'],
+    defaultColumns: ['name', 'image', 'memberType', 'role', 'updatedAt'],
     description: 'A collection of staff and board members.',
     components: {
       afterListTable: ['@/collections/Team/SeedButton'],
@@ -61,27 +61,11 @@ export const Team: CollectionConfig = {
               required: true,
             },
             {
-              name: 'avatar',
-              type: 'upload',
-              relationTo: 'avatars',
-              required: true,
-              admin: {
-                description:
-                  'This image will only show the face. Leave some space for it to be cropped in a circle.',
-                components: {
-                  Cell: '@/collections/Team/AvatarCell',
-                },
-              },
-            },
-            {
               name: 'image',
-              label: 'Portrait Image',
+              label: 'Image',
               type: 'upload',
-              relationTo: 'portraits',
+              relationTo: 'media',
               required: true,
-              admin: {
-                description: 'This image uses a 8:10 ratio.',
-              },
             },
             {
               name: 'role',
@@ -130,7 +114,7 @@ export const Team: CollectionConfig = {
                   hasGenerateFn: true,
                 }),
                 MetaImageField({
-                  relationTo: 'meta-images',
+                  relationTo: 'media',
                 }),
 
                 MetaDescriptionField({}),

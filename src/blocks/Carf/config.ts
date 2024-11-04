@@ -20,7 +20,7 @@ export const Carf: Block = {
     {
       name: 'image',
       type: 'upload',
-      relationTo: 'cards',
+      relationTo: 'media',
     },
   ],
 }

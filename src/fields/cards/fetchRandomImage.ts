@@ -24,9 +24,8 @@ const formatFilename = (val: string): string =>
 
 export const fetchRandomImage: FieldHook = async ({ value, req, siblingData, data: pageData }) => {
   if (!value && pageData?._status === 'published' && siblingData.linkType === 'link') {
-    const url = `https://api.unsplash.com/photos/random?client_id=${
-      process.env.UNSPLASH_ACCESS_KEY
-    }&query=${siblingData?.keywords}`
+    const url = `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_ACCESS_KEY
+      }&query=${siblingData?.keywords}`
 
     try {
       const response = await fetch(url)
@@ -52,7 +51,7 @@ export const fetchRandomImage: FieldHook = async ({ value, req, siblingData, dat
 
       // Upload the image to the media collection
       const image = await req.payload.create({
-        collection: 'cards',
+        collection: 'media',
         data: {
           alt: altDescription,
         },

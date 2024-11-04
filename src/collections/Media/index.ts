@@ -45,6 +45,17 @@ export const Media: CollectionConfig = {
         },
       },
       {
+        name: 'portrait',
+        width: 800,
+        height: 1000,
+        formatOptions: {
+          format: 'webp',
+        },
+        generateImageName: ({ originalName }) => {
+          return `${originalName}-portrait`
+        },
+      },
+      {
         name: 'meta',
         width: 1200,
         height: 630,
@@ -60,6 +71,7 @@ export const Media: CollectionConfig = {
     ],
     adminThumbnail: 'thumbnail',
     staticDir: path.resolve(dirname, '../../../public/media'),
+
   },
   fields: [
     {

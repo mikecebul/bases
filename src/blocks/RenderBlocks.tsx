@@ -11,10 +11,12 @@ import { TeamMemberBlock } from './TeamMember/Component'
 import { AboutUsBlock } from './AboutUs/Component'
 import { LinksBlock } from './Links/Component'
 import { FormBlock } from './Form/Component'
+import { RichTextBlock } from './RichText/Component'
 // import { MediaBlock } from './MediaBlock/Component'
 
 const blockComponents = {
   hero: HeroBlock,
+  richText: RichTextBlock,
   services: ServicesBlock,
   carf: CarfBlock,
   donate: DonateBlock,

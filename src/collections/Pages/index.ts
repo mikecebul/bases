@@ -23,6 +23,7 @@ import { AboutUs } from '@/blocks/AboutUs/config'
 import { Links } from '@/blocks/Links/config'
 import { superAdmin } from '@/access/superAdmin'
 import { FormBlock } from '@/blocks/Form/config'
+import { RichText } from '@/blocks/RichText/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -61,7 +62,7 @@ export const Pages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Hero, Services, Carf, Donate, Team, AboutUs, Links, FormBlock],
+              blocks: [Hero, RichText, Services, Carf, Donate, Team, AboutUs, Links, FormBlock],
               required: true,
             },
           ],
@@ -93,7 +94,7 @@ export const Pages: CollectionConfig = {
                   hasGenerateFn: true,
                 }),
                 MetaImageField({
-                  relationTo: 'meta-images',
+                  relationTo: 'media',
                 }),
 
                 MetaDescriptionField({}),

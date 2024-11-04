@@ -19,11 +19,11 @@ export const MediaBlock: Block = {
         },
       ],
     },
-    // {
-    //   name: 'media',
-    //   type: 'upload',
-    //   relationTo: 'media',
-    //   required: true,
-    // },
+    {
+      name: 'media',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+    },
   ],
 }

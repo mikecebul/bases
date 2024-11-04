@@ -15,8 +15,9 @@ export const Team = ({
 }: {
   teamBlock: TeamBlockType
 }) => {
-  const avatarUrlIfExists = (person: TeamType) => {
-    if (typeof person.avatar === 'object' && !!person.avatar.url) return person.avatar.url
+  const imageThumbnailUrlIfExists = (person: TeamType) => {
+    if (typeof person.image === 'object' && person.image.sizes?.thumbnail?.url)
+      return person.image.sizes.thumbnail.url
   }
 
   return (
@@ -67,7 +68,7 @@ export const Team = ({
                       <div className="flex items-center gap-x-6">
                         <Avatar className="w-16 h-16">
                           <AvatarImage
-                            src={avatarUrlIfExists(person)}
+                            src={imageThumbnailUrlIfExists(person)}
                             alt="profile of staff member."
                           />
                           <AvatarFallback>

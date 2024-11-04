@@ -12,11 +12,12 @@ import './globals.css'
 import { draftMode } from 'next/headers'
 import { Header } from '@/globals/Header/Component'
 import { ThemeProvider } from 'next-themes'
+import { baseUrl } from '@/utilities/baseUrl'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const { isEnabled } = draftMode()
+  const { isEnabled } = await draftMode()
 
   return (
     <html className={cn(inter.className)} lang="en" suppressHydrationWarning>
@@ -42,7 +43,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'https://www.basesmi.org'),
+  metadataBase: new URL(baseUrl),
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',

@@ -70,7 +70,7 @@ export const linkCards: ArrayField = {
     {
       name: 'image',
       type: 'upload',
-      relationTo: 'cards',
+      relationTo: 'media',
       hooks: {
         beforeChange: [fetchRandomImage],
       },

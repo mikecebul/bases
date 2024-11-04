@@ -1,7 +1,7 @@
 import type { StaticImageData } from 'next/image'
 import type { ElementType, Ref } from 'react'
 
-import type { Card as MediaType } from '@/payload-types'
+import type { Media } from '@/payload-types'
 
 export interface Props {
   alt?: string
@@ -13,7 +13,7 @@ export interface Props {
   onLoad?: () => void
   priority?: boolean // for NextImage only
   ref?: Ref<HTMLImageElement | HTMLVideoElement | null>
-  resource?: MediaType | string | number // for Payload media
+  resource?: Media | string | number // for Payload media
   size?: string // for NextImage only
   src?: StaticImageData // for static media
   videoClassName?: string

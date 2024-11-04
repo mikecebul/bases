@@ -1,12 +1,12 @@
 'use client'
 
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { Media } from '@/payload-types'
 import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
 import Image from 'next/image'
-import { Media } from '@/payload-types'
 
-export default function AboutUsCarousel({ images }: { images: Media[] }) {
+export default function RichTextCarousel({ images }: { images: Media[] }) {
   if (!images) return null
 
   return (
@@ -25,7 +25,7 @@ export default function AboutUsCarousel({ images }: { images: Media[] }) {
             <Image
               className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
               src={image.url ?? ''}
-              alt="BASES Sign"
+              alt="Image"
               width={960}
               height={640}
               priority

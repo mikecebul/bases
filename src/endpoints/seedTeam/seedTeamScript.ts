@@ -70,20 +70,10 @@ export const seedTeamScript = async ({
       const imagePath = path.join(process.cwd(), 'public', person.imageUrl)
 
       const image = await req.payload.create({
-        collection: 'portraits',
+        collection: 'media',
         data: {
           alt: `${person.name} profile`,
           filename: `${formatSlug(person.name)}-profile`,
-        },
-        filePath: imagePath,
-        req,
-      })
-
-      const avatar = await req.payload.create({
-        collection: 'avatars',
-        data: {
-          alt: `${person.name} avatar`,
-          filename: `${formatSlug(person.name)}-avatar`,
         },
         filePath: imagePath,
         req,
@@ -111,8 +101,8 @@ export const seedTeamScript = async ({
           image: image.id,
           bio: editorJSON as Team['bio'],
           slug: String(formatSlug(person.name)),
-          avatar: avatar.id,
           publishedAt: new Date().toJSON(),
+          _status: 'published',
         },
       })
     } catch (error: unknown) {

@@ -1,13 +1,12 @@
 import { Block } from 'payload'
 
-export const AboutUs: Block = {
-  slug: 'aboutUs',
-  interfaceName: 'AboutUsBlock',
+export const RichText: Block = {
+  slug: 'richText',
+  interfaceName: 'RichTextBlock',
   fields: [
     {
       name: 'subtitle',
       type: 'text',
-      defaultValue: "Where it started & where we're going",
     },
     {
       name: 'richContent',

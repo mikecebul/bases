@@ -38,6 +38,7 @@ import { seedServices } from './endpoints/seedServices'
 import { seedTeam } from './endpoints/seedTeam'
 import { MediaBlock } from './blocks/MediaBlock/config'
 import { Media } from './collections/Media'
+import { baseUrl } from './utilities/baseUrl'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -50,13 +51,13 @@ const generateTitle: GenerateTitle<TeamType | Page> = ({ doc }) => {
 }
 
 const generateURL: GenerateURL<TeamType | Page> = ({ doc }) => {
-  if (!doc.slug) return process.env.NEXT_PUBLIC_SERVER_URL!
-  if ('memberType' in doc) return `${process.env.NEXT_PUBLIC_SERVER_URL!}/team/${doc.slug}`
-  return `${process.env.NEXT_PUBLIC_SERVER_URL!}/${doc.slug}`
+  if (!doc.slug) return baseUrl
+  if ('memberType' in doc) return `${baseUrl}/team/${doc.slug}`
+  return `${baseUrl}/${doc.slug}`
 }
 const generateImage: GenerateImage<TeamType | Page> = ({ doc }) => {
-  if (typeof doc.meta?.metadata?.image === 'object' && doc.meta?.metadata?.image) {
-    return doc.meta.metadata.image.url || '/flowers-sign.webp'
+  if (typeof doc.meta?.metadata?.image === 'object' && doc.meta?.metadata?.image?.sizes?.meta?.url) {
+    return doc.meta.metadata.image.sizes.meta.url || '/flowers-sign.webp'
   }
   return '/flowers-sign.webp'
 }

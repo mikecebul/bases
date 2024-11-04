@@ -2,10 +2,9 @@
 
 import Container from '@/components/Container'
 import * as motion from 'framer-motion/client'
-import type { Team } from '@/payload-types'
+import type { Media, Team } from '@/payload-types'
 import {
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -17,6 +16,10 @@ import { cn } from '@/utilities/cn'
 import { buttonVariants } from '@/components/ui/button'
 
 export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
+  const imagePortraitUrlIfExists = (image: Media) => {
+    if (image.sizes?.portrait?.url) return image.sizes.portrait.url
+    return image.url
+  }
   return (
     <Container className="lg:overflow-visible">
       <motion.div
@@ -26,9 +29,9 @@ export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
         className="grid grid-cols-1 gap-x-8 lg:grid-cols-2 lg:items-start"
       >
         <div className="lg:sticky lg:top-20 lg:col-start-2 lg:row-start-1 pb-8 lg:pb-0">
-          {typeof teamMember.image === 'object' && typeof teamMember.image.url === 'string' && (
+          {typeof teamMember.image === 'object' && (
             <Image
-              src={teamMember.image.url}
+              src={imagePortraitUrlIfExists(teamMember.image) || ''}
               alt={teamMember.image.alt}
               width={1000}
               height={1000}
