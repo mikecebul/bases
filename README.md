@@ -158,8 +158,4 @@ Some caveats to using SQLite is not all migrations are supported. Such as updati
 
 ## Deployment
 
-I'm using Vercel because I'd rather not maintain a Digital Ocean Droplet anymore. The migrate script is in the build script already.
-
-## Notes
-
-This is all using the free tiers of each service. Turso will automatically archive the db after 10 days of inactivity. Until I land my first paying customer for hosting, I'm just going to use the free cron job to send a heartbeat to keep it from sleeping. But $8.50 a month for 500 db's is pretty awesome, so I plan on subscribing soon.
+Currently using VPS with Hetzner and Dokploy as my PAAS.
