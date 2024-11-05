@@ -70,9 +70,13 @@ export default async function Page({ params: paramsPromise }: Args) {
     slug: slug[0],
   })
 
-  if (!page) {
-    notFound()
+  if (!page && slug[0] !== 'home') {
+    return (
+      <h1 className='text-lg'>Log into the admin panel to create your first page.</h1>
+    )
   }
+
+  if (!page) notFound()
 
   return (
     <main>
