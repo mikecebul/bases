@@ -66,17 +66,32 @@ export default async function Page({ params: paramsPromise }: Args) {
   }
 
   // Handle regular pages
+  if (slug[0] === 'home') {
+    const page = await queryPageBySlug({
+      slug: slug[0],
+    })
+
+    if (!page) {
+      return (
+        <h1 className='text-lg'>Log into the admin panel to create your home page.</h1>
+      )
+    }
+
+    return (
+      <main>
+        <PayloadRedirects disableNotFound url={url} />
+        <RenderBlocks blocks={page.layout} />
+      </main>
+    )
+  }
+
   const page = await queryPageBySlug({
     slug: slug[0],
   })
 
-  if (!page && slug[0] !== 'home') {
-    return (
-      <h1 className='text-lg'>Log into the admin panel to create your first page.</h1>
-    )
+  if (!page) {
+    notFound()
   }
-
-  if (!page) notFound()
 
   return (
     <main>
