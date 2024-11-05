@@ -8,9 +8,7 @@ const defaultOpenGraph: Metadata['openGraph'] = {
   description: 'Outpatient substance use and mental health counseling in Charlevoix, MI.',
   images: [
     {
-      url: process.env.NEXT_PUBLIC_SERVER_URL
-        ? `${process.env.NEXT_PUBLIC_SERVER_URL}/flowers-sign.webp`
-        : '/flowers-sign.webp',
+      url: `${baseUrl}/flowers-sign-meta.webp`,
     },
   ],
   siteName: 'BASESmi',

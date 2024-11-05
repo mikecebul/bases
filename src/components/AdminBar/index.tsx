@@ -7,6 +7,7 @@ import { useSelectedLayoutSegments } from 'next/navigation'
 import { PayloadAdminBar } from 'payload-admin-bar'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { baseUrl } from '@/utilities/baseUrl'
 
 const collectionLabels = {
   pages: {
@@ -54,7 +55,7 @@ export const AdminBar: React.FC<{
             logo: 'text-white',
             user: 'text-white',
           }}
-          cmsURL={process.env.NEXT_PUBLIC_SERVER_URL}
+          cmsURL={baseUrl}
           collection={collection}
           collectionLabels={{
             plural: collectionLabels[collection]?.plural || 'Pages',

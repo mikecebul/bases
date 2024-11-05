@@ -152,8 +152,8 @@ export default buildConfig({
     Media,
     Users,
   ],
-  cors: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
-  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
+  cors: [baseUrl || ''].filter(Boolean),
+  csrf: [baseUrl || ''].filter(Boolean),
   email: resendAdapter({
     defaultFromAddress: process.env.RESEND_DEFAULT_EMAIL || '',
     defaultFromName: 'BASES Admin',

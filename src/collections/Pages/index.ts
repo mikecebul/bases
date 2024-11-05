@@ -24,6 +24,7 @@ import { Links } from '@/blocks/Links/config'
 import { superAdmin } from '@/access/superAdmin'
 import { FormBlock } from '@/blocks/Form/config'
 import { RichText } from '@/blocks/RichText/config'
+import { baseUrl } from '@/utilities/baseUrl'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -41,7 +42,7 @@ export const Pages: CollectionConfig = {
         const path = generatePreviewPath({
           path: `/${typeof data?.slug === 'string' ? data.slug : ''}`,
         })
-        return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
+        return `${baseUrl}${path}`
       },
     },
     preview: (doc) =>
