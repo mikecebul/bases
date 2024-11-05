@@ -8,6 +8,8 @@ import { notFound } from 'next/navigation'
 import { TeamMemberBlock } from '@/blocks/TeamMember/Component'
 import { Metadata } from 'next'
 import { generateMeta } from '@/utilities/generateMeta'
+import { Page as PageType } from '@/payload-types'
+import { homeStatic } from './home-static'
 
 export async function generateStaticParams() {
   const payload = await getPayloadHMR({ config: configPromise })
@@ -50,6 +52,8 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = ['home'] } = await paramsPromise
   const url = '/' + slug.join('/')
 
+  let page: PageType
+
   // Handle team member pages
   if (slug[0] === 'team' && slug.length === 2) {
     const teamMember = await queryTeamMemberBySlug({ slug: slug[1] })
@@ -66,31 +70,16 @@ export default async function Page({ params: paramsPromise }: Args) {
   }
 
   // Handle regular pages
-  if (slug[0] === 'home') {
-    const page = await queryPageBySlug({
-      slug: slug[0],
-    })
-
-    if (!page) {
-      return (
-        <h1 className='text-lg'>Log into the admin panel to create your home page.</h1>
-      )
-    }
-
-    return (
-      <main>
-        <PayloadRedirects disableNotFound url={url} />
-        <RenderBlocks blocks={page.layout} />
-      </main>
-    )
-  }
-
-  const page = await queryPageBySlug({
+  page = await queryPageBySlug({
     slug: slug[0],
   })
 
+  if (slug[0] === 'home' && !page) {
+    page = homeStatic
+  }
+
   if (!page) {
-    notFound()
+    return <PayloadRedirects url={url} />
   }
 
   return (
