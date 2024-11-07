@@ -54,9 +54,13 @@ export const fetchRandomImage: FieldHook = async ({ value, req, siblingData, dat
         collection: 'media',
         data: {
           alt: altDescription,
+          filename: imageFile.name + '.' + fileExtension,
+          mimeType,
+
         },
         file: imageFile,
         req,
+        overrideAccess: false,
       })
 
       // Clean up the temporary file
