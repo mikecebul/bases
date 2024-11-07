@@ -21,6 +21,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_OUTPUT=standalone
 
 RUN \
   if [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \

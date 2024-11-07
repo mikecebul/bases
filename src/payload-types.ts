@@ -38,7 +38,7 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsSelect: {
+  collectionsSelect?: {
     pages: PagesSelect<false> | PagesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     team: TeamSelect<false> | TeamSelect<true>;
@@ -57,7 +57,7 @@ export interface Config {
     footer: Footer;
     'company-info': CompanyInfo;
   };
-  globalsSelect: {
+  globalsSelect?: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'company-info': CompanyInfoSelect<false> | CompanyInfoSelect<true>;

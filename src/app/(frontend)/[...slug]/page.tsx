@@ -4,12 +4,9 @@ import { cache } from 'react'
 import { draftMode } from 'next/headers'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
-import { notFound } from 'next/navigation'
 import { TeamMemberBlock } from '@/blocks/TeamMember/Component'
 import { Metadata } from 'next'
 import { generateMeta } from '@/utilities/generateMeta'
-import { Page as PageType } from '@/payload-types'
-import { homeStatic } from './home-static'
 
 export async function generateStaticParams() {
   const payload = await getPayloadHMR({ config: configPromise })
@@ -32,11 +29,9 @@ export async function generateStaticParams() {
 
   const params = [
     // Regular pages (excluding home)
-    ...pages.docs
-      ?.filter((doc) => doc.slug !== 'home')
-      .map(({ slug }) => ({ slug: [slug] })),
+    ...pages.docs?.filter((doc) => doc.slug !== 'home').map(({ slug }) => ({ slug: [slug] })),
     // Team members
-    ...team.docs?.map(({ slug }) => ({ slug: ['team', slug] }))
+    ...team.docs?.map(({ slug }) => ({ slug: ['team', slug] })),
   ]
 
   return params
@@ -52,13 +47,11 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = ['home'] } = await paramsPromise
   const url = '/' + slug.join('/')
 
-  let page: PageType
-
   // Handle team member pages
   if (slug[0] === 'team' && slug.length === 2) {
     const teamMember = await queryTeamMemberBySlug({ slug: slug[1] })
     if (!teamMember) {
-      notFound()
+      return <PayloadRedirects url={url} />
     }
 
     return (
@@ -70,12 +63,12 @@ export default async function Page({ params: paramsPromise }: Args) {
   }
 
   // Handle regular pages
-  page = await queryPageBySlug({
+  const page = await queryPageBySlug({
     slug: slug[0],
   })
 
-  if (slug[0] === 'home' && !page) {
-    page = homeStatic
+  if (!page && slug[0] === 'home') {
+    return null
   }
 
   if (!page) {
