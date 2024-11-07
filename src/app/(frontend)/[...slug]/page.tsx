@@ -7,6 +7,7 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { TeamMemberBlock } from '@/blocks/TeamMember/Component'
 import { Metadata } from 'next'
 import { generateMeta } from '@/utilities/generateMeta'
+import type { Page as PageType } from '@/payload-types'
 
 export async function generateStaticParams() {
   const payload = await getPayloadHMR({ config: configPromise })
@@ -84,23 +85,32 @@ export default async function Page({ params: paramsPromise }: Args) {
 }
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
+  try {
+    const { isEnabled: draft } = await draftMode()
+    const payload = await getPayloadHMR({ config: configPromise })
 
-  const payload = await getPayloadHMR({ config: configPromise })
-
-  const result = await payload.find({
-    collection: 'pages',
-    draft,
-    limit: 1,
-    overrideAccess: draft,
-    where: {
-      slug: {
-        equals: slug,
+    const result = await payload.find({
+      collection: 'pages',
+      draft,
+      limit: 1,
+      overrideAccess: draft,
+      where: {
+        slug: {
+          equals: slug,
+        },
       },
-    },
-  })
+    })
 
-  return result.docs?.[0] || null
+    if (!result?.docs?.length) {
+      console.warn(`No page found for slug: ${slug}`)
+      return null
+    }
+
+    return result.docs[0]
+  } catch (error) {
+    console.error(`Error querying page for slug ${slug}:`, error)
+    return null
+  }
 })
 
 const queryTeamMemberBySlug = cache(async ({ slug }: { slug: string }) => {
@@ -134,5 +144,5 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 
   // Handle regular page metadata
   const page = await queryPageBySlug({ slug: slug[0] })
-  return generateMeta({ doc: page })
+  return generateMeta({ doc: page || ({} as PageType) })
 }
