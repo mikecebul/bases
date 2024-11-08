@@ -40,7 +40,7 @@ export const Services: Block = {
       name: 'howMany',
       type: 'select',
       defaultValue: 'topThreeServices',
-      label: 'Type',
+      label: 'How Many?',
       options: [
         {
           label: 'Top 3 Services',

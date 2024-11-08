@@ -29,9 +29,9 @@ export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
         className="grid grid-cols-1 gap-x-8 lg:grid-cols-2 lg:items-start"
       >
         <div className="lg:sticky lg:top-20 lg:col-start-2 lg:row-start-1 pb-8 lg:pb-0">
-          {typeof teamMember.image === 'object' && (
+          {typeof teamMember.image === 'object' && teamMember.image.url && (
             <Image
-              src={imagePortraitUrlIfExists(teamMember.image) || ''}
+              src={imagePortraitUrlIfExists(teamMember.image) || teamMember.image.url}
               alt={teamMember.image.alt}
               width={1000}
               height={1000}
