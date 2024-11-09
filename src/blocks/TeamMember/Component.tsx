@@ -3,12 +3,7 @@
 import Container from '@/components/Container'
 import * as motion from 'framer-motion/client'
 import type { Media, Team } from '@/payload-types'
-import {
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import RichText from '@/components/RichText'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,9 +11,11 @@ import { cn } from '@/utilities/cn'
 import { buttonVariants } from '@/components/ui/button'
 
 export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
+  console.log(teamMember.image)
   const imagePortraitUrlIfExists = (image: Media) => {
     if (image.sizes?.portrait?.url) return image.sizes.portrait.url
-    return image.url
+    if (image.url) return image.url
+    return '/placeholder.svg'
   }
   return (
     <Container className="lg:overflow-visible">
@@ -29,9 +26,9 @@ export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
         className="grid grid-cols-1 gap-x-8 lg:grid-cols-2 lg:items-start"
       >
         <div className="lg:sticky lg:top-20 lg:col-start-2 lg:row-start-1 pb-8 lg:pb-0">
-          {typeof teamMember.image === 'object' && teamMember.image.url && (
+          {typeof teamMember.image === 'object' && (
             <Image
-              src={imagePortraitUrlIfExists(teamMember.image) || teamMember.image.url}
+              src={imagePortraitUrlIfExists(teamMember.image)}
               alt={teamMember.image.alt}
               width={1000}
               height={1000}
