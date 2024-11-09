@@ -24,7 +24,6 @@ export async function generateStaticParams() {
     collection: 'team',
     draft: false,
     limit: 1000,
-    overrideAccess: false,
   })
 
   const params = [
@@ -92,7 +91,6 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
     collection: 'pages',
     draft,
     limit: 1,
-    overrideAccess: draft,
     where: {
       slug: {
         equals: slug,
@@ -112,7 +110,6 @@ const queryTeamMemberBySlug = cache(async ({ slug }: { slug: string }) => {
     collection: 'team',
     draft,
     limit: 1,
-    overrideAccess: draft,
     where: {
       slug: {
         equals: slug,
