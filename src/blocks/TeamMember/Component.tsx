@@ -13,9 +13,12 @@ import { buttonVariants } from '@/components/ui/button'
 export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
   console.log(teamMember.image)
   const imagePortraitUrlIfExists = (image: Media) => {
-    // if (image.sizes?.portrait?.url && image.sizes.portrait.url !== null)
-    //   return image.sizes.portrait.url
-    if (image.url && image.url !== null) return image.url
+    if (
+      typeof image.sizes?.portrait?.url === 'string' &&
+      typeof image.sizes.portrait.filename === 'string'
+    )
+      return image.sizes.portrait.url
+    if (typeof image.url === 'string' && image.url !== null) return image.url
     return '/placeholder.svg'
   }
   return (
@@ -31,7 +34,7 @@ export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
             <Image
               src={imagePortraitUrlIfExists(teamMember.image)}
               alt={teamMember.image.alt}
-              width={1000}
+              width={800}
               height={1000}
               className="object-top mx-auto mt-0 rounded-lg w-3/5 sm:w-2/5 lg:w-4/5 xl:w-3/5"
             />

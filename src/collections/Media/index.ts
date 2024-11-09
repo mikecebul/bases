@@ -71,7 +71,6 @@ export const Media: CollectionConfig = {
     ],
     adminThumbnail: 'thumbnail',
     staticDir: path.resolve(dirname, '../../../public/media'),
-
   },
   fields: [
     {
