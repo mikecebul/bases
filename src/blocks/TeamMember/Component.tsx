@@ -13,11 +13,7 @@ import { buttonVariants } from '@/components/ui/button'
 export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
   console.log(teamMember.image)
   const imagePortraitUrlIfExists = (image: Media) => {
-    if (
-      typeof image.sizes?.portrait?.url === 'string' &&
-      typeof image.sizes.portrait.filename === 'string'
-    )
-      return image.sizes.portrait.url
+    if (typeof image.sizes?.portrait?.url === 'string') return image.sizes.portrait.url
     if (typeof image.url === 'string') return image.url
     return '/placeholder.svg'
   }
