@@ -18,7 +18,7 @@ export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
       typeof image.sizes.portrait.filename === 'string'
     )
       return image.sizes.portrait.url
-    if (typeof image.url === 'string' && image.url !== null) return image.url
+    if (typeof image.url === 'string') return image.url
     return '/placeholder.svg'
   }
   return (

@@ -56,7 +56,10 @@ const generateURL: GenerateURL<TeamType | Page> = ({ doc }) => {
   return `${baseUrl}/${doc.slug}`
 }
 const generateImage: GenerateImage<TeamType | Page> = ({ doc }) => {
-  if (typeof doc.meta?.metadata?.image === 'object' && doc.meta?.metadata?.image?.sizes?.meta?.url) {
+  if (
+    typeof doc.meta?.metadata?.image === 'object' &&
+    doc.meta?.metadata?.image?.sizes?.meta?.url
+  ) {
     return doc.meta.metadata.image.sizes.meta.url || '/flowers-sign.webp'
   }
   return '/flowers-sign.webp'
@@ -145,13 +148,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI!,
   }),
-  collections: [
-    Pages,
-    Services,
-    Team,
-    Media,
-    Users,
-  ],
+  collections: [Pages, Services, Team, Media, Users],
   cors: [baseUrl || ''].filter(Boolean),
   csrf: [baseUrl || ''].filter(Boolean),
   email: resendAdapter({
@@ -205,6 +202,7 @@ export default buildConfig({
         media: {
           disableLocalStorage: true,
           generateFileURL: (args: any) => {
+            if (typeof args.filename !== 'string') return null as unknown as string
             return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
           },
           prefix: 'media',
