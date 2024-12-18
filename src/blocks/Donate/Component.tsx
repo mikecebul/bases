@@ -1,5 +1,4 @@
 import { Icons } from '@/components/Icons'
-import FadeInFromTop from '@/components/framer/FadeInFromTop'
 import FadeInFromLeft from '@/components/framer/FadeInFromLeft'
 import FadeInFromRight from '@/components/framer/FadeInFromRight'
 import { DonateForm } from './DonateForm'

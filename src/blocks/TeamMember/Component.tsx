@@ -1,7 +1,7 @@
 'use client'
 
 import Container from '@/components/Container'
-import * as motion from 'framer-motion/client'
+import { motion } from 'motion/react'
 import type { Media, Team } from '@/payload-types'
 import { CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import RichText from '@/components/RichText'

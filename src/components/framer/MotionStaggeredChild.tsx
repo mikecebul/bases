@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/utilities/cn'
-import * as motion from 'framer-motion/client'
+import { motion } from 'motion/react'
 import type { ReactNode } from 'react'
 
 export const MotionStaggeredChild = ({

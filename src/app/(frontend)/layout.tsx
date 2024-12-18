@@ -6,7 +6,6 @@ import type { ReactNode } from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/globals/Footer/Component'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
 import { draftMode } from 'next/headers'
@@ -32,7 +31,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               preview: isEnabled,
             }}
           />
-          <LivePreviewListener />
           <Header />
           <div className="grow">{children}</div>
           <Footer />

@@ -1,11 +1,12 @@
 'use client'
 
 import { Icon } from '@/components/Icons/Icon'
-import { useTableCell } from '@payloadcms/ui'
+import { DefaultCellComponentProps } from 'payload'
 import React from 'react'
 
-export default function CellIcon() {
-  const { cellData } = useTableCell()
+export const CellIcon = ({ cellData }: DefaultCellComponentProps) => {
 
   return <Icon name={cellData} size={25} />
 }
+
+export default CellIcon

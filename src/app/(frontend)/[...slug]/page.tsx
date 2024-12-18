@@ -1,15 +1,16 @@
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { cache } from 'react'
 import { draftMode } from 'next/headers'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
-import { TeamMemberBlock } from '@/blocks/TeamMember/Component'
 import { Metadata } from 'next'
 import { generateMeta } from '@/utilities/generateMeta'
+import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { TeamMemberBlock } from '@/blocks/TeamMember/Component'
 
 export async function generateStaticParams() {
-  const payload = await getPayloadHMR({ config: configPromise })
+  const payload = await getPayload({ config: configPromise })
 
   // Get regular pages
   const pages = await payload.find({
@@ -43,9 +44,12 @@ type Args = {
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
+  const { isEnabled: draft } = await draftMode()
   const { slug = ['home'] } = await paramsPromise
   const url = '/' + slug.join('/')
 
+  let page
+  
   // Handle team member pages
   if (slug[0] === 'team' && slug.length === 2) {
     const teamMember = await queryTeamMemberBySlug({ slug: slug[1] })
@@ -56,28 +60,28 @@ export default async function Page({ params: paramsPromise }: Args) {
     return (
       <main>
         <PayloadRedirects disableNotFound url={url} />
+        {draft && <LivePreviewListener />}
         <TeamMemberBlock teamMember={teamMember} />
       </main>
     )
   }
 
   // Handle regular pages
-  const page = await queryPageBySlug({
-    slug: slug[0],
-  })
+  if (slug.length === 1) {
+    page = await queryPageBySlug({slug: slug[0]})
+  }
 
   if (!page && slug[0] === 'home') {
     return null
   }
 
-  if (!page) {
-    return <PayloadRedirects url={url} />
-  }
+  const { layout } = page
 
   return (
     <main>
-      <PayloadRedirects disableNotFound url={url} />
-      <RenderBlocks blocks={page.layout} />
+      <PayloadRedirects url={url} />
+      {draft && <LivePreviewListener />}
+      <RenderBlocks blocks={layout} />
     </main>
   )
 }
@@ -85,7 +89,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
 
-  const payload = await getPayloadHMR({ config: configPromise })
+  const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
     collection: 'pages',
@@ -104,7 +108,7 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 const queryTeamMemberBySlug = cache(async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
 
-  const payload = await getPayloadHMR({ config: configPromise })
+  const payload = await getPayload({ config: configPromise })
 
   const { docs: team } = await payload.find({
     collection: 'team',

@@ -1,11 +1,10 @@
 'use client'
 
-import { User } from '@/payload-types'
-import { SelectField, SelectInput, useAuth, useField, useFieldProps } from '@payloadcms/ui'
-import { Option, TextFieldClientComponent } from 'payload'
+import { SelectField, useAuth, useField } from '@payloadcms/ui'
+import type { User } from 'payload'
+import { Option, SelectFieldClientComponent } from 'payload'
 
-const RoleSelect: TextFieldClientComponent = () => {
-  const { path } = useFieldProps()
+const RoleSelectClient: SelectFieldClientComponent = ({ path, validate }) => {
   const { value, setValue } = useField<string>({ path })
   const { user } = useAuth<User>()
 
@@ -38,6 +37,11 @@ const RoleSelect: TextFieldClientComponent = () => {
   }
 
   const onChange = (option: Option | Option[]) => {
+    // prevent admins from creating super admins
+    if (user?.role !== 'superAdmin' && value === 'superAdmin') return
+    // prevent editors from creating admins
+    if (user?.role === 'editor' && value === 'admin') return
+
     setValue(option)
   }
 
@@ -45,16 +49,19 @@ const RoleSelect: TextFieldClientComponent = () => {
     <>
       <label className="field-label">Role Select</label>
       <SelectField
+        path={path}
         field={{
           name: path,
           hasMany: false,
           options: options(),
         }}
+        readOnly={value === 'superAdmin' || user?.role === 'editor'}
         value={value}
         onChange={onChange}
+        validate={validate}
       />
     </>
   )
 }
 
-export default RoleSelect
+export default RoleSelectClient

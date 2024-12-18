@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import * as motion from 'framer-motion/client'
+import { motion } from 'motion/react'
 import { cn } from '@/utilities/cn'
 
 import { Icons } from '@/components/Icons'

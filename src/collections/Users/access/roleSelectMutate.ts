@@ -15,10 +15,16 @@ export const roleSelectMutate: FieldAccess = async ({ req, data }) => {
   // not logged in
   if (!user) return false
 
-  // Admins can't create Super Admins
-  if (user.role === 'superAdmin') return true
-  if (user.role === 'admin') {
-    if (data?.role !== 'superAdmin') return true
+  // Ensure user is of type User
+  if ('role' in user) {
+    // Super Admins can do anything
+    if (user.role === 'superAdmin') return true
+    // Admins can update roles except to superAdmin
+    if (user.role === 'admin') {
+      if (data?.role !== 'superAdmin') return true
+    }
+    // Editors cannot change roles at all
+    if (user.role === 'editor') return false
   }
   return false
 }

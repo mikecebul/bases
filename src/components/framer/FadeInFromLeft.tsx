@@ -1,6 +1,6 @@
 'use client'
 
-import * as motion from 'framer-motion/client'
+import { motion } from 'motion/react'
 import type { ReactNode } from 'react'
 
 export default function FadeInFromLeft({

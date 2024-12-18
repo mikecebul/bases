@@ -67,9 +67,9 @@ export interface Config {
   user: User & {
     collection: 'users';
   };
-  jobs?: {
+  jobs: {
     tasks: unknown;
-    workflows?: unknown;
+    workflows: unknown;
   };
 }
 export interface UserAuthOperations {
@@ -443,9 +443,12 @@ export interface FormBlock {
 export interface User {
   id: string;
   name?: string | null;
-  role: string;
+  role?: ('user' | 'editor' | 'admin' | 'superAdmin') | null;
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -560,194 +563,15 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        hero?:
-          | T
-          | {
-              type?: T;
-              highImpact?:
-                | T
-                | {
-                    title?: T;
-                    description?: T;
-                    phoneNumber?: T;
-                    links?:
-                      | T
-                      | {
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                appearance?: T;
-                              };
-                          id?: T;
-                        };
-                    image?: T;
-                    svg?: T;
-                  };
-              mediumImpact?:
-                | T
-                | {
-                    subtitle?: T;
-                    title?: T;
-                    description?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        richText?:
-          | T
-          | {
-              subtitle?: T;
-              richContent?: T;
-              images?: T;
-              id?: T;
-              blockName?: T;
-            };
-        services?:
-          | T
-          | {
-              subtitle?: T;
-              title?: T;
-              description?: T;
-              gridSVG?: T;
-              howMany?: T;
-              topThreeServices?: T;
-              allServices?: T;
-              links?:
-                | T
-                | {
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          appearance?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        carf?:
-          | T
-          | {
-              subtitle?: T;
-              title?: T;
-              description?: T;
-              image?: T;
-              id?: T;
-              blockName?: T;
-            };
-        donate?:
-          | T
-          | {
-              subtitle?: T;
-              title?: T;
-              description?: T;
-              programs?:
-                | T
-                | {
-                    title?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        team?:
-          | T
-          | {
-              memberType?: T;
-              title?: T;
-              description?: T;
-              teamMembers?: T;
-              reverse?: T;
-              id?: T;
-              blockName?: T;
-            };
-        aboutUs?:
-          | T
-          | {
-              subtitle?: T;
-              richContent?: T;
-              images?: T;
-              id?: T;
-              blockName?: T;
-            };
-        linksBlock?:
-          | T
-          | {
-              hero?:
-                | T
-                | {
-                    hero?:
-                      | T
-                      | {
-                          type?: T;
-                          highImpact?:
-                            | T
-                            | {
-                                title?: T;
-                                description?: T;
-                                phoneNumber?: T;
-                                links?:
-                                  | T
-                                  | {
-                                      link?:
-                                        | T
-                                        | {
-                                            type?: T;
-                                            newTab?: T;
-                                            reference?: T;
-                                            url?: T;
-                                            label?: T;
-                                            appearance?: T;
-                                          };
-                                      id?: T;
-                                    };
-                                image?: T;
-                                svg?: T;
-                              };
-                          mediumImpact?:
-                            | T
-                            | {
-                                subtitle?: T;
-                                title?: T;
-                                description?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                  };
-              linkCards?:
-                | T
-                | {
-                    linkType?: T;
-                    title?: T;
-                    description?: T;
-                    imageUploadOption?: T;
-                    keywords?: T;
-                    image?: T;
-                    href?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        formBlock?:
-          | T
-          | {
-              enableIntro?: T;
-              introContent?: T;
-              id?: T;
-              blockName?: T;
-            };
+        hero?: T | HeroSelect<T>;
+        richText?: T | RichTextBlockSelect<T>;
+        services?: T | ServicesBlockSelect<T>;
+        carf?: T | CarfBlockSelect<T>;
+        donate?: T | DonateBlockSelect<T>;
+        team?: T | TeamBlockSelect<T>;
+        aboutUs?: T | AboutUsBlockSelect<T>;
+        linksBlock?: T | LinksBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
       };
   meta?:
     | T
@@ -756,11 +580,9 @@ export interface PagesSelect<T extends boolean = true> {
         metadata?:
           | T
           | {
-              overview?: T;
               title?: T;
               image?: T;
               description?: T;
-              preview?: T;
             };
       };
   publishedAt?: T;
@@ -769,6 +591,178 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_select".
+ */
+export interface HeroSelect<T extends boolean = true> {
+  type?: T;
+  highImpact?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        phoneNumber?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        image?: T;
+        svg?: T;
+      };
+  mediumImpact?:
+    | T
+    | {
+        subtitle?: T;
+        title?: T;
+        description?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock_select".
+ */
+export interface RichTextBlockSelect<T extends boolean = true> {
+  subtitle?: T;
+  richContent?: T;
+  images?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServicesBlock_select".
+ */
+export interface ServicesBlockSelect<T extends boolean = true> {
+  subtitle?: T;
+  title?: T;
+  description?: T;
+  gridSVG?: T;
+  howMany?: T;
+  topThreeServices?: T;
+  allServices?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarfBlock_select".
+ */
+export interface CarfBlockSelect<T extends boolean = true> {
+  subtitle?: T;
+  title?: T;
+  description?: T;
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DonateBlock_select".
+ */
+export interface DonateBlockSelect<T extends boolean = true> {
+  subtitle?: T;
+  title?: T;
+  description?: T;
+  programs?:
+    | T
+    | {
+        title?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlock_select".
+ */
+export interface TeamBlockSelect<T extends boolean = true> {
+  memberType?: T;
+  title?: T;
+  description?: T;
+  teamMembers?: T;
+  reverse?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsBlock_select".
+ */
+export interface AboutUsBlockSelect<T extends boolean = true> {
+  subtitle?: T;
+  richContent?: T;
+  images?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinksBlock_select".
+ */
+export interface LinksBlockSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        hero?: T | HeroSelect<T>;
+      };
+  linkCards?: T | LinkCardsSelect<T>;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinkCards_select".
+ */
+export interface LinkCardsSelect<T extends boolean = true> {
+  linkType?: T;
+  title?: T;
+  description?: T;
+  imageUploadOption?: T;
+  keywords?: T;
+  image?: T;
+  href?: T;
+  id?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormBlock_select".
+ */
+export interface FormBlockSelect<T extends boolean = true> {
+  enableIntro?: T;
+  introContent?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -799,11 +793,9 @@ export interface TeamSelect<T extends boolean = true> {
         metadata?:
           | T
           | {
-              overview?: T;
               title?: T;
               image?: T;
               description?: T;
-              preview?: T;
             };
       };
   publishedAt?: T;
@@ -876,6 +868,9 @@ export interface UsersSelect<T extends boolean = true> {
   role?: T;
   updatedAt?: T;
   createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
   email?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;

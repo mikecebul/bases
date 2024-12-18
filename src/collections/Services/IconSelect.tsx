@@ -1,12 +1,11 @@
 'use client'
 
 import { lucideIcons } from '@/components/Icons'
-import { SelectField, useField, useFieldProps } from '@payloadcms/ui'
+import { SelectField, useField } from '@payloadcms/ui'
 import { Icon } from '@/components/Icons/Icon'
 import { Option, TextFieldClientComponent } from 'payload'
 
-export const IconSelect: TextFieldClientComponent = () => {
-  const { path } = useFieldProps()
+export const IconSelect: TextFieldClientComponent = ({ path}) => {
   const { setValue, value } = useField<string>({ path })
   const options = lucideIcons.map((icon) => ({
     label: icon.label,
@@ -23,6 +22,7 @@ export const IconSelect: TextFieldClientComponent = () => {
         <Icon name={value} className="shrink-0" />
         <div className="w-full sm:w-auto min-w-64">
           <SelectField
+            path={path}
             field={{
               name: path,
               hasMany: false,

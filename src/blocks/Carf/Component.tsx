@@ -1,7 +1,6 @@
 import Container from '@/components/Container'
-import { Icons } from '@/components/Icons'
 import type { CarfBlock as CarfBlockType } from '@/payload-types'
-import * as motion from 'framer-motion/client'
+import { motion } from 'motion/react'
 import Image from 'next/image'
 
 export const CarfBlock = ({ subtitle, title, description, image }: CarfBlockType) => {

@@ -1,6 +1,4 @@
 import type { CollectionConfig } from 'payload'
-
-import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Hero } from '@/blocks/Hero/config'
 import { Services } from '@/blocks/Services/config'
@@ -25,14 +23,15 @@ import { superAdmin } from '@/access/superAdmin'
 import { FormBlock } from '@/blocks/Form/config'
 import { RichText } from '@/blocks/RichText/config'
 import { baseUrl } from '@/utilities/baseUrl'
+import { editorOrHigher } from '@/access/editorOrHigher'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: editorOrHigher,
+    delete: editorOrHigher,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: editorOrHigher,
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],

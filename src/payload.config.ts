@@ -7,6 +7,7 @@ import { s3Storage as s3StoragePlugin } from '@payloadcms/storage-s3'
 import { S3_PLUGIN_CONFIG } from './plugins/s3'
 import {
   BlocksFeature,
+  ParagraphFeature,
   BoldFeature,
   FixedToolbarFeature,
   HeadingFeature,
@@ -111,7 +112,8 @@ export default buildConfig({
       return [
         FixedToolbarFeature(),
         InlineToolbarFeature(),
-        HeadingFeature({ enabledHeadingSizes: ['h2'] }),
+        ParagraphFeature(),
+        HeadingFeature({ enabledHeadingSizes: ['h1', 'h2'] }),
         UnderlineFeature(),
         BoldFeature(),
         ItalicFeature(),
@@ -205,7 +207,7 @@ export default buildConfig({
             if (typeof args.filename !== 'string') return null as unknown as string
             return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
           },
-          prefix: 'media',
+          prefix: process.env.NEXT_PUBLIC_UPLOAD_PREFIX || 'media',
         },
       },
     }),

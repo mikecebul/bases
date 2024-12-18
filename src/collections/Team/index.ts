@@ -1,4 +1,3 @@
-import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { slugField } from '@/fields/slug'
 import {
@@ -12,14 +11,15 @@ import { CollectionConfig } from 'payload'
 import { revalidateTeam } from './hooks/revalidateTeam'
 import { populatePublishedAt } from '@/hooks/populatePublishedAt'
 import { superAdmin } from '@/access/superAdmin'
+import { editorOrHigher } from '@/access/editorOrHigher'
 
 export const Team: CollectionConfig = {
   slug: 'team',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: editorOrHigher,
+    delete: editorOrHigher,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: editorOrHigher,
   },
   labels: {
     singular: 'Team Member',

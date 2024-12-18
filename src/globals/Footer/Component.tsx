@@ -8,11 +8,11 @@ import { Clock, Facebook, Mail, Navigation, Phone, Printer } from 'lucide-react'
 import Image from 'next/image'
 import Container from '@/components/Container'
 import { CMSLink } from '@/components/Link'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 import payloadConfig from '@payload-config'
+import { getPayload } from 'payload'
 
 export async function Footer() {
-  const payload = await getPayloadHMR({ config: payloadConfig })
+  const payload = await getPayload({ config: payloadConfig })
 
   const { pageLinks, showContact, showGoogleMap } = await payload.findGlobal({
     slug: 'footer',

@@ -1,5 +1,5 @@
-import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { editorOrHigher } from '@/access/editorOrHigher'
 import { superAdmin } from '@/access/superAdmin'
 import { CollectionConfig } from 'payload'
 
@@ -18,10 +18,10 @@ export const Services: CollectionConfig = {
     hideAPIURL: !superAdmin,
   },
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: editorOrHigher,
+    delete: editorOrHigher,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: editorOrHigher,
   },
   fields: [
     {
@@ -42,9 +42,7 @@ export const Services: CollectionConfig = {
       required: true,
       admin: {
         components: {
-          Field: {
-            path: '@/collections/Services/IconSelect',
-          },
+          Field: '@/collections/Services/IconSelect',
           Cell: '@/collections/Services/CellIcon',
         },
       },

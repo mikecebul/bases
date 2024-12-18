@@ -1,6 +1,6 @@
 'use client'
 
-import * as motion from 'framer-motion/client'
+import { motion } from 'motion/react'
 import { IconWithBorder } from '@/components/Icons/Icon'
 import { Service } from '@/payload-types'
 

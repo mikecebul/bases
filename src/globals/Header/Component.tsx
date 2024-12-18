@@ -3,11 +3,11 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 import React from 'react'
 
 import type { CompanyInfo, Header } from '@/payload-types'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import payloadConfig from '@payload-config'
 
 export async function Header() {
-  const payload = await getPayloadHMR({ config: payloadConfig })
+  const payload = await getPayload({ config: payloadConfig })
 
   const header: Header = await payload.findGlobal({
     slug: 'header',
