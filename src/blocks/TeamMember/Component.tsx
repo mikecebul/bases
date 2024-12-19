@@ -9,14 +9,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/utilities/cn'
 import { buttonVariants } from '@/components/ui/button'
+import { Title } from '@/components/Hero/HeroMedium'
 
 export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
-  console.log(teamMember.image)
-  const imagePortraitUrlIfExists = (image: Media) => {
-    if (typeof image.sizes?.portrait?.url === 'string') return image.sizes.portrait.url
-    if (typeof image.url === 'string') return image.url
-    return '/placeholder.svg'
-  }
   return (
     <Container className="lg:overflow-visible">
       <motion.div
@@ -28,22 +23,23 @@ export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
         <div className="lg:sticky lg:top-20 lg:col-start-2 lg:row-start-1 pb-8 lg:pb-0">
           {typeof teamMember.image === 'object' && (
             <Image
-              src={imagePortraitUrlIfExists(teamMember.image)}
-              alt={teamMember.image.alt}
-              width={800}
-              height={1000}
+              src={teamMember.image.url ?? '/placeholder.svg'}
+              alt={teamMember.image.alt ?? 'Team Member Profile'}
+              width={teamMember.image.width ?? 800}
+              height={teamMember.image.height ?? 1000}
               className="object-top mx-auto mt-0 rounded-lg w-3/5 sm:w-2/5 lg:w-4/5 xl:w-3/5"
             />
           )}
         </div>
         <div>
           <CardHeader className="px-0">
-            <CardTitle>
-              {teamMember.name}
-              {' - '}
-              {teamMember.memberType === 'staff' && <span>{teamMember.qualifications}</span>}
-            </CardTitle>
-            <p className="text-brand font-medium">{teamMember.role}</p>
+            <Title text={teamMember.name} heading="h1" />
+            <div className="pt-0 xl:pt-2">
+              {teamMember.memberType === 'staff' && (
+                <p className="text-muted-foreground font-medium text-sm xl:text-lg">{teamMember.qualifications}</p>
+              )}
+              <p className="text-brand font-medium text-sm xl:text-lg">{teamMember.role}</p>
+            </div>
           </CardHeader>
           <CardContent className="grid px-0 pt-4 sm:gap-16">
             <RichText content={teamMember.bio} />

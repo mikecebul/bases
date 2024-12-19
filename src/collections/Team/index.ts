@@ -12,6 +12,8 @@ import { revalidateTeam } from './hooks/revalidateTeam'
 import { populatePublishedAt } from '@/hooks/populatePublishedAt'
 import { superAdmin } from '@/access/superAdmin'
 import { editorOrHigher } from '@/access/editorOrHigher'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import { baseUrl } from '@/utilities/baseUrl'
 
 export const Team: CollectionConfig = {
   slug: 'team',
@@ -28,6 +30,16 @@ export const Team: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     hideAPIURL: !superAdmin,
+    livePreview: {
+      url: ({ data }) => {
+        const path = generatePreviewPath({
+          path: `/team/${typeof data?.slug === 'string' ? data.slug : ''}`,
+        })
+        return `${baseUrl}${path}`
+      },
+    },
+    preview: (doc) =>
+      generatePreviewPath({ path: `/team/${typeof doc?.slug === 'string' ? doc.slug : ''}` }),
     defaultColumns: ['name', 'image', 'memberType', 'role', 'updatedAt'],
     description: 'A collection of staff and board members.',
     components: {
@@ -66,6 +78,7 @@ export const Team: CollectionConfig = {
               type: 'upload',
               relationTo: 'media',
               required: true,
+              displayPreview: true
             },
             {
               name: 'role',

@@ -16,12 +16,27 @@ export const Subtitle = ({ text }: { text: string }) => {
     <h3 className="text-base font-semibold leading-7 capitalize text-brand max-w-prose">{text}</h3>
   )
 }
-export const Title = ({ text }: { text: string }) => {
-  return (
-    <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 capitalize text-pretty max-w-prose">
-      {text}
-    </h2>
-  )
+export const Title = ({ text, heading = 'h2' }: { text: string, heading?: string }) => {
+  switch (heading) {
+    case 'h2':
+      return (
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 capitalize text-pretty max-w-prose">
+          {text}
+        </h2>
+      )
+    case 'h1':
+      return (
+        <h1 className="text-4xl md:text-7xl font-bold tracking-tight text-gray-900 text-balance max-w-prose">
+          {text}
+        </h1>
+      )
+    default:
+      return (
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 capitalize text-pretty max-w-prose">
+          {text}
+        </h2>
+      )
+  }
 }
 export const Description = ({ text }: { text: string }) => {
   return (
