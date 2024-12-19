@@ -51,10 +51,6 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const page = await queryPageBySlug({ slug })
 
-  if (!page && slug === 'home') {
-    return null
-  }
-
   if (!page) {
     return <PayloadRedirects url={url} />
   }
