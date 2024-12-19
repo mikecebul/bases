@@ -10,29 +10,32 @@ import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
-  const team = await payload.find({
+  const { docs: team } = await payload.find({
     collection: 'team',
     draft: false,
     limit: 1000,
+    pagination: false,
+    select: { slug: true }
   })
 
-  return team.docs?.map(({ slug }) => ({ slug })) || []
+  return team?.map(({ slug }) => ({ slug })) || []
 }
 
 const queryTeamMemberBySlug = cache(async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
   const payload = await getPayload({ config: configPromise })
 
-  const { docs: team } = await payload.find({
+  const result = await payload.find({
     collection: 'team',
     draft,
     limit: 1,
+    pagination: false,
     where: {
-      slug: { equals: slug },
-    },
+      slug: { equals: slug }
+    }
   })
 
-  return team?.[0] || null
+  return result.docs[0] || null
 })
 
 type Args = {

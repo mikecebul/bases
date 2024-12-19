@@ -7,36 +7,28 @@ import { Metadata } from 'next'
 import { generateMeta } from '@/utilities/generateMeta'
 import { getPayload } from 'payload'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { Page as PageType } from '@/payload-types'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
-  const pages = await payload.find({
+  const { docs: pages } = await payload.find({
     collection: 'pages',
     draft: false,
     limit: 1000,
-    overrideAccess: true,
+    pagination: false,
+    select: { slug: true }
   })
 
-  return pages.docs
-    ?.filter((doc) => doc.slug !== 'home')
-    .map(({ slug }) => ({ slug }))
+  const params = pages
+    ?.filter((doc) => {
+      return doc.slug !== 'home'
+    })
+    .map(({ slug }) => {
+      return { slug }
+    })
+
+  return params
 }
-
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
-  const payload = await getPayload({ config: configPromise })
-
-  const { docs: pages } = await payload.find({
-    collection: 'pages',
-    draft,
-    limit: 1,
-    where: {
-      slug: { equals: slug },
-    },
-  })
-
-  return pages?.[0] || null
-})
 
 type Args = {
   params: Promise<{
@@ -49,7 +41,9 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
   const url = `/${slug}`
 
-  const page = await queryPageBySlug({ slug })
+  let page: PageType | null
+
+  page = await queryPageBySlug({ slug })
 
   if (!page && slug === 'home') {
     return (
@@ -76,4 +70,21 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const { slug = 'home' } = await paramsPromise
   const page = await queryPageBySlug({ slug })
   return generateMeta({ doc: page })
-} 
+}
+
+const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+  const { isEnabled: draft } = await draftMode()
+  const payload = await getPayload({ config: configPromise })
+
+  const result = await payload.find({
+    collection: 'pages',
+    draft,
+    limit: 1,
+    pagination: false,
+    where: {
+      slug: { equals: slug }
+    }
+  })
+
+  return result.docs[0] || null
+})
