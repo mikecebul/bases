@@ -13,7 +13,7 @@ export const Services: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'icon', 'desc', 'updatedAt'],
     components: {
-      afterListTable: ['@/collections/Services/SeedButton'],
+      afterListTable: ['@/collections/Services/SeedButton#Button'],
     },
     hideAPIURL: !superAdmin,
   },

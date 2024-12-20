@@ -22,7 +22,7 @@ import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 }
 import { SlugComponent as SlugComponent_92cc057d0a2abb4f6cf0307edf59f986 } from '@/fields/slug/SlugComponent'
 import { default as default_59b07a6b756344d16e771f86cef8b0c2 } from '@/collections/Services/CellIcon'
 import { default as default_d410be602a97942e5bba5d072cc2e534 } from '@/collections/Services/IconSelect'
-import { default as default_95ced92f721f92dbfe3282fde9aa439c } from '@/collections/Services/SeedButton'
+import { Button as Button_95ced92f721f92dbfe3282fde9aa439c } from '@/collections/Services/SeedButton'
 import { default as default_be84db3044c19869c30804b38589cfba } from '@/collections/Team/SeedButton'
 import { default as default_f4047b1a8a90d344d3f09d570ca929c0 } from '@/collections/Users/RoleCell'
 import { default as default_a0ed575495a5f102e2308e339b13de0a } from '@/collections/Users/RoleSelect'
@@ -56,7 +56,7 @@ export const importMap = {
   "@/fields/slug/SlugComponent#SlugComponent": SlugComponent_92cc057d0a2abb4f6cf0307edf59f986,
   "@/collections/Services/CellIcon#default": default_59b07a6b756344d16e771f86cef8b0c2,
   "@/collections/Services/IconSelect#default": default_d410be602a97942e5bba5d072cc2e534,
-  "@/collections/Services/SeedButton#default": default_95ced92f721f92dbfe3282fde9aa439c,
+  "@/collections/Services/SeedButton#Button": Button_95ced92f721f92dbfe3282fde9aa439c,
   "@/collections/Team/SeedButton#default": default_be84db3044c19869c30804b38589cfba,
   "@/collections/Users/RoleCell#default": default_f4047b1a8a90d344d3f09d570ca929c0,
   "@/collections/Users/RoleSelect#default": default_a0ed575495a5f102e2308e339b13de0a,
