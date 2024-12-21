@@ -32,7 +32,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             }}
           />
           <Header />
-          <div className="grow">{children}</div>
+
+          <div className="grow flex">{children}</div>
           <Footer />
         </ThemeProvider>
       </body>

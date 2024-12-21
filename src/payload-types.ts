@@ -16,6 +16,9 @@ export type LinkCards =
       title: string;
       description: string;
       imageUploadOption?: ('generate' | 'manual') | null;
+      /**
+       * Coma seperated words
+       */
       keywords?: string | null;
       image?: (string | null) | Media;
       href: string;
@@ -112,6 +115,9 @@ export interface Page {
     hideFromSearchEngines?: boolean | null;
     metadata?: {
       title?: string | null;
+      /**
+       * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+       */
       image?: (string | null) | Media;
       description?: string | null;
     };
@@ -132,6 +138,9 @@ export interface Hero {
   highImpact?: {
     title: string;
     description: string;
+    /**
+     * Phone number for 'Call Now' cta on mobile.
+     */
     phoneNumber: string;
     links?:
       | {
@@ -149,6 +158,9 @@ export interface Hero {
                 } | null);
             url?: string | null;
             label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
             appearance?: ('default' | 'outline') | null;
           };
           id?: string | null;
@@ -172,6 +184,9 @@ export interface Hero {
  */
 export interface Media {
   id: string;
+  /**
+   * Alternative text for SEO and accessibility
+   */
   alt: string;
   caption?: string | null;
   prefix?: string | null;
@@ -241,7 +256,13 @@ export interface ServicesBlock {
   description: string;
   gridSVG: boolean;
   howMany: 'topThreeServices' | 'allServices';
+  /**
+   * Select and sort the top 3 services
+   */
   topThreeServices?: (string | Service)[] | null;
+  /**
+   * Select and sort all your available services
+   */
   allServices?: (string | Service)[] | null;
   links?:
     | {
@@ -259,6 +280,9 @@ export interface ServicesBlock {
               } | null);
           url?: string | null;
           label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
           appearance?: ('default' | 'outline') | null;
         };
         id?: string | null;
@@ -326,6 +350,8 @@ export interface TeamBlock {
   blockType: 'team';
 }
 /**
+ * A collection of staff and board members.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "team".
  */
@@ -355,6 +381,9 @@ export interface Team {
     hideFromSearchEngines?: boolean | null;
     metadata?: {
       title?: string | null;
+      /**
+       * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+       */
       image?: (string | null) | Media;
       description?: string | null;
     };
@@ -397,6 +426,9 @@ export interface AboutUsBlock {
  * via the `definition` "LinksBlock".
  */
 export interface LinksBlock {
+  /**
+   * Only use Medium Impact Hero.
+   */
   hero?: Hero[] | null;
   linkCards?: LinkCards;
   id?: string | null;
@@ -456,6 +488,9 @@ export interface User {
  */
 export interface Redirect {
   id: string;
+  /**
+   * You will need to rebuild the website when changing this field.
+   */
   from: string;
   to?: {
     type?: ('reference' | 'custom') | null;
@@ -970,11 +1005,16 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
+ * Update business information.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "company-info".
  */
 export interface CompanyInfo {
   id: string;
+  /**
+   * Company contact information.
+   */
   contact?: {
     phone?: string | null;
     fax?: string | null;
