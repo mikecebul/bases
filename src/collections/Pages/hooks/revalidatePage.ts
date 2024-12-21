@@ -1,6 +1,6 @@
 import type { CollectionAfterChangeHook } from 'payload'
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 import type { Page } from '../../../payload-types'
 
@@ -15,6 +15,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
     payload.logger.info(`Revalidating page at path: ${path}`)
 
     revalidatePath(path)
+    revalidateTag('sitemap')
   }
 
   // If the page was previously published, we need to revalidate the old path
@@ -24,6 +25,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
     payload.logger.info(`Revalidating old page at path: ${oldPath}`)
 
     revalidatePath(oldPath)
+    revalidateTag('sitemap')
   }
 
   return doc

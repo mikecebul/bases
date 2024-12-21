@@ -1,6 +1,6 @@
 import type { CollectionAfterChangeHook } from 'payload'
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 import type { Team } from '@/payload-types'
 
@@ -16,6 +16,7 @@ export const revalidateTeam: CollectionAfterChangeHook<Team> = ({
 
     revalidatePath(path)
     revalidatePath('/team')
+    revalidateTag('sitemap')
   }
 
   // If the post was previously published, we need to revalidate the old path
@@ -26,6 +27,7 @@ export const revalidateTeam: CollectionAfterChangeHook<Team> = ({
 
     revalidatePath(oldPath)
     revalidatePath('/team')
+    revalidateTag('sitemap')
   }
   return doc
 }

@@ -14,6 +14,7 @@ import { superAdmin } from '@/access/superAdmin'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import { baseUrl } from '@/utilities/baseUrl'
+import { revalidateDelete } from './hooks/revalidateDelete'
 
 export const Team: CollectionConfig = {
   slug: 'team',
@@ -78,7 +79,7 @@ export const Team: CollectionConfig = {
               type: 'upload',
               relationTo: 'media',
               required: true,
-              displayPreview: true
+              displayPreview: true,
             },
             {
               name: 'role',
@@ -157,6 +158,7 @@ export const Team: CollectionConfig = {
   hooks: {
     afterChange: [revalidateTeam],
     beforeChange: [populatePublishedAt],
+    afterDelete: [revalidateDelete],
   },
   versions: {
     drafts: {

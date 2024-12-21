@@ -16,7 +16,7 @@ export async function generateStaticParams() {
     draft: false,
     limit: 1000,
     pagination: false,
-    select: { slug: true }
+    select: { slug: true },
   })
 
   const params = pages
@@ -82,8 +82,8 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
     limit: 1,
     pagination: false,
     where: {
-      slug: { equals: slug }
-    }
+      slug: { equals: slug },
+    },
   })
 
   return result.docs[0] || null

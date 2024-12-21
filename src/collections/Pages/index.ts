@@ -24,6 +24,7 @@ import { FormBlock } from '@/blocks/Form/config'
 import { RichText } from '@/blocks/RichText/config'
 import { baseUrl } from '@/utilities/baseUrl'
 import { editorOrHigher } from '@/access/editorOrHigher'
+import { revalidateDelete } from './hooks/revalidateDelete'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -124,6 +125,7 @@ export const Pages: CollectionConfig = {
   hooks: {
     afterChange: [revalidatePage],
     beforeChange: [populatePublishedAt],
+    afterDelete: [revalidateDelete],
   },
   versions: {
     drafts: {
