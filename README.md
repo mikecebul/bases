@@ -35,7 +35,7 @@ This project was built with [PayloadCMS](https://payloadcms.com/) and [Next.js 1
 
 - **Framework**: Next.js 15 (React 19)
 - **Admin Panel**: Payload CMS
-- **Database**: Sqlite from [Turso](https://turso.tech).
+- **Database**: MongoDB
 - **Image Storage**: [Cloudflare R2](https://r2.cloudflarestorage.com/).
 - **Animations**: [Framer Motion v12](https://www.framer.com/motion/).
 - **Blocks**: Components built with [Shadcn/ui](https://ui.shadcn.com/).
@@ -54,39 +54,37 @@ This project is designed to be my base boilerplate for any new small business we
 
 ### Environment Setup
 
-Before running the application, you need to set up the following APIs and services. Copy the `.env.example` file to `.env` and update the values with your own credentials.
+Before running the application, you need to set up the following services:
+
+#### Required Services
+
+1. **MongoDB Database**
+
+   - Create a new database
+   - Add the connection string to `MONGODB_URI` in your `.env` file
+
+2. **S3 Compatible Storage (Cloudflare R2)**
+   - Set `S3_ENABLED=true` for production
+   - Obtain credentials from your S3-compatible storage provider
+   - Fill in the S3-related environment variables
+
+#### Optional Services
 
 1. **Google Maps API**
 
-   - Go to the [Google Cloud Console](https://console.cloud.google.com/)
-   - Create a new project or select an existing one
-   - Enable the Maps JavaScript API
-   - Create an API key and add it to `GOOGLE_MAPS_API_KEY` in your `.env` file
+   - Create/select project in [Google Cloud Console](https://console.cloud.google.com/)
+   - Enable Maps JavaScript API
+   - Add key to `GOOGLE_MAPS_API_KEY`
 
 2. **Resend Email**
 
-   - Sign up for an account at [Resend](https://resend.com/)
-   - Obtain your API key from the dashboard
-   - Add the API key to `RESEND_API_KEY` in your `.env` file
-   - Set your default sender email in `RESEND_DEFAULT_EMAIL`
+   - Get API key from [Resend](https://resend.com/)
+   - Add to `RESEND_API_KEY`
+   - Set `RESEND_DEFAULT_EMAIL`
 
-3. **Turso Database**
-
-   - Sign up for [Turso](https://turso.tech/)
-   - Create a new database
-   - Get your database URL and auth token
-   - Add them to `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` respectively
-
-4. **S3 Compatible Storage (Cloudflare R2)**
-
-   - If you want to use S3 for file storage, set `S3_ENABLED=true`
-   - Obtain credentials from your S3-compatible storage provider
-   - Fill in the S3-related environment variables in your `.env` file
-
-5. **Unsplash API**
-   - Register as a developer on [Unsplash](https://unsplash.com/developers)
-   - Create a new application to get your access and secret keys
-   - Add these to `UNSPLASH_ACCESS_KEY` and `UNSPLASH_SECRET_KEY` in your `.env` file
+3. **Unsplash API**
+   - Register at [Unsplash Developers](https://unsplash.com/developers)
+   - Add keys to `UNSPLASH_ACCESS_KEY` and `UNSPLASH_SECRET_KEY`
 
 ### Running the Application
 
@@ -150,12 +148,104 @@ Cloudflare R2 is convient if you already use them for DNS as you simply click a 
 
 ## Database
 
-I'm using Turso which is really the icing on the cake for my dream stack for small websites like this. Right now the Payload SQLite adapter is in beta and I've found using migrations in development is the only usable form right now (Ritsu was right). Plus it lets you make sure your scripts work before you push them to production. Once stable I'm sure we can go back to using DB Push in development.
+MongoDB is running in a Docker container alongside the application on my VPS.
 
-In development make sure to have the env var LOCAL_DATABASE_URL as it will save a local sqlite db. Super cool to not need to use docker to setup a postgres instance. To create a migration after finishing a fetaure use `payload migrate:create`.
+_While the template supports Turso's SQLite database, I've switched to self-hosted MongoDB for faster development and easier management. View the sqlite branch for using Turso._
 
-Some caveats to using SQLite is not all migrations are supported. Such as updating a table's foreign key. For this one in particualar I found a [great video](https://youtu.be/qTp3VA-9DYc?si=7KSHOC8HoteU11r2) that explains how to properly handle it.
+### Database Backup & Restore
+
+The database is manually backed up to S3. Here's how to work with backups:
+
+#### Development Setup
+
+1. Install MongoDB Database Tools for working with backups:
+
+##### MacOS
+
+```bash
+brew tap mongodb/brew
+brew install mongodb-database-tools
+```
+
+##### Ubuntu
+
+```bash
+sudo apt-get install mongodb-database-tools
+```
+
+#### Restoring from Backup
+
+1. Download the backup file from S3 to your local machine's `.dumps` directory
+2. To restore to a new database name:
+
+```bash
+mongorestore --uri="YOUR_MONGODB_URI" \
+  --nsInclude="original-db-name.*" \
+  --nsFrom="original-db-name.*" \
+  --nsTo="new-db-name.*" \
+  --gzip \
+  --archive=".dumps/your-backup-file.gz"
+```
+
+3. To drop and restore to the same database:
+
+##### MongoDB Shell (mongosh):
+
+```bash
+mongosh "YOUR_MONGODB_URI"
+use database-name
+db.dropDatabase()
+```
+
+##### MongoDB Compass:
+
+```bash
+1. Connect to your database
+2. Right-click on the database name
+3. Select "Drop Database"
+4. Confirm the deletion
+```
+
+##### Then restore (notice we don't need nsFrom/nsTo when keeping the same name)
+
+```bash
+mongorestore --uri="YOUR_MONGODB_URI" \
+ --nsInclude="database-name.\*" \
+ --gzip \
+ --archive=".dumps/your-backup-file.gz"
+```
 
 ## Deployment
 
-Currently using VPS with Hetzner and Dokploy as my PAAS.
+This project is deployed on a VPS (Virtual Private Server) with Hetzner using [Dokploy](https://dokploy.com/) as the Platform as a Service (PaaS) solution. The setup includes:
+
+### Infrastructure
+
+- **VPS Provider**: Hetzner
+- **Container Management**: Docker
+- **PaaS**: Dokploy for simplified deployment and management
+- **Database**: Self-hosted MongoDB in Docker
+- **Backups**: Manual backups to S3 storage (crons jobs feature needs some bug fixes)
+
+### Deployment Process
+
+1. The application and MongoDB run in separate Docker containers
+2. Dokploy manages container orchestration and deployment
+3. Environment variables are managed through Dokploy's interface
+4. Database backups should be performed regularly and uploaded to S3
+
+### Environment Variables
+
+Update your production `.env` file with MongoDB connection details:
+
+```bash
+MONGODB_URI=mongodb://username:password@localhost:27017/database
+# ... other existing env vars ...
+```
+
+### Backup Strategy
+
+1. Regular manual backups to S3
+2. Keep multiple backup versions for safety
+3. Test restores periodically in development environment
+4. Document any schema changes that might affect restore process

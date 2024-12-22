@@ -17,3 +17,6 @@ public/meta
 
 # sqlite db
 payload.db
+
+# dumps
+.dumps/
