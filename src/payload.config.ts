@@ -35,8 +35,6 @@ import { CompanyInfo } from './globals/CompanyInfo/config'
 import { Services } from './collections/Services'
 import { Team } from './collections/Team'
 import { superAdmin } from './access/superAdmin'
-import { seedServices } from './endpoints/seedServices'
-import { seedTeam } from './endpoints/seedTeam'
 import { MediaBlock } from './blocks/MediaBlock/config'
 import { Media } from './collections/Media'
 import { baseUrl } from './utilities/baseUrl'
@@ -158,10 +156,6 @@ export default buildConfig({
     defaultFromName: 'BASES Admin',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
-  endpoints: [
-    { handler: seedServices, method: 'get', path: '/seed-services' },
-    { handler: seedTeam, method: 'get', path: '/seed-team' },
-  ],
   globals: [Header, Footer, CompanyInfo],
   plugins: [
     redirectsPlugin({

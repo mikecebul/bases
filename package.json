@@ -64,7 +64,6 @@
     "react-dom": "19.0.0",
     "react-hook-form": "7.54.1",
     "sharp": "0.33.5",
-    "swr": "^2.2.5",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.1"

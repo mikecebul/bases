@@ -1,6 +1,5 @@
-import React from 'react'
 import { Button as PayloadButton } from '@payloadcms/ui'
-import { getPayload } from 'payload'
+import { getPayload, type ServerComponentProps } from 'payload'
 import configPromise from '@payload-config'
 import { siteConfig } from '@/config'
 import { revalidatePath } from 'next/cache'
@@ -27,8 +26,7 @@ async function handleSeed(): Promise<void> {
   }
 }
 
-export async function Button() {
-  const payload = await getPayload({ config: configPromise })
+export const Button = async ({ payload }: ServerComponentProps) => {
   const { totalDocs } = await payload.find({
     collection: 'services',
     depth: 0,
