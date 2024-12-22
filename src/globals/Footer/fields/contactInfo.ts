@@ -1,9 +1,9 @@
 import deepMerge from '@/utilities/deepMerge'
 import type { Field, GroupField } from 'payload'
 
-type ContactGroupType = (options?: { overrides?: Partial<GroupField> }) => Field
+type ContactGroupType = ({ overrides }?: { overrides?: Partial<GroupField> }) => Field
 
-const contactInfo: ContactGroupType = ({ overrides = {} }: { overrides?: Partial<GroupField> }) => {
+const contactInfo: ContactGroupType = ({ overrides = {} } = {}) => {
   const contactsField: Field = {
     name: 'contact',
     type: 'group',

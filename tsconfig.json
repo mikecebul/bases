@@ -18,6 +18,7 @@
     "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "noImplicitAny": false,
     "resolveJsonModule": true,
     "sourceMap": true,
     "isolatedModules": true,

@@ -73,13 +73,14 @@ const Users: CollectionConfig = {
         condition: (data, siblingData, { user }) => {
           if (!user) return false
           return true
-        }
+        },
       },
       hooks: {
         beforeChange: [ensureFirstUserIsSuperAdmin],
         afterChange: [
           ({ req }) =>
-            req.headers['X-Payload-Migration'] !== 'true' && revalidatePath('/(payload)', 'layout'),
+            req.headers.get('X-Payload-Migration') !== 'true' &&
+            revalidatePath('/(payload)', 'layout'),
         ],
       },
       validate: async (val, { req: { user, payload } }) => {

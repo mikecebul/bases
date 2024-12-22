@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { buildInitialFormState } from './buildInitialFormState'
 import { fields } from './fields'
 import { baseUrl } from '@/utilities/baseUrl'
+import { RichTextContent } from '@/components/RichText/types'
 
 export type Value = unknown
 
@@ -26,9 +27,7 @@ export type FormBlockType = {
   blockType?: 'formBlock'
   enableIntro: boolean
   form: FormType
-  introContent?: {
-    [k: string]: unknown
-  }[]
+  introContent?: RichTextContent
 }
 
 export const FormBlock: React.FC<
@@ -43,7 +42,7 @@ export const FormBlock: React.FC<
     introContent,
   } = props
 
-  const formMethods = useForm({
+  const formMethods = useForm<any>({
     defaultValues: buildInitialFormState(formFromProps.fields),
   })
   const {
@@ -142,7 +141,7 @@ export const FormBlock: React.FC<
               {formFromProps &&
                 formFromProps.fields &&
                 formFromProps.fields?.map((field, index) => {
-                  const Field: React.FC<any> = fields?.[field.blockType]
+                  const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields]
                   if (Field) {
                     return (
                       <div className="mb-6 last:mb-0" key={index}>
