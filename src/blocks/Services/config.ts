@@ -60,10 +60,10 @@ export const Services: Block = {
       admin: {
         condition: (_, { howMany } = {}) => ['topThreeServices'].includes(howMany),
         description: 'Select and sort the top 3 services',
-        width: '350px',
-        // style: {
-        //   maxWidth: '350px',
-        // },
+        // width: '350px',
+        style: {
+          maxWidth: '350px',
+        },
       },
       relationTo: 'services',
       hasMany: true,
@@ -78,7 +78,10 @@ export const Services: Block = {
       admin: {
         condition: (_, { howMany } = {}) => ['allServices'].includes(howMany),
         description: 'Select and sort all your available services',
-        width: '350px',
+        // width: '350px',
+        style: {
+          maxWidth: '350px',
+        },
       },
       relationTo: 'services',
       hasMany: true,
