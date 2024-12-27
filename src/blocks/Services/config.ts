@@ -38,7 +38,7 @@ export const Services: Block = {
     },
     {
       name: 'howMany',
-      type: 'select',
+      type: 'radio',
       defaultValue: 'topThreeServices',
       label: 'How Many?',
       options: [
@@ -60,7 +60,10 @@ export const Services: Block = {
       admin: {
         condition: (_, { howMany } = {}) => ['topThreeServices'].includes(howMany),
         description: 'Select and sort the top 3 services',
-        width: '350px',
+        // width: '350px',
+        style: {
+          maxWidth: '350px',
+        },
       },
       relationTo: 'services',
       hasMany: true,

@@ -23,7 +23,7 @@ export const contentFields: Field[] = [
             type: 'text',
             admin: {
               components: {
-                Field: '@/fields/iconSelect/Component',
+                Field: '@/fields/IconSelect/Component',
               },
               width: '33%',
             },
