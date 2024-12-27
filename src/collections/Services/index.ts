@@ -1,6 +1,7 @@
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { superAdmin } from '@/access/superAdmin'
+import { iconSelect } from '@/fields/IconSelect/config'
 import { CollectionConfig } from 'payload'
 
 export const Services: CollectionConfig = {
@@ -41,16 +42,6 @@ export const Services: CollectionConfig = {
       type: 'textarea',
       required: true,
     },
-    {
-      name: 'icon',
-      type: 'text',
-      required: true,
-      admin: {
-        components: {
-          Field: '@/collections/Services/IconSelect',
-          Cell: '@/collections/Services/CellIcon',
-        },
-      },
-    },
+    iconSelect,
   ],
 }

@@ -25,6 +25,7 @@ import { RichText } from '@/blocks/RichText/config'
 import { baseUrl } from '@/utilities/baseUrl'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { revalidateDelete } from './hooks/revalidateDelete'
+import { TwoColumnLayout } from '@/blocks/TwoColumnLayout/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -63,7 +64,18 @@ export const Pages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Hero, RichText, Services, Carf, Donate, Team, AboutUs, Links, FormBlock],
+              blocks: [
+                Hero,
+                RichText,
+                Services,
+                Carf,
+                Donate,
+                Team,
+                AboutUs,
+                Links,
+                FormBlock,
+                TwoColumnLayout,
+              ],
               required: true,
             },
           ],

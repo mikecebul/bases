@@ -16,23 +16,23 @@ export const Subtitle = ({ text }: { text: string }) => {
     <h3 className="text-base font-semibold leading-7 capitalize text-brand max-w-prose">{text}</h3>
   )
 }
-export const Title = ({ text, heading = 'h2' }: { text: string, heading?: string }) => {
+export const Title = ({ text, heading = 'h2' }: { text: string; heading?: string }) => {
   switch (heading) {
     case 'h2':
       return (
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 capitalize text-pretty max-w-prose">
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-primary capitalize text-balance max-w-prose">
           {text}
         </h2>
       )
     case 'h1':
       return (
-        <h1 className="text-4xl md:text-7xl font-bold tracking-tight text-gray-900 text-balance max-w-prose">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-primary text-pretty max-w-prose ">
           {text}
         </h1>
       )
     default:
       return (
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 capitalize text-pretty max-w-prose">
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 capitalize text-balance max-w-prose">
           {text}
         </h2>
       )
@@ -40,6 +40,6 @@ export const Title = ({ text, heading = 'h2' }: { text: string, heading?: string
 }
 export const Description = ({ text }: { text: string }) => {
   return (
-    <p className="pt-4 text-lg leading-7 text-muted-foreground max-w-prose text-pretty">{text}</p>
+    <p className="pt-4 text-lg leading-7 text-muted-foreground max-w-prose text-balance">{text}</p>
   )
 }

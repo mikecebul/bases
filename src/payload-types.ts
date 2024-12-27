@@ -8,6 +8,34 @@
 
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinkGroup".
+ */
+export type LinkGroup =
+  | {
+      link: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?:
+          | ({
+              relationTo: 'pages';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'media';
+              value: string | Media;
+            } | null);
+        url?: string | null;
+        label: string;
+        /**
+         * Choose how the link should be rendered.
+         */
+        appearance?: ('default' | 'outline') | null;
+      };
+      id?: string | null;
+    }[]
+  | null;
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "LinkCards".
  */
 export type LinkCards =
@@ -110,6 +138,7 @@ export interface Page {
     | AboutUsBlock
     | LinksBlock
     | FormBlock
+    | TwoColumnLayoutBlock
   )[];
   meta?: {
     hideFromSearchEngines?: boolean | null;
@@ -142,30 +171,7 @@ export interface Hero {
      * Phone number for 'Call Now' cta on mobile.
      */
     phoneNumber: string;
-    links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null)
-              | ({
-                  relationTo: 'media';
-                  value: string | Media;
-                } | null);
-            url?: string | null;
-            label: string;
-            /**
-             * Choose how the link should be rendered.
-             */
-            appearance?: ('default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
+    links?: LinkGroup;
     image: string | Media;
     svg?: boolean | null;
   };
@@ -264,30 +270,7 @@ export interface ServicesBlock {
    * Select and sort all your available services
    */
   allServices?: (string | Service)[] | null;
-  links?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'media';
-                value: string | Media;
-              } | null);
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  links?: LinkGroup;
   id?: string | null;
   blockName?: string | null;
   blockType: 'services';
@@ -300,7 +283,7 @@ export interface Service {
   id: string;
   title: string;
   desc: string;
-  icon: string;
+  icon?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -462,6 +445,64 @@ export interface FormBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TwoColumnLayoutBlock".
+ */
+export interface TwoColumnLayoutBlock {
+  /**
+   * The direction of the layout
+   */
+  direction?: ('ltr' | 'rtl') | null;
+  /**
+   * The breakpoint at which the layout switches to a two column layout
+   */
+  breakpoint?: ('sm' | 'md' | 'lg' | 'xl') | null;
+  columnOne?: {
+    contentType?: ('cta' | 'richText') | null;
+    verticalAlignment?: ('top' | 'center' | 'bottom') | null;
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    cta?: {
+      hasSubtitle?: boolean | null;
+      subtitle?: {
+        icon?: string | null;
+        text?: string | null;
+      };
+      title: string;
+      heading?: ('h1' | 'h2') | null;
+      description: string;
+      links?: LinkGroup;
+    };
+  };
+  columnTwo?: {
+    contentType?: ('image' | 'form') | null;
+    priority?: boolean | null;
+    /**
+     * Images will follow as user scrolls
+     */
+    sticky?: boolean | null;
+    svg?: boolean | null;
+    images?: (string | Media)[] | null;
+    form?: FormBlock[] | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'twoColumnLayout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -599,6 +640,7 @@ export interface PagesSelect<T extends boolean = true> {
         aboutUs?: T | AboutUsBlockSelect<T>;
         linksBlock?: T | LinksBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        twoColumnLayout?: T | TwoColumnLayoutBlockSelect<T>;
       };
   meta?:
     | T
@@ -631,21 +673,7 @@ export interface HeroSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         phoneNumber?: T;
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                    appearance?: T;
-                  };
-              id?: T;
-            };
+        links?: T | LinkGroupSelect<T>;
         image?: T;
         svg?: T;
       };
@@ -658,6 +686,23 @@ export interface HeroSelect<T extends boolean = true> {
       };
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinkGroup_select".
+ */
+export interface LinkGroupSelect<T extends boolean = true> {
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -682,21 +727,7 @@ export interface ServicesBlockSelect<T extends boolean = true> {
   howMany?: T;
   topThreeServices?: T;
   allServices?: T;
-  links?:
-    | T
-    | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
-        id?: T;
-      };
+  links?: T | LinkGroupSelect<T>;
   id?: T;
   blockName?: T;
 }
@@ -788,6 +819,52 @@ export interface LinkCardsSelect<T extends boolean = true> {
 export interface FormBlockSelect<T extends boolean = true> {
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TwoColumnLayoutBlock_select".
+ */
+export interface TwoColumnLayoutBlockSelect<T extends boolean = true> {
+  direction?: T;
+  breakpoint?: T;
+  columnOne?:
+    | T
+    | {
+        contentType?: T;
+        verticalAlignment?: T;
+        richText?: T;
+        cta?:
+          | T
+          | {
+              hasSubtitle?: T;
+              subtitle?:
+                | T
+                | {
+                    icon?: T;
+                    text?: T;
+                  };
+              title?: T;
+              heading?: T;
+              description?: T;
+              links?: T | LinkGroupSelect<T>;
+            };
+      };
+  columnTwo?:
+    | T
+    | {
+        contentType?: T;
+        priority?: T;
+        sticky?: T;
+        svg?: T;
+        images?: T;
+        form?:
+          | T
+          | {
+              formBlock?: T | FormBlockSelect<T>;
+            };
+      };
   id?: T;
   blockName?: T;
 }

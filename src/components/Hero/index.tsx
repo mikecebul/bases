@@ -56,18 +56,18 @@ export async function Hero({ title, description, image, links, svg }: Props) {
             ))}
         </div>
       </div>
-      <div className="relative hidden lg:mt-0 lg:col-span-6 lg:flex">
+      <div className="relative lg:mt-0 lg:col-span-6 lg:flex">
         {image != null && typeof image === 'object' && (
           <>
             <Image
               src={image.url ?? '/woman-laptop.webp'}
               alt={image.alt ?? 'Woman using telehealth services from home.'}
               className="object-cover w-full rounded-lg"
-              width={960}
-              height={640}
+              width={image.width ?? 960}
+              height={image.height ?? 640}
               priority
             />
-            {svg && <SVG />}
+            <HeroSVG />
           </>
         )}
       </div>
@@ -75,9 +75,14 @@ export async function Hero({ title, description, image, links, svg }: Props) {
   )
 }
 
-const SVG = () => {
+export const HeroSVG = ({ direction = 'ltr' }: { direction?: 'ltr' | 'rtl' | null }) => {
   return (
-    <span className="absolute -left-8 -bottom-8 -z-10 text-brand">
+    <span
+      className={cn('absolute -z-10 text-brand', {
+        '-bottom-9 -left-9': direction === 'ltr' || direction === 'rtl',
+        // '-bottom-9 -left-9': direction === 'ltr',
+      })}
+    >
       <svg
         width="93"
         height="93"

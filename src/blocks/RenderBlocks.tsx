@@ -12,6 +12,7 @@ import { AboutUsBlock } from './AboutUs/Component'
 import { LinksBlock } from './Links/Component'
 import { FormBlock } from './Form/Component'
 import { RichTextBlock } from './RichText/Component'
+import { TwoColumnLayoutBlock } from './TwoColumnLayout/Component'
 // import { MediaBlock } from './MediaBlock/Component'
 
 const blockComponents = {
@@ -25,6 +26,7 @@ const blockComponents = {
   aboutUs: AboutUsBlock,
   linksBlock: LinksBlock,
   formBlock: FormBlock,
+  twoColumnLayout: TwoColumnLayoutBlock,
   // mediaBlock: MediaBlock,
 }
 
@@ -45,7 +47,11 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
-              return <Block key={index} {...(block as any)} />
+              return (
+                <div key={index} className="py-24 last:pb-36">
+                  <Block {...(block as any)} />
+                </div>
+              )
             }
           }
           return null
