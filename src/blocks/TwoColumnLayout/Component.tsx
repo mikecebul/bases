@@ -11,6 +11,7 @@ import { RenderBlocks } from '../RenderBlocks'
 import RichTextCarousel from '../RichText/RichTextCarousel'
 import { imagesAsMedia } from '@/utilities/imagesAsMedia'
 import { HeroSVG } from '@/components/Hero'
+import Image from 'next/image'
 
 export const TwoColumnLayoutBlock = ({
   direction = 'ltr',
@@ -87,12 +88,19 @@ export const TwoColumnLayoutBlock = ({
               <RichTextCarousel images={validImages} priority={priority ?? false} />
               {svg && <HeroSVG direction={direction} />}
             </div>
-          ) : (
+          ) : images?.[0] && typeof images[0] === 'object' ? (
             <div className="relative">
-              <Media resource={images?.[0]} priority={priority ?? false} />
+              <Image
+                className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
+                src={images?.[0]?.url ?? ''}
+                alt={images?.[0]?.alt ?? ''}
+                width={images?.[0]?.width ?? 960}
+                height={images?.[0]?.height ?? 640}
+                priority={priority ?? false}
+              />
               {svg && <HeroSVG direction={direction} />}
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     </Container>
