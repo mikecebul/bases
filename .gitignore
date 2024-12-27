@@ -20,3 +20,5 @@ payload.db
 
 # dumps
 .dumps/
+
+tsconfig.tsbuildinfo
