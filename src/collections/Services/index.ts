@@ -1,7 +1,7 @@
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { superAdmin } from '@/access/superAdmin'
-import { iconSelect } from '@/fields/IconSelect/config'
+import { iconSelect } from '@/fields/iconSelect/config'
 import { CollectionConfig } from 'payload'
 
 export const Services: CollectionConfig = {
