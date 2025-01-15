@@ -13,6 +13,7 @@ import { LinksBlock } from './Links/Component'
 import { FormBlock } from './Form/Component'
 import { RichTextBlock } from './RichText/Component'
 import { TwoColumnLayoutBlock } from './TwoColumnLayout/Component'
+import { cn } from '@/utilities/cn'
 // import { MediaBlock } from './MediaBlock/Component'
 
 const blockComponents = {
@@ -48,7 +49,11 @@ export const RenderBlocks: React.FC<{
 
             if (Block) {
               return (
-                <div key={index} className="py-24 last:pb-36">
+                <div
+                  key={index}
+                  className={cn(
+                    blockType === 'carf' ? 'py-0 last:pb-12' : 'py-24 last:pb-36',
+                  )}>
                   <Block {...(block as any)} />
                 </div>
               )

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Icons } from '../../components/Icons'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -33,6 +33,9 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
           </Button>
         </SheetTrigger>
         <SheetContent side="right" className="w-72 sm:w-1/2">
+          <SheetTitle>
+            <p className="sr-only">BASES mobile navigation</p>
+          </SheetTitle>
           <div className="flex justify-center mt-16">
             <Icons.logo className="w-40" />
           </div>

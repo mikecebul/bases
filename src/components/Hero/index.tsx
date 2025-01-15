@@ -10,12 +10,11 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 type Props = NonNullable<HeroType['highImpact']>
 
 export async function Hero({ title, description, image, links, svg }: Props) {
-  const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
-  const { contact } = companyInfo
+  const { contact, social, hours } = (await getCachedGlobal('company-info', 2)()) as CompanyInfo
   const cleanedPhone = contact?.phone ? contact?.phone.replace(/\D/g, '') : null
 
   return (
-    <section className="grid lg:gap-8 lg:grid-cols-12 2xl:px-0 2xl:container">
+    <section className="grid lg:gap-8 lg:grid-cols-12 2xl:px-0 2xl:container gap-12">
       <div className="flex flex-col mr-auto lg:col-span-6">
         <h1 className="max-w-2xl pb-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:pb-8 xl:text-6xl 2xl:text-7xl">
           {title}
@@ -34,7 +33,7 @@ export async function Hero({ title, description, image, links, svg }: Props) {
             Call Now
           </Link>
           <Link
-            href={contact?.googleMapLink ?? '#'}
+            href={contact?.physicalAddress.googleMapLink ?? '#'}
             className={cn(
               buttonVariants({ variant: 'brandOutline', size: 'xl' }),
               'xl:hidden min-w-full lg:min-w-64',
@@ -56,15 +55,15 @@ export async function Hero({ title, description, image, links, svg }: Props) {
             ))}
         </div>
       </div>
-      <div className="relative lg:mt-0 lg:col-span-6 lg:flex">
+      <div className="relative">
         {image != null && typeof image === 'object' && (
           <>
             <Image
               src={image.url ?? '/woman-laptop.webp'}
               alt={image.alt ?? 'Woman using telehealth services from home.'}
-              className="object-cover w-full rounded-lg"
-              width={image.width ?? 960}
-              height={image.height ?? 640}
+              className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
+              width={image.width ?? 0}
+              height={image.height ?? 0}
               priority
             />
             <HeroSVG />
@@ -78,7 +77,7 @@ export async function Hero({ title, description, image, links, svg }: Props) {
 export const HeroSVG = ({ direction = 'ltr' }: { direction?: 'ltr' | 'rtl' | null }) => {
   return (
     <span
-      className={cn('absolute -z-10 text-brand', {
+      className={cn('hidden xl:block absolute -z-10 text-brand', {
         '-bottom-9 -left-9': direction === 'ltr' || direction === 'rtl',
         // '-bottom-9 -left-9': direction === 'ltr',
       })}

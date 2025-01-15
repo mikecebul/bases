@@ -26,7 +26,7 @@ export const Title = ({ text, heading = 'h2' }: { text: string; heading?: string
       )
     case 'h1':
       return (
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-primary text-pretty max-w-prose ">
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-primary text-pretty max-w-prose ">
           {text}
         </h1>
       )
@@ -40,6 +40,6 @@ export const Title = ({ text, heading = 'h2' }: { text: string; heading?: string
 }
 export const Description = ({ text }: { text: string }) => {
   return (
-    <p className="pt-4 text-lg leading-7 text-muted-foreground max-w-prose text-balance">{text}</p>
+    <p className="text-lg leading-7 text-muted-foreground max-w-prose text-balance">{text}</p>
   )
 }

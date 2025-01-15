@@ -1082,22 +1082,31 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
- * Update business information.
- *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "company-info".
  */
 export interface CompanyInfo {
   id: string;
-  /**
-   * Company contact information.
-   */
-  contact?: {
+  contact: {
+    name?: string | null;
+    email?: string | null;
     phone?: string | null;
     fax?: string | null;
-    address?: string | null;
-    googleMapLink?: string | null;
-    email?: string | null;
+    physicalAddress: {
+      street: string;
+      cityStateZip: string;
+      /**
+       * Enter the full URL to the Google Map location
+       */
+      googleMapLink?: string | null;
+      /**
+       * Select the exact location on Google Maps
+       *
+       * @minItems 2
+       * @maxItems 2
+       */
+      coordinates?: [number, number] | null;
+    };
   };
   social?:
     | {
@@ -1188,11 +1197,18 @@ export interface CompanyInfoSelect<T extends boolean = true> {
   contact?:
     | T
     | {
+        name?: T;
+        email?: T;
         phone?: T;
         fax?: T;
-        address?: T;
-        googleMapLink?: T;
-        email?: T;
+        physicalAddress?:
+          | T
+          | {
+              street?: T;
+              cityStateZip?: T;
+              googleMapLink?: T;
+              coordinates?: T;
+            };
       };
   social?:
     | T

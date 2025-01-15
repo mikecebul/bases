@@ -44,7 +44,7 @@ export const TwoColumnLayoutBlock = ({
         })}
       >
         <div
-          className={cn('order-1 flex flex-col justify-center gap-4', {
+          className={cn('order-1 flex flex-col justify-center gap-4 lg:gap-6 ', {
             'justify-center': verticalAlignment === 'center',
             'justify-start': verticalAlignment === 'top',
             'justify-end': verticalAlignment === 'bottom',

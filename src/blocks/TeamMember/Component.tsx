@@ -32,7 +32,7 @@ export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
           )}
         </div>
         <div>
-          <CardHeader className="px-0">
+          <CardHeader className="px-0 space-y-0 pt-0">
             <Title text={teamMember.name} heading="h1" />
             <div className="pt-0 xl:pt-2">
               {teamMember.memberType === 'staff' && (

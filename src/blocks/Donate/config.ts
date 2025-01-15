@@ -22,7 +22,7 @@ export const Donate: Block = {
       type: 'array',
       admin: {
         components: {
-          RowLabel: '@/blocks/Donate/RowLabel',
+          RowLabel: '@/components/RowLabel/RowLabelWithTitle',
         },
       },
       fields: [

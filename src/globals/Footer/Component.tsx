@@ -10,6 +10,7 @@ import Container from '@/components/Container'
 import { CMSLink } from '@/components/Link'
 import payloadConfig from '@payload-config'
 import { getPayload } from 'payload'
+import { GoogleMap } from './GoogleMap'
 
 export async function Footer() {
   const payload = await getPayload({ config: payloadConfig })
@@ -64,17 +65,17 @@ export async function Footer() {
                     </a>
                   </li>
                 )}
-                {typeof contact?.address === 'string' && (
-                  <li key={contact.address} className="group">
+                {typeof contact?.physicalAddress === 'object' && (
+                  <li key={contact.physicalAddress.street} className="group">
                     <a
-                      href={contact.googleMapLink ?? '#'}
+                      href={contact.physicalAddress.googleMapLink ?? '#'}
                       className={cn(
                         buttonVariants({ variant: 'ghost' }),
                         'flex justify-start group-hover:text-primary',
                       )}
                     >
                       <Navigation className="flex-shrink-0 mr-2" size={20} />
-                      {contact.address}
+                      {contact.physicalAddress.street}
                     </a>
                   </li>
                 )}
@@ -151,15 +152,7 @@ export async function Footer() {
             <div className="col-span-1 sm:col-span-2 lg:col-span-1">
               <p className="text-lg font-bold">Location</p>
               <Separator className="my-4" />
-              <Link href="https://goo.gl/maps/X956fmf511Fef9Pr7">
-                <Image
-                  src={`https://maps.googleapis.com/maps/api/staticmap?center=45.3035201,-85.2598514&zoom=16&size=400x400&markers=color:blue%7Clabel:B%7C45.3035201,-85.2598514&key=${process.env.GOOGLE_MAPS_API_KEY}`}
-                  alt="Google maps of our address"
-                  width={1000}
-                  height={1000}
-                  className="h-[350px] object-cover"
-                ></Image>
-              </Link>
+              <GoogleMap contact={contact} />
             </div>
           )}
         </div>

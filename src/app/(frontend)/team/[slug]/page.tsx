@@ -55,7 +55,7 @@ export default async function TeamMemberPage({ params: paramsPromise }: Args) {
   }
 
   return (
-    <main>
+    <main className="pt-24 pb-36">
       <PayloadRedirects disableNotFound url={url} />
       {draft && <LivePreviewListener />}
       <TeamMemberBlock teamMember={teamMember} />

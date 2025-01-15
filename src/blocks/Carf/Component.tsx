@@ -1,3 +1,5 @@
+'use client'
+
 import Container from '@/components/Container'
 import type { CarfBlock as CarfBlockType } from '@/payload-types'
 import { motion } from 'motion/react'
@@ -5,7 +7,7 @@ import Image from 'next/image'
 
 export const CarfBlock = ({ subtitle, title, description, image }: CarfBlockType) => {
   return (
-    <Container className="2xl:max-w-full bg-brand">
+    <Container className="2xl:max-w-full bg-brand py-24">
       <div className="grid px-4 2xl:container 2xl:px-0 lg:grid-cols-2 md:px-8 xl:items-center xl:text-center">
         <motion.div
           initial={{ opacity: 0, x: 'var(--x-from)' }}

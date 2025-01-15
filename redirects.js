@@ -23,6 +23,11 @@ const redirects = async () => {
       destination: '/rdfk',
       permanent: false,
     },
+    {
+      source: '/home',
+      destination: '/',
+      permanent: true,
+    },
   ]
 
   // Combine all redirects into a single array
