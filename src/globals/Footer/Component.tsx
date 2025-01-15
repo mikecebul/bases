@@ -75,7 +75,7 @@ export async function Footer() {
                       )}
                     >
                       <Navigation className="flex-shrink-0 mr-2" size={20} />
-                      {contact.physicalAddress.street}
+                      {contact.physicalAddress.street} | {contact.physicalAddress.cityStateZip}
                     </a>
                   </li>
                 )}
