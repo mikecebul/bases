@@ -38,23 +38,27 @@ export const fetchRandomImage: FieldHook = async ({ value, req, siblingData, dat
 
       // Read the file buffer
       const fileBuffer = fs.readFileSync(localFilePath)
-      const fileExtension: string = imageUrl.split('.').pop() || 'jpeg'
+      // Extract format from URL query parameter
+      const urlParams = new URLSearchParams(imageUrl.split('?')[1])
+      const fileExtension = urlParams.get('fm') || 'jpeg'
       const mimeType = `image/${fileExtension}`
 
       // Create the image file object
       const imageFile = {
         data: fileBuffer,
         mimetype: mimeType,
-        name: formatFilename(siblingData?.title ?? 'card'),
+        name: `${formatFilename(siblingData?.title ?? 'card')}.${fileExtension}`,
         size: fileBuffer.length,
       }
 
       // Upload the image to the media collection
+      console.log('imageFile.name', imageFile.name)
+      console.log('fileExtension', fileExtension)
       const image = await req.payload.create({
         collection: 'media',
         data: {
           alt: altDescription,
-          filename: imageFile.name + '.' + fileExtension,
+          filename: imageFile.name,
           mimeType,
 
         },
