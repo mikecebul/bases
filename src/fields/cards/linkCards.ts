@@ -9,7 +9,7 @@ export const linkCards: ArrayField = {
   interfaceName: 'LinkCards',
   admin: {
     components: {
-      RowLabel: '@/fields/cards/RowLabel',
+      RowLabel: '@/components/RowLabel/RowLabelWithTitle',
     },
   },
   fields: [
