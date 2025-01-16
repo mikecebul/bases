@@ -17,10 +17,12 @@ export default function DonateBlock({ subtitle, title, description, programs }: 
   return (
     <Container>
       <div className="gap-16 lg:flex lg:items-end">
-        <FadeInFromLeft className="flex flex-col ">
+        <FadeInFromLeft className="flex flex-col">
           {!!subtitle && <Subtitle text={subtitle} />}
-          {!!title && <Title text={title} />}
-          {!!description && <Description text={description} />}
+          <div className="flex flex-col gap-4">
+            {!!title && <Title text={title} />}
+            {!!description && <Description text={description} className="text-pretty" />}
+          </div>
           <ul
             role="list"
             className="grid grid-cols-1 gap-4 p-8 mt-8 text-sm leading-6 rounded-lg lg:grid-cols-2 lg:gap-6 bg-accent md:max-w-4xl"

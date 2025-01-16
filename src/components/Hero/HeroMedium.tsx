@@ -1,4 +1,5 @@
 import { Hero } from '@/payload-types'
+import { cn } from '@/utilities/cn'
 
 export function HeroMedium(props: Hero['mediumImpact']) {
   const { subtitle, title, description } = props || {}
@@ -38,8 +39,10 @@ export const Title = ({ text, heading = 'h2' }: { text: string; heading?: string
       )
   }
 }
-export const Description = ({ text }: { text: string }) => {
+export const Description = ({ text, className }: { text: string; className?: string }) => {
   return (
-    <p className="text-lg leading-7 text-muted-foreground max-w-prose text-balance">{text}</p>
+    <p className={cn('text-lg leading-7 text-muted-foreground max-w-prose text-balance', className)}>
+      {text}
+    </p>
   )
 }
