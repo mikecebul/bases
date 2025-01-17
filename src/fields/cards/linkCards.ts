@@ -1,4 +1,4 @@
-import type { ArrayField, Field } from 'payload'
+import type { ArrayField } from 'payload'
 import { addHTTPS } from '@/hooks/addHTTPS'
 import { fetchRandomImage } from './fetchRandomImage'
 
@@ -72,7 +72,7 @@ export const linkCards: ArrayField = {
       type: 'upload',
       relationTo: 'media',
       hooks: {
-        beforeChange: [fetchRandomImage],
+        beforeChange: [fetchRandomImage]
       },
       admin: {
         condition: (_, siblingData) =>

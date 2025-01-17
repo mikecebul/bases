@@ -60,7 +60,6 @@ export const fetchRandomImage: FieldHook = async ({ value, req, siblingData, dat
           alt: altDescription,
           filename: imageFile.name,
           mimeType,
-
         },
         file: imageFile,
         req,
