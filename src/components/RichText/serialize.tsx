@@ -122,7 +122,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             }
             case 'paragraph': {
               return (
-                <p className="col-start-2 text-lg" key={index}>
+                <p className="col-start-2 text-base max-w-prose text-pretty" key={index}>
                   {serializedChildren}
                 </p>
               )
