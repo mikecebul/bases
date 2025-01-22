@@ -13,6 +13,8 @@ const nextConfig = {
         baseUrl,
         'https://images.unsplash.com',
         'https://maps.googleapis.com',
+        'https://basesmi.org',
+        'https://www.basesmi.org',
         'https://bases.mikecebul.dev',
         'https://bases-dev.mikecebul.dev',
         'https://bases-dokploy.mikecebul.dev',
