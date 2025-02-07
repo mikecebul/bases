@@ -7,8 +7,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Update and enable Corepack
-RUN npm install -g corepack@latest && \
-    corepack enable
+RUN npm install -g corepack@latest
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -28,8 +27,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_OUTPUT=standalone
 
 # Update and enable Corepack
-RUN npm install -g corepack@latest && \
-    corepack enable
+RUN npm install -g corepack@latest
 
 RUN \
   if [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
