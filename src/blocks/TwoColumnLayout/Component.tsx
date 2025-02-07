@@ -40,7 +40,7 @@ export const TwoColumnLayoutBlock = async ({
   } = columnTwo ?? {}
   const validImages = imagesAsMedia(images)
 
-  const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
+  const companyInfo = (await getCachedGlobal('company-info')()) as CompanyInfo
   const { contact } = companyInfo
   const cleanedPhone = contact?.phone ? contact.phone.replace(/\D/g, '') : null
 
