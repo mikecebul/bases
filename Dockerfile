@@ -33,6 +33,15 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_OUTPUT=standalone
+ENV COREPACK_ENABLE_STRICT=0
+ENV COREPACK_ENABLE_NETWORK=1
+
+# Update and enable Corepack with version logging
+RUN echo "Before: corepack version => $(corepack --version || echo 'not installed')" && \
+    npm install -g corepack@latest && \
+    echo "After : corepack version => $(corepack --version)" && \
+    corepack enable && \
+    echo "PNPM version => $(pnpm --version || echo 'not installed')"
 
 RUN \
   if [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
