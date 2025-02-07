@@ -14,8 +14,8 @@ RUN echo "Before: corepack version => $(corepack --version || echo 'not installe
     echo "PNPM version => $(pnpm --version || echo 'not installed')"
 
 # Disable integrity checks for Corepack
-ENV COREPACK_ENABLE_STRICT=0
-ENV COREPACK_ENABLE_NETWORK=1
+# ENV COREPACK_ENABLE_STRICT=0
+# ENV COREPACK_ENABLE_NETWORK=1
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -33,8 +33,8 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_OUTPUT=standalone
-ENV COREPACK_ENABLE_STRICT=0
-ENV COREPACK_ENABLE_NETWORK=1
+# ENV COREPACK_ENABLE_STRICT=0
+# ENV COREPACK_ENABLE_NETWORK=1
 
 # Update and enable Corepack with version logging
 RUN echo "Before: corepack version => $(corepack --version || echo 'not installed')" && \
