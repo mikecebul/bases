@@ -6,16 +6,9 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Update and enable Corepack with version logging
-RUN echo "Before: corepack version => $(corepack --version || echo 'not installed')" && \
-    npm install -g corepack@latest && \
-    echo "After : corepack version => $(corepack --version)" && \
-    corepack enable && \
-    echo "PNPM version => $(pnpm --version || echo 'not installed')"
-
-# Disable integrity checks for Corepack
-# ENV COREPACK_ENABLE_STRICT=0
-# ENV COREPACK_ENABLE_NETWORK=1
+# Update and enable Corepack
+RUN npm install -g corepack@latest && \
+    corepack enable
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -33,15 +26,10 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_OUTPUT=standalone
-# ENV COREPACK_ENABLE_STRICT=0
-# ENV COREPACK_ENABLE_NETWORK=1
 
-# Update and enable Corepack with version logging
-RUN echo "Before: corepack version => $(corepack --version || echo 'not installed')" && \
-    npm install -g corepack@latest && \
-    echo "After : corepack version => $(corepack --version)" && \
-    corepack enable && \
-    echo "PNPM version => $(pnpm --version || echo 'not installed')"
+# Update and enable Corepack
+RUN npm install -g corepack@latest && \
+    corepack enable
 
 RUN \
   if [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
