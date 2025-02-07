@@ -7,13 +7,15 @@ import { cn } from '@/utilities/cn'
 export const CTALinks = ({
   links,
   justify = 'start',
+  className,
 }: {
   links: LinkGroup
   justify?: 'center' | 'start'
+  className?: string
 }) => {
   return (
     <div
-      className={cn('flex gap-4 flex-wrap w-full pt-4', {
+      className={cn('flex gap-4 flex-wrap w-full pt-4', className, {
         'md:justify-start': justify === 'start',
         'md:justify-center': justify === 'center',
       })}
@@ -25,6 +27,7 @@ export const CTALinks = ({
             {...link}
             size="xl"
             appearance={link.appearance === 'default' ? 'brand' : 'brandOutline'}
+            className="min-w-64"
           />
         ))}
     </div>

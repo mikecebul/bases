@@ -71,6 +71,12 @@ export const contentFields: Field[] = [
     type: 'textarea',
     required: true,
   },
+  {
+    name: 'mobileHeroLinks',
+    type: 'checkbox',
+    label: 'Use default mobile hero links',
+    defaultValue: false,
+  },
   linkGroup({
     overrides: {
       maxRows: 2,

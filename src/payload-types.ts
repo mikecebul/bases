@@ -483,6 +483,7 @@ export interface TwoColumnLayoutBlock {
       title: string;
       heading?: ('h1' | 'h2') | null;
       description: string;
+      mobileHeroLinks?: boolean | null;
       links?: LinkGroup;
     };
   };
@@ -848,6 +849,7 @@ export interface TwoColumnLayoutBlockSelect<T extends boolean = true> {
               title?: T;
               heading?: T;
               description?: T;
+              mobileHeroLinks?: T;
               links?: T | LinkGroupSelect<T>;
             };
       };

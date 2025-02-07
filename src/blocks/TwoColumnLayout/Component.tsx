@@ -4,7 +4,7 @@ import { Description, Title } from '@/components/Hero/HeroMedium'
 import { Icon } from '@/components/Icons/Icon'
 import { Media } from '@/components/Media'
 import { Badge } from '@/components/ui/badge'
-import type { TwoColumnLayoutBlock as TwoColumnLayoutBlockType } from '@/payload-types'
+import type { CompanyInfo, TwoColumnLayoutBlock as TwoColumnLayoutBlockType } from '@/payload-types'
 import { cn } from '@/utilities/cn'
 import RichText from '@/components/RichText'
 import { RenderBlocks } from '../RenderBlocks'
@@ -12,8 +12,12 @@ import RichTextCarousel from '../RichText/RichTextCarousel'
 import { imagesAsMedia } from '@/utilities/imagesAsMedia'
 import { HeroSVG } from '@/components/Hero'
 import Image from 'next/image'
+import Link from 'next/link'
+import { getCachedGlobal } from '@/utilities/getGlobals'
+import { buttonVariants } from '@/components/ui/button'
+import { Icons } from '@/components/Icons'
 
-export const TwoColumnLayoutBlock = ({
+export const TwoColumnLayoutBlock = async ({
   direction = 'ltr',
   breakpoint = 'md',
   columnOne,
@@ -25,7 +29,7 @@ export const TwoColumnLayoutBlock = ({
     richText,
     verticalAlignment = 'center',
   } = columnOne ?? {}
-  const { hasSubtitle, subtitle, title, heading, description, links } = cta ?? {}
+  const { hasSubtitle, subtitle, title, heading, description, links, mobileHeroLinks } = cta ?? {}
   const {
     contentType: columnTwoType,
     form,
@@ -35,6 +39,10 @@ export const TwoColumnLayoutBlock = ({
     svg = false,
   } = columnTwo ?? {}
   const validImages = imagesAsMedia(images)
+
+  const companyInfo: CompanyInfo = await getCachedGlobal('company-info')()
+  const { contact } = companyInfo
+  const cleanedPhone = contact?.phone ? contact.phone.replace(/\D/g, '') : null
 
   return (
     <Container className="xl:overflow-visible">
@@ -64,7 +72,34 @@ export const TwoColumnLayoutBlock = ({
               )}
               {title && <Title text={title} heading={heading ?? 'h2'} />}
               {description && <Description text={description} />}
-              {links && <CTALinks links={links} />}
+              {links && (
+                <CTALinks links={links} className={mobileHeroLinks ? 'hidden lg:flex' : ''} />
+              )}
+              {/* Mobile Links */}
+              {mobileHeroLinks ? (
+                <div className="flex flex-col space-y-4 md:mr-4 lg:hidden">
+                  <Link
+                    href={cleanedPhone ? `tel:${cleanedPhone}` : '#'}
+                    className={cn(
+                      buttonVariants({ variant: 'brand', size: 'xl' }),
+                      'xl:hidden min-w-full lg:min-w-64',
+                    )}
+                  >
+                    <Icons.phone className="mr-2" />
+                    Call Now
+                  </Link>
+                  <Link
+                    href={contact?.physicalAddress.googleMapLink ?? '#'}
+                    className={cn(
+                      buttonVariants({ variant: 'brandOutline', size: 'xl' }),
+                      'xl:hidden min-w-full lg:min-w-64',
+                    )}
+                  >
+                    <Icons.navigation className="mr-2" />
+                    Directions to our Building
+                  </Link>
+                </div>
+              ) : null}
             </>
           ) : (
             richText && <RichText content={richText} />
