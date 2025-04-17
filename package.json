@@ -23,7 +23,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@lexical/headless": "0.17.0",
     "@lexical/markdown": "0.17.0",
-    "@libsql/client": "^0.6.2",
+    "@libsql/client": "0.6.2",
     "@payloadcms/db-sqlite": "beta",
     "@payloadcms/email-resend": "beta",
     "@payloadcms/live-preview-react": "beta",
