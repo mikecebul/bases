@@ -7,8 +7,8 @@ import Image from 'next/image'
 
 export const CarfBlock = ({ subtitle, title, description, image }: CarfBlockType) => {
   return (
-    <Container className="2xl:max-w-full bg-brand py-24">
-      <div className="grid px-4 2xl:container 2xl:px-0 lg:grid-cols-2 md:px-8 xl:items-center xl:text-center">
+    <Container className="py-24 2xl:max-w-[1920px] bg-brand">
+      <div className="container grid px-4 mx-auto lg:grid-cols-2 md:px-8 xl:items-center xl:text-center">
         <motion.div
           initial={{ opacity: 0, x: 'var(--x-from)' }}
           whileInView={{ opacity: 1, x: 0 }}
