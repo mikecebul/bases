@@ -1,8 +1,6 @@
 import type { GlobalConfig } from 'payload'
 import { link } from '@/fields/link'
 import { revalidateFooter } from './hooks/revalidateFooter'
-import { encryptField } from './hooks/encryptField'
-import { decryptField } from './hooks/decryptField'
 import { superAdmin } from '@/access/superAdmin'
 
 export const Footer: GlobalConfig = {

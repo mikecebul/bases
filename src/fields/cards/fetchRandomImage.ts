@@ -1,19 +1,5 @@
 import type { FieldHook } from 'payload'
 import fs from 'fs'
-import { extname } from 'path'
-
-async function storeFileLocally(url: string, fileName: string): Promise<string> {
-  const response = await fetch(url)
-  const buffer = await response.arrayBuffer()
-  const data = Buffer.from(buffer)
-
-  const fileExtension = extname(url).slice(1)
-  const filePath = `/tmp/${fileName}.${fileExtension}`
-
-  fs.writeFileSync(filePath, data)
-
-  return filePath
-}
 
 const formatFilename = (val: string): string =>
   val
@@ -24,50 +10,40 @@ const formatFilename = (val: string): string =>
 
 export const fetchRandomImage: FieldHook = async ({ value, req, siblingData, data: pageData }) => {
   if (!value && pageData?._status === 'published' && siblingData.linkType === 'link') {
-    const url = `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_ACCESS_KEY
-      }&query=${siblingData?.keywords}`
+    const url = `https://api.unsplash.com/photos/random?client_id=${
+      process.env.UNSPLASH_ACCESS_KEY
+    }&query=${siblingData?.keywords}`
 
     try {
       const response = await fetch(url)
       const data = await response.json()
       const imageUrl = data.urls.regular
       const altDescription = data.alt_description
-      const fileName = data.slug
 
-      const localFilePath = await storeFileLocally(imageUrl, fileName)
-
-      // Read the file buffer
-      const fileBuffer = fs.readFileSync(localFilePath)
-      // Extract format from URL query parameter
-      const urlParams = new URLSearchParams(imageUrl.split('?')[1])
-      const fileExtension = urlParams.get('fm') || 'jpeg'
-      const mimeType = `image/${fileExtension}`
+      // Fetch the actual image
+      const imageResponse = await fetch(imageUrl)
+      const arrayBuffer = await imageResponse.arrayBuffer()
+      const buffer = Buffer.from(arrayBuffer)
 
       // Create the image file object
       const imageFile = {
-        data: fileBuffer,
-        mimetype: mimeType,
-        name: `${formatFilename(siblingData?.title ?? 'card')}.${fileExtension}`,
-        size: fileBuffer.length,
+        data: buffer,
+        mimetype: 'image/jpeg',
+        name: formatFilename(siblingData?.title ?? 'card') + '.jpg',
+        size: buffer.length,
       }
 
       // Upload the image to the media collection
-      console.log('imageFile.name', imageFile.name)
-      console.log('fileExtension', fileExtension)
       const image = await req.payload.create({
         collection: 'media',
         data: {
           alt: altDescription,
           filename: imageFile.name,
-          mimeType,
+          mimeType: imageFile.mimetype,
         },
         file: imageFile,
         req,
-        overrideAccess: false,
       })
-
-      // Clean up the temporary file
-      fs.unlinkSync(localFilePath)
 
       return image.id
     } catch (error) {
