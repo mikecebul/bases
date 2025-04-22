@@ -19,7 +19,7 @@ export const HeaderClient = ({
   const { phone, physicalAddress: { cityStateZip, street, googleMapLink } } = contact || {}
 
   return (
-    <header className="sticky top-0 z-40 flex w-full py-2 bg-background/50 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 flex w-full py-2 bg-background/50 backdrop-blur-xs">
       <div className="flex items-center w-full px-4 md:px-8 2xl:px-0 2xl:container">
         <Link
           href="/"

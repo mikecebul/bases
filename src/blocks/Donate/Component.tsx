@@ -37,7 +37,7 @@ export default function DonateBlock({ subtitle, title, description, programs }: 
           </ul>
         </FadeInFromLeft>
         <FadeInFromRight className="flex justify-center grow">
-          <div className="mt-12 lg:mt-0 w-md p-8 mx-auto rounded-lg lg:flex-shrink-0 bg-brand lg:flex lg:flex-col lg:justify-center sm:w-96 lg:max-w-sm">
+          <div className="mt-12 lg:mt-0 w-md p-8 mx-auto rounded-lg lg:shrink-0 bg-brand lg:flex lg:flex-col lg:justify-center sm:w-96 lg:max-w-sm">
             <div className="text-accent">
               <p className="pb-6 text-base font-medium">
                 Contribute $100 or more to support our vital community services.

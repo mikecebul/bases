@@ -9,7 +9,7 @@ export type LinkCard = NonNullableLinkCards[number]
 export const VideoCard = ({ card }: { card: LinkCard }) => {
   return (
     <a key={card.id} href={card.href} target="_blank">
-      <Card className="flex flex-col h-full max-w-lg px-0 py-0 text-left shadow bg-accent/60 hover:bg-accent group">
+      <Card className="flex flex-col h-full max-w-lg px-0 py-0 text-left shadow-sm bg-accent/60 hover:bg-accent group">
         <CardContent className="p-0 overflow-hidden rounded-t-md">
           <iframe
             src={card.href}

@@ -7,7 +7,7 @@ import type { LinkCard as LinkCardType } from './VideoCard'
 export const LinkCard = ({ card }: { card: LinkCardType }) => {
   return (
     <a key={card.title} href={card.href} target="_blank">
-      <Card className="flex flex-col h-full max-w-lg px-0 py-0 text-left shadow bg-accent/60 hover:bg-accent group">
+      <Card className="flex flex-col h-full max-w-lg px-0 py-0 text-left shadow-sm bg-accent/60 hover:bg-accent group">
         <CardContent className="p-0 overflow-hidden rounded-t-lg">
           {card.linkType === 'link' &&
             typeof card.image === 'object' &&
