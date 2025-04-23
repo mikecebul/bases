@@ -249,5 +249,3 @@ MONGODB_URI=mongodb://username:password@localhost:27017/database
 2. Keep multiple backup versions for safety
 3. Test restores periodically in development environment
 4. Document any schema changes that might affect restore process
-
-.
