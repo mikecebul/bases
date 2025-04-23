@@ -70,6 +70,7 @@ export default buildConfig({
   admin: {
     avatar: 'default',
     components: {
+      afterDashboard: ['@/components/AnalyticsButton'],
       graphics: {
         Icon: '@/graphics/Icon',
         Logo: '@/graphics/Logo',
