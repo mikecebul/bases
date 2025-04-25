@@ -30,6 +30,7 @@ import { default as default_3ffd8082d3e9477cf001d7760082c496 } from '@/globals/C
 import { default as default_a8ed57560afaff4535f43ca83a9fecbd } from '@/graphics/Icon'
 import { default as default_d3e265f969641a4ccf3d5a195904e268 } from '@/graphics/Logo'
 import { default as default_d98a869117375d0305a4aa875919ea2b } from '@/components/AnalyticsButton'
+import { AdminErrorBoundary as AdminErrorBoundary_e5a9e14bdbe97e70ba60697217fe7688 } from '@payloadcms/plugin-sentry/client'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 
 export const importMap = {
@@ -65,5 +66,6 @@ export const importMap = {
   "@/graphics/Icon#default": default_a8ed57560afaff4535f43ca83a9fecbd,
   "@/graphics/Logo#default": default_d3e265f969641a4ccf3d5a195904e268,
   "@/components/AnalyticsButton#default": default_d98a869117375d0305a4aa875919ea2b,
+  "@payloadcms/plugin-sentry/client#AdminErrorBoundary": AdminErrorBoundary_e5a9e14bdbe97e70ba60697217fe7688,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24
 }

@@ -2,6 +2,8 @@ import type { TextFieldSingleValidation } from 'payload'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
 
+import { sentryPlugin } from '@payloadcms/plugin-sentry'
+import * as Sentry from '@sentry/nextjs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { s3Storage as s3StoragePlugin } from '@payloadcms/storage-s3'
@@ -167,6 +169,21 @@ export default buildConfig({
   }),
   globals: [Header, Footer, CompanyInfo],
   plugins: [
+    sentryPlugin({
+      options: {
+        captureErrors: [400, 401, 403],
+        context: ({ defaultContext, req }) => {
+          return {
+            ...defaultContext,
+            tags: {
+              locale: req.locale,
+            },
+          }
+        },
+        debug: true,
+      },
+      Sentry,
+    }),
     redirectsPlugin({
       collections: ['pages', 'team'],
       overrides: {
