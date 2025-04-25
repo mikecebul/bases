@@ -142,21 +142,17 @@ In development you simply use the S3_ENABLED=false in the .env file and all your
 - NEXT_PUBLIC_S3_HOSTNAME=
 - NEXT_PUBLIC_UPLOAD_PREFIX=media
 
-I'm not using the NEXT_PUBLIC_UPLOAD_PREFIX as I have all my images that use different formats in their own collection with their own prefix. It makes it similar to individual folders and more effecient than having 6 different formats for every image. Plus, type checking those nested image sizes is a pain in the ass.
-
 Cloudflare R2 is convient if you already use them for DNS as you simply click a button and you have a subdomain for your bucket. Love it.
 
 ## Database
 
-MongoDB is running in a Docker container alongside the application on my VPS.
-
-_While the template supports Turso's SQLite database, I've switched to self-hosted MongoDB for faster development and easier management. View the sqlite branch for using Turso._
+MongoDB is running in a Docker container alongside the application on my VPS. I use Dokploy on a Hetzner server.
 
 ### Database Backup & Restore
 
-The database is manually backed up to S3. Here's how to work with backups:
+Dokploy has features for automatic backups using crontab, how many to store so it deletes old ones (I set it to 90), and an easy way to restore if needed.
 
-#### Development Setup
+#### Manual Database Management
 
 1. Install MongoDB Database Tools for working with backups:
 
@@ -225,7 +221,7 @@ This project is deployed on a VPS (Virtual Private Server) with Hetzner using [D
 - **Container Management**: Docker
 - **PaaS**: Dokploy for simplified deployment and management
 - **Database**: Self-hosted MongoDB in Docker
-- **Backups**: Manual backups to S3 storage (crons jobs feature needs some bug fixes)
+- **Backups**: Automatic backups to S3 storage
 
 ### Deployment Process
 
@@ -242,10 +238,3 @@ Update your production `.env` file with MongoDB connection details:
 MONGODB_URI=mongodb://username:password@localhost:27017/database
 # ... other existing env vars ...
 ```
-
-### Backup Strategy
-
-1. Regular manual backups to S3
-2. Keep multiple backup versions for safety
-3. Test restores periodically in development environment
-4. Document any schema changes that might affect restore process
