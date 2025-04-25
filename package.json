@@ -29,6 +29,7 @@
     "@payloadcms/next": "3.35.1",
     "@payloadcms/plugin-form-builder": "3.35.1",
     "@payloadcms/plugin-redirects": "3.35.1",
+    "@payloadcms/plugin-sentry": "^3.35.1",
     "@payloadcms/plugin-seo": "3.35.1",
     "@payloadcms/richtext-lexical": "3.35.1",
     "@payloadcms/storage-s3": "3.35.1",
