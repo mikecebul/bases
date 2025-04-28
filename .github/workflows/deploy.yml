@@ -26,7 +26,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            mikeskee/bases:latest
+            mikecebul/bases:latest
           platforms: linux/amd64
           build-args: |
             NEXT_PUBLIC_IS_LIVE=${{ secrets.NEXT_PUBLIC_IS_LIVE }}
