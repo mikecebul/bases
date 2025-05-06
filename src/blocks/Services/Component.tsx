@@ -8,6 +8,7 @@ import Container from '@/components/Container'
 export async function ServicesBlock({
   subtitle,
   title,
+  heading,
   description,
   gridSVG,
   howMany,
@@ -25,7 +26,7 @@ export async function ServicesBlock({
   return (
     <Container className="">
       {gridSVG && <GridSVG />}
-      <HeroMedium subtitle={subtitle} title={title} description={description} />
+      <HeroMedium subtitle={subtitle} title={title} description={description} heading={heading} />
       {howMany === 'allServices' && sanitizedAllServices.length > 0 && (
         <ServicesList services={sanitizedAllServices} />
       )}
@@ -34,16 +35,16 @@ export async function ServicesBlock({
           <ServicesList services={sanitizedTopThreeServices} />
           {links != null
             ? links.map(({ link }) => (
-              <div key={link.label} className="flex md:flex-row pt-12 justify-center">
-                <CMSLink
-                  key={link.label}
-                  {...link}
-                  size="xl"
-                  appearance="brand"
-                  className="min-w-full md:min-w-64 "
-                />
-              </div>
-            ))
+                <div key={link.label} className="flex justify-center pt-12 md:flex-row">
+                  <CMSLink
+                    key={link.label}
+                    {...link}
+                    size="xl"
+                    appearance="brand"
+                    className="min-w-full md:min-w-64 "
+                  />
+                </div>
+              ))
             : null}
         </>
       )}

@@ -16,10 +16,31 @@ export const Services: Block = {
       required: true,
     },
     {
-      name: 'title',
-      type: 'text',
-      defaultValue: 'Everything you need for a successful recovery journey',
-      required: true,
+      type: 'row',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          defaultValue: 'Everything you need for a successful recovery journey',
+          required: true,
+        },
+        {
+          name: 'heading',
+          type: 'select',
+          defaultValue: 'h2',
+          options: [
+            {
+              label: 'H1',
+              value: 'h1',
+            },
+            {
+              label: 'H2',
+              value: 'h2',
+            },
+          ],
+          required: true,
+        },
+      ],
     },
     {
       name: 'description',

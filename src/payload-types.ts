@@ -314,6 +314,7 @@ export interface RichTextBlock {
 export interface ServicesBlock {
   subtitle: string;
   title: string;
+  heading: 'h1' | 'h2';
   description: string;
   gridSVG: boolean;
   howMany: 'topThreeServices' | 'allServices';
@@ -778,6 +779,7 @@ export interface RichTextBlockSelect<T extends boolean = true> {
 export interface ServicesBlockSelect<T extends boolean = true> {
   subtitle?: T;
   title?: T;
+  heading?: T;
   description?: T;
   gridSVG?: T;
   howMany?: T;

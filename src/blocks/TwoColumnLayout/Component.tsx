@@ -2,11 +2,10 @@ import Container from '@/components/Container'
 import { CTALinks } from '@/components/CTALinks'
 import { Description, Title } from '@/components/Hero/HeroMedium'
 import { Icon } from '@/components/Icons/Icon'
-import { Media } from '@/components/Media'
 import { Badge } from '@/components/ui/badge'
 import type { CompanyInfo, TwoColumnLayoutBlock as TwoColumnLayoutBlockType } from '@/payload-types'
 import { cn } from '@/utilities/cn'
-import RichText from '@/components/RichText'
+import { RichText } from '@/components/RichText'
 import { RenderBlocks } from '../RenderBlocks'
 import RichTextCarousel from '../RichText/RichTextCarousel'
 import { imagesAsMedia } from '@/utilities/imagesAsMedia'
@@ -102,7 +101,7 @@ export const TwoColumnLayoutBlock = async ({
               ) : null}
             </>
           ) : (
-            richText && <RichText content={richText} />
+            richText && <RichText data={richText} className="lg:text-lg" />
           )}
         </div>
         <div
