@@ -125,16 +125,5 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  --breakpoint-2xl: 86rem;
-}
-
-@layer utilities {
-  html {
-    opacity: 0;
-  }
-
-  html[data-theme='dark'],
-  html[data-theme='light'] {
-    opacity: initial;
-  }
+  --breakpoint-2xl: 96rem;
 }
