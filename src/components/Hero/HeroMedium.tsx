@@ -1,13 +1,8 @@
 import { Hero } from '@/payload-types'
 import { cn } from '@/utilities/cn'
 
-type Props = {
-  subtitle?: string
-  title?: string
-  description?: string
-  heading?: 'h1' | 'h2'
-}
-export function HeroMedium({ subtitle, title, description, heading }: Props) {
+export function HeroMedium(props: Hero['mediumImpact']) {
+  const { title, description, heading, subtitle } = props || {}
   return (
     <div
       className={cn(
@@ -27,7 +22,13 @@ export function HeroMedium({ subtitle, title, description, heading }: Props) {
 export const Subtitle = ({ text }: { text: string }) => {
   return <h3 className="text-base font-semibold leading-7 capitalize text-brand">{text}</h3>
 }
-export const Title = ({ text, heading = 'h2' }: { text: string; heading?: string }) => {
+export const Title = ({
+  text,
+  heading = 'h2',
+}: {
+  text: string
+  heading?: 'h1' | 'h2' | null | undefined
+}) => {
   switch (heading) {
     case 'h2':
       return (

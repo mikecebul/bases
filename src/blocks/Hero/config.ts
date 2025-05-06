@@ -92,9 +92,32 @@ export const Hero: Block = {
           type: 'text',
         },
         {
-          name: 'title',
-          type: 'text',
-          required: true,
+          type: 'row',
+          fields: [
+            {
+              name: 'title',
+              label: 'Title',
+              type: 'text',
+              defaultValue: 'Substance Use and Mental Health Counseling',
+              required: true,
+            },
+            {
+              name: 'heading',
+              label: 'Heading',
+              type: 'select',
+              options: [
+                {
+                  label: 'H1',
+                  value: 'h1',
+                },
+                {
+                  label: 'H2',
+                  value: 'h2',
+                },
+              ],
+              defaultValue: 'h2',
+            },
+          ],
         },
         {
           name: 'description',

@@ -18,6 +18,7 @@ export const LinksBlock = ({ hero, linkCards }: LinksBlockType) => {
           title={mediumImpact.title}
           subtitle={mediumImpact.subtitle}
           description={mediumImpact.description}
+          heading={mediumImpact.heading}
         />
       )}
       {!!linkCards && linkCards.length > 0 && (

@@ -233,6 +233,7 @@ export interface Hero {
   mediumImpact?: {
     subtitle?: string | null;
     title: string;
+    heading?: ('h1' | 'h2') | null;
     description?: string | null;
   };
   id?: string | null;
@@ -739,6 +740,7 @@ export interface HeroSelect<T extends boolean = true> {
     | {
         subtitle?: T;
         title?: T;
+        heading?: T;
         description?: T;
       };
   id?: T;
