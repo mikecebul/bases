@@ -42,7 +42,6 @@ import { superAdmin } from './access/superAdmin'
 import { MediaBlock } from './blocks/MediaBlock/config'
 import { Media } from './collections/Media'
 import { baseUrl } from './utilities/baseUrl'
-import { Analytics } from './globals/Analytics/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -73,10 +72,16 @@ export default buildConfig({
   admin: {
     avatar: 'default',
     components: {
-      // afterDashboard: ['@/components/AnalyticsButton'],
+      afterNavLinks: ['@/components/afterNavLinks/LinkToAnalyticsDefaultRootView'],
       graphics: {
         Icon: '@/graphics/Icon',
         Logo: '@/graphics/Logo',
+      },
+      views: {
+        CustomRootView: {
+          Component: '@/components/views/Analytics',
+          path: '/analytics',
+        },
       },
     },
     importMap: {
@@ -164,7 +169,7 @@ export default buildConfig({
     url: process.env.DATABASE_URI!,
   }),
   collections: [Pages, Services, Team, Media, Users],
-  globals: [Header, Footer, CompanyInfo, Analytics],
+  globals: [Header, Footer, CompanyInfo],
   cors: [baseUrl || ''].filter(Boolean),
   csrf: [baseUrl || ''].filter(Boolean),
   email: resendAdapter({
