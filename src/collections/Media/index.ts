@@ -22,6 +22,7 @@ export const Media: CollectionConfig = {
   },
   admin: {
     defaultColumns: ['filename', 'alt', 'updatedAt'],
+    group: 'Admin',
     hideAPIURL: !superAdmin,
   },
   upload: {

@@ -143,11 +143,13 @@ export interface Config {
     header: Header;
     footer: Footer;
     'company-info': CompanyInfo;
+    analytics: Analytics;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'company-info': CompanyInfoSelect<false> | CompanyInfoSelect<true>;
+    analytics: AnalyticsSelect<false> | AnalyticsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1204,6 +1206,15 @@ export interface CompanyInfo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics".
+ */
+export interface Analytics {
+  id: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1295,6 +1306,15 @@ export interface CompanyInfoSelect<T extends boolean = true> {
         note?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics_select".
+ */
+export interface AnalyticsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -19,8 +19,9 @@ const Users: CollectionConfig = {
     update: ({ req, id }) => self({ req, id }) || adminUserAccess({ req }) || superAdmin({ req }),
   },
   admin: {
-    hideAPIURL: !superAdmin,
     defaultColumns: ['name', 'email', 'role'],
+    group: 'Admin',
+    hideAPIURL: !superAdmin,
     useAsTitle: 'name',
   },
   auth: {

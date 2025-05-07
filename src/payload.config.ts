@@ -42,6 +42,7 @@ import { superAdmin } from './access/superAdmin'
 import { MediaBlock } from './blocks/MediaBlock/config'
 import { Media } from './collections/Media'
 import { baseUrl } from './utilities/baseUrl'
+import { Analytics } from './globals/Analytics/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -72,7 +73,7 @@ export default buildConfig({
   admin: {
     avatar: 'default',
     components: {
-      afterDashboard: ['@/components/AnalyticsButton'],
+      // afterDashboard: ['@/components/AnalyticsButton'],
       graphics: {
         Icon: '@/graphics/Icon',
         Logo: '@/graphics/Logo',
@@ -163,6 +164,7 @@ export default buildConfig({
     url: process.env.DATABASE_URI!,
   }),
   collections: [Pages, Services, Team, Media, Users],
+  globals: [Header, Footer, CompanyInfo, Analytics],
   cors: [baseUrl || ''].filter(Boolean),
   csrf: [baseUrl || ''].filter(Boolean),
   email: resendAdapter({
@@ -170,7 +172,6 @@ export default buildConfig({
     defaultFromName: 'BASES Admin',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
-  globals: [Header, Footer, CompanyInfo],
   plugins: [
     sentryPlugin({
       options: {
@@ -196,6 +197,9 @@ export default buildConfig({
           delete: superAdmin,
           update: superAdmin,
           create: superAdmin,
+        },
+        admin: {
+          group: 'Admin',
         },
         // @ts-expect-error
         fields: ({ defaultFields }) => {
