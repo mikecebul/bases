@@ -156,6 +156,9 @@ export default buildConfig({
       ]
     },
   }),
+  graphQL: {
+    disable: true,
+  },
   db: mongooseAdapter({
     url: process.env.DATABASE_URI!,
   }),
