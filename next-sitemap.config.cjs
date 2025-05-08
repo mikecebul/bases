@@ -4,5 +4,6 @@ const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 module.exports = {
   siteUrl: baseUrl,
   generateRobotsTxt: false,
+  generateIndexSitemap: baseUrl !== 'http://localhost:3000',
   output: process.env.NEXT_OUTPUT === 'standalone' ? 'standalone' : undefined,
 }
