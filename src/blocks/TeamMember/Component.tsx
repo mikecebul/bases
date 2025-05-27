@@ -3,11 +3,11 @@ import * as motion from 'motion/react-client'
 import type { Team } from '@/payload-types'
 import { CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { RichText } from '@/components/RichText'
-import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/utilities/cn'
 import { buttonVariants } from '@/components/ui/button'
 import { Title } from '@/components/Hero/HeroMedium'
+import { Media } from '@/components/Media'
 
 export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
   return (
@@ -18,17 +18,14 @@ export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
         transition={{ duration: 0.3 }}
         className="grid grid-cols-1 gap-x-8 lg:grid-cols-2 lg:items-start"
       >
-        <div className="pb-8 lg:sticky lg:top-28 lg:col-start-2 lg:row-start-1 lg:pb-0">
-          {typeof teamMember.image === 'object' && (
-            <Image
-              src={teamMember.image.url ?? '/placeholder.svg'}
-              alt={teamMember.image.alt ?? 'Team Member Profile'}
-              width={teamMember.image.width ?? 800}
-              height={teamMember.image.height ?? 1000}
-              className="object-top w-3/5 mx-auto mt-0 rounded-lg sm:w-2/5 lg:w-4/5 xl:w-3/5"
-            />
-          )}
-        </div>
+        {typeof teamMember.image === 'object' && (
+          <Media
+            alt={teamMember.image.alt ?? 'Team Member Profile'}
+            className="pb-8 lg:sticky lg:top-28 lg:col-start-2 lg:row-start-1 lg:pb-0"
+            imgClassName="object-top w-3/5 mx-auto mt-0 rounded-lg sm:w-2/5 lg:w-4/5 xl:w-3/5"
+            resource={teamMember.image}
+          />
+        )}
         <div>
           <CardHeader className="px-0 pt-0 space-y-0">
             <Title text={teamMember.name} heading="h1" />
