@@ -99,7 +99,7 @@ export const Pages: CollectionConfig = {
               },
               fields: [
                 OverviewField({
-                  titlePath: 'meta.metadata.t itle',
+                  titlePath: 'meta.metadata.title',
                   descriptionPath: 'meta.metadata.description',
                   imagePath: 'meta.metadata.image',
                 }),

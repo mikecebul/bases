@@ -34,8 +34,8 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   })
 
   // Map the slugs of the pages you want to disallow in robots.txt
-  const disallowedPages = pages.map((page) => page.slug ?? `/${page.slug}`)
-  const disallowedTeamPages = teamMembers.map((page) => page.slug ?? `/team/${page.slug}`)
+  const disallowedPages = pages.map((page) => `/${page.slug}`)
+  const disallowedTeamPages = teamMembers.map((page) => `/team/${page.slug}`)
 
   return {
     rules: {
