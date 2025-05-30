@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/Icons'
+import { Media } from '@/components/Media'
 
 export const TwoColumnLayoutBlock = async ({
   direction = 'ltr',
@@ -124,12 +125,10 @@ export const TwoColumnLayoutBlock = async ({
             </div>
           ) : images?.[0] && typeof images[0] === 'object' ? (
             <div className="relative">
-              <Image
-                className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
-                src={images?.[0]?.url ?? ''}
-                alt={images?.[0]?.alt ?? ''}
-                width={images?.[0]?.width ?? 960}
-                height={images?.[0]?.height ?? 640}
+              <Media
+                className="relative"
+                imgClassName="rounded-lg shadow-lg ring-1 ring-gray-400/10"
+                resource={validImages[0] ?? '/women-laptop.webp'}
                 priority={priority ?? false}
               />
               {svg && <HeroSVG direction={direction} />}

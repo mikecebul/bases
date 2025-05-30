@@ -252,6 +252,7 @@ export interface Media {
   alt: string;
   caption?: string | null;
   prefix?: string | null;
+  blurhash?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -978,6 +979,7 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   prefix?: T;
+  blurhash?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

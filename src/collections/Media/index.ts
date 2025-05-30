@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url'
 import path from 'path'
 import { superAdmin } from '@/access/superAdmin'
 import { editorOrHigher } from '@/access/editorOrHigher'
+import { generateBlurhash } from './generateBlurhash'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -85,5 +86,17 @@ export const Media: CollectionConfig = {
         hidden: true,
       },
     },
+    {
+      name: 'blurhash',
+      type: 'text',
+      admin: {
+        hidden: true,
+        disableListColumn: true,
+        disableListFilter: true,
+      },
+    },
   ],
+  hooks: {
+    beforeValidate: [generateBlurhash],
+  },
 }
