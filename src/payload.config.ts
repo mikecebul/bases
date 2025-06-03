@@ -155,6 +155,22 @@ export default buildConfig({
                   }
                   return value ? true : 'URL is required'
                 }) as TextFieldSingleValidation,
+                hooks: {
+                  beforeValidate: [({ value, siblingData }) => {
+                    // If linking internally to a media item, auto-generate the S3 URL
+                    if (siblingData?.linkType === 'internal' && siblingData?.doc?.relationTo === 'media' && siblingData?.doc?.value) {
+                      const mediaDoc = siblingData.doc.value
+                      const filename = mediaDoc.filename || mediaDoc.fileName
+                      const prefix = process.env.NEXT_PUBLIC_UPLOAD_PREFIX || 'media'
+                      const hostname = process.env.NEXT_PUBLIC_S3_HOSTNAME
+                      if (filename && hostname) {
+                        return `https://${hostname}/${prefix}/${filename}`
+                      }
+                    }
+                    // For custom links, use the manually entered value
+                    return value
+                  }],
+                },
               },
             ]
           },
