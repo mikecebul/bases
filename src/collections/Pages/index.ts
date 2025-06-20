@@ -20,7 +20,7 @@ import { Team } from '@/blocks/Team/config'
 import { AboutUs } from '@/blocks/AboutUs/config'
 import { Links } from '@/blocks/Links/config'
 import { superAdmin } from '@/access/superAdmin'
-import { FormBlock } from '@/blocks/Form/config'
+import { Form } from '@/blocks/Form/config'
 import { RichText } from '@/blocks/RichText/config'
 import { baseUrl } from '@/utilities/baseUrl'
 import { editorOrHigher } from '@/access/editorOrHigher'
@@ -73,7 +73,7 @@ export const Pages: CollectionConfig = {
                 Team,
                 AboutUs,
                 Links,
-                FormBlock,
+                Form,
                 TwoColumnLayout,
               ],
               required: true,

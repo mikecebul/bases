@@ -1,171 +1,71 @@
 'use client'
-import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
 
-import { useRouter } from 'next/navigation'
-import React, { useCallback, useState } from 'react'
-import { useForm, FormProvider } from 'react-hook-form'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { useState } from 'react'
+import { useStore } from '@tanstack/react-form'
+import type { FormBlock as FormBlockType } from '@/payload-types'
 import { RichText } from '@/components/RichText'
-import { Button } from '@/components/ui/button'
-
-import { buildInitialFormState } from './buildInitialFormState'
-import { fields } from './fields'
-import { baseUrl } from '@/utilities/baseUrl'
-import type { RichTextContent } from '@/components/RichText'
-
-export type Value = unknown
-
-export interface Property {
-  [key: string]: Value
+import { RenderFields } from './renders/RenderFieldsWithValidation'
+import { useDynamicForm } from './hooks/use-dynamic-form'
+import { ContactForm } from './child-forms/contact'
+export type PostError = {
+  message: string
+  status?: string
 }
 
-export interface Data {
-  [key: string]: Property | Property[]
-}
+export const FormBlock = ({ form: payloadForm, enableIntro, introContent }: FormBlockType) => {
+  const { confirmationMessage, confirmationType, fields, formType } =
+    typeof payloadForm !== 'string' ? payloadForm : {}
 
-export type FormBlockType = {
-  blockName?: string
-  blockType?: 'formBlock'
-  enableIntro: boolean
-  form: FormType
-  introContent?: RichTextContent
-}
+  const [postError, setPostError] = useState<PostError | undefined>()
 
-export const FormBlock: React.FC<
-  {
-    id?: string
-  } & FormBlockType
-> = (props) => {
-  const {
-    enableIntro,
-    form: formFromProps,
-    form: { id: formID, confirmationMessage, confirmationType, redirect, submitButtonLabel } = {},
-    introContent,
-  } = props
+  const { form, defaultValues } = useDynamicForm({ payloadForm, setPostError })
 
-  const formMethods = useForm<any>({
-    defaultValues: buildInitialFormState(formFromProps.fields),
-  })
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = formMethods
+  // Check if the form is successfully submitted
+  const [isSubmitSuccessful] = useStore(form.store, (state) => [state.isSubmitSuccessful])
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [hasSubmitted, setHasSubmitted] = useState<boolean>()
-  const [error, setError] = useState<{ message: string; status?: string } | undefined>()
-  const router = useRouter()
-
-  const onSubmit = useCallback(
-    (data: Data) => {
-      let loadingTimerID: ReturnType<typeof setTimeout>
-      const submitForm = async () => {
-        setError(undefined)
-
-        const dataToSend = Object.entries(data).map(([name, value]) => ({
-          field: name,
-          value,
-        }))
-
-        // delay loading indicator by 1s
-        loadingTimerID = setTimeout(() => {
-          setIsLoading(true)
-        }, 1000)
-
-        try {
-          const req = await fetch(`${baseUrl}/api/form-submissions`, {
-            body: JSON.stringify({
-              form: formID,
-              submissionData: dataToSend,
-            }),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            method: 'POST',
-          })
-
-          const res = await req.json()
-
-          clearTimeout(loadingTimerID)
-
-          if (req.status >= 400) {
-            setIsLoading(false)
-
-            setError({
-              message: res.errors?.[0]?.message || 'Internal Server Error',
-              status: res.status,
-            })
-
-            return
-          }
-
-          setIsLoading(false)
-          setHasSubmitted(true)
-
-          if (confirmationType === 'redirect' && redirect) {
-            const { url } = redirect
-
-            const redirectUrl = url
-
-            if (redirectUrl) router.push(redirectUrl)
-          }
-        } catch (err) {
-          console.warn(err)
-          setIsLoading(false)
-          setError({
-            message: 'Something went wrong.',
-          })
-        }
-      }
-
-      void submitForm()
-    },
-    [router, formID, redirect, confirmationType],
-  )
+  // Confirmation Message
+  if (isSubmitSuccessful && !postError && confirmationType === 'message' && confirmationMessage)
+    return <RichText data={confirmationMessage} />
 
   return (
-    <div className="container lg:max-w-[48rem] pb-20">
-      <FormProvider {...formMethods}>
-        {enableIntro && introContent && !hasSubmitted && (
-          <RichText className="mb-8" data={introContent} enableGutter={false} />
-        )}
-        {!isLoading && hasSubmitted && confirmationType === 'message' && (
-          <RichText data={confirmationMessage} />
-        )}
-        {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-        {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
-        {!hasSubmitted && (
-          <form id={formID} onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-4 last:mb-0">
-              {formFromProps &&
-                formFromProps.fields &&
-                formFromProps.fields?.map((field, index) => {
-                  const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields]
-                  if (Field) {
-                    return (
-                      <div className="mb-6 last:mb-0" key={index}>
-                        <Field
-                          form={formFromProps}
-                          {...field}
-                          {...formMethods}
-                          control={control}
-                          errors={errors}
-                          register={register}
-                        />
-                      </div>
-                    )
-                  }
-                  return null
-                })}
-            </div>
-
-            <Button form={formID} type="submit" variant="default">
-              {submitButtonLabel}
-            </Button>
-          </form>
-        )}
-      </FormProvider>
+    <div className="max-w-2xl mx-auto max-md:px-2 ">
+      {enableIntro && introContent && (
+        <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
+      )}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          form.handleSubmit()
+        }}
+      >
+        <Card className="@container">
+          <CardContent className="grid grid-cols-1 gap-4 @lg:grid-cols-2 p-6 auto-cols-fr">
+            {formType === 'dynamic' &&
+              fields?.map((field) => (
+                <RenderFields
+                  key={field.id}
+                  field={field}
+                  defaultValues={defaultValues}
+                  form={form}
+                />
+              ))}
+            {/* Prebuilt Contact Form Fields with validation */}
+            {formType === 'static' &&
+              typeof payloadForm === 'object' &&
+              payloadForm.form === 'contact' && <ContactForm form={form} />}
+          </CardContent>
+          <CardFooter className="flex flex-col items center">
+            <form.AppForm>
+              <form.SubmitButton label={'Submit'} />
+            </form.AppForm>
+            {postError && (
+              <em className="pt-2 text-destructive">{`${postError.status || '500'}: ${postError.message || ''}`}</em>
+            )}
+          </CardFooter>
+        </Card>
+      </form>
     </div>
   )
 }

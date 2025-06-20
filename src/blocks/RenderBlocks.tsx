@@ -51,9 +51,8 @@ export const RenderBlocks: React.FC<{
               return (
                 <div
                   key={index}
-                  className={cn(
-                    blockType === 'carf' ? 'py-0 last:pb-12' : 'py-24 last:pb-36',
-                  )}>
+                  className={cn(blockType === 'carf' ? 'py-0 last:pb-12' : 'py-24 last:pb-36')}
+                >
                   <Block {...(block as any)} />
                 </div>
               )
