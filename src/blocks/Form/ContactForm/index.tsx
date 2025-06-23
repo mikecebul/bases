@@ -26,12 +26,8 @@ export const ContactForm = ({ form: payloadForm, enableIntro, introContent }: Fo
   // Check if the form is successfully submitted
   const [isSubmitSuccessful] = useStore(form.store, (state) => [state.isSubmitSuccessful])
 
-  // Confirmation Message
-  if (isSubmitSuccessful && !postError && confirmationType === 'message' && confirmationMessage)
-    return <RichText data={confirmationMessage} />
-
   return (
-    <div className="max-w-2xl mx-auto max-md:px-2 ">
+    <div className="w-full max-w-2xl">
       {enableIntro && introContent && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}
@@ -43,86 +39,95 @@ export const ContactForm = ({ form: payloadForm, enableIntro, introContent }: Fo
         }}
       >
         <Card className="@container">
-          <CardContent className="grid grid-cols-1 gap-4 @lg:grid-cols-2 p-6 auto-cols-fr">
-            <form.AppField
-              name="name"
-              validators={{
-                onChange: z.string().min(1, 'Name is required'),
-              }}
-            >
-              {(formField) => (
-                <formField.TextField
+          {isSubmitSuccessful &&
+          !postError &&
+          confirmationType === 'message' &&
+          confirmationMessage ? (
+            <RichText data={confirmationMessage} className="p-6 pt-0" />
+          ) : (
+            <>
+              <CardContent className="grid grid-cols-1 gap-4 @lg:grid-cols-2 p-6 auto-cols-fr">
+                <form.AppField
                   name="name"
-                  label="Name"
-                  colSpan="2"
-                  blockType="text"
-                  required
-                />
-              )}
-            </form.AppField>
-            <form.AppField
-              name="phone"
-              validators={{
-                onChange: z
-                  .string()
-                  .min(1, 'Phone number required')
-                  .regex(
-                    /^(?:\+?1[-. ]?)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
-                    'Invalid phone number',
-                  ),
-              }}
-            >
-              {(formField) => (
-                <formField.PhoneField
+                  validators={{
+                    onChange: z.string().min(1, 'Name is required'),
+                  }}
+                >
+                  {(formField) => (
+                    <formField.TextField
+                      name="name"
+                      label="Name"
+                      colSpan="1"
+                      blockType="text"
+                      required
+                    />
+                  )}
+                </form.AppField>
+                <form.AppField
                   name="phone"
-                  label="Phone Number"
-                  colSpan="2"
-                  blockType="phone"
-                  required
-                />
-              )}
-            </form.AppField>
-            <form.AppField
-              name="email"
-              validators={{
-                onChange: z.string().min(1, 'Email is required').email(),
-              }}
-            >
-              {(formField) => (
-                <formField.EmailField
+                  validators={{
+                    onChange: z
+                      .string()
+                      .min(1, 'Phone number required')
+                      .regex(
+                        /^(?:\+?1[-. ]?)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
+                        'Invalid phone number',
+                      ),
+                  }}
+                >
+                  {(formField) => (
+                    <formField.PhoneField
+                      name="phone"
+                      label="Phone Number"
+                      colSpan="1"
+                      blockType="phone"
+                      required
+                    />
+                  )}
+                </form.AppField>
+                <form.AppField
                   name="email"
-                  label="Email"
-                  colSpan="2"
-                  blockType="email"
-                  required
-                />
-              )}
-            </form.AppField>
-            <form.AppField
-              name="message"
-              validators={{
-                onChange: z.string().min(1, 'Description is required'),
-              }}
-            >
-              {(formField) => (
-                <formField.TextareaField
+                  validators={{
+                    onChange: z.string().min(1, 'Email is required').email(),
+                  }}
+                >
+                  {(formField) => (
+                    <formField.EmailField
+                      name="email"
+                      label="Email"
+                      colSpan="2"
+                      blockType="email"
+                      required
+                    />
+                  )}
+                </form.AppField>
+                <form.AppField
                   name="message"
-                  label="Message"
-                  colSpan="2"
-                  blockType="textarea"
-                  required
-                />
-              )}
-            </form.AppField>
-          </CardContent>
-          <CardFooter className="flex flex-col items center">
-            <form.AppForm>
-              <form.SubmitButton label={'Submit'} />
-            </form.AppForm>
-            {postError && (
-              <em className="pt-2 text-destructive">{`${postError.status || '500'}: ${postError.message || ''}`}</em>
-            )}
-          </CardFooter>
+                  validators={{
+                    onChange: z.string().min(1, 'Description is required'),
+                  }}
+                >
+                  {(formField) => (
+                    <formField.TextareaField
+                      name="message"
+                      label="Message"
+                      colSpan="2"
+                      blockType="textarea"
+                      required
+                    />
+                  )}
+                </form.AppField>
+              </CardContent>
+              <CardFooter className="flex flex-col items center">
+                <form.AppForm>
+                  <form.SubmitButton label={'Submit'} />
+                </form.AppForm>
+                {postError && (
+                  <em className="pt-2 text-destructive">{`${postError.status || '500'}: ${postError.message || ''}`}</em>
+                )}
+              </CardFooter>
+            </>
+          )}
         </Card>
       </form>
     </div>

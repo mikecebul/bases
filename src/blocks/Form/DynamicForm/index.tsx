@@ -5,9 +5,9 @@ import { useState } from 'react'
 import { useStore } from '@tanstack/react-form'
 import type { FormBlock as FormBlockType } from '@/payload-types'
 import { RichText } from '@/components/RichText'
-import { RenderFields } from '../renders/render-fields-with-validation'
 import { useDynamicForm } from './use-dynamic-form'
 import { PostError } from '../Component'
+import { RenderFields } from '../renders/render-fields-with-validation'
 
 export const DynamicForm = ({ form: payloadForm, enableIntro, introContent }: FormBlockType) => {
   const { confirmationMessage, confirmationType, fields, formType } =
@@ -25,7 +25,7 @@ export const DynamicForm = ({ form: payloadForm, enableIntro, introContent }: Fo
     return <RichText data={confirmationMessage} />
 
   return (
-    <div className="max-w-2xl mx-auto max-md:px-2 ">
+    <div className="w-full">
       {enableIntro && introContent && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}

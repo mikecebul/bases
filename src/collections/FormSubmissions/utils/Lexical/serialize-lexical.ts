@@ -27,10 +27,6 @@ export async function convertLexicalNodesToHTML({
   parent: SerializedLexicalNodeWithParent
   submissionData?: any
 }): Promise<string> {
-  // Log the nodes we're trying to convert
-  console.log('Nodes to convert:', JSON.stringify(lexicalNodes, null, 2))
-  console.log('Parent:', JSON.stringify(parent, null, 2))
-
   const unknownConverter = converters.find((converter) => converter.nodeTypes.includes('unknown'))
 
   const htmlArray = await Promise.all(

@@ -33,8 +33,6 @@ export const useDynamicFormOpts = ({
     onSubmit: async ({ value: data, formApi: form }) => {
       setPostError(undefined)
 
-      console.log('Submitting form data:', data)
-
       try {
         const req = await fetch(`${getClientSideURL()}/api/form-submissions`, {
           body: JSON.stringify({
