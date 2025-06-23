@@ -10,7 +10,7 @@ import { TeamBlock } from './Team/Component'
 import { TeamMemberBlock } from './TeamMember/Component'
 import { AboutUsBlock } from './AboutUs/Component'
 import { LinksBlock } from './Links/Component'
-import { FormBlock } from './Form/Component'
+import { FormBlockRouter } from './Form/Component'
 import { RichTextBlock } from './RichText/Component'
 import { TwoColumnLayoutBlock } from './TwoColumnLayout/Component'
 import { cn } from '@/utilities/cn'
@@ -26,7 +26,7 @@ const blockComponents = {
   teamMember: TeamMemberBlock,
   aboutUs: AboutUsBlock,
   linksBlock: LinksBlock,
-  formBlock: FormBlock,
+  formBlock: FormBlockRouter,
   twoColumnLayout: TwoColumnLayoutBlock,
   // mediaBlock: MediaBlock,
 }

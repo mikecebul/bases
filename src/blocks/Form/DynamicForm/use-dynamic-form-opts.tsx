@@ -6,13 +6,12 @@ import type { Dispatch, SetStateAction } from 'react'
 import { getClientSideURL } from '@/utilities/getURL'
 import { useRouter } from 'next/navigation'
 import { PostError } from '../Component'
-import { contactFormOpts } from '../child-forms/contact'
 
 export type FormField = NonNullable<Form['fields']>[number]
 export type Value = string | number | boolean | any[] | Record<string, any> | undefined
 export type DefaultValues = Record<string, Value>
 
-export const useFormOpts = ({
+export const useDynamicFormOpts = ({
   payloadForm,
   setPostError,
 }: {
@@ -24,13 +23,13 @@ export const useFormOpts = ({
     fields,
     id: formId,
     redirect,
-    form
+    form,
   } = typeof payloadForm !== 'string' ? payloadForm : {}
   const router = useRouter()
   const defaultValues = getDefaultValues(fields)
 
   return formOptions({
-    defaultValues: form === 'contact' ? contactFormOpts.defaultValues : defaultValues,
+    defaultValues,
     onSubmit: async ({ value: data, formApi: form }) => {
       setPostError(undefined)
 

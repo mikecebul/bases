@@ -1,10 +1,10 @@
-import { DefaultValues } from '../hooks/use-form-opts'
-import { RenderFields } from './RenderFieldsWithValidation'
+import { DefaultValues } from '../DynamicForm/use-dynamic-form-opts'
+import { RenderFields } from './render-fields-with-validation'
 
 import type { GroupFormField } from '@/payload-types'
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-import { DynamicFormType } from '../hooks/use-dynamic-form'
+import { DynamicFormType } from '../DynamicForm/use-dynamic-form'
 
 export const GroupFieldComponent = ({
   defaultValues,

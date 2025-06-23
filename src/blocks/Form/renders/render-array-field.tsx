@@ -1,6 +1,6 @@
-import type { DefaultValues } from '../hooks/use-form-opts'
-import type { DynamicFormType } from '../hooks/use-dynamic-form'
-import { RenderFields } from './RenderFieldsWithValidation'
+import type { DefaultValues } from '../DynamicForm/use-dynamic-form-opts'
+import type { DynamicFormType } from '../DynamicForm/use-dynamic-form'
+import { RenderFields } from './render-fields-with-validation'
 
 import type { ArrayFormField } from '@/payload-types'
 

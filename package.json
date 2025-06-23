@@ -26,6 +26,7 @@
     "@lexical/markdown": "0.28.0",
     "@payloadcms/admin-bar": "3.43.0",
     "@payloadcms/db-mongodb": "3.43.0",
+    "@payloadcms/email-nodemailer": "3.43.0",
     "@payloadcms/email-resend": "3.43.0",
     "@payloadcms/live-preview-react": "3.43.0",
     "@payloadcms/next": "3.43.0",

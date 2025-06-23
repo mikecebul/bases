@@ -1,5 +1,6 @@
 import type { TextFieldSingleValidation } from 'payload'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 import { sentryPlugin } from '@payloadcms/plugin-sentry'
@@ -174,11 +175,25 @@ export default buildConfig({
   globals: [Header, Footer, CompanyInfo],
   cors: [baseUrl || ''].filter(Boolean),
   csrf: [baseUrl || ''].filter(Boolean),
-  email: resendAdapter({
-    defaultFromAddress: process.env.RESEND_DEFAULT_EMAIL || '',
-    defaultFromName: 'BASES Admin',
-    apiKey: process.env.RESEND_API_KEY || '',
-  }),
+  email:
+    process.env.NODE_ENV === 'development'
+      ? nodemailerAdapter({
+          defaultFromAddress: 'website@basesmi.org',
+          defaultFromName: 'BASES Admin',
+          transportOptions: {
+            host: 'localhost',
+            port: 1025,
+            auth: {
+              user: 'dev',
+              pass: 'password',
+            },
+          },
+        })
+      : resendAdapter({
+          defaultFromAddress: process.env.RESEND_DEFAULT_EMAIL || '',
+          defaultFromName: 'BASES Admin',
+          apiKey: process.env.RESEND_API_KEY || '',
+        }),
   plugins: [
     sentryPlugin({
       options: {

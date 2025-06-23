@@ -1,71 +1,21 @@
-'use client'
+import { FormBlock } from '@/payload-types'
+import { ContactForm } from './ContactForm'
+import { DynamicForm } from './DynamicForm'
 
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
-import { useState } from 'react'
-import { useStore } from '@tanstack/react-form'
-import type { FormBlock as FormBlockType } from '@/payload-types'
-import { RichText } from '@/components/RichText'
-import { RenderFields } from './renders/RenderFieldsWithValidation'
-import { useDynamicForm } from './hooks/use-dynamic-form'
-import { ContactForm } from './child-forms/contact'
 export type PostError = {
   message: string
   status?: string
 }
 
-export const FormBlock = ({ form: payloadForm, enableIntro, introContent }: FormBlockType) => {
-  const { confirmationMessage, confirmationType, fields, formType } =
-    typeof payloadForm !== 'string' ? payloadForm : {}
+export const FormBlockRouter = (props: FormBlock) => {
+  const { form } = props
+  const { formType } = typeof form !== 'string' ? form : {}
 
-  const [postError, setPostError] = useState<PostError | undefined>()
+  if (formType === 'dynamic') {
+    return <DynamicForm {...props} />
+  }
 
-  const { form, defaultValues } = useDynamicForm({ payloadForm, setPostError })
-
-  // Check if the form is successfully submitted
-  const [isSubmitSuccessful] = useStore(form.store, (state) => [state.isSubmitSuccessful])
-
-  // Confirmation Message
-  if (isSubmitSuccessful && !postError && confirmationType === 'message' && confirmationMessage)
-    return <RichText data={confirmationMessage} />
-
-  return (
-    <div className="max-w-2xl mx-auto max-md:px-2 ">
-      {enableIntro && introContent && (
-        <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
-      )}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          form.handleSubmit()
-        }}
-      >
-        <Card className="@container">
-          <CardContent className="grid grid-cols-1 gap-4 @lg:grid-cols-2 p-6 auto-cols-fr">
-            {formType === 'dynamic' &&
-              fields?.map((field) => (
-                <RenderFields
-                  key={field.id}
-                  field={field}
-                  defaultValues={defaultValues}
-                  form={form}
-                />
-              ))}
-            {/* Prebuilt Contact Form Fields with validation */}
-            {formType === 'static' &&
-              typeof payloadForm === 'object' &&
-              payloadForm.form === 'contact' && <ContactForm form={form} />}
-          </CardContent>
-          <CardFooter className="flex flex-col items center">
-            <form.AppForm>
-              <form.SubmitButton label={'Submit'} />
-            </form.AppForm>
-            {postError && (
-              <em className="pt-2 text-destructive">{`${postError.status || '500'}: ${postError.message || ''}`}</em>
-            )}
-          </CardFooter>
-        </Card>
-      </form>
-    </div>
-  )
+  if (typeof form === 'object' && formType === 'static') {
+    return <ContactForm {...props} />
+  }
 }

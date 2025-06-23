@@ -1,11 +1,10 @@
 'use client'
 
 import { Form } from '@/payload-types'
-import { useFormOpts } from './use-form-opts'
-import { useAppForm } from './form'
+import { useFormOpts } from './use-dynamic-form-opts'
+import { useAppForm } from '../hooks/form'
 import { Dispatch, SetStateAction } from 'react'
-import type { PostError } from '../Component'
-import { contactFormOpts } from '../child-forms/contact'
+import { PostError } from '../Component'
 
 type Props = {
   payloadForm: Form | string
