@@ -1,7 +1,7 @@
 'use client'
 
 import { Form } from '@/payload-types'
-import { useFormOpts } from './use-dynamic-form-opts'
+import { useDynamicFormOpts } from './use-dynamic-form-opts'
 import { useAppForm } from '../hooks/form'
 import { Dispatch, SetStateAction } from 'react'
 import { PostError } from '../Component'
@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const useDynamicForm = ({ payloadForm, setPostError }: Props) => {
-  const { defaultValues, onSubmit } = useFormOpts({
+  const { defaultValues, onSubmit } = useDynamicFormOpts({
     payloadForm,
     setPostError,
   })
