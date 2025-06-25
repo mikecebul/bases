@@ -124,8 +124,8 @@ export const ContactForm = ({ form: payloadForm, enableIntro, introContent }: Fo
                   )}
                 </form.AppField>
                 <form.AppField
-                  name="Services"
-                  mode='array'
+                  name="services"
+                  mode="array"
                   validators={{
                     onChange: ({ value }) =>
                       !value || value.length === 0
