@@ -124,6 +124,24 @@ export const ContactForm = ({ form: payloadForm, enableIntro, introContent }: Fo
                   )}
                 </form.AppField>
                 <form.AppField
+                  name="Services"
+                  mode='array'
+                  validators={{
+                    onChange: ({ value }) =>
+                      !value || value.length === 0
+                        ? { message: 'Please select at least one service' }
+                        : undefined,
+                  }}
+                >
+                  {(formField) => (
+                    <formField.MultiSelectField
+                      name="services"
+                      label="Services of Interest"
+                      colSpan="2"
+                    />
+                  )}
+                </form.AppField>
+                <form.AppField
                   name="message"
                   validators={{
                     onChange: z.string().min(1, 'Description is required'),

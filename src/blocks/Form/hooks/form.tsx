@@ -12,6 +12,7 @@ import StateField from '../field-components/state-field'
 import CountryField from '../field-components/country-field'
 import SelectField from '../field-components/select-field'
 import SubmitButton from '../form-components/submit-button'
+import MultiSelectField from '../field-components/multi-select-field'
 
 export const { useAppForm, withForm } = createFormHook({
   fieldComponents: {
@@ -24,6 +25,7 @@ export const { useAppForm, withForm } = createFormHook({
     StateField,
     CountryField,
     SelectField,
+    MultiSelectField,
   },
   formComponents: {
     SubmitButton,

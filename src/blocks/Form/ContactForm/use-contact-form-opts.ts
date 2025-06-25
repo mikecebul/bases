@@ -7,6 +7,15 @@ import type { Dispatch, SetStateAction } from 'react'
 import { PostError } from '../Component'
 import { Form } from '@/payload-types'
 
+export type ContactFormType = {
+  name: string
+  phone: string
+  email: string
+  confirmEmail: string
+  services: string[]
+  message: string
+}
+
 export const useContactFormOpts = ({
   payloadForm,
   setPostError,
@@ -27,8 +36,9 @@ export const useContactFormOpts = ({
       phone: '',
       email: '',
       confirmEmail: '',
+      services: [],
       message: '',
-    },
+    } as ContactFormType,
     onSubmit: async ({ value: data, formApi: form }) => {
       setPostError(undefined)
       try {
