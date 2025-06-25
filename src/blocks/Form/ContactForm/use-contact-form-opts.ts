@@ -26,6 +26,7 @@ export const useContactFormOpts = ({
       name: '',
       phone: '',
       email: '',
+      confirmEmail: '',
       message: '',
     },
     onSubmit: async ({ value: data, formApi: form }) => {

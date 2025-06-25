@@ -102,6 +102,28 @@ export const ContactForm = ({ form: payloadForm, enableIntro, introContent }: Fo
                   )}
                 </form.AppField>
                 <form.AppField
+                  name="confirmEmail"
+                  validators={{
+                    onChangeListenTo: ['email'],
+                    onChange: ({ value, fieldApi }) => {
+                      if (value !== fieldApi.form.getFieldValue('email')) {
+                        return { message: 'Emails do not match' }
+                      }
+                      return undefined
+                    },
+                  }}
+                >
+                  {(formField) => (
+                    <formField.EmailField
+                      name="confirmEmail"
+                      label="Confirm Email"
+                      colSpan="2"
+                      blockType="email"
+                      required
+                    />
+                  )}
+                </form.AppField>
+                <form.AppField
                   name="message"
                   validators={{
                     onChange: z.string().min(1, 'Description is required'),
