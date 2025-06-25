@@ -7,10 +7,10 @@ import { cn } from '@/utilities/cn'
 import { CheckCircleIcon } from 'lucide-react'
 
 const OPTIONS = [
-  'assessment',
-  'counseling',
-  'drivers license',
-  'domestic violence',
+  'Assessment',
+  'Counseling',
+  'Drivers license',
+  'Domestic violence',
   'OWI safety class',
   'Narcan kits',
 ]
