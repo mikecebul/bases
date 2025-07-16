@@ -43,7 +43,7 @@ export const ContactForm = ({ form: payloadForm, enableIntro, introContent }: Fo
           !postError &&
           confirmationType === 'message' &&
           confirmationMessage ? (
-            <RichText data={confirmationMessage} className="p-6 pt-0" />
+            <RichText data={confirmationMessage} className="p-6" />
           ) : (
             <>
               <CardContent className="grid grid-cols-1 gap-4 @lg:grid-cols-2 p-6 auto-cols-fr">
