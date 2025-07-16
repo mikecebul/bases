@@ -18,6 +18,9 @@ public/meta
 # sqlite db
 payload.db
 
+# mailpit
+/data
+
 # dumps
 .dumps/
 tsconfig.tsbuildinfo

@@ -107,7 +107,7 @@ export const TwoColumnLayoutBlock = async ({
         </div>
         <div
           className={cn('order-2', {
-            'flex items-center justify-center': !sticky,
+            'flex flex-col items-center justify-center': !sticky,
             'sticky xl:top-20 xl:pt-2': sticky,
             relative: svg,
             'sm:order-1': direction === 'rtl' && breakpoint === 'sm',
@@ -117,7 +117,7 @@ export const TwoColumnLayoutBlock = async ({
           })}
         >
           {columnTwoType === 'form' ? (
-            form && <RenderBlocks blocks={form} />
+            form && <RenderBlocks blocks={form} nested />
           ) : validImages.length > 1 ? (
             <div className="relative">
               <RichTextCarousel images={validImages} priority={priority ?? false} />

@@ -119,6 +119,8 @@ export interface Config {
     team: Team;
     media: Media;
     users: User;
+    forms: Form;
+    'form-submissions': FormSubmission;
     redirects: Redirect;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -131,6 +133,8 @@ export interface Config {
     team: TeamSelect<false> | TeamSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    forms: FormsSelect<false> | FormsSelect<true>;
+    'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -481,6 +485,7 @@ export interface LinksBlock {
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
+  form: string | Form;
   enableIntro?: boolean | null;
   introContent?: {
     root: {
@@ -500,6 +505,300 @@ export interface FormBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'formBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forms".
+ */
+export interface Form {
+  id: string;
+  title: string;
+  formType: 'dynamic' | 'static';
+  fields?:
+    | (
+        | CheckboxFormField
+        | CountryFormField
+        | EmailFormField
+        | {
+            message?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'message';
+          }
+        | NumberFormField
+        | SelectFormField
+        | StateFormField
+        | TextFormField
+        | TextareaFormField
+        | PhoneFormField
+        | ArrayFormField
+        | GroupFormField
+      )[]
+    | null;
+  form?: 'contact' | null;
+  submitButtonLabel?: string | null;
+  /**
+   * Choose whether to display an on-page message or redirect to a different page after they submit the form.
+   */
+  confirmationType?: ('message' | 'redirect') | null;
+  confirmationMessage?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  redirect?: {
+    type?: ('reference' | 'custom') | null;
+    reference?: {
+      relationTo: 'pages';
+      value: string | Page;
+    } | null;
+    url?: string | null;
+  };
+  /**
+   * Send custom emails when the form submits. Use comma separated lists to send the same email to multiple recipients. To reference a value from this form, wrap that field's name with double curly brackets, i.e. {{firstName}}. You can use a wildcard {{*}} to output all data and {{*:table}} to format it as an HTML table in the email.
+   */
+  emails?:
+    | {
+        emailTo?: string | null;
+        cc?: string | null;
+        bcc?: string | null;
+        replyTo?: string | null;
+        emailFrom?: string | null;
+        subject: string;
+        /**
+         * Enter the message that should be sent in this email.
+         */
+        message?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CheckboxFormField".
+ */
+export interface CheckboxFormField {
+  name: string;
+  label?: string | null;
+  colSpan: '1' | '2';
+  errorMsg?: string | null;
+  defaultValue?: boolean | null;
+  required?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'checkbox';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CountryFormField".
+ */
+export interface CountryFormField {
+  name: string;
+  label?: string | null;
+  /**
+   * form defaults to spanning the full two columns
+   */
+  colSpan: '1' | '2';
+  required?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'country';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EmailFormField".
+ */
+export interface EmailFormField {
+  name: string;
+  label?: string | null;
+  /**
+   * form defaults to spanning the full two columns
+   */
+  colSpan: '1' | '2';
+  required?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'email';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NumberFormField".
+ */
+export interface NumberFormField {
+  name: string;
+  label?: string | null;
+  colSpan: '1' | '2';
+  defaultValue?: number | null;
+  min?: number | null;
+  minError?: string | null;
+  max?: number | null;
+  maxError?: string | null;
+  required?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'number';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SelectFormField".
+ */
+export interface SelectFormField {
+  name: string;
+  label?: string | null;
+  colSpan: '1' | '2';
+  defaultValue?: string | null;
+  options?:
+    | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  required?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'select';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StateFormField".
+ */
+export interface StateFormField {
+  name: string;
+  label?: string | null;
+  /**
+   * form defaults to spanning the full two columns
+   */
+  colSpan: '1' | '2';
+  required?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'state';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextFormField".
+ */
+export interface TextFormField {
+  name: string;
+  label?: string | null;
+  colSpan: '1' | '2';
+  defaultValue?: string | null;
+  required?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'text';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextareaFormField".
+ */
+export interface TextareaFormField {
+  name: string;
+  label?: string | null;
+  colSpan: '1' | '2';
+  defaultValue?: string | null;
+  required?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textarea';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PhoneFormField".
+ */
+export interface PhoneFormField {
+  name: string;
+  label?: string | null;
+  /**
+   * form defaults to spanning the full two columns
+   */
+  colSpan: '1' | '2';
+  required?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'phone';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArrayFormField".
+ */
+export interface ArrayFormField {
+  name: string;
+  label: string;
+  title?: string | null;
+  description?: string | null;
+  colSpan: '1' | '2';
+  minRows: number;
+  maxRows: number;
+  fields: (TextFormField | TextareaFormField | EmailFormField | NumberFormField | CheckboxFormField | PhoneFormField)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'array';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GroupFormField".
+ */
+export interface GroupFormField {
+  name: string;
+  title?: string | null;
+  description?: string | null;
+  fields: (
+    | TextFormField
+    | TextareaFormField
+    | EmailFormField
+    | NumberFormField
+    | CheckboxFormField
+    | PhoneFormField
+    | ArrayFormField
+    | SelectFormField
+    | StateFormField
+    | CountryFormField
+  )[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'group';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -580,7 +879,33 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
+export interface FormSubmission {
+  id: string;
+  form: string | Form;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -634,6 +959,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'forms';
+        value: string | Form;
+      } | null)
+    | ({
+        relationTo: 'form-submissions';
+        value: string | FormSubmission;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -878,6 +1211,7 @@ export interface LinkCardsSelect<T extends boolean = true> {
  * via the `definition` "FormBlock_select".
  */
 export interface FormBlockSelect<T extends boolean = true> {
+  form?: T;
   enableIntro?: T;
   introContent?: T;
   id?: T;
@@ -1035,6 +1369,253 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forms_select".
+ */
+export interface FormsSelect<T extends boolean = true> {
+  title?: T;
+  formType?: T;
+  fields?:
+    | T
+    | {
+        checkbox?: T | CheckboxFormFieldSelect<T>;
+        country?: T | CountryFormFieldSelect<T>;
+        email?: T | EmailFormFieldSelect<T>;
+        message?:
+          | T
+          | {
+              message?: T;
+              id?: T;
+              blockName?: T;
+            };
+        number?: T | NumberFormFieldSelect<T>;
+        select?: T | SelectFormFieldSelect<T>;
+        state?: T | StateFormFieldSelect<T>;
+        text?: T | TextFormFieldSelect<T>;
+        textarea?: T | TextareaFormFieldSelect<T>;
+        phone?: T | PhoneFormFieldSelect<T>;
+        array?: T | ArrayFormFieldSelect<T>;
+        group?: T | GroupFormFieldSelect<T>;
+      };
+  form?: T;
+  submitButtonLabel?: T;
+  confirmationType?: T;
+  confirmationMessage?: T;
+  redirect?:
+    | T
+    | {
+        type?: T;
+        reference?: T;
+        url?: T;
+      };
+  emails?:
+    | T
+    | {
+        emailTo?: T;
+        cc?: T;
+        bcc?: T;
+        replyTo?: T;
+        emailFrom?: T;
+        subject?: T;
+        message?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CheckboxFormField_select".
+ */
+export interface CheckboxFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  colSpan?: T;
+  errorMsg?: T;
+  defaultValue?: T;
+  required?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CountryFormField_select".
+ */
+export interface CountryFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  colSpan?: T;
+  required?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EmailFormField_select".
+ */
+export interface EmailFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  colSpan?: T;
+  required?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NumberFormField_select".
+ */
+export interface NumberFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  colSpan?: T;
+  defaultValue?: T;
+  min?: T;
+  minError?: T;
+  max?: T;
+  maxError?: T;
+  required?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SelectFormField_select".
+ */
+export interface SelectFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  colSpan?: T;
+  defaultValue?: T;
+  options?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        id?: T;
+      };
+  required?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StateFormField_select".
+ */
+export interface StateFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  colSpan?: T;
+  required?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextFormField_select".
+ */
+export interface TextFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  colSpan?: T;
+  defaultValue?: T;
+  required?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextareaFormField_select".
+ */
+export interface TextareaFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  colSpan?: T;
+  defaultValue?: T;
+  required?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PhoneFormField_select".
+ */
+export interface PhoneFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  colSpan?: T;
+  required?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArrayFormField_select".
+ */
+export interface ArrayFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  label?: T;
+  title?: T;
+  description?: T;
+  colSpan?: T;
+  minRows?: T;
+  maxRows?: T;
+  fields?:
+    | T
+    | {
+        text?: T | TextFormFieldSelect<T>;
+        textarea?: T | TextareaFormFieldSelect<T>;
+        email?: T | EmailFormFieldSelect<T>;
+        number?: T | NumberFormFieldSelect<T>;
+        checkbox?: T | CheckboxFormFieldSelect<T>;
+        phone?: T | PhoneFormFieldSelect<T>;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GroupFormField_select".
+ */
+export interface GroupFormFieldSelect<T extends boolean = true> {
+  name?: T;
+  title?: T;
+  description?: T;
+  fields?:
+    | T
+    | {
+        text?: T | TextFormFieldSelect<T>;
+        textarea?: T | TextareaFormFieldSelect<T>;
+        email?: T | EmailFormFieldSelect<T>;
+        number?: T | NumberFormFieldSelect<T>;
+        checkbox?: T | CheckboxFormFieldSelect<T>;
+        phone?: T | PhoneFormFieldSelect<T>;
+        array?: T | ArrayFormFieldSelect<T>;
+        select?: T | SelectFormFieldSelect<T>;
+        state?: T | StateFormFieldSelect<T>;
+        country?: T | CountryFormFieldSelect<T>;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions_select".
+ */
+export interface FormSubmissionsSelect<T extends boolean = true> {
+  form?: T;
+  data?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

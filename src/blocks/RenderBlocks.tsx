@@ -10,7 +10,7 @@ import { TeamBlock } from './Team/Component'
 import { TeamMemberBlock } from './TeamMember/Component'
 import { AboutUsBlock } from './AboutUs/Component'
 import { LinksBlock } from './Links/Component'
-import { FormBlock } from './Form/Component'
+import { FormBlockRouter } from './Form/Component'
 import { RichTextBlock } from './RichText/Component'
 import { TwoColumnLayoutBlock } from './TwoColumnLayout/Component'
 import { cn } from '@/utilities/cn'
@@ -26,15 +26,16 @@ const blockComponents = {
   teamMember: TeamMemberBlock,
   aboutUs: AboutUsBlock,
   linksBlock: LinksBlock,
-  formBlock: FormBlock,
+  formBlock: FormBlockRouter,
   twoColumnLayout: TwoColumnLayoutBlock,
   // mediaBlock: MediaBlock,
 }
 
 export const RenderBlocks: React.FC<{
   blocks: Page['layout'][number][]
+  nested?: boolean
 }> = (props) => {
-  const { blocks } = props
+  const { blocks, nested = false } = props
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
@@ -48,13 +49,14 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
-              return (
+              return nested ? (
+                <Block key={index} {...(block as any)} nested={nested} />
+              ) : (
                 <div
                   key={index}
-                  className={cn(
-                    blockType === 'carf' ? 'py-0 last:pb-12' : 'py-24 last:pb-36',
-                  )}>
-                  <Block {...(block as any)} />
+                  className={cn(blockType === 'carf' ? 'py-0 last:pb-12' : 'py-24 last:pb-36')}
+                >
+                  <Block {...(block as any)} nested={nested} />
                 </div>
               )
             }
