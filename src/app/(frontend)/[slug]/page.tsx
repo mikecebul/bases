@@ -15,6 +15,7 @@ export async function generateStaticParams() {
     collection: 'pages',
     draft: false,
     limit: 1000,
+    overrideAccess: false,
     pagination: false,
     select: { slug: true },
   })
@@ -47,7 +48,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   if (!page && slug === 'home') {
     return (
-      <main className="grow flex flex-col items-center justify-center">
+      <main className="flex flex-col items-center justify-center grow">
         <h1 className="text-4xl font-bold">Hello World</h1>
       </main>
     )
