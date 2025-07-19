@@ -102,3 +102,4 @@ Role-based permissions:
 - Team member pages auto-generate with SEO-optimized URLs (`/team/[slug]`)
 - Database migrations run automatically on build
 - All images are processed with blurhash for smooth loading
+- Use concise commit messages without generated attribution text
