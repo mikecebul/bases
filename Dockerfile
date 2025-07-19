@@ -29,12 +29,45 @@ RUN --mount=type=secret,id=DATABASE_URI \
   --mount=type=secret,id=S3_ENABLED \
   --mount=type=secret,id=SENTRY_AUTH_TOKEN \
   --mount=type=secret,id=SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING \
+  --mount=type=secret,id=NEXT_PUBLIC_IS_LIVE \
+  --mount=type=secret,id=NEXT_PUBLIC_GOOGLE_MAPS_API_KEY \
+  --mount=type=secret,id=NEXT_PUBLIC_UPLOAD_PREFIX \
+  --mount=type=secret,id=NEXT_PUBLIC_USAEPAY_KEY \
+  --mount=type=secret,id=NEXT_PUBLIC_SENTRY_DSN \
+  --mount=type=secret,id=EMAIL_HOST \
+  --mount=type=secret,id=EMAIL_PORT \
+  --mount=type=secret,id=EMAIL_USER \
+  --mount=type=secret,id=EMAIL_PASSWORD \
+  --mount=type=secret,id=S3_ACCESS_KEY_ID \
+  --mount=type=secret,id=S3_SECRET_ACCESS_KEY \
+  --mount=type=secret,id=S3_REGION \
+  --mount=type=secret,id=S3_ENDPOINT \
+  --mount=type=secret,id=S3_BUCKET \
+  --mount=type=secret,id=NEXT_PUBLIC_S3_HOSTNAME \
+  --mount=type=secret,id=UNSPLASH_ACCESS_KEY \
   sh -c '( \
   echo "DATABASE_URI=$(cat /run/secrets/DATABASE_URI)" && \
   echo "NEXT_PUBLIC_SERVER_URL=$(cat /run/secrets/NEXT_PUBLIC_SERVER_URL)" && \
   echo "PAYLOAD_SECRET=$(cat /run/secrets/PAYLOAD_SECRET)" && \
   echo "S3_ENABLED=$(cat /run/secrets/S3_ENABLED)" && \
   echo "SENTRY_AUTH_TOKEN=$(cat /run/secrets/SENTRY_AUTH_TOKEN)" && \
+  echo "SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING=$(cat /run/secrets/SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING)" && \
+  echo "NEXT_PUBLIC_IS_LIVE=$(cat /run/secrets/NEXT_PUBLIC_IS_LIVE)" && \
+  echo "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$(cat /run/secrets/NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)" && \
+  echo "NEXT_PUBLIC_UPLOAD_PREFIX=$(cat /run/secrets/NEXT_PUBLIC_UPLOAD_PREFIX)" && \
+  echo "NEXT_PUBLIC_USAEPAY_KEY=$(cat /run/secrets/NEXT_PUBLIC_USAEPAY_KEY)" && \
+  echo "NEXT_PUBLIC_SENTRY_DSN=$(cat /run/secrets/NEXT_PUBLIC_SENTRY_DSN)" && \
+  echo "EMAIL_HOST=$(cat /run/secrets/EMAIL_HOST)" && \
+  echo "EMAIL_PORT=$(cat /run/secrets/EMAIL_PORT)" && \
+  echo "EMAIL_USER=$(cat /run/secrets/EMAIL_USER)" && \
+  echo "EMAIL_PASSWORD=$(cat /run/secrets/EMAIL_PASSWORD)" && \
+  echo "S3_ACCESS_KEY_ID=$(cat /run/secrets/S3_ACCESS_KEY_ID)" && \
+  echo "S3_SECRET_ACCESS_KEY=$(cat /run/secrets/S3_SECRET_ACCESS_KEY)" && \
+  echo "S3_REGION=$(cat /run/secrets/S3_REGION)" && \
+  echo "S3_ENDPOINT=$(cat /run/secrets/S3_ENDPOINT)" && \
+  echo "S3_BUCKET=$(cat /run/secrets/S3_BUCKET)" && \
+  echo "NEXT_PUBLIC_S3_HOSTNAME=$(cat /run/secrets/NEXT_PUBLIC_S3_HOSTNAME)" && \
+  echo "UNSPLASH_ACCESS_KEY=$(cat /run/secrets/UNSPLASH_ACCESS_KEY)" \
   ) > .env.production'
 
 ENV SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING=1
@@ -56,24 +89,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Runtime environment variables from docker-compose.yml
-ENV NEXT_PUBLIC_IS_LIVE=$NEXT_PUBLIC_IS_LIVE
-ENV NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
-ENV NEXT_PUBLIC_UPLOAD_PREFIX=$NEXT_PUBLIC_UPLOAD_PREFIX
-ENV NEXT_PUBLIC_USAEPAY_KEY=$NEXT_PUBLIC_USAEPAY_KEY
-ENV NEXT_PUBLIC_SENTRY_DSN=$NEXT_PUBLIC_SENTRY_DSN
-ENV EMAIL_HOST=$EMAIL_HOST
-ENV EMAIL_PORT=$EMAIL_PORT
-ENV EMAIL_USER=$EMAIL_USER
-ENV EMAIL_PASSWORD=$EMAIL_PASSWORD
-ENV S3_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
-ENV S3_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
-ENV S3_REGION=$S3_REGION
-ENV S3_ENDPOINT=$S3_ENDPOINT
-ENV S3_BUCKET=$S3_BUCKET
-ENV NEXT_PUBLIC_S3_HOSTNAME=$NEXT_PUBLIC_S3_HOSTNAME
-ENV UNSPLASH_ACCESS_KEY=$UNSPLASH_ACCESS_KEY
+# Runtime environment variables will be provided by docker-compose or deployment platform
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
