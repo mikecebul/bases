@@ -1,6 +1,31 @@
 version: '3'
 
 services:
+  app:
+    image: mikecebul/bases:latest
+    ports:
+      - '3000:3000'
+    environment:
+      # Runtime environment variables - add these to Dokploy
+      - NEXT_PUBLIC_IS_LIVE=${NEXT_PUBLIC_IS_LIVE}
+      - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+      - NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL}
+      - NEXT_PUBLIC_UPLOAD_PREFIX=${NEXT_PUBLIC_UPLOAD_PREFIX}
+      - NEXT_PUBLIC_USAEPAY_KEY=${NEXT_PUBLIC_USAEPAY_KEY}
+      - NEXT_PUBLIC_SENTRY_DSN=${NEXT_PUBLIC_SENTRY_DSN}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID}
+      - S3_SECRET_ACCESS_KEY=${S3_SECRET_ACCESS_KEY}
+      - S3_REGION=${S3_REGION}
+      - S3_ENDPOINT=${S3_ENDPOINT}
+      - S3_BUCKET=${S3_BUCKET}
+      - NEXT_PUBLIC_S3_HOSTNAME=${NEXT_PUBLIC_S3_HOSTNAME}
+      - UNSPLASH_ACCESS_KEY=${UNSPLASH_ACCESS_KEY}
+    restart: unless-stopped
+
   mongo:
     image: mongo:latest
     ports:

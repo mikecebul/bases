@@ -1,3 +1,7 @@
+# Allow Claude to see hidden files
+!.*
+
+# beginning of the file
 build
 dist / media
 node_modules
