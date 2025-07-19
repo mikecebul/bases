@@ -22,6 +22,12 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Set build environment variables before creating .env.production
+ENV SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING=1
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_OUTPUT=standalone
+
 # Create .env.production from Docker secrets (build-time only)
 RUN --mount=type=secret,id=DATABASE_URI \
   --mount=type=secret,id=NEXT_PUBLIC_SERVER_URL \
@@ -69,10 +75,6 @@ RUN --mount=type=secret,id=DATABASE_URI \
   echo "NEXT_PUBLIC_S3_HOSTNAME=$(cat /run/secrets/NEXT_PUBLIC_S3_HOSTNAME)" && \
   echo "UNSPLASH_ACCESS_KEY=$(cat /run/secrets/UNSPLASH_ACCESS_KEY)" \
   ) > .env.production'
-
-ENV SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING=1
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV NEXT_OUTPUT=standalone
 
 # Update and enable Corepack
 RUN npm install -g corepack@latest

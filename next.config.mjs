@@ -17,9 +17,7 @@ const nextConfig = {
         'https://maps.googleapis.com',
         'https://basesmi.org',
         'https://www.basesmi.org',
-        'https://bases.mikecebul.dev',
-        'https://bases-dev.mikecebul.dev',
-        'https://media-bases.mikecebul.dev',
+        'https://media-bases.mikecebul.com',
       ].map((item) => {
         const url = new URL(item)
         return {
