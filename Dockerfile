@@ -23,18 +23,12 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Set build environment variables before creating .env.production
-ENV SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING=1
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV NEXT_OUTPUT=standalone
-
 # Create .env.production from Docker secrets (build-time only)
 RUN --mount=type=secret,id=DATABASE_URI \
   --mount=type=secret,id=NEXT_PUBLIC_SERVER_URL \
   --mount=type=secret,id=PAYLOAD_SECRET \
   --mount=type=secret,id=S3_ENABLED \
   --mount=type=secret,id=SENTRY_AUTH_TOKEN \
-  --mount=type=secret,id=SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING \
   --mount=type=secret,id=NEXT_PUBLIC_IS_LIVE \
   --mount=type=secret,id=NEXT_PUBLIC_GOOGLE_MAPS_API_KEY \
   --mount=type=secret,id=NEXT_PUBLIC_UPLOAD_PREFIX \
@@ -57,7 +51,6 @@ RUN --mount=type=secret,id=DATABASE_URI \
   echo "PAYLOAD_SECRET=$(cat /run/secrets/PAYLOAD_SECRET)" && \
   echo "S3_ENABLED=$(cat /run/secrets/S3_ENABLED)" && \
   echo "SENTRY_AUTH_TOKEN=$(cat /run/secrets/SENTRY_AUTH_TOKEN)" && \
-  echo "SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING=$(cat /run/secrets/SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING)" && \
   echo "NEXT_PUBLIC_IS_LIVE=$(cat /run/secrets/NEXT_PUBLIC_IS_LIVE)" && \
   echo "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$(cat /run/secrets/NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)" && \
   echo "NEXT_PUBLIC_UPLOAD_PREFIX=$(cat /run/secrets/NEXT_PUBLIC_UPLOAD_PREFIX)" && \
@@ -75,6 +68,10 @@ RUN --mount=type=secret,id=DATABASE_URI \
   echo "NEXT_PUBLIC_S3_HOSTNAME=$(cat /run/secrets/NEXT_PUBLIC_S3_HOSTNAME)" && \
   echo "UNSPLASH_ACCESS_KEY=$(cat /run/secrets/UNSPLASH_ACCESS_KEY)" \
   ) > .env.production'
+
+ENV SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING=1
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_OUTPUT=standalone
 
 # Update and enable Corepack
 RUN npm install -g corepack@latest
