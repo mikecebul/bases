@@ -39,15 +39,22 @@ export const Pages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     hideAPIURL: !superAdmin,
     livePreview: {
-      url: ({ data }) => {
+      url: ({ data, req }) => {
         const path = generatePreviewPath({
-          path: `/${typeof data?.slug === 'string' ? data.slug : ''}`,
+          slug: typeof data?.slug === 'string' ? data.slug : '',
+          collection: 'pages',
+          req,
         })
-        return `${baseUrl}${path}`
+
+        return path
       },
     },
-    preview: (doc) =>
-      generatePreviewPath({ path: `/${typeof doc?.slug === 'string' ? doc.slug : ''}` }),
+    preview: (data, { req }) =>
+      generatePreviewPath({
+        slug: typeof data?.slug === 'string' ? data.slug : '',
+        collection: 'pages',
+        req,
+      }),
     useAsTitle: 'title',
   },
   fields: [

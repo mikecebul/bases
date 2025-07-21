@@ -32,15 +32,22 @@ export const Team: CollectionConfig = {
     useAsTitle: 'name',
     hideAPIURL: !superAdmin,
     livePreview: {
-      url: ({ data }) => {
+      url: ({ data, req }) => {
         const path = generatePreviewPath({
-          path: `/team/${typeof data?.slug === 'string' ? data.slug : ''}`,
+          slug: typeof data?.slug === 'string' ? `team/${data.slug}` : '',
+          collection: 'team',
+          req,
         })
-        return `${baseUrl}${path}`
+
+        return path
       },
     },
-    preview: (doc) =>
-      generatePreviewPath({ path: `/team/${typeof doc?.slug === 'string' ? doc.slug : ''}` }),
+    preview: (data, { req }) =>
+      generatePreviewPath({
+        slug: typeof data?.slug === 'string' ? `team/${data.slug}` : '',
+        collection: 'team',
+        req,
+      }),
     defaultColumns: ['name', 'image', 'memberType', 'role', 'updatedAt'],
     description: 'A collection of staff and board members.',
     components: {

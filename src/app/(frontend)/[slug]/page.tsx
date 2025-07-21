@@ -5,7 +5,7 @@ import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { Metadata } from 'next'
 import { generateMeta } from '@/utilities/generateMeta'
-import { getPayload, RequiredDataFromCollectionSlug } from 'payload'
+import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 export async function generateStaticParams() {
@@ -42,6 +42,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const url = `/${slug}`
 
   let page: RequiredDataFromCollectionSlug<'pages'> | null
+  console.log('Page:', slug, 'Draft mode:', draft)
 
   page = await queryPageBySlug({ slug })
 
