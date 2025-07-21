@@ -10,7 +10,6 @@ const OPTIONS = [
   'Assessment',
   'Counseling',
   'Drivers license',
-  'Domestic violence',
   'OWI safety class',
   'Narcan kits',
 ]
