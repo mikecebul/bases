@@ -5,9 +5,8 @@ import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { Metadata } from 'next'
 import { generateMeta } from '@/utilities/generateMeta'
-import { getPayload } from 'payload'
+import { getPayload, RequiredDataFromCollectionSlug } from 'payload'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { Page as PageType } from '@/payload-types'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -42,7 +41,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
   const url = `/${slug}`
 
-  let page: PageType | null
+  let page: RequiredDataFromCollectionSlug<'pages'> | null
 
   page = await queryPageBySlug({ slug })
 
@@ -87,6 +86,5 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
       slug: { equals: slug },
     },
   })
-
-  return result.docs[0] || null
+  return result.docs?.[0] || null
 })
