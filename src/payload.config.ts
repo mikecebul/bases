@@ -176,17 +176,17 @@ export default buildConfig({
   cors: [baseUrl || ''].filter(Boolean),
   csrf: [baseUrl || ''].filter(Boolean),
   email: nodemailerAdapter({
-          defaultFromAddress: 'website@basesmi.org',
-          defaultFromName: 'BASES Website',
-          transportOptions: {
-            host: process.env.EMAIL_HOST,
-            port: process.env.EMAIL_PORT,
-            auth: {
-              user: process.env.EMAIL_USER,
-              pass: process.env.EMAIL_PASSWORD,
-            },
-          },
-        }),
+    defaultFromAddress: 'website@basesmi.org',
+    defaultFromName: 'BASES Website',
+    transportOptions: {
+      host: process.env.EMAIL_HOST || 'localhost',
+      port: process.env.EMAIL_PORT || 1025,
+      auth: {
+        user: process.env.EMAIL_USER || 'user',
+        pass: process.env.EMAIL_PASSWORD || 'password',
+      },
+    },
+  }),
   plugins: [
     sentryPlugin({
       options: {

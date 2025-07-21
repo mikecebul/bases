@@ -9,7 +9,7 @@ export default function SubmitButton({ label }: { label: string }) {
   return (
     <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
       {([canSubmit, isSubmitting]) => (
-        <Button className="w-full" disabled={!canSubmit || isSubmitting}>
+        <Button variant="brand" className="w-full" disabled={!canSubmit || isSubmitting}>
           {isSubmitting ? <Loader className="animate-spin" /> : label}
         </Button>
       )}
