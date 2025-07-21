@@ -77,15 +77,47 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
   const payload = await getPayload({ config: configPromise })
 
-  const result = await payload.find({
-    collection: 'pages',
-    draft,
-    limit: 1,
-    overrideAccess: draft,
-    pagination: false,
-    where: {
-      slug: { equals: slug },
-    },
-  })
-  return result.docs?.[0] || null
+  console.log(`=== Querying ${slug} ===`)
+  console.log(`Draft: ${draft}, Override: ${draft}`)
+
+  try {
+    const result = await payload.find({
+      collection: 'pages',
+      draft,
+      limit: 1,
+      overrideAccess: draft,
+      pagination: false,
+      where: {
+        slug: { equals: slug },
+      },
+    })
+
+    const page = result.docs?.[0] || null
+
+    if (page) {
+      console.log(
+        `✓ Found ${slug}: status=${page._status}, layout=${page.layout?.length || 0} blocks`,
+      )
+
+      // Check each block
+      if (page.layout) {
+        page.layout.forEach((block, i) => {
+          if (!block) {
+            console.error(`❌ Block ${i} is null/undefined`)
+          } else if (!block.blockType) {
+            console.error(`❌ Block ${i} missing blockType:`, Object.keys(block))
+          } else {
+            console.log(`✓ Block ${i}: ${block.blockType}`)
+          }
+        })
+      }
+    } else {
+      console.log(`❌ No page found for ${slug}`)
+    }
+
+    return page
+  } catch (error) {
+    console.error(`❌ Error querying ${slug}:`, error)
+    throw error
+  }
 })
