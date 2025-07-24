@@ -1,6 +1,4 @@
-import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
-import { replaceDoubleCurlys } from './utils/replace-double-curlys'
-import { serializeLexical } from './utils/Lexical/serialize-lexical'
+import type { CollectionConfig } from 'payload'
 import { sendEmail } from './sendEmail'
 
 export const FormSubmissions: CollectionConfig = {

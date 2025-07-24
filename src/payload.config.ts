@@ -175,18 +175,25 @@ export default buildConfig({
   globals: [Header, Footer, CompanyInfo],
   cors: [baseUrl || ''].filter(Boolean),
   csrf: [baseUrl || ''].filter(Boolean),
-  email: nodemailerAdapter({
-    defaultFromAddress: 'website@basesmi.org',
-    defaultFromName: 'BASES Website',
-    transportOptions: {
-      host: process.env.EMAIL_HOST || 'localhost',
-      port: process.env.EMAIL_PORT || 1025,
-      auth: {
-        user: process.env.EMAIL_USER || 'user',
-        pass: process.env.EMAIL_PASSWORD || 'password',
-      },
-    },
-  }),
+  email:
+    process.env.NODE_ENV === 'production'
+      ? resendAdapter({
+          apiKey: process.env.RESEND_API_KEY!,
+          defaultFromAddress: 'bases-website@mikecebul.dev',
+          defaultFromName: 'BASES Website',
+        })
+      : nodemailerAdapter({
+          defaultFromAddress: 'bases-website@mikecebul.dev',
+          defaultFromName: 'BASES Website',
+          transportOptions: {
+            host: process.env.EMAIL_HOST || 'localhost',
+            port: process.env.EMAIL_PORT || 1025,
+            auth: {
+              user: process.env.EMAIL_USER || 'user',
+              pass: process.env.EMAIL_PASSWORD || 'password',
+            },
+          },
+        }),
   plugins: [
     sentryPlugin({
       options: {
