@@ -1,3 +1,4 @@
+import { anyone } from '@/access/anyone'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { superAdmin } from '@/access/superAdmin'
@@ -26,7 +27,7 @@ export const Services: CollectionConfig = {
   access: {
     create: editorOrHigher,
     delete: editorOrHigher,
-    read: authenticatedOrPublished,
+    read: anyone,
     update: editorOrHigher,
   },
   fields: [
