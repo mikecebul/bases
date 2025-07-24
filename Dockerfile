@@ -39,6 +39,7 @@ RUN --mount=type=secret,id=DATABASE_URI \
   --mount=type=secret,id=EMAIL_USER \
   --mount=type=secret,id=EMAIL_PASSWORD \
   --mount=type=secret,id=PREVIEW_SECRET \
+  --mount=type=secret,id=RESEND_API_KEY \
   --mount=type=secret,id=S3_ACCESS_KEY_ID \
   --mount=type=secret,id=S3_SECRET_ACCESS_KEY \
   --mount=type=secret,id=S3_REGION \
@@ -62,6 +63,7 @@ RUN --mount=type=secret,id=DATABASE_URI \
   echo "EMAIL_USER=$(cat /run/secrets/EMAIL_USER)" && \
   echo "EMAIL_PASSWORD=$(cat /run/secrets/EMAIL_PASSWORD)" && \
   echo "PREVIEW_SECRET=$(cat /run/secrets/PREVIEW_SECRET)" && \
+  echo "RESEND_API_KEY=$(cat /run/secrets/RESEND_API_KEY)" && \
   echo "S3_ACCESS_KEY_ID=$(cat /run/secrets/S3_ACCESS_KEY_ID)" && \
   echo "S3_SECRET_ACCESS_KEY=$(cat /run/secrets/S3_SECRET_ACCESS_KEY)" && \
   echo "S3_REGION=$(cat /run/secrets/S3_REGION)" && \
