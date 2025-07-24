@@ -178,7 +178,7 @@ export default buildConfig({
   email:
     process.env.NODE_ENV === 'production'
       ? resendAdapter({
-          apiKey: process.env.RESEND_API_KEY!,
+          apiKey: process.env.RESEND_API_KEY || '',
           defaultFromAddress: 'bases-website@mikecebul.dev',
           defaultFromName: 'BASES Website',
         })
