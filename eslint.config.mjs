@@ -21,6 +21,7 @@ const eslintConfig = defineConfig([
     '**/.next/**',
     'playwright.config.ts',
     'jest.config.js',
+    'src/payload-types.ts',
   ]),
   ...compat.config({
     extends: ['next', 'prettier'],
