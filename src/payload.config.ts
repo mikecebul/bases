@@ -75,6 +75,56 @@ const generateImage: GenerateImage<TeamType | Page> = ({ doc }) => {
 }
 
 export default buildConfig({
+  onInit: async () => {
+    console.log('🔄 Payload is initializing')
+  },
+  jobs: {
+    tasks: [
+      {
+        slug: 'revalidate-all-paths',
+        schedule: [
+          {
+            cron: '0 0 * * 0', // Every Sunday at midnight
+            queue: 'revalidation',
+          },
+        ],
+        handler: async () => {
+          try {
+            // Use fetch to trigger revalidation via API route
+            const baseUrl = process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000'
+            const response = await fetch(`${baseUrl}/api/revalidate`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                path: '/',
+                secret: process.env.PREVIEW_SECRET,
+              }),
+            })
+
+            if (response.ok) {
+              console.log('✅ Weekly revalidation completed successfully')
+              return { output: 'Revalidation completed successfully' }
+            } else {
+              throw new Error(`Revalidation failed with status: ${response.status}`)
+            }
+          } catch (error: unknown) {
+            console.log(
+              `❌ Revalidation failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            )
+            throw error
+          }
+        },
+      },
+    ],
+    autoRun: [
+      {
+        queue: 'revalidation',
+        cron: '0 0 * * *', // Check daily at midnight
+      },
+    ],
+  },
   admin: {
     avatar: 'default',
     components: {
@@ -130,7 +180,7 @@ export default buildConfig({
         HeadingFeature({ enabledHeadingSizes: ['h1', 'h2'] }),
         UnderlineFeature(),
         BoldFeature(),
-        
+
         ItalicFeature(),
         UnorderedListFeature(),
         OrderedListFeature(),
