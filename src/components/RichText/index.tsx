@@ -159,7 +159,6 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
             <li
               aria-checked={node.checked ? 'true' : 'false'}
               className={`list-item-checkbox${node.checked ? 'list-item-checkbox-checked' : 'list-item-checkbox-unchecked'}${hasSubLists ? 'nestedListItem' : ''}`}
-               
               role="checkbox"
               style={{ listStyleType: 'inherit' }}
               tabIndex={-1}
@@ -190,7 +189,7 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
         })
 
         return (
-          <blockquote className="py-4 pl-6 my-6 italic border-l-4 rounded-r-lg text-muted-foreground border-brand bg-muted max-w-prose">
+          <blockquote className="py-4 pl-6 pr-3 my-6 italic border-l-4 rounded-r-lg text-muted-foreground border-brand bg-muted max-w-prose">
             {children}
           </blockquote>
         )
