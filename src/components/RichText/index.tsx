@@ -21,6 +21,7 @@ import { cn } from '@/utilities/cn'
 import Link from 'next/link'
 import { addHTTPS } from '@/utilities/addHTTPS'
 import { randomUUID } from 'crypto'
+import { replaceDoubleCurlysRichText } from '@/utilities/replaceDoubleCurlysRichText'
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -41,6 +42,10 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
   return function converters({ defaultConverters }) {
     return {
       ...defaultConverters,
+      text: ({ node }) => {
+        const processedText = replaceDoubleCurlysRichText(node.text)
+        return <span dangerouslySetInnerHTML={{ __html: processedText }} />
+      },
       paragraph: ({ node, nodesToJSX }) => {
         const children = nodesToJSX({
           nodes: node.children,
