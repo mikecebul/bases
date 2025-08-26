@@ -19,6 +19,7 @@ type Props = {
 }
 
 export function serializeLexical({ nodes }: Props): JSX.Element {
+  console.log('nodes', nodes)
   return (
     <Fragment>
       {nodes?.map((node, index): JSX.Element | null => {
@@ -98,7 +99,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
           //   case 'mediaBlock':
           //     return (
           //       <MediaBlock
-          //         className="col-start-1 col-span-3"
+          //         className="col-span-3 col-start-1"
           //         imgClassName="m-0"
           //         key={index}
           //         {...block}
@@ -138,7 +139,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case 'list': {
               const Tag = node?.tag
               return (
-                <Tag className="list col-start-2" key={index}>
+                <Tag className="col-start-2 list" key={index}>
                   {serializedChildren}
                 </Tag>
               )
@@ -168,7 +169,10 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             }
             case 'quote': {
               return (
-                <blockquote className="col-start-2" key={index}>
+                <blockquote
+                  className="col-start-2 pb-4 italic text-7xl max-w-prose text-pretty"
+                  key={index}
+                >
                   {serializedChildren}
                 </blockquote>
               )

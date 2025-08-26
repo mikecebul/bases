@@ -15,7 +15,6 @@ import {
   BoldFeature,
   FixedToolbarFeature,
   HeadingFeature,
-  InlineToolbarFeature,
   ItalicFeature,
   LinkFeature,
   OrderedListFeature,
@@ -23,6 +22,7 @@ import {
   lexicalEditor,
   UnderlineFeature,
   type LinkFields,
+  BlockquoteFeature,
 } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp' // editor-import
 import path from 'path'
@@ -41,10 +41,13 @@ import { Services } from './collections/Services'
 import { Team } from './collections/Team'
 import { superAdmin } from './access/superAdmin'
 import { MediaBlock } from './blocks/MediaBlock/config'
+import { SubtitleBlock } from './blocks/SubtitleBlock/config'
+import { LineBreakBlock } from './blocks/LineBreakBlock/config'
 import { Media } from './collections/Media'
 import { baseUrl } from './utilities/baseUrl'
 import { Forms } from './collections/Forms'
 import { FormSubmissions } from './collections/FormSubmissions'
+import { Subtitle } from './components/Hero/HeroMedium'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -123,16 +126,17 @@ export default buildConfig({
     features: () => {
       return [
         FixedToolbarFeature(),
-        InlineToolbarFeature(),
         ParagraphFeature(),
         HeadingFeature({ enabledHeadingSizes: ['h1', 'h2'] }),
         UnderlineFeature(),
         BoldFeature(),
+        
         ItalicFeature(),
         UnorderedListFeature(),
         OrderedListFeature(),
+        BlockquoteFeature(),
         BlocksFeature({
-          blocks: [MediaBlock],
+          blocks: [MediaBlock, SubtitleBlock, LineBreakBlock],
         }),
         LinkFeature({
           enabledCollections: ['pages'],

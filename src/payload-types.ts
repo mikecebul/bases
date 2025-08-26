@@ -445,7 +445,6 @@ export interface Team {
  * via the `definition` "AboutUsBlock".
  */
 export interface AboutUsBlock {
-  subtitle?: string | null;
   richContent?: {
     root: {
       type: string;
@@ -1172,7 +1171,6 @@ export interface TeamBlockSelect<T extends boolean = true> {
  * via the `definition` "AboutUsBlock_select".
  */
 export interface AboutUsBlockSelect<T extends boolean = true> {
-  subtitle?: T;
   richContent?: T;
   images?: T;
   id?: T;
@@ -1892,6 +1890,26 @@ export interface MediaBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SubtitleBlock".
+ */
+export interface SubtitleBlock {
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'subtitleBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LineBreakBlock".
+ */
+export interface LineBreakBlock {
+  size?: ('small' | 'medium' | 'large' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'lineBreakBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

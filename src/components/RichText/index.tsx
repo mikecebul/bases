@@ -1,4 +1,6 @@
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { SubtitleBlock } from '@/blocks/SubtitleBlock/Component'
+import { LineBreakBlock } from '@/blocks/LineBreakBlock/Component'
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
@@ -10,13 +12,21 @@ import {
   RichText as ConvertRichText,
 } from '@payloadcms/richtext-lexical/react'
 
-import type { MediaBlock as MediaBlockProps } from '@/payload-types'
+import type {
+  MediaBlock as MediaBlockProps,
+  SubtitleBlock as SubtitleBlockProps,
+  LineBreakBlock as LineBreakBlockProps,
+} from '@/payload-types'
 import { cn } from '@/utilities/cn'
 import Link from 'next/link'
 import { addHTTPS } from '@/utilities/addHTTPS'
 import { randomUUID } from 'crypto'
 
-type NodeTypes = DefaultNodeTypes | SerializedBlockNode<MediaBlockProps>
+type NodeTypes =
+  | DefaultNodeTypes
+  | SerializedBlockNode<MediaBlockProps>
+  | SerializedBlockNode<SubtitleBlockProps>
+  | SerializedBlockNode<LineBreakBlockProps>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -49,9 +59,9 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
 
         const Tag = node?.tag
         const textSizeMap = {
-          h1: 'text-5xl md:text-7xl font-bold tracking-tight text-balance max-w-prose pb-12',
-          h2: 'text-4xl font-bold tracking-tight text-balance max-w-prose pb-4 pt-6',
-          h3: 'text-2xl font-semibold tracking-tight text-balance max-w-prose pb-6',
+          h1: 'text-5xl md:text-7xl font-bold tracking-tight text-balance max-w-prose pb-6',
+          h2: 'text-4xl font-bold tracking-tight text-balance max-w-prose pb-4',
+          h3: 'text-2xl font-semibold tracking-tight text-balance max-w-prose pb-4',
           h4: 'text-xl font-semibold tracking-tight text-balance max-w-prose pb-4',
           h5: 'text-xl font-medium tracking-tight text-balance max-w-prose pb-4',
           h6: 'text-lg font-medium tracking-tight text-balance max-w-prose pb-4',
@@ -174,6 +184,17 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
           </li>
         )
       },
+      quote: ({ node, nodesToJSX }) => {
+        const children = nodesToJSX({
+          nodes: node.children,
+        })
+
+        return (
+          <blockquote className="py-4 pl-6 my-6 italic border-l-4 rounded-r-lg text-muted-foreground border-brand bg-muted max-w-prose">
+            {children}
+          </blockquote>
+        )
+      },
       blocks: {
         mediaBlock: ({ node }) => (
           <MediaBlock
@@ -185,6 +206,8 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
             disableInnerContainer={true}
           />
         ),
+        subtitleBlock: ({ node }) => <SubtitleBlock {...node.fields} />,
+        lineBreakBlock: ({ node }) => <LineBreakBlock {...node.fields} />,
       },
     }
   }
