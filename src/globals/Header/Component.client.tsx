@@ -37,7 +37,7 @@ export const HeaderClient = ({
         }}
         className="static!"
       />
-      <div className="flex items-center w-full px-4 py-3 md:px-8 2xl:px-0 2xl:container 2xl:mx-auto">
+      <div className="flex items-center w-full px-4 py-3 md:px-8 2xl:container 2xl:mx-auto">
         <Link
           href="/"
           className={cn(buttonVariants({ variant: 'nav', size: 'clear' }), 'py-0 px-0 shrink-0')}
