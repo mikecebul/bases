@@ -4,11 +4,11 @@ import { serializeLexical } from '@/plugins/lexical/serializeLexical'
 
 const processEmailRecipients = (emailString: string): string[] => {
   if (!emailString) return []
-  
+
   return emailString
     .split(',')
-    .map(email => email.trim())
-    .filter(email => email.length > 0)
+    .map((email) => email.trim())
+    .filter((email) => email.length > 0)
 }
 
 export const sendEmail: CollectionAfterChangeHook = async (args) => {
@@ -46,12 +46,12 @@ export const sendEmail: CollectionAfterChangeHook = async (args) => {
             const toRaw = replaceDoubleCurlys(emailTo, submissionData)
             const ccRaw = emailCC ? replaceDoubleCurlys(emailCC, submissionData) : ''
             const bccRaw = emailBCC ? replaceDoubleCurlys(emailBCC, submissionData) : ''
-            
+
             // Process recipients into arrays
             const to = processEmailRecipients(toRaw)
             const cc = ccRaw ? processEmailRecipients(ccRaw) : undefined
             const bcc = bccRaw ? processEmailRecipients(bccRaw) : undefined
-            
+
             const from = replaceDoubleCurlys(emailFrom || defaultFromAddress, submissionData)
             const replyTo = replaceDoubleCurlys(
               emailReplyTo || emailFrom || defaultFromAddress,
