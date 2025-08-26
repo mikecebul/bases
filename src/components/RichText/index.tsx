@@ -159,7 +159,7 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
             <li
               aria-checked={node.checked ? 'true' : 'false'}
               className={`list-item-checkbox${node.checked ? 'list-item-checkbox-checked' : 'list-item-checkbox-unchecked'}${hasSubLists ? 'nestedListItem' : ''}`}
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+               
               role="checkbox"
               style={{ listStyleType: 'inherit' }}
               tabIndex={-1}

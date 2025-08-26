@@ -151,7 +151,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                     aria-checked={node.checked ? 'true' : 'false'}
                     className={` ${node.checked ? '' : ''}`}
                     key={index}
-                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+                     
                     role="checkbox"
                     tabIndex={-1}
                     value={node?.value}
