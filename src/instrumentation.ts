@@ -4,7 +4,12 @@ export async function register() {
   if (process.env.TURBOPACK) {
     return
   }
-``
+
+  // Disable Sentry in development
+  if (process.env.NODE_ENV === 'development') {
+    return
+  }
+
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     await import('../sentry.server.config')
   }
