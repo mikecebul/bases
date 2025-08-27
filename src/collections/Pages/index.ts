@@ -25,6 +25,7 @@ import { RichText } from '@/blocks/RichText/config'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { revalidateDelete } from './hooks/revalidateDelete'
 import { TwoColumnLayout } from '@/blocks/TwoColumnLayout/config'
+import { SimplePractice } from '@/blocks/SimplePractice/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -81,6 +82,7 @@ export const Pages: CollectionConfig = {
                 Links,
                 Form,
                 TwoColumnLayout,
+                SimplePractice,
               ],
               required: true,
             },

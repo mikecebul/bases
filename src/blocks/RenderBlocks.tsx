@@ -13,6 +13,7 @@ import { LinksBlock } from './Links/Component'
 import { FormBlockRouter } from './Form/Component'
 import { RichTextBlock } from './RichText/Component'
 import { TwoColumnLayoutBlock } from './TwoColumnLayout/Component'
+import { SimplePracticeBlock } from './SimplePractice/Component'
 import { cn } from '@/utilities/cn'
 // import { MediaBlock } from './MediaBlock/Component'
 
@@ -28,6 +29,7 @@ const blockComponents = {
   linksBlock: LinksBlock,
   formBlock: FormBlockRouter,
   twoColumnLayout: TwoColumnLayoutBlock,
+  simplePractice: SimplePracticeBlock,
   // mediaBlock: MediaBlock,
 }
 

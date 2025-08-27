@@ -208,6 +208,7 @@ export interface Page {
     | LinksBlock
     | FormBlock
     | TwoColumnLayoutBlock
+    | SimplePractice
   )[];
   meta?: {
     hideFromSearchEngines?: boolean | null;
@@ -870,6 +871,34 @@ export interface TwoColumnLayoutBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SimplePractice".
+ */
+export interface SimplePractice {
+  hasSubtitle?: boolean | null;
+  subtitle?: {
+    icon?: string | null;
+    text?: string | null;
+  };
+  title: string;
+  heading?: ('h1' | 'h2') | null;
+  description: string;
+  mobileHeroLinks?: boolean | null;
+  links?: LinkGroup;
+  buttonText: string;
+  buttonDescription?: string | null;
+  features?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'simplePractice';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -1147,6 +1176,7 @@ export interface PagesSelect<T extends boolean = true> {
         linksBlock?: T | LinksBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         twoColumnLayout?: T | TwoColumnLayoutBlockSelect<T>;
+        simplePractice?: T | SimplePracticeSelect<T>;
       };
   meta?:
     | T
@@ -1373,6 +1403,35 @@ export interface TwoColumnLayoutBlockSelect<T extends boolean = true> {
           | {
               formBlock?: T | FormBlockSelect<T>;
             };
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SimplePractice_select".
+ */
+export interface SimplePracticeSelect<T extends boolean = true> {
+  hasSubtitle?: T;
+  subtitle?:
+    | T
+    | {
+        icon?: T;
+        text?: T;
+      };
+  title?: T;
+  heading?: T;
+  description?: T;
+  mobileHeroLinks?: T;
+  links?: T | LinkGroupSelect<T>;
+  buttonText?: T;
+  buttonDescription?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
       };
   id?: T;
   blockName?: T;
