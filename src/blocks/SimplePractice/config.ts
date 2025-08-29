@@ -23,38 +23,5 @@ export const SimplePractice: Block = {
       label: 'Button Description',
       defaultValue: 'Click above to open our secure contact form',
     },
-    {
-      name: 'features',
-      type: 'array',
-      label: 'Feature Cards',
-      minRows: 1,
-      maxRows: 6,
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'description',
-          type: 'textarea',
-          required: true,
-        },
-      ],
-      defaultValue: [
-        {
-          title: 'Enhanced Security & HIPAA Compliance',
-          description: 'HITRUST-certified security with specialized protection for substance abuse treatment records under 42 CFR Part 2. Bank-level encryption ensures your sensitive information is protected.',
-        },
-        {
-          title: 'Streamlined Treatment Access',
-          description: 'Complete intake forms from home, receive automated appointment reminders with secure telehealth links, and access your treatment documents 24/7 through our secure portal.',
-        },
-        {
-          title: 'Integrated Care Coordination',
-          description: 'Professional-grade treatment infrastructure with HIPAA-compliant telehealth integration, reducing administrative burden so we can focus on your recovery and therapeutic work.',
-        },
-      ],
-    },
   ],
 }

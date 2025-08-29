@@ -20,7 +20,7 @@ export function SimplePracticeContact({ buttonText = "Contact", className = "" }
   }, [])
 
   return (
-    <div className={`text-left ${className}`}>
+    <div className={cn('text-left', className)}>
       <a
         href="https://leah-mayotte.clientsecure.me"
         className={cn(buttonVariants({ variant: "brand", size: "xl" }), "w-full")}

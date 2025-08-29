@@ -886,13 +886,6 @@ export interface SimplePractice {
   links?: LinkGroup;
   buttonText: string;
   buttonDescription?: string | null;
-  features?:
-    | {
-        title: string;
-        description: string;
-        id?: string | null;
-      }[]
-    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'simplePractice';
@@ -1426,13 +1419,6 @@ export interface SimplePracticeSelect<T extends boolean = true> {
   links?: T | LinkGroupSelect<T>;
   buttonText?: T;
   buttonDescription?: T;
-  features?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        id?: T;
-      };
   id?: T;
   blockName?: T;
 }

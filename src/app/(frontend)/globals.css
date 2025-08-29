@@ -3,6 +3,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -10,9 +11,20 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
+
+  @keyframes subtle-pulse {
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  .animate-subtle-pulse {
+    animation: subtle-pulse 2s ease-in-out infinite;
+  }
 }
 
 @layer base {
+
   h1,
   h2,
   h3,
