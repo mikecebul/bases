@@ -28,6 +28,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           src="https://analytics.mikecebul.dev/script.js"
           strategy="lazyOnload"
         />
+        <Script
+          src="https://widget-cdn.simplepractice.com/assets/integration-1.0.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body className="flex flex-col min-h-dvh">
         <ThemeProvider forcedTheme="light">

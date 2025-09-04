@@ -1,9 +1,12 @@
+'use client'
+
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { cn } from 'src/utilities/cn'
 import Link from 'next/link'
 import React from 'react'
 
 import type { Media, Page } from '@/payload-types'
+import { useSimplePracticeWidget } from '@/hooks/useSimplePracticeWidget'
 
 type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
@@ -17,7 +20,7 @@ type CMSLinkType = {
     value: Page | Media | string | number
   } | null
   size?: ButtonProps['size'] | null
-  type?: 'custom' | 'reference' | null
+  type?: 'custom' | 'reference' | 'contactForm' | null
   url?: string | null
 }
 
@@ -35,6 +38,14 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     url,
   } = props
 
+  const { openWidget } = useSimplePracticeWidget({
+    scopeId: "d2835c56-8608-4653-b0d9-d6f24a6a62e1",
+    scopeUri: "leah-mayotte",
+    applicationId: "7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b",
+    channel: "embedded_widget",
+    type: "Contact form"
+  })
+
   const href =
     type === 'reference' && typeof reference?.value === 'object'
       ? reference?.relationTo === 'media' && 'url' in reference.value
@@ -43,6 +54,35 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
           ? `/${reference.value.slug}` // Use the slug from the Page object
           : null
       : url
+
+  if (type === 'contactForm') {
+    const size = appearance === 'link' ? 'clear' : sizeFromProps
+
+    /* Ensure we don't break any styles set by richText */
+    if (appearance === 'inline') {
+      return (
+        <button
+          className={cn(className)}
+          onClick={openWidget}
+        >
+          {label && label}
+          {children && children}
+        </button>
+      )
+    }
+
+    return (
+      <Button
+        className={className}
+        size={size}
+        variant={appearance}
+        onClick={openWidget}
+      >
+        {label && label}
+        {children && children}
+      </Button>
+    )
+  }
 
   if (!href) return null
 

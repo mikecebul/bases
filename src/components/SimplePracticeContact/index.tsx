@@ -1,40 +1,40 @@
 "use client"
 
-import { useEffect } from "react"
 import { cn } from "@/utilities/cn"
-import { buttonVariants } from "@/components/ui/button"
+import { ButtonProps, buttonVariants } from "@/components/ui/button"
+import { useSimplePracticeWidget } from "@/hooks/useSimplePracticeWidget"
 
 interface SimplePracticeContactProps {
   buttonText?: string
   className?: string
+  variant?: 'inline' | ButtonProps['variant']
+  card?: boolean
 }
 
-export function SimplePracticeContact({ buttonText = "Contact", className = "" }: SimplePracticeContactProps) {
-  useEffect(() => {
-    if (!document.querySelector('script[src*="simplepractice.com"]')) {
-      const script = document.createElement("script")
-      script.src = "https://widget-cdn.simplepractice.com/assets/integration-1.0.js"
-      script.async = true
-      document.head.appendChild(script)
-    }
-  }, [])
+export function SimplePracticeContact({ buttonText = "Contact", className = "", variant, card }: SimplePracticeContactProps) {
+  const { openWidget } = useSimplePracticeWidget({
+    scopeId: "d2835c56-8608-4653-b0d9-d6f24a6a62e1",
+    scopeUri: "leah-mayotte",
+    applicationId: "7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b",
+    channel: "embedded_widget",
+    type: "Contact form"
+  })
+
+  const isInline = variant === 'inline'
 
   return (
-    <div className={cn('text-left', className)}>
-      <a
-        href="https://leah-mayotte.clientsecure.me"
-        className={cn(buttonVariants({ variant: "brand", size: "xl" }), "w-full")}
-        data-spwidget-scope-id="d2835c56-8608-4653-b0d9-d6f24a6a62e1"
-        data-spwidget-scope-uri="leah-mayotte"
-        data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b"
-        data-spwidget-channel="embedded_widget"
-        data-spwidget-type="Contact form"
-        data-spwidget-contact
-        data-spwidget-scope-global
-        data-spwidget-autobind
+    <div className={cn('text-center', className)}>
+      <button
+        onClick={openWidget}
+        className={cn(
+          isInline ? 'inline-block px-3 py-1.5 text-[#1371C8] bg-white border border-[#1371C8] rounded font-semibold text-sm hover:text-[#0F5AA0] active:text-white/75 active:shadow-[0_1px_3px_rgba(0,0,0,0.15)_inset]'
+            : buttonVariants({ variant: variant as ButtonProps['variant'], size: "xl" }),
+          isInline ? '' : "w-full",
+          { 'group': card },
+        )}
       >
         {buttonText}
-      </a>
+      </button>
     </div>
   )
 }

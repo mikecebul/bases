@@ -13,7 +13,7 @@
 export type LinkGroup =
   | {
       link: {
-        type?: ('reference' | 'custom') | null;
+        type?: ('reference' | 'custom' | 'contactForm') | null;
         newTab?: boolean | null;
         reference?:
           | ({
@@ -1864,7 +1864,7 @@ export interface Header {
   navItems?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'contactForm') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1893,7 +1893,7 @@ export interface Footer {
   pageLinks?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'contactForm') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1946,7 +1946,7 @@ export interface CompanyInfo {
     | {
         platform?: string | null;
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'contactForm') | null;
           newTab?: boolean | null;
           reference?:
             | ({

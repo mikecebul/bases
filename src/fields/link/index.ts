@@ -50,6 +50,10 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
                 label: 'Custom URL',
                 value: 'custom',
               },
+              {
+                label: 'Open Contact Form',
+                value: 'contactForm',
+              },
             ],
           },
           {
