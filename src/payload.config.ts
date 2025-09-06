@@ -233,11 +233,11 @@ export default buildConfig({
     process.env.NODE_ENV === 'production'
       ? resendAdapter({
           apiKey: process.env.RESEND_API_KEY || '',
-          defaultFromAddress: 'bases-website@mikecebul.dev',
+          defaultFromAddress: 'bases-website@mikecebul.com',
           defaultFromName: 'BASES Website',
         })
       : nodemailerAdapter({
-          defaultFromAddress: 'bases-website@mikecebul.dev',
+          defaultFromAddress: 'bases-website@mikecebul.com',
           defaultFromName: 'BASES Website',
           transportOptions: {
             host: process.env.EMAIL_HOST || 'localhost',
