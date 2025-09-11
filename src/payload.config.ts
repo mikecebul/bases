@@ -248,7 +248,7 @@ export default buildConfig({
       }),
   plugins: [
     sentryPlugin({
-      enabled: process.env.NODE_ENV === 'production',
+      enabled: true,
       options: {
         captureErrors: [400, 401, 403],
         context: ({ defaultContext, req }) => {
@@ -259,7 +259,7 @@ export default buildConfig({
             },
           }
         },
-        debug: true,
+        debug: false,
       },
       Sentry,
     }),
