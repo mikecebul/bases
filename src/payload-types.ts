@@ -208,7 +208,7 @@ export interface Page {
     | LinksBlock
     | FormBlock
     | TwoColumnLayoutBlock
-    | SimplePractice
+    | ContactPage
   )[];
   meta?: {
     hideFromSearchEngines?: boolean | null;
@@ -871,24 +871,33 @@ export interface TwoColumnLayoutBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "SimplePractice".
+ * via the `definition` "ContactPage".
  */
-export interface SimplePractice {
-  hasSubtitle?: boolean | null;
-  subtitle?: {
-    icon?: string | null;
-    text?: string | null;
-  };
-  title: string;
-  heading?: ('h1' | 'h2') | null;
-  description: string;
-  mobileHeroLinks?: boolean | null;
-  links?: LinkGroup;
-  buttonText: string;
-  buttonDescription?: string | null;
+export interface ContactPage {
+  title?: string | null;
+  description?: string | null;
+  contactFormTitle?: string | null;
+  contactFormDescription?: string | null;
+  contactFormButtonText?: string | null;
+  /**
+   * When enabled, contact details will be pulled from Company Info global. When disabled, use the fields below.
+   */
+  useCompanyInfo?: boolean | null;
+  /**
+   * Override email when not using Company Info
+   */
+  customEmail?: string | null;
+  /**
+   * Override phone when not using Company Info
+   */
+  customPhone?: string | null;
+  /**
+   * Override address when not using Company Info
+   */
+  customAddress?: string | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'simplePractice';
+  blockType: 'contactPage';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1169,7 +1178,7 @@ export interface PagesSelect<T extends boolean = true> {
         linksBlock?: T | LinksBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         twoColumnLayout?: T | TwoColumnLayoutBlockSelect<T>;
-        simplePractice?: T | SimplePracticeSelect<T>;
+        contactPage?: T | ContactPageSelect<T>;
       };
   meta?:
     | T
@@ -1402,23 +1411,18 @@ export interface TwoColumnLayoutBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "SimplePractice_select".
+ * via the `definition` "ContactPage_select".
  */
-export interface SimplePracticeSelect<T extends boolean = true> {
-  hasSubtitle?: T;
-  subtitle?:
-    | T
-    | {
-        icon?: T;
-        text?: T;
-      };
+export interface ContactPageSelect<T extends boolean = true> {
   title?: T;
-  heading?: T;
   description?: T;
-  mobileHeroLinks?: T;
-  links?: T | LinkGroupSelect<T>;
-  buttonText?: T;
-  buttonDescription?: T;
+  contactFormTitle?: T;
+  contactFormDescription?: T;
+  contactFormButtonText?: T;
+  useCompanyInfo?: T;
+  customEmail?: T;
+  customPhone?: T;
+  customAddress?: T;
   id?: T;
   blockName?: T;
 }
