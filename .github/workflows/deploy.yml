@@ -39,10 +39,6 @@ jobs:
             NEXT_PUBLIC_UPLOAD_PREFIX=${{ secrets.NEXT_PUBLIC_UPLOAD_PREFIX }}
             NEXT_PUBLIC_USAEPAY_KEY=${{ secrets.NEXT_PUBLIC_USAEPAY_KEY }}
             NEXT_PUBLIC_SENTRY_DSN=${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
-            EMAIL_HOST=${{ secrets.EMAIL_HOST }}
-            EMAIL_PORT=${{ secrets.EMAIL_PORT }}
-            EMAIL_USER=${{ secrets.EMAIL_USER }}
-            EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
             PREVIEW_SECRET=${{ secrets.PREVIEW_SECRET }}
             RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}
             S3_ACCESS_KEY_ID=${{ secrets.S3_ACCESS_KEY_ID }}

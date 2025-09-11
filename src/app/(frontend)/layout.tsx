@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <Script
           defer
           data-website-id="f3c16b6d-ba74-4792-a21a-a7930138c0f0"
-          src="https://analytics.mikecebul.dev/script.js"
+          src="https://analytics.mikecebul.com/script.js"
           strategy="lazyOnload"
         />
         <Script

@@ -45,8 +45,8 @@ const nextConfig = {
 // Sentry Configuration
 const sentryConfig = {
   org: 'mikecebul',
-  project: 'cvx-jr-golf',
-  sentryUrl: 'https://monitor.mikecebul.dev/',
+  project: 'bases',
+  sentryUrl: 'https://monitor.mikecebul.com/',
   authToken: process.env.SENTRY_AUTH_TOKEN,
   silent: !process.env.CI,
   widenClientFileUpload: true,
