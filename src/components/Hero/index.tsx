@@ -49,7 +49,7 @@ export async function Hero({ title, description, image, links, svg }: Props) {
                 key={id}
                 {...link}
                 size="xl"
-                appearance={index === 0 ? 'brand' : link.appearance}
+                appearance={index === 0 ? 'brand' : link.appearance === 'primary' ? 'default' : link.appearance}
                 className="hidden rounded-lg xl:flex lg:min-w-64"
               />
             ))}
