@@ -53,13 +53,12 @@ export const ContactCard = ({
     return <>{cardChildren}</>
   }
 
-  // Special styling for form type similar to ClickableCard
   if (type === 'form') {
     return (
       <Card className={`group transition-all duration-300 border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl hover:border-blue-200 hover:shadow-lg hover:-translate-y-1 has-[button:hover]:border-blue-200 has-[button:hover]:shadow-lg ${className}`}>
         <CardHeader className="pb-4">
           <div className="flex items-center justify-start mb-4">
-            <div className="flex items-center justify-center mr-3 bg-green-100 rounded-full size-10 animate-subtle-pulse transition-transform group-hover:scale-110">
+            <div className="flex items-center justify-center mr-3 transition-transform bg-green-100 rounded-full size-10 animate-subtle-pulse group-hover:scale-110">
               <Icon className="text-green-600 size-6 animate-subtle-pulse" />
             </div>
             <div className="text-left">
@@ -84,7 +83,7 @@ export const ContactCard = ({
       <Card className={`group bg-card rounded-xl border shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${className}`}>
         <CardHeader className="pb-4">
           <span className={`mb-4 flex size-12 flex-col items-center justify-center rounded-full transition-transform group-hover:scale-110 ${colorClasses}`}>
-            <Icon className="h-6 w-6" />
+            <Icon className="w-6 h-6" />
           </span>
           <CardTitle className="text-lg font-semibold">{title}</CardTitle>
           {description && (
@@ -93,7 +92,7 @@ export const ContactCard = ({
         </CardHeader>
         <CardContent className="pt-0">
           {href ? (
-            <span className="inline-flex items-center font-semibold text-primary transition-colors hover:underline">
+            <span className="inline-flex items-center font-semibold transition-colors text-primary hover:underline">
               {value}
             </span>
           ) : (

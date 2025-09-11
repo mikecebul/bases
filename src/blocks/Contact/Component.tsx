@@ -6,31 +6,6 @@ import { GoogleMap } from '@/globals/Footer/GoogleMap'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { SimplePracticeContact } from '@/components/SimplePracticeContact'
 
-// export async function SimplePracticeBlock({
-//   hasSubtitle,
-//   subtitle,
-//   title,
-//   heading,
-//   description,
-//   buttonText,
-//   buttonDescription,
-// }: Props) {
-//   return (
-//     <Container>
-//       <HeroMedium
-//         subtitle={hasSubtitle && subtitle?.text ? subtitle.text : undefined}
-//         title={title}
-//         heading={heading}
-//         description={description}
-//       />
-
-//       <div className="mb-12">
-//         <ClickableCard buttonText={buttonText} buttonDescription={buttonDescription ?? 'Schedule Consultation'} />
-//       </div>
-//     </Container>
-//   )
-// }
-
 type ContactPageProps = {
   title?: string
   description?: string
@@ -136,7 +111,7 @@ export async function ContactPageBlock({
           <ContactCard
             type="phone"
             title="Phone"
-            description="Available Mon-Fri, 9am-5pm."
+            description="Available during normal business hours."
             value={phone}
             href={`tel:${phone}`}
           />

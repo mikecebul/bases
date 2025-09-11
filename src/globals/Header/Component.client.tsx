@@ -45,7 +45,7 @@ export const HeaderClient = ({
           <Icons.logo className="w-40 md:w-44 lg:w-64" />
         </Link>
         <MainNav navItems={navItems} />
-        <MobileNav navItems={navItems} />
+        <MobileNav navItems={navItems} contact={contact} />
         <div className="flex flex-col items-end gap-2 ml-auto">
           <Link
             href={googleMapLink ?? '#'}

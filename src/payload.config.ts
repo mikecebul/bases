@@ -75,9 +75,7 @@ const generateImage: GenerateImage<TeamType | Page> = ({ doc }) => {
 }
 
 export default buildConfig({
-  onInit: async () => {
-    console.log('🔄 Payload is initializing')
-  },
+  serverURL: baseUrl,
   jobs: {
     tasks: [
       {
@@ -232,22 +230,22 @@ export default buildConfig({
   email:
     process.env.NODE_ENV === 'production'
       ? resendAdapter({
-          apiKey: process.env.RESEND_API_KEY || '',
-          defaultFromAddress: 'bases-website@mikecebul.com',
-          defaultFromName: 'BASES Website',
-        })
+        apiKey: process.env.RESEND_API_KEY || '',
+        defaultFromAddress: 'bases-website@mikecebul.com',
+        defaultFromName: 'BASES Website',
+      })
       : nodemailerAdapter({
-          defaultFromAddress: 'bases-website@mikecebul.com',
-          defaultFromName: 'BASES Website',
-          transportOptions: {
-            host: process.env.EMAIL_HOST || 'localhost',
-            port: process.env.EMAIL_PORT || 1025,
-            auth: {
-              user: process.env.EMAIL_USER || 'user',
-              pass: process.env.EMAIL_PASSWORD || 'password',
-            },
+        defaultFromAddress: 'bases-website@mikecebul.com',
+        defaultFromName: 'BASES Website',
+        transportOptions: {
+          host: process.env.EMAIL_HOST || 'localhost',
+          port: process.env.EMAIL_PORT || 1025,
+          auth: {
+            user: process.env.EMAIL_USER || 'user',
+            pass: process.env.EMAIL_PASSWORD || 'password',
           },
-        }),
+        },
+      }),
   plugins: [
     sentryPlugin({
       enabled: process.env.NODE_ENV === 'production',

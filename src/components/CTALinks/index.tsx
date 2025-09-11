@@ -26,8 +26,12 @@ export const CTALinks = ({
             key={id}
             {...link}
             size="xl"
-            appearance={link.appearance === 'default' ? 'brand' : 'brandOutline'}
-            className="min-w-64"
+            appearance={
+              link.appearance === 'primary' ? 'brand' 
+              : link.appearance === 'outline' ? 'brandOutline'
+              : 'brand'
+            }
+            className="min-w-64 w-full sm:w-auto"
           />
         ))}
     </div>

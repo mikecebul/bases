@@ -12,9 +12,6 @@ import { imagesAsMedia } from '@/utilities/imagesAsMedia'
 import { HeroSVG } from '@/components/Hero'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getCachedGlobal } from '@/utilities/getGlobals'
-import { buttonVariants } from '@/components/ui/button'
-import { Icons } from '@/components/Icons'
 import { Media } from '@/components/Media'
 
 export const TwoColumnLayoutBlock = async ({
@@ -29,7 +26,7 @@ export const TwoColumnLayoutBlock = async ({
     richText,
     verticalAlignment = 'center',
   } = columnOne ?? {}
-  const { hasSubtitle, subtitle, title, heading, description, links, mobileHeroLinks } = cta ?? {}
+  const { hasSubtitle, subtitle, title, heading, description, links } = cta ?? {}
   const {
     contentType: columnTwoType,
     form,
@@ -39,10 +36,6 @@ export const TwoColumnLayoutBlock = async ({
     svg = false,
   } = columnTwo ?? {}
   const validImages = imagesAsMedia(images)
-
-  const companyInfo = (await getCachedGlobal('company-info')()) as CompanyInfo
-  const { contact } = companyInfo
-  const cleanedPhone = contact?.phone ? contact.phone.replace(/\D/g, '') : null
 
   return (
     <Container className="xl:overflow-visible">
@@ -72,34 +65,7 @@ export const TwoColumnLayoutBlock = async ({
               )}
               {title && <Title text={title} heading={heading ?? 'h2'} />}
               {description && <Description text={description} />}
-              {links && (
-                <CTALinks links={links} className={mobileHeroLinks ? 'hidden lg:flex' : ''} />
-              )}
-              {/* Mobile Links */}
-              {mobileHeroLinks ? (
-                <div className="flex flex-col space-y-4 md:mr-4 lg:hidden">
-                  <Link
-                    href={cleanedPhone ? `tel:${cleanedPhone}` : '#'}
-                    className={cn(
-                      buttonVariants({ variant: 'brand', size: 'xl' }),
-                      'xl:hidden min-w-full lg:min-w-64',
-                    )}
-                  >
-                    <Icons.phone className="mr-2" />
-                    Call Now
-                  </Link>
-                  <Link
-                    href={contact?.physicalAddress.googleMapLink ?? '#'}
-                    className={cn(
-                      buttonVariants({ variant: 'brandOutline', size: 'xl' }),
-                      'xl:hidden min-w-full lg:min-w-64',
-                    )}
-                  >
-                    <Icons.navigation className="mr-2" />
-                    Directions to our Building
-                  </Link>
-                </div>
-              ) : null}
+              {links && <CTALinks links={links} />}
             </>
           ) : (
             richText && <RichText data={richText} className="lg:text-lg" />
