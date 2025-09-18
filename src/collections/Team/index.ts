@@ -33,7 +33,7 @@ export const Team: CollectionConfig = {
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
-          slug: typeof data?.slug === 'string' ? `team/${data.slug}` : '',
+          slug: typeof data?.slug === 'string' ? `${data.slug}` : '',
           collection: 'team',
           req,
         })
@@ -43,7 +43,7 @@ export const Team: CollectionConfig = {
     },
     preview: (data, { req }) =>
       generatePreviewPath({
-        slug: typeof data?.slug === 'string' ? `team/${data.slug}` : '',
+        slug: typeof data?.slug === 'string' ? `${data.slug}` : '',
         collection: 'team',
         req,
       }),
