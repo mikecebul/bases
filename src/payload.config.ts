@@ -127,6 +127,7 @@ export default buildConfig({
     avatar: 'default',
     components: {
       afterNavLinks: ['@/components/afterNavLinks/LinkToAnalyticsDefaultRootView'],
+      afterDashboard: ['@/components/afterDashboard/Analytics'],
       graphics: {
         Icon: '@/graphics/Icon',
         Logo: '@/graphics/Logo',

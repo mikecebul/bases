@@ -29,6 +29,7 @@ import { default as default_9734ea5d74b781c5b6e952c2aa41414f } from '@/globals/C
 import { default as default_3ffd8082d3e9477cf001d7760082c496 } from '@/globals/CompanyInfo/HoursRowLabel'
 import { default as default_a8ed57560afaff4535f43ca83a9fecbd } from '@/graphics/Icon'
 import { default as default_d3e265f969641a4ccf3d5a195904e268 } from '@/graphics/Logo'
+import { default as default_6b85bbe5b07dcbb6e3a8e43e51c14a0b } from '@/components/afterDashboard/Analytics'
 import { default as default_95a1304f99d4385400076a6aaa04a867 } from '@/components/afterNavLinks/LinkToAnalyticsDefaultRootView'
 import { AdminErrorBoundary as AdminErrorBoundary_e5a9e14bdbe97e70ba60697217fe7688 } from '@payloadcms/plugin-sentry/client'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
@@ -66,6 +67,7 @@ export const importMap = {
   "@/globals/CompanyInfo/HoursRowLabel#default": default_3ffd8082d3e9477cf001d7760082c496,
   "@/graphics/Icon#default": default_a8ed57560afaff4535f43ca83a9fecbd,
   "@/graphics/Logo#default": default_d3e265f969641a4ccf3d5a195904e268,
+  "@/components/afterDashboard/Analytics#default": default_6b85bbe5b07dcbb6e3a8e43e51c14a0b,
   "@/components/afterNavLinks/LinkToAnalyticsDefaultRootView#default": default_95a1304f99d4385400076a6aaa04a867,
   "@payloadcms/plugin-sentry/client#AdminErrorBoundary": AdminErrorBoundary_e5a9e14bdbe97e70ba60697217fe7688,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
