@@ -234,9 +234,9 @@ export function RichText(props: Props) {
       className={cn(
         '',
         {
-          container: enableGutter,
+          'container': enableGutter,
           'max-w-none': !enableGutter,
-          'prose md:prose-md dark:prose-invert mx-auto': enableProse,
+          'prose md:prose-md dark:prose-invert': enableProse,
         },
         className,
       )}
