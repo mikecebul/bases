@@ -356,6 +356,21 @@ export interface Service {
   id: string;
   title: string;
   desc: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   icon?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -1433,6 +1448,7 @@ export interface ContactPageSelect<T extends boolean = true> {
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
   desc?: T;
+  description?: T;
   icon?: T;
   updatedAt?: T;
   createdAt?: T;

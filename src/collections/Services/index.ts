@@ -43,6 +43,11 @@ export const Services: CollectionConfig = {
       type: 'textarea',
       required: true,
     },
+    {
+      name: 'description',
+      label: 'Description - Rich Text',
+      type: 'richText',
+    },
     iconSelect,
   ],
 }
