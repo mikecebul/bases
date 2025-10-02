@@ -1,11 +1,10 @@
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 
-import type { CompanyInfo, Footer } from '@/payload-types'
+import type { Footer } from '@/payload-types'
 import { cn } from '@/utilities/cn'
 import { buttonVariants } from '@/components/ui/button'
 import { Clock, Facebook, Mail, Navigation, Phone, Printer } from 'lucide-react'
-import Image from 'next/image'
 import Container from '@/components/Container'
 import { CMSLink } from '@/components/Link'
 import payloadConfig from '@payload-config'
@@ -60,7 +59,7 @@ export async function Footer() {
                         'flex justify-start group-hover:text-primary',
                       )}
                     >
-                      <Phone className="shrink-0 mr-2" size={20} />
+                      <Phone className="mr-2 shrink-0" size={20} />
                       {contact.phone}
                     </a>
                   </li>
@@ -74,7 +73,7 @@ export async function Footer() {
                         'flex justify-start group-hover:text-primary',
                       )}
                     >
-                      <Navigation className="shrink-0 mr-2" size={20} />
+                      <Navigation className="mr-2 shrink-0" size={20} />
                       {contact.physicalAddress.street} | {contact.physicalAddress.cityStateZip}
                     </a>
                   </li>
@@ -88,7 +87,7 @@ export async function Footer() {
                         'flex justify-start group-hover:text-primary',
                       )}
                     >
-                      <Mail className="shrink-0 mr-2" size={20} />
+                      <Mail className="mr-2 shrink-0" size={20} />
                       {contact.email}
                     </a>
                   </li>

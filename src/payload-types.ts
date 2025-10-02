@@ -895,6 +895,24 @@ export interface ContactPage {
   contactFormDescription?: string | null;
   contactFormButtonText?: string | null;
   /**
+   * Instructions for clients on how to contact the practice (displays in the location card)
+   */
+  contactInstructions?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
    * When enabled, contact details will be pulled from Company Info global. When disabled, use the fields below.
    */
   useCompanyInfo?: boolean | null;
@@ -910,6 +928,10 @@ export interface ContactPage {
    * Override address when not using Company Info
    */
   customAddress?: string | null;
+  /**
+   * Phone availability hours (displays under the phone number)
+   */
+  phoneHours?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'contactPage';
@@ -1434,10 +1456,12 @@ export interface ContactPageSelect<T extends boolean = true> {
   contactFormTitle?: T;
   contactFormDescription?: T;
   contactFormButtonText?: T;
+  contactInstructions?: T;
   useCompanyInfo?: T;
   customEmail?: T;
   customPhone?: T;
   customAddress?: T;
+  phoneHours?: T;
   id?: T;
   blockName?: T;
 }

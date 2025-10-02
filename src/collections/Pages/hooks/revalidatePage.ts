@@ -7,15 +7,17 @@ import type { Page } from '../../../payload-types'
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   doc,
   previousDoc,
-  req: { payload },
+  req: { payload, headers },
 }) => {
   if (doc._status === 'published') {
     const path = doc.slug === 'home' ? '/' : `/${doc.slug}`
 
     payload.logger.info(`Revalidating page at path: ${path}`)
 
-    revalidatePath(path)
-    revalidateTag('sitemap')
+    if (headers['X-Payload-Migration'] !== 'true') {
+      revalidatePath(path)
+      revalidateTag('sitemap')
+    }
   }
 
   // If the page was previously published, we need to revalidate the old path
@@ -24,8 +26,10 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 
     payload.logger.info(`Revalidating old page at path: ${oldPath}`)
 
-    revalidatePath(oldPath)
-    revalidateTag('sitemap')
+    if (headers['X-Payload-Migration'] !== 'true') {
+      revalidatePath(oldPath)
+      revalidateTag('sitemap')
+    }
   }
 
   return doc

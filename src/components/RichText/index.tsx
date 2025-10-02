@@ -22,6 +22,15 @@ import Link from 'next/link'
 import { addHTTPS } from '@/utilities/addHTTPS'
 import { randomUUID } from 'crypto'
 import { replaceDoubleCurlysRichText } from '@/utilities/replaceDoubleCurlysRichText'
+import {
+  IS_BOLD,
+  IS_ITALIC,
+  IS_STRIKETHROUGH,
+  IS_UNDERLINE,
+  IS_CODE,
+  IS_SUBSCRIPT,
+  IS_SUPERSCRIPT,
+} from './nodeFormat'
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -44,7 +53,33 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
       ...defaultConverters,
       text: ({ node }) => {
         const processedText = replaceDoubleCurlysRichText(node.text)
-        return <span dangerouslySetInnerHTML={{ __html: processedText }} />
+
+        // Handle text formatting (bold, italic, etc.)
+        let element = <span dangerouslySetInnerHTML={{ __html: processedText }} />
+
+        if (node.format & IS_BOLD) {
+          element = <strong className="font-bold">{element}</strong>
+        }
+        if (node.format & IS_ITALIC) {
+          element = <em className="italic">{element}</em>
+        }
+        if (node.format & IS_STRIKETHROUGH) {
+          element = <span className="line-through">{element}</span>
+        }
+        if (node.format & IS_UNDERLINE) {
+          element = <span className="underline">{element}</span>
+        }
+        if (node.format & IS_CODE) {
+          element = <code className="px-1 py-0.5 text-sm font-mono bg-muted rounded">{processedText}</code>
+        }
+        if (node.format & IS_SUBSCRIPT) {
+          element = <sub className="text-xs">{element}</sub>
+        }
+        if (node.format & IS_SUPERSCRIPT) {
+          element = <sup className="text-xs">{element}</sup>
+        }
+
+        return element
       },
       paragraph: ({ node, nodesToJSX }) => {
         const children = nodesToJSX({

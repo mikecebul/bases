@@ -5,6 +5,7 @@ import { ContactCard } from '@/components/Cards/ContactCard'
 import { GoogleMap } from '@/globals/Footer/GoogleMap'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { SimplePracticeContact } from '@/components/SimplePracticeContact'
+import { RichText } from '@/components/RichText'
 
 type ContactPageProps = {
   title?: string
@@ -12,10 +13,12 @@ type ContactPageProps = {
   contactFormTitle?: string
   contactFormDescription?: string
   contactFormButtonText?: string
+  contactInstructions?: any
   useCompanyInfo?: boolean
   customEmail?: string
   customPhone?: string
   customAddress?: string
+  phoneHours?: string
 }
 
 export async function ContactPageBlock({
@@ -24,10 +27,12 @@ export async function ContactPageBlock({
   contactFormTitle = "Send Secure Message",
   contactFormDescription = "Use our HIPAA-compliant contact form to send us a secure message.",
   contactFormButtonText = "Open Contact Form",
+  contactInstructions,
   useCompanyInfo = true,
   customEmail,
   customPhone,
   customAddress,
+  phoneHours = "Monday - Friday, 11:00 AM - 2:00 PM",
 }: ContactPageProps) {
   const companyInfo = (await getCachedGlobal('company-info')()) as CompanyInfo
   const { contact } = companyInfo
@@ -47,40 +52,38 @@ export async function ContactPageBlock({
       />
 
       <div className="grid gap-8 mb-12 lg:grid-cols-2">
-        <ContactCard
-          type="address"
-          title="Office Location & Hours"
-          value={address}
-          className="lg:min-h-full"
-        >
-          <div className="mt-6 space-y-4">
-            <div className="p-4 rounded-lg bg-muted/50">
-              <p className="mb-2 font-semibold text-foreground">Office Hours:</p>
-              <div className="space-y-1 text-sm text-muted-foreground">
-                <div className="flex justify-between">
-                  <span>Monday - Thursday</span>
-                  <span>10:00 AM - 6:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Friday</span>
-                  <span>10:00 AM - 5:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Saturday & Sunday</span>
-                  <span>By Appointment</span>
-                </div>
-              </div>
-            </div>
+        <div className="space-y-6">
+          {contactInstructions && (
+            <ContactCard
+              type="hours"
+              title="How to Reach Us"
+              value=""
+            >
+              <RichText
+                data={contactInstructions}
+                enableGutter={false}
+                enableProse={false}
+                paragraphClassName="text-sm pb-2"
+              />
+            </ContactCard>
+          )}
 
-            {contact ? (
-              <GoogleMap contact={contact} />
-            ) : (
-              <div className="p-8 text-center border-2 border-dashed rounded-lg bg-muted/30 border-muted-foreground/20">
-                <p className="text-sm text-muted-foreground">Map will display when contact info is provided</p>
-              </div>
-            )}
-          </div>
-        </ContactCard>
+          <ContactCard
+            type="address"
+            title="Office Location"
+            value={address}
+          >
+            <div className="mt-6">
+              {contact ? (
+                <GoogleMap contact={contact} />
+              ) : (
+                <div className="p-8 text-center border-2 border-dashed rounded-lg bg-muted/30 border-muted-foreground/20">
+                  <p className="text-sm text-muted-foreground">Map will display when contact info is provided</p>
+                </div>
+              )}
+            </div>
+          </ContactCard>
+        </div>
 
         <div className="space-y-6">
 
@@ -111,7 +114,7 @@ export async function ContactPageBlock({
           <ContactCard
             type="phone"
             title="Phone"
-            description="Available during normal business hours."
+            description={phoneHours}
             value={phone}
             href={`tel:${phone}`}
           />

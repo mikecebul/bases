@@ -2,8 +2,8 @@ import { authenticated } from '@/access/authenticated'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { superAdmin } from '@/access/superAdmin'
 import { link } from '@/fields/link'
-import { revalidatePath, revalidateTag } from 'next/cache'
 import { GlobalConfig } from 'payload'
+import { revalidateCompanyInfo } from './hooks/revalidateCompanyInfo'
 
 export const CompanyInfo: GlobalConfig = {
   slug: 'company-info',
@@ -16,13 +16,7 @@ export const CompanyInfo: GlobalConfig = {
     hideAPIURL: !superAdmin,
   },
   hooks: {
-    afterChange: [
-      ({ req }) => {
-        if (req.headers['X-Payload-Migration'] !== 'true') {
-          revalidateTag('global-company-info')
-        }
-      },
-    ],
+    afterChange: [revalidateCompanyInfo],
   },
   fields: [
     {

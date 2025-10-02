@@ -39,6 +39,14 @@ export const ContactPage: Block = {
       defaultValue: 'Open Contact Form',
     },
     {
+      name: 'contactInstructions',
+      type: 'richText',
+      label: 'Contact Instructions',
+      admin: {
+        description: 'Instructions for clients on how to contact the practice (displays in the location card)',
+      },
+    },
+    {
       name: 'useCompanyInfo',
       type: 'checkbox',
       label: 'Use Company Info for Contact Details',
@@ -73,6 +81,15 @@ export const ContactPage: Block = {
         condition: (_, siblingData) => !siblingData.useCompanyInfo,
         description: 'Override address when not using Company Info',
       },
+    },
+    {
+      name: 'phoneHours',
+      type: 'text',
+      label: 'Phone Hours',
+      admin: {
+        description: 'Phone availability hours (displays under the phone number)',
+      },
+      defaultValue: 'Monday - Friday, 11:00 AM - 2:00 PM',
     },
   ],
 }
