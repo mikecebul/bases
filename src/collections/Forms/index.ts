@@ -1,5 +1,7 @@
 import { CollectionConfig } from 'payload'
 import { fields } from './fields'
+import { revalidateDelete } from './hooks/revalidateDelete'
+import { revalidateForms } from './hooks/revalidateForms'
 
 export const Forms: CollectionConfig = {
   slug: 'forms',
@@ -9,6 +11,10 @@ export const Forms: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     group: 'Forms',
+  },
+  hooks: {
+    afterChange: [revalidateForms],
+    afterDelete: [revalidateDelete],
   },
   fields: [
     {

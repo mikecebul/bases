@@ -4,6 +4,8 @@ import { editorOrHigher } from '@/access/editorOrHigher'
 import { superAdmin } from '@/access/superAdmin'
 import { iconSelect } from '@/fields/iconSelect/config'
 import { CollectionConfig } from 'payload'
+import { revalidateDelete } from './hooks/revalidateDelete'
+import { revalidateServices } from './hooks/revalidateServices'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -23,6 +25,10 @@ export const Services: CollectionConfig = {
       ],
     },
     hideAPIURL: !superAdmin,
+  },
+  hooks: {
+    afterChange: [revalidateServices],
+    afterDelete: [revalidateDelete],
   },
   access: {
     create: editorOrHigher,
