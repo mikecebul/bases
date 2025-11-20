@@ -159,7 +159,7 @@ export async function Footer() {
         <Separator />
         <div className="flex items-center justify-center">
           <span className="block text-sm text-center text-gray-500">
-            © {new Date().getFullYear()}{' '}
+            © 2025{' '}
             <Link href="/" className={cn(buttonVariants({ variant: 'ghost' }), 'p-0')}>
               BASES
             </Link>
