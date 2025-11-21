@@ -1,6 +1,5 @@
 'use client'
 
-import { HeroSVG } from '@/components/Hero'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import type { Media } from '@/payload-types'
 import Autoplay from 'embla-carousel-autoplay'

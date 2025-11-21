@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Icons } from '../../components/Icons'
@@ -17,7 +17,13 @@ export type NavItem = NonNullable<Header['navItems']>[number]
 
 export function MobileNav({ navItems, contact }: { navItems: NavItem[], contact: CompanyInfo['contact'] }) {
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const currentPathName = usePathname()
+
+  // Prevent hydration mismatch by only showing active state after mount
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   
   const cleanedPhone = contact?.phone ? contact.phone.replace(/\D/g, '') : null
 
@@ -68,7 +74,7 @@ export function MobileNav({ navItems, contact }: { navItems: NavItem[], contact:
                       appearance={appearance}
                       className={cn('text-lg', {
                         'border-b-2 border-b-brand border-opacity-100 rounded-br-lg rounded-bl-lg text-brand':
-                          !isPrimary && isActiveRoute(currentPathName as string, slug),
+                          !isPrimary && mounted && isActiveRoute(currentPathName as string, slug),
                         'bg-brand hover:bg-brand/90 text-white':
                           isPrimary,
                       })}
