@@ -10,7 +10,6 @@ import { MobileNav } from './MobileNav'
 
 import { PayloadAdminBar } from '@payloadcms/admin-bar'
 import { baseUrl } from '@/utilities/baseUrl'
-import Logo from '@/graphics/Logo'
 
 export const HeaderClient = ({
   header,
@@ -24,6 +23,7 @@ export const HeaderClient = ({
     phone,
     physicalAddress: { cityStateZip, street, googleMapLink },
   } = contact || {}
+  const cleanedPhone = phone ? phone.replace(/\D/g, '') : null
 
   return (
     <header className="sticky top-0 z-40 flex flex-col w-full bg-background/50 backdrop-blur-xs overflow-clip">
@@ -47,8 +47,10 @@ export const HeaderClient = ({
         <MainNav navItems={navItems} />
         <MobileNav navItems={navItems} contact={contact} />
         <div className="flex flex-col items-end gap-2 ml-auto">
-          <Link
+          <a
             href={googleMapLink ?? '#'}
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: 'outline' }),
               'hidden xl:inline-flex text-lg text-brand hover:text-brand/90',
@@ -56,11 +58,17 @@ export const HeaderClient = ({
           >
             <Icons.navigation className="mr-2" size={20} />
             {street} | {cityStateZip}
-          </Link>
-          <div className={cn(buttonVariants({ variant: 'text' }), 'text-lg hidden xl:inline-flex')}>
+          </a>
+          <a
+            href={cleanedPhone ? `tel:${cleanedPhone}` : '#'}
+            className={cn(
+              buttonVariants({ variant: 'ghost' }),
+              'text-lg hidden xl:inline-flex hover:text-primary',
+            )}
+          >
             <Icons.phone className="mr-2" size={20} />
             {phone}
-          </div>
+          </a>
         </div>
       </div>
     </header>

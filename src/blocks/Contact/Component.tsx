@@ -40,6 +40,7 @@ export async function ContactPageBlock({
   // Use company info or custom values based on useCompanyInfo flag
   const email = useCompanyInfo && contact?.email ? contact.email : (customEmail || "contact@practice.com")
   const phone = useCompanyInfo && contact?.phone ? contact.phone : (customPhone || "(555) 123-4567")
+  const cleanedPhone = phone ? phone.replace(/\D/g, '') : ''
   const address = useCompanyInfo && contact?.physicalAddress
     ? `${contact.physicalAddress.street}\n${contact.physicalAddress.cityStateZip}`
     : (customAddress || "123 Wellness Way\nSuite 200\nYour City, ST 12345")
@@ -116,7 +117,7 @@ export async function ContactPageBlock({
             title="Phone"
             description={phoneHours}
             value={phone}
-            href={`tel:${phone}`}
+            href={`tel:${cleanedPhone}`}
           />
         </div>
       </div>

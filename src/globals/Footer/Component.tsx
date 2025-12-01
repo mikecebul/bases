@@ -10,6 +10,7 @@ import { CMSLink } from '@/components/Link'
 import payloadConfig from '@payload-config'
 import { getPayload } from 'payload'
 import { GoogleMap } from './GoogleMap'
+import { Copyright } from './Copyright'
 
 export async function Footer() {
   const payload = await getPayload({ config: payloadConfig })
@@ -23,6 +24,8 @@ export async function Footer() {
     slug: 'company-info',
     depth: 1,
   })
+
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer>
@@ -68,6 +71,8 @@ export async function Footer() {
                   <li key={contact.physicalAddress.street} className="group">
                     <a
                       href={contact.physicalAddress.googleMapLink ?? '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={cn(
                         buttonVariants({ variant: 'ghost' }),
                         'flex justify-start group-hover:text-primary',
@@ -94,10 +99,16 @@ export async function Footer() {
                 )}
                 {typeof contact?.fax === 'string' && (
                   <li key={contact.fax} className="group">
-                    <div className={cn(buttonVariants({ variant: 'text' }), 'text-gray-500')}>
-                      <Printer className="mr-2" size={20} />
+                    <a
+                      href={`tel:${contact.fax.replace(/\D/g, '')}`}
+                      className={cn(
+                        buttonVariants({ variant: 'ghost' }),
+                        'flex justify-start group-hover:text-primary pointer-events-none cursor-default',
+                      )}
+                    >
+                      <Printer className="mr-2 shrink-0" size={20} />
                       {contact.fax}
-                    </div>
+                    </a>
                   </li>
                 )}
                 {/* Social Links */}
@@ -158,13 +169,11 @@ export async function Footer() {
 
         <Separator />
         <div className="flex items-center justify-center">
-          <span className="block text-sm text-center text-gray-500">
-            © 2025{' '}
-            <Link href="/" className={cn(buttonVariants({ variant: 'ghost' }), 'p-0')}>
-              BASES
+          <Copyright year={currentYear}>
+            <Link href="/" className={cn(buttonVariants({ variant: 'ghost' }), 'p-0 text-balance')}>
+              {contact.name ?? 'BASES'}
             </Link>
-            . All Rights Reserved.
-          </span>
+          </Copyright>
         </div>
       </Container>
     </footer>

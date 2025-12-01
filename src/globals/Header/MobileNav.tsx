@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Icons } from '../../components/Icons'
@@ -10,20 +10,12 @@ import { cn } from '@/utilities/cn'
 import { isActiveRoute } from '@/utilities/isActiveRoute'
 import { Header, CompanyInfo } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
-import Link from 'next/link'
-import { getCachedGlobal } from '@/utilities/getGlobals'
 
 export type NavItem = NonNullable<Header['navItems']>[number]
 
 export function MobileNav({ navItems, contact }: { navItems: NavItem[], contact: CompanyInfo['contact'] }) {
   const [open, setOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
   const currentPathName = usePathname()
-
-  // Prevent hydration mismatch by only showing active state after mount
-  useEffect(() => {
-    setMounted(true)
-  }, [])
   
   const cleanedPhone = contact?.phone ? contact.phone.replace(/\D/g, '') : null
 
@@ -74,7 +66,7 @@ export function MobileNav({ navItems, contact }: { navItems: NavItem[], contact:
                       appearance={appearance}
                       className={cn('text-lg', {
                         'border-b-2 border-b-brand border-opacity-100 rounded-br-lg rounded-bl-lg text-brand':
-                          !isPrimary && mounted && isActiveRoute(currentPathName as string, slug),
+                          !isPrimary && isActiveRoute(currentPathName as string, slug),
                         'bg-brand hover:bg-brand/90 text-white':
                           isPrimary,
                       })}
@@ -91,7 +83,7 @@ export function MobileNav({ navItems, contact }: { navItems: NavItem[], contact:
           {/* Fixed Footer with Call and Directions */}
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border bg-background">
             <div className="flex flex-col space-y-2">
-              <Link
+              <a
                 href={cleanedPhone ? `tel:${cleanedPhone}` : '#'}
                 className={cn(
                   buttonVariants({ variant: 'brand', size: 'default' }),
@@ -101,9 +93,11 @@ export function MobileNav({ navItems, contact }: { navItems: NavItem[], contact:
               >
                 <Icons.phone className="mr-2 size-4" />
                 Call Now
-              </Link>
-              <Link
+              </a>
+              <a
                 href={contact?.physicalAddress?.googleMapLink ?? '#'}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
                   buttonVariants({ variant: 'brandOutline', size: 'default' }),
                   'w-full justify-center'
@@ -112,7 +106,7 @@ export function MobileNav({ navItems, contact }: { navItems: NavItem[], contact:
               >
                 <Icons.navigation className="mr-2 size-4" />
                 Get Directions
-              </Link>
+              </a>
             </div>
           </div>
         </SheetContent>

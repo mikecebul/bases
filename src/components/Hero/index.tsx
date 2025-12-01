@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/Icons'
-import Link from 'next/link'
 import { cn } from '@/utilities/cn'
 import type { CompanyInfo, Hero as HeroType } from '@/payload-types'
 import { CMSLink } from '../Link'
@@ -9,8 +8,8 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 
 type Props = NonNullable<HeroType['highImpact']>
 
-export async function Hero({ title, description, image, links, svg }: Props) {
-  const { contact, social, hours } = (await getCachedGlobal('company-info', 2)()) as CompanyInfo
+export async function Hero({ title, description, image, links }: Props) {
+  const { contact } = (await getCachedGlobal('company-info', 2)()) as CompanyInfo
   const cleanedPhone = contact?.phone ? contact?.phone.replace(/\D/g, '') : null
 
   return (
@@ -22,7 +21,7 @@ export async function Hero({ title, description, image, links, svg }: Props) {
         <p className="max-w-xl pb-8 text-lg text-muted-foreground">{description}</p>
         <div className="flex flex-col space-y-4 md:mr-4 xl:flex-row xl:space-x-0 xl:items-start">
           {/* Mobile Links */}
-          <Link
+          <a
             href={cleanedPhone ? `tel:${cleanedPhone}` : '#'}
             className={cn(
               buttonVariants({ variant: 'brand', size: 'xl' }),
@@ -31,9 +30,11 @@ export async function Hero({ title, description, image, links, svg }: Props) {
           >
             <Icons.phone className="mr-2" />
             Call Now
-          </Link>
-          <Link
+          </a>
+          <a
             href={contact?.physicalAddress.googleMapLink ?? '#'}
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: 'brandOutline', size: 'xl' }),
               'xl:hidden min-w-full lg:min-w-64',
@@ -41,7 +42,7 @@ export async function Hero({ title, description, image, links, svg }: Props) {
           >
             <Icons.navigation className="mr-2" />
             Directions to our Building
-          </Link>
+          </a>
           {/* Desktop Links */}
           {links != null &&
             links.map(({ link, id }, index) => (

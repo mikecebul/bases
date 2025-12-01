@@ -5,16 +5,9 @@ import { isActiveRoute } from '@/utilities/isActiveRoute'
 import { usePathname } from 'next/navigation'
 import type { NavItem } from './MobileNav'
 import { CMSLink } from '@/components/Link'
-import { useEffect, useState } from 'react'
 
 export function MainNav({ navItems }: { navItems: NavItem[] }) {
   const currentPathName = usePathname()
-  const [mounted, setMounted] = useState(false)
-
-  // Prevent hydration mismatch by only showing active state after mount
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   return (
     <div className="flex-1">
@@ -41,7 +34,7 @@ export function MainNav({ navItems }: { navItems: NavItem[] }) {
               appearance={appearance}
               className={cn('', {
                 'border-b-2 border-b-brand border-opacity-100 rounded-br-lg rounded-bl-lg text-brand':
-                  !isPrimary && mounted && isActiveRoute(currentPathName as string, slug),
+                  !isPrimary && isActiveRoute(currentPathName as string, slug),
                 'bg-brand hover:bg-brand/90 text-white':
                   isPrimary,
               })}
