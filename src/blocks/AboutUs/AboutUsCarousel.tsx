@@ -5,6 +5,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
 import Image from 'next/image'
 import { Media } from '@/payload-types'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 
 export default function AboutUsCarousel({ images }: { images: Media[] }) {
   if (!images) return null
@@ -24,7 +25,7 @@ export default function AboutUsCarousel({ images }: { images: Media[] }) {
           <CarouselItem key={image.id}>
             <Image
               className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
-              src={image.url ?? ''}
+              src={getMediaUrl(image.url)}
               alt="BASES Sign"
               width={960}
               height={640}

@@ -7,7 +7,7 @@ export const revalidateDelete: CollectionAfterDeleteHook<Page> = ({ doc, req: { 
     const path = `/team/${doc?.slug}`
     revalidatePath(path)
     revalidatePath('/team')
-    revalidateTag('sitemap')
+    revalidateTag('sitemap', 'max')
   }
 
   return doc

@@ -5,11 +5,6 @@ export const AboutUs: Block = {
   interfaceName: 'AboutUsBlock',
   fields: [
     {
-      name: 'subtitle',
-      type: 'text',
-      defaultValue: "Where it started & where we're going",
-    },
-    {
       name: 'richContent',
       type: 'richText',
     },

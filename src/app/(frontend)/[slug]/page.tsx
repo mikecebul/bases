@@ -5,9 +5,8 @@ import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { Metadata } from 'next'
 import { generateMeta } from '@/utilities/generateMeta'
-import { getPayload } from 'payload'
+import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { Page as PageType } from '@/payload-types'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -15,6 +14,7 @@ export async function generateStaticParams() {
     collection: 'pages',
     draft: false,
     limit: 1000,
+    overrideAccess: false,
     pagination: false,
     select: { slug: true },
   })
@@ -41,13 +41,11 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
   const url = `/${slug}`
 
-  let page: PageType | null
-
-  page = await queryPageBySlug({ slug })
+  const page = await queryPageBySlug({ slug })
 
   if (!page && slug === 'home') {
     return (
-      <main className="grow flex flex-col items-center justify-center">
+      <main className="flex flex-col items-center justify-center grow">
         <h1 className="text-4xl font-bold">Hello World</h1>
       </main>
     )
@@ -80,11 +78,11 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
     collection: 'pages',
     draft,
     limit: 1,
+    overrideAccess: draft,
     pagination: false,
     where: {
       slug: { equals: slug },
     },
   })
-
-  return result.docs[0] || null
+  return result.docs?.[0] || null
 })

@@ -11,7 +11,7 @@ export function MainNav({ navItems }: { navItems: NavItem[] }) {
 
   return (
     <div className="flex-1">
-      <div className="justify-center hidden gap-8 px-8 md:flex">
+      <div className="justify-center hidden gap-8 px-8 md:flex md:flex-wrap">
         {navItems.map(({ link }, i) => {
           const slug =
             typeof link.reference?.value === 'object'
@@ -23,14 +23,20 @@ export function MainNav({ navItems }: { navItems: NavItem[] }) {
                   ? link.reference.value.url
                   : ''
               : ''
+
+          const appearance = link.appearance === 'primary' ? 'default' : 'nav'
+          const isPrimary = link.appearance === 'primary'
+
           return (
             <CMSLink
               key={i}
               {...link}
-              appearance="nav"
+              appearance={appearance}
               className={cn('', {
                 'border-b-2 border-b-brand border-opacity-100 rounded-br-lg rounded-bl-lg text-brand':
-                  isActiveRoute(currentPathName as string, slug),
+                  !isPrimary && isActiveRoute(currentPathName as string, slug),
+                'bg-brand hover:bg-brand/90 text-white':
+                  isPrimary,
               })}
             />
           )

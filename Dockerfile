@@ -17,36 +17,63 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# install require in the middle package
-RUN pnpm add require-in-the-middle@"$(jq -r '.dependencies["require-in-the-middle"]' < package.json)"
-
-
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ARG PAYLOAD_SECRET
-ARG DATABASE_URI
-ARG NEXT_PUBLIC_IS_LIVE
-ARG NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-ARG UNSPLASH_ACCESS_KEY
-ARG NEXT_PUBLIC_SERVER_URL
-ARG RESEND_DEFAULT_EMAIL
-ARG AUTH_RESEND_KEY
-ARG S3_ENABLED
-ARG S3_ACCESS_KEY_ID
-ARG S3_SECRET_ACCESS_KEY
-ARG S3_REGION
-ARG S3_ENDPOINT
-ARG S3_BUCKET
-ARG NEXT_PUBLIC_S3_HOSTNAME
-ARG NEXT_PUBLIC_UPLOAD_PREFIX
-ARG NEXT_PUBLIC_USAEPAY_KEY
-ARG NEXT_PUBLIC_SENTRY_DSN
-ARG SENTRY_AUTH_TOKEN
-ARG SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING
 
+# Create .env.production from Docker secrets (build-time only)
+RUN --mount=type=secret,id=DATABASE_URI \
+  --mount=type=secret,id=NEXT_PUBLIC_SERVER_URL \
+  --mount=type=secret,id=PAYLOAD_SECRET \
+  --mount=type=secret,id=S3_ENABLED \
+  --mount=type=secret,id=SENTRY_AUTH_TOKEN \
+  --mount=type=secret,id=NEXT_PUBLIC_IS_LIVE \
+  --mount=type=secret,id=NEXT_PUBLIC_GOOGLE_MAPS_API_KEY \
+  --mount=type=secret,id=NEXT_PUBLIC_UPLOAD_PREFIX \
+  --mount=type=secret,id=NEXT_PUBLIC_USAEPAY_KEY \
+  --mount=type=secret,id=NEXT_PUBLIC_SENTRY_DSN \
+  --mount=type=secret,id=EMAIL_HOST \
+  --mount=type=secret,id=EMAIL_PORT \
+  --mount=type=secret,id=EMAIL_USER \
+  --mount=type=secret,id=EMAIL_PASSWORD \
+  --mount=type=secret,id=PREVIEW_SECRET \
+  --mount=type=secret,id=RESEND_API_KEY \
+  --mount=type=secret,id=S3_ACCESS_KEY_ID \
+  --mount=type=secret,id=S3_SECRET_ACCESS_KEY \
+  --mount=type=secret,id=S3_REGION \
+  --mount=type=secret,id=S3_ENDPOINT \
+  --mount=type=secret,id=S3_BUCKET \
+  --mount=type=secret,id=NEXT_PUBLIC_S3_HOSTNAME \
+  --mount=type=secret,id=UNSPLASH_ACCESS_KEY \
+  sh -c '( \
+  echo "DATABASE_URI=$(cat /run/secrets/DATABASE_URI)" && \
+  echo "NEXT_PUBLIC_SERVER_URL=$(cat /run/secrets/NEXT_PUBLIC_SERVER_URL)" && \
+  echo "PAYLOAD_SECRET=$(cat /run/secrets/PAYLOAD_SECRET)" && \
+  echo "S3_ENABLED=$(cat /run/secrets/S3_ENABLED)" && \
+  echo "SENTRY_AUTH_TOKEN=$(cat /run/secrets/SENTRY_AUTH_TOKEN)" && \
+  echo "NEXT_PUBLIC_IS_LIVE=$(cat /run/secrets/NEXT_PUBLIC_IS_LIVE)" && \
+  echo "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$(cat /run/secrets/NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)" && \
+  echo "NEXT_PUBLIC_UPLOAD_PREFIX=$(cat /run/secrets/NEXT_PUBLIC_UPLOAD_PREFIX)" && \
+  echo "NEXT_PUBLIC_USAEPAY_KEY=$(cat /run/secrets/NEXT_PUBLIC_USAEPAY_KEY)" && \
+  echo "NEXT_PUBLIC_SENTRY_DSN=$(cat /run/secrets/NEXT_PUBLIC_SENTRY_DSN)" && \
+  echo "EMAIL_HOST=$(cat /run/secrets/EMAIL_HOST)" && \
+  echo "EMAIL_PORT=$(cat /run/secrets/EMAIL_PORT)" && \
+  echo "EMAIL_USER=$(cat /run/secrets/EMAIL_USER)" && \
+  echo "EMAIL_PASSWORD=$(cat /run/secrets/EMAIL_PASSWORD)" && \
+  echo "PREVIEW_SECRET=$(cat /run/secrets/PREVIEW_SECRET)" && \
+  echo "RESEND_API_KEY=$(cat /run/secrets/RESEND_API_KEY)" && \
+  echo "S3_ACCESS_KEY_ID=$(cat /run/secrets/S3_ACCESS_KEY_ID)" && \
+  echo "S3_SECRET_ACCESS_KEY=$(cat /run/secrets/S3_SECRET_ACCESS_KEY)" && \
+  echo "S3_REGION=$(cat /run/secrets/S3_REGION)" && \
+  echo "S3_ENDPOINT=$(cat /run/secrets/S3_ENDPOINT)" && \
+  echo "S3_BUCKET=$(cat /run/secrets/S3_BUCKET)" && \
+  echo "NEXT_PUBLIC_S3_HOSTNAME=$(cat /run/secrets/NEXT_PUBLIC_S3_HOSTNAME)" && \
+  echo "UNSPLASH_ACCESS_KEY=$(cat /run/secrets/UNSPLASH_ACCESS_KEY)" \
+  ) > .env.production'
+
+ENV SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING=1
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_OUTPUT=standalone
 
@@ -54,7 +81,7 @@ ENV NEXT_OUTPUT=standalone
 RUN npm install -g corepack@latest
 
 RUN \
-  if [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
+  if [ -f pnpm-lock.yaml ]; then corepack enable pnpm && set -a && . ./.env.production && set +a && pnpm run build; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
@@ -64,6 +91,8 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Runtime environment variables will be provided by docker-compose or deployment platform
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

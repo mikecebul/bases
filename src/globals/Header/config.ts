@@ -20,7 +20,7 @@ export const Header: GlobalConfig = {
       },
       fields: [
         link({
-          appearances: false,
+          appearances: ['default', 'primary'],
         }),
       ],
       maxRows: 6,

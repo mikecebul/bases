@@ -1,4 +1,6 @@
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { SubtitleBlock } from '@/blocks/SubtitleBlock/Component'
+import { LineBreakBlock } from '@/blocks/LineBreakBlock/Component'
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
@@ -10,13 +12,31 @@ import {
   RichText as ConvertRichText,
 } from '@payloadcms/richtext-lexical/react'
 
-import type { MediaBlock as MediaBlockProps } from '@/payload-types'
+import type {
+  MediaBlock as MediaBlockProps,
+  SubtitleBlock as SubtitleBlockProps,
+  LineBreakBlock as LineBreakBlockProps,
+} from '@/payload-types'
 import { cn } from '@/utilities/cn'
 import Link from 'next/link'
 import { addHTTPS } from '@/utilities/addHTTPS'
 import { randomUUID } from 'crypto'
+import { replaceDoubleCurlysRichText } from '@/utilities/replaceDoubleCurlysRichText'
+import {
+  IS_BOLD,
+  IS_ITALIC,
+  IS_STRIKETHROUGH,
+  IS_UNDERLINE,
+  IS_CODE,
+  IS_SUBSCRIPT,
+  IS_SUPERSCRIPT,
+} from './nodeFormat'
 
-type NodeTypes = DefaultNodeTypes | SerializedBlockNode<MediaBlockProps>
+type NodeTypes =
+  | DefaultNodeTypes
+  | SerializedBlockNode<MediaBlockProps>
+  | SerializedBlockNode<SubtitleBlockProps>
+  | SerializedBlockNode<LineBreakBlockProps>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -31,6 +51,36 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
   return function converters({ defaultConverters }) {
     return {
       ...defaultConverters,
+      text: ({ node }) => {
+        const processedText = replaceDoubleCurlysRichText(node.text)
+
+        // Handle text formatting (bold, italic, etc.)
+        let element = <span dangerouslySetInnerHTML={{ __html: processedText }} />
+
+        if (node.format & IS_BOLD) {
+          element = <strong className="font-bold">{element}</strong>
+        }
+        if (node.format & IS_ITALIC) {
+          element = <em className="italic">{element}</em>
+        }
+        if (node.format & IS_STRIKETHROUGH) {
+          element = <span className="line-through">{element}</span>
+        }
+        if (node.format & IS_UNDERLINE) {
+          element = <span className="underline">{element}</span>
+        }
+        if (node.format & IS_CODE) {
+          element = <code className="px-1 py-0.5 text-sm font-mono bg-muted rounded">{processedText}</code>
+        }
+        if (node.format & IS_SUBSCRIPT) {
+          element = <sub className="text-xs">{element}</sub>
+        }
+        if (node.format & IS_SUPERSCRIPT) {
+          element = <sup className="text-xs">{element}</sup>
+        }
+
+        return element
+      },
       paragraph: ({ node, nodesToJSX }) => {
         const children = nodesToJSX({
           nodes: node.children,
@@ -49,9 +99,9 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
 
         const Tag = node?.tag
         const textSizeMap = {
-          h1: 'text-5xl md:text-7xl font-bold tracking-tight text-balance max-w-prose pb-12',
-          h2: 'text-4xl font-bold tracking-tight text-balance max-w-prose pb-4 pt-6',
-          h3: 'text-2xl font-semibold tracking-tight text-balance max-w-prose pb-6',
+          h1: 'text-5xl md:text-7xl font-bold tracking-tight text-balance max-w-prose pb-6',
+          h2: 'text-4xl font-bold tracking-tight text-balance max-w-prose pb-4',
+          h3: 'text-2xl font-semibold tracking-tight text-balance max-w-prose pb-4',
           h4: 'text-xl font-semibold tracking-tight text-balance max-w-prose pb-4',
           h5: 'text-xl font-medium tracking-tight text-balance max-w-prose pb-4',
           h6: 'text-lg font-medium tracking-tight text-balance max-w-prose pb-4',
@@ -149,7 +199,6 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
             <li
               aria-checked={node.checked ? 'true' : 'false'}
               className={`list-item-checkbox${node.checked ? 'list-item-checkbox-checked' : 'list-item-checkbox-unchecked'}${hasSubLists ? 'nestedListItem' : ''}`}
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
               role="checkbox"
               style={{ listStyleType: 'inherit' }}
               tabIndex={-1}
@@ -174,6 +223,17 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
           </li>
         )
       },
+      quote: ({ node, nodesToJSX }) => {
+        const children = nodesToJSX({
+          nodes: node.children,
+        })
+
+        return (
+          <blockquote className="py-4 pl-6 pr-3 my-6 italic border-l-4 rounded-r-lg text-muted-foreground border-brand bg-muted max-w-prose">
+            {children}
+          </blockquote>
+        )
+      },
       blocks: {
         mediaBlock: ({ node }) => (
           <MediaBlock
@@ -185,6 +245,8 @@ const jsxConverters = (paragraphClassName?: string): JSXConvertersFunction<NodeT
             disableInnerContainer={true}
           />
         ),
+        subtitleBlock: ({ node }) => <SubtitleBlock {...node.fields} />,
+        lineBreakBlock: ({ node }) => <LineBreakBlock {...node.fields} />,
       },
     }
   }
@@ -207,9 +269,9 @@ export function RichText(props: Props) {
       className={cn(
         '',
         {
-          container: enableGutter,
+          'container': enableGutter,
           'max-w-none': !enableGutter,
-          'prose md:prose-md dark:prose-invert mx-auto': enableProse,
+          'prose md:prose-md dark:prose-invert': enableProse,
         },
         className,
       )}

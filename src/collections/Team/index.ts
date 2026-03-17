@@ -13,7 +13,6 @@ import { populatePublishedAt } from '@/hooks/populatePublishedAt'
 import { superAdmin } from '@/access/superAdmin'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
-import { baseUrl } from '@/utilities/baseUrl'
 import { revalidateDelete } from './hooks/revalidateDelete'
 
 export const Team: CollectionConfig = {
@@ -32,15 +31,22 @@ export const Team: CollectionConfig = {
     useAsTitle: 'name',
     hideAPIURL: !superAdmin,
     livePreview: {
-      url: ({ data }) => {
+      url: ({ data, req }) => {
         const path = generatePreviewPath({
-          path: `/team/${typeof data?.slug === 'string' ? data.slug : ''}`,
+          slug: typeof data?.slug === 'string' ? `${data.slug}` : '',
+          collection: 'team',
+          req,
         })
-        return `${baseUrl}${path}`
+
+        return path
       },
     },
-    preview: (doc) =>
-      generatePreviewPath({ path: `/team/${typeof doc?.slug === 'string' ? doc.slug : ''}` }),
+    preview: (data, { req }) =>
+      generatePreviewPath({
+        slug: typeof data?.slug === 'string' ? `${data.slug}` : '',
+        collection: 'team',
+        req,
+      }),
     defaultColumns: ['name', 'image', 'memberType', 'role', 'updatedAt'],
     description: 'A collection of staff and board members.',
     components: {
@@ -163,7 +169,7 @@ export const Team: CollectionConfig = {
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // We set this interval for optimal live preview
+        interval: 200, // We set this interval for optimal live preview
       },
     },
     maxPerDoc: 50,

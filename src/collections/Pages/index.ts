@@ -20,12 +20,12 @@ import { Team } from '@/blocks/Team/config'
 import { AboutUs } from '@/blocks/AboutUs/config'
 import { Links } from '@/blocks/Links/config'
 import { superAdmin } from '@/access/superAdmin'
-import { FormBlock } from '@/blocks/Form/config'
+import { Form } from '@/blocks/Form/config'
 import { RichText } from '@/blocks/RichText/config'
-import { baseUrl } from '@/utilities/baseUrl'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { revalidateDelete } from './hooks/revalidateDelete'
 import { TwoColumnLayout } from '@/blocks/TwoColumnLayout/config'
+import { ContactPage } from '@/blocks/Contact/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -39,15 +39,22 @@ export const Pages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     hideAPIURL: !superAdmin,
     livePreview: {
-      url: ({ data }) => {
+      url: ({ data, req }) => {
         const path = generatePreviewPath({
-          path: `/${typeof data?.slug === 'string' ? data.slug : ''}`,
+          slug: typeof data?.slug === 'string' ? data.slug : '',
+          collection: 'pages',
+          req,
         })
-        return `${baseUrl}${path}`
+
+        return path
       },
     },
-    preview: (doc) =>
-      generatePreviewPath({ path: `/${typeof doc?.slug === 'string' ? doc.slug : ''}` }),
+    preview: (data, { req }) =>
+      generatePreviewPath({
+        slug: typeof data?.slug === 'string' ? data.slug : '',
+        collection: 'pages',
+        req,
+      }),
     useAsTitle: 'title',
   },
   fields: [
@@ -73,8 +80,9 @@ export const Pages: CollectionConfig = {
                 Team,
                 AboutUs,
                 Links,
-                FormBlock,
+                Form,
                 TwoColumnLayout,
+                ContactPage,
               ],
               required: true,
             },
@@ -142,7 +150,7 @@ export const Pages: CollectionConfig = {
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // We set this interval for optimal live preview
+        interval: 200, // We set this interval for optimal live preview
       },
     },
     maxPerDoc: 50,

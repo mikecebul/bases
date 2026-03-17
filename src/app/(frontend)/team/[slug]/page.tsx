@@ -5,7 +5,7 @@ import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { TeamMemberBlock } from '@/blocks/TeamMember/Component'
 import { Metadata } from 'next'
 import { generateMeta } from '@/utilities/generateMeta'
-import { getPayload } from 'payload'
+import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 export async function generateStaticParams() {
@@ -14,29 +14,13 @@ export async function generateStaticParams() {
     collection: 'team',
     draft: false,
     limit: 1000,
+    overrideAccess: false,
     pagination: false,
-    select: { slug: true }
+    select: { slug: true },
   })
 
   return team?.map(({ slug }) => ({ slug })) || []
 }
-
-const queryTeamMemberBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
-  const payload = await getPayload({ config: configPromise })
-
-  const result = await payload.find({
-    collection: 'team',
-    draft,
-    limit: 1,
-    pagination: false,
-    where: {
-      slug: { equals: slug }
-    }
-  })
-
-  return result.docs[0] || null
-})
 
 type Args = {
   params: Promise<{
@@ -69,10 +53,28 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   if (!slug) {
     return {
       title: 'Team',
-      description: 'Meet our team'
+      description: 'Meet our team',
     }
   }
 
   const teamMember = await queryTeamMemberBySlug({ slug })
   return generateMeta({ doc: teamMember })
-} 
+}
+
+const queryTeamMemberBySlug = cache(async ({ slug }: { slug: string }) => {
+  const { isEnabled: draft } = await draftMode()
+  const payload = await getPayload({ config: configPromise })
+
+  const result = await payload.find({
+    collection: 'team',
+    draft,
+    limit: 1,
+    overrideAccess: draft,
+    pagination: false,
+    where: {
+      slug: { equals: slug },
+    },
+  })
+
+  return result.docs[0] || null
+})

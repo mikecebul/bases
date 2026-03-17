@@ -7,6 +7,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverExternalPackages: [`require-in-the-middle`],
   output: process.env.NEXT_OUTPUT === 'standalone' ? 'standalone' : undefined,
   images: {
     remotePatterns: [
@@ -16,9 +17,7 @@ const nextConfig = {
         'https://maps.googleapis.com',
         'https://basesmi.org',
         'https://www.basesmi.org',
-        'https://bases.mikecebul.dev',
-        'https://bases-dev.mikecebul.dev',
-        'https://media-bases.mikecebul.dev',
+        'https://media-bases.mikecebul.com',
       ].map((item) => {
         const url = new URL(item)
         return {
@@ -43,8 +42,8 @@ const nextConfig = {
 // Sentry Configuration
 const sentryConfig = {
   org: 'mikecebul',
-  project: 'cvx-jr-golf',
-  sentryUrl: 'https://monitor.mikecebul.dev/',
+  project: 'bases',
+  sentryUrl: 'https://monitor.mikecebul.com/',
   authToken: process.env.SENTRY_AUTH_TOKEN,
   silent: !process.env.CI,
   widenClientFileUpload: true,

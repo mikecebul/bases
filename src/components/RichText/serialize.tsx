@@ -19,6 +19,7 @@ type Props = {
 }
 
 export function serializeLexical({ nodes }: Props): JSX.Element {
+  console.log('nodes', nodes)
   return (
     <Fragment>
       {nodes?.map((node, index): JSX.Element | null => {
@@ -65,7 +66,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
         // https://github.com/facebook/lexical/blob/d10c4e6e55261b2fdd7d1845aed46151d0f06a8c/packages/lexical-list/src/LexicalListItemNode.ts#L133
         // which does not return checked: false (only true - i.e. there is no prop for false)
         const serializedChildrenFn = (node: NodeTypes): JSX.Element | null => {
-          if (node.children == null) {
+          if (!('children' in node) || node.children == null) {
             return null
           } else {
             if (node?.type === 'list' && node?.listType === 'check') {
@@ -98,7 +99,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
           //   case 'mediaBlock':
           //     return (
           //       <MediaBlock
-          //         className="col-start-1 col-span-3"
+          //         className="col-span-3 col-start-1"
           //         imgClassName="m-0"
           //         key={index}
           //         {...block}
@@ -138,7 +139,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case 'list': {
               const Tag = node?.tag
               return (
-                <Tag className="list col-start-2" key={index}>
+                <Tag className="col-start-2 list" key={index}>
                   {serializedChildren}
                 </Tag>
               )
@@ -150,7 +151,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                     aria-checked={node.checked ? 'true' : 'false'}
                     className={` ${node.checked ? '' : ''}`}
                     key={index}
-                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+                     
                     role="checkbox"
                     tabIndex={-1}
                     value={node?.value}
@@ -168,7 +169,10 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             }
             case 'quote': {
               return (
-                <blockquote className="col-start-2" key={index}>
+                <blockquote
+                  className="col-start-2 pb-4 italic text-7xl max-w-prose text-pretty"
+                  key={index}
+                >
                   {serializedChildren}
                 </blockquote>
               )

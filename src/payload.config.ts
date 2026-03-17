@@ -1,5 +1,6 @@
 import type { TextFieldSingleValidation } from 'payload'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 import { sentryPlugin } from '@payloadcms/plugin-sentry'
@@ -14,7 +15,6 @@ import {
   BoldFeature,
   FixedToolbarFeature,
   HeadingFeature,
-  InlineToolbarFeature,
   ItalicFeature,
   LinkFeature,
   OrderedListFeature,
@@ -22,6 +22,7 @@ import {
   lexicalEditor,
   UnderlineFeature,
   type LinkFields,
+  BlockquoteFeature,
 } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp' // editor-import
 import path from 'path'
@@ -40,11 +41,17 @@ import { Services } from './collections/Services'
 import { Team } from './collections/Team'
 import { superAdmin } from './access/superAdmin'
 import { MediaBlock } from './blocks/MediaBlock/config'
+import { SubtitleBlock } from './blocks/SubtitleBlock/config'
+import { LineBreakBlock } from './blocks/LineBreakBlock/config'
 import { Media } from './collections/Media'
 import { baseUrl } from './utilities/baseUrl'
+import { Forms } from './collections/Forms'
+import { FormSubmissions } from './collections/FormSubmissions'
+import { Subtitle } from './components/Hero/HeroMedium'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const databaseURL = process.env.DATABASE_URI || process.env.MONGODB_URI
 
 const generateTitle: GenerateTitle<TeamType | Page> = ({ doc }) => {
   if ('name' in doc) {
@@ -69,10 +76,59 @@ const generateImage: GenerateImage<TeamType | Page> = ({ doc }) => {
 }
 
 export default buildConfig({
+  serverURL: baseUrl,
+  jobs: {
+    tasks: [
+      {
+        slug: 'revalidate-all-paths',
+        schedule: [
+          {
+            cron: '0 0 * * 0', // Every Sunday at midnight
+            queue: 'revalidation',
+          },
+        ],
+        handler: async () => {
+          try {
+            // Use fetch to trigger revalidation via API route
+            const baseUrl = process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000'
+            const response = await fetch(`${baseUrl}/api/revalidate`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                path: '/',
+                secret: process.env.PREVIEW_SECRET,
+              }),
+            })
+
+            if (response.ok) {
+              console.log('✅ Weekly revalidation completed successfully')
+              return { output: 'Revalidation completed successfully' }
+            } else {
+              throw new Error(`Revalidation failed with status: ${response.status}`)
+            }
+          } catch (error: unknown) {
+            console.log(
+              `❌ Revalidation failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            )
+            throw error
+          }
+        },
+      },
+    ],
+    autoRun: [
+      {
+        queue: 'revalidation',
+        cron: '0 0 * * *', // Check daily at midnight
+      },
+    ],
+  },
   admin: {
     avatar: 'default',
     components: {
       afterNavLinks: ['@/components/afterNavLinks/LinkToAnalyticsDefaultRootView'],
+      afterDashboard: ['@/components/afterDashboard/Analytics'],
       graphics: {
         Icon: '@/graphics/Icon',
         Logo: '@/graphics/Logo',
@@ -120,16 +176,17 @@ export default buildConfig({
     features: () => {
       return [
         FixedToolbarFeature(),
-        InlineToolbarFeature(),
         ParagraphFeature(),
         HeadingFeature({ enabledHeadingSizes: ['h1', 'h2'] }),
         UnderlineFeature(),
         BoldFeature(),
+
         ItalicFeature(),
         UnorderedListFeature(),
         OrderedListFeature(),
+        BlockquoteFeature(),
         BlocksFeature({
-          blocks: [MediaBlock],
+          blocks: [MediaBlock, SubtitleBlock, LineBreakBlock],
         }),
         LinkFeature({
           enabledCollections: ['pages'],
@@ -166,19 +223,34 @@ export default buildConfig({
     disable: true,
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI!,
+    url: databaseURL!,
   }),
-  collections: [Pages, Services, Team, Media, Users],
+  collections: [Pages, Services, Team, Media, Users, Forms, FormSubmissions],
   globals: [Header, Footer, CompanyInfo],
   cors: [baseUrl || ''].filter(Boolean),
   csrf: [baseUrl || ''].filter(Boolean),
-  email: resendAdapter({
-    defaultFromAddress: process.env.RESEND_DEFAULT_EMAIL || '',
-    defaultFromName: 'BASES Admin',
-    apiKey: process.env.RESEND_API_KEY || '',
-  }),
+  email:
+    process.env.NODE_ENV === 'production'
+      ? resendAdapter({
+        apiKey: process.env.RESEND_API_KEY || '',
+        defaultFromAddress: 'bases-website@mikecebul.com',
+        defaultFromName: 'BASES Website',
+      })
+      : nodemailerAdapter({
+        defaultFromAddress: 'bases-website@mikecebul.com',
+        defaultFromName: 'BASES Website',
+        transportOptions: {
+          host: process.env.EMAIL_HOST || 'localhost',
+          port: process.env.EMAIL_PORT || 1025,
+          auth: {
+            user: process.env.EMAIL_USER || 'user',
+            pass: process.env.EMAIL_PASSWORD || 'password',
+          },
+        },
+      }),
   plugins: [
     sentryPlugin({
+      enabled: true,
       options: {
         captureErrors: [400, 401, 403],
         context: ({ defaultContext, req }) => {
@@ -189,7 +261,7 @@ export default buildConfig({
             },
           }
         },
-        debug: true,
+        debug: false,
       },
       Sentry,
     }),
@@ -206,7 +278,7 @@ export default buildConfig({
         admin: {
           group: 'Admin',
         },
-        // @ts-expect-error
+        // @ts-expect-error Payload's redirects plugin typing does not expose this override shape correctly.
         fields: ({ defaultFields }) => {
           return defaultFields.map((field) => {
             if ('name' in field && field.name === 'from') {

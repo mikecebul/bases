@@ -1,8 +1,11 @@
+import { anyone } from '@/access/anyone'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { superAdmin } from '@/access/superAdmin'
 import { iconSelect } from '@/fields/iconSelect/config'
 import { CollectionConfig } from 'payload'
+import { revalidateDelete } from './hooks/revalidateDelete'
+import { revalidateServices } from './hooks/revalidateServices'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -23,10 +26,14 @@ export const Services: CollectionConfig = {
     },
     hideAPIURL: !superAdmin,
   },
+  hooks: {
+    afterChange: [revalidateServices],
+    afterDelete: [revalidateDelete],
+  },
   access: {
     create: editorOrHigher,
     delete: editorOrHigher,
-    read: authenticatedOrPublished,
+    read: anyone,
     update: editorOrHigher,
   },
   fields: [
@@ -41,6 +48,11 @@ export const Services: CollectionConfig = {
       label: 'Description',
       type: 'textarea',
       required: true,
+    },
+    {
+      name: 'description',
+      label: 'Description - Rich Text',
+      type: 'richText',
     },
     iconSelect,
   ],

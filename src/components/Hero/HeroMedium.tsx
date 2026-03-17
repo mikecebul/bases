@@ -19,8 +19,12 @@ export function HeroMedium(props: Hero['mediumImpact']) {
   )
 }
 
-export const Subtitle = ({ text }: { text: string }) => {
-  return <h3 className="text-base font-semibold leading-7 capitalize text-brand">{text}</h3>
+export const Subtitle = ({ text, className }: { text: string; className?: string }) => {
+  return (
+    <h3 className={cn('text-base font-semibold leading-7 capitalize text-brand', className)}>
+      {text}
+    </h3>
+  )
 }
 export const Title = ({
   text,

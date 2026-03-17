@@ -3,19 +3,12 @@ import { CTALinks } from '@/components/CTALinks'
 import { Description, Title } from '@/components/Hero/HeroMedium'
 import { Icon } from '@/components/Icons/Icon'
 import { Badge } from '@/components/ui/badge'
-import type { CompanyInfo, TwoColumnLayoutBlock as TwoColumnLayoutBlockType } from '@/payload-types'
+import type { TwoColumnLayoutBlock as TwoColumnLayoutBlockType } from '@/payload-types'
 import { cn } from '@/utilities/cn'
 import { RichText } from '@/components/RichText'
 import { RenderBlocks } from '../RenderBlocks'
 import RichTextCarousel from '../RichText/RichTextCarousel'
 import { imagesAsMedia } from '@/utilities/imagesAsMedia'
-import { HeroSVG } from '@/components/Hero'
-import Image from 'next/image'
-import Link from 'next/link'
-import { getCachedGlobal } from '@/utilities/getGlobals'
-import { buttonVariants } from '@/components/ui/button'
-import { Icons } from '@/components/Icons'
-import { Media } from '@/components/Media'
 
 export const TwoColumnLayoutBlock = async ({
   direction = 'ltr',
@@ -29,7 +22,7 @@ export const TwoColumnLayoutBlock = async ({
     richText,
     verticalAlignment = 'center',
   } = columnOne ?? {}
-  const { hasSubtitle, subtitle, title, heading, description, links, mobileHeroLinks } = cta ?? {}
+  const { hasSubtitle, subtitle, title, heading, description, links } = cta ?? {}
   const {
     contentType: columnTwoType,
     form,
@@ -40,12 +33,8 @@ export const TwoColumnLayoutBlock = async ({
   } = columnTwo ?? {}
   const validImages = imagesAsMedia(images)
 
-  const companyInfo = (await getCachedGlobal('company-info')()) as CompanyInfo
-  const { contact } = companyInfo
-  const cleanedPhone = contact?.phone ? contact.phone.replace(/\D/g, '') : null
-
   return (
-    <Container className="xl:overflow-visible">
+    <Container className="overflow-visible">
       <div
         className={cn('grid grid-cols-1 gap-12', `${breakpoint}:grid-cols-2`, {
           'xl:items-start': sticky,
@@ -72,34 +61,7 @@ export const TwoColumnLayoutBlock = async ({
               )}
               {title && <Title text={title} heading={heading ?? 'h2'} />}
               {description && <Description text={description} />}
-              {links && (
-                <CTALinks links={links} className={mobileHeroLinks ? 'hidden lg:flex' : ''} />
-              )}
-              {/* Mobile Links */}
-              {mobileHeroLinks ? (
-                <div className="flex flex-col space-y-4 md:mr-4 lg:hidden">
-                  <Link
-                    href={cleanedPhone ? `tel:${cleanedPhone}` : '#'}
-                    className={cn(
-                      buttonVariants({ variant: 'brand', size: 'xl' }),
-                      'xl:hidden min-w-full lg:min-w-64',
-                    )}
-                  >
-                    <Icons.phone className="mr-2" />
-                    Call Now
-                  </Link>
-                  <Link
-                    href={contact?.physicalAddress.googleMapLink ?? '#'}
-                    className={cn(
-                      buttonVariants({ variant: 'brandOutline', size: 'xl' }),
-                      'xl:hidden min-w-full lg:min-w-64',
-                    )}
-                  >
-                    <Icons.navigation className="mr-2" />
-                    Directions to our Building
-                  </Link>
-                </div>
-              ) : null}
+              {links && <CTALinks links={links} />}
             </>
           ) : (
             richText && <RichText data={richText} className="lg:text-lg" />
@@ -107,9 +69,8 @@ export const TwoColumnLayoutBlock = async ({
         </div>
         <div
           className={cn('order-2', {
-            'flex items-center justify-center': !sticky,
+            'flex flex-col items-center justify-center': !sticky,
             'sticky xl:top-20 xl:pt-2': sticky,
-            relative: svg,
             'sm:order-1': direction === 'rtl' && breakpoint === 'sm',
             'md:order-1': direction === 'rtl' && breakpoint === 'md',
             'lg:order-1': direction === 'rtl' && breakpoint === 'lg',
@@ -117,21 +78,15 @@ export const TwoColumnLayoutBlock = async ({
           })}
         >
           {columnTwoType === 'form' ? (
-            form && <RenderBlocks blocks={form} />
-          ) : validImages.length > 1 ? (
-            <div className="relative">
-              <RichTextCarousel images={validImages} priority={priority ?? false} />
-              {svg && <HeroSVG direction={direction} />}
-            </div>
-          ) : images?.[0] && typeof images[0] === 'object' ? (
-            <div className="relative">
-              <Media
-                className="relative"
-                imgClassName="rounded-lg shadow-lg ring-1 ring-gray-400/10"
-                resource={validImages[0] ?? '/women-laptop.webp'}
+            form && <RenderBlocks blocks={form} nested />
+          ) : validImages.length > 0 ? (
+            <div className="self-start w-full">
+              <RichTextCarousel
+                direction={direction}
+                images={validImages}
                 priority={priority ?? false}
+                showCornerDots={svg ?? false}
               />
-              {svg && <HeroSVG direction={direction} />}
             </div>
           ) : null}
         </div>
