@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
 import { Mail, MapPin, Phone, Clock, Shield } from 'lucide-react'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 interface ContactCardProps {
   type: 'email' | 'phone' | 'address' | 'hours' | 'form'
@@ -30,28 +30,17 @@ const colorMap = {
   form: 'text-green-600 bg-green-100',
 }
 
-export const ContactCard = ({ 
-  type, 
-  title, 
-  description, 
-  value, 
-  href, 
+export const ContactCard = ({
+  type,
+  title,
+  description,
+  value,
+  href,
   className = '',
-  children 
+  children,
 }: ContactCardProps) => {
   const Icon = iconMap[type]
   const colorClasses = colorMap[type]
-  
-  const CardWrapper = ({ children: cardChildren }: { children: ReactNode }) => {
-    if (href) {
-      return (
-        <a href={href} className="block group">
-          {cardChildren}
-        </a>
-      )
-    }
-    return <>{cardChildren}</>
-  }
 
   if (type === 'form') {
     return (
@@ -78,29 +67,37 @@ export const ContactCard = ({
     )
   }
 
-  return (
-    <CardWrapper>
-      <Card className={`group bg-card rounded-xl border shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${className}`}>
-        <CardHeader className="pb-4">
-          <span className={`mb-4 flex size-12 flex-col items-center justify-center rounded-full transition-transform group-hover:scale-110 ${colorClasses}`}>
-            <Icon className="w-6 h-6" />
+  const cardContent = (
+    <Card className={`group bg-card rounded-xl border shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${className}`}>
+      <CardHeader className="pb-4">
+        <span className={`mb-4 flex size-12 flex-col items-center justify-center rounded-full transition-transform group-hover:scale-110 ${colorClasses}`}>
+          <Icon className="w-6 h-6" />
+        </span>
+        <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+        {description && (
+          <CardDescription className="text-sm leading-relaxed">{description}</CardDescription>
+        )}
+      </CardHeader>
+      <CardContent className="pt-0">
+        {href ? (
+          <span className="inline-flex items-center font-semibold transition-colors text-primary hover:underline">
+            {value}
           </span>
-          <CardTitle className="text-lg font-semibold">{title}</CardTitle>
-          {description && (
-            <CardDescription className="text-sm leading-relaxed">{description}</CardDescription>
-          )}
-        </CardHeader>
-        <CardContent className="pt-0">
-          {href ? (
-            <span className="inline-flex items-center font-semibold transition-colors text-primary hover:underline">
-              {value}
-            </span>
-          ) : (
-            <div className="font-medium">{value}</div>
-          )}
-          {children}
-        </CardContent>
-      </Card>
-    </CardWrapper>
+        ) : (
+          <div className="font-medium">{value}</div>
+        )}
+        {children}
+      </CardContent>
+    </Card>
   )
+
+  if (href) {
+    return (
+      <a href={href} className="block group">
+        {cardContent}
+      </a>
+    )
+  }
+
+  return cardContent
 }

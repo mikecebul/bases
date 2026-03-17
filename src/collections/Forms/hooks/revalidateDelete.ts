@@ -10,7 +10,7 @@ export const revalidateDelete: CollectionAfterDeleteHook<Form> = ({
     // Revalidate root layout to update all pages using this form
     revalidatePath('/', 'layout')
 
-    revalidateTag('sitemap')
+    revalidateTag('sitemap', 'max')
   }
 
   return doc

@@ -3,7 +3,7 @@
 import type { Data, TextFieldClientComponent } from 'payload'
 
 import { TextField, useLocale, useWatchForm } from '@payloadcms/ui'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 
 type FieldWithID = {
   id: string
@@ -16,31 +16,33 @@ const DynamicPriceSelector: TextFieldClientComponent = (props) => {
   const { fields, getData, getDataByPath } = useWatchForm()
 
   const locale = useLocale()
-
-  const [isNumberField, setIsNumberField] = useState<boolean>()
-  const [valueType, setValueType] = useState<'static' | 'valueOfField'>()
-
-  // only number fields can use 'valueOfField`
-  useEffect(() => {
-    if (path) {
-      const parentPath = path.split('.').slice(0, -1).join('.')
-      const paymentFieldData: any = getDataByPath(parentPath)
-
-      if (paymentFieldData) {
-        const { fieldToUse, valueType } = paymentFieldData
-
-        setValueType(valueType)
-
-        const { fields: allFields }: Data = getData()
-        const field = allFields.find((field: FieldWithID) => field.name === fieldToUse)
-
-        if (field) {
-          const { blockType } = field
-          setIsNumberField(blockType === 'number')
-        }
+  const { isNumberField, valueType } = useMemo(() => {
+    if (!path) {
+      return {
+        isNumberField: undefined,
+        valueType: undefined,
       }
     }
-  }, [fields, getDataByPath, getData, path])
+
+    const parentPath = path.split('.').slice(0, -1).join('.')
+    const paymentFieldData: any = getDataByPath(parentPath)
+
+    if (!paymentFieldData) {
+      return {
+        isNumberField: undefined,
+        valueType: undefined,
+      }
+    }
+
+    const { fieldToUse, valueType } = paymentFieldData
+    const { fields: allFields }: Data = getData()
+    const field = allFields.find((field: FieldWithID) => field.name === fieldToUse)
+
+    return {
+      isNumberField: field ? field.blockType === 'number' : undefined,
+      valueType,
+    }
+  }, [fields, getData, getDataByPath, path])
 
   // TODO: make this a number field, block by Payload
   if (valueType === 'static') {

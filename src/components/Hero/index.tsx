@@ -2,9 +2,11 @@ import Image from 'next/image'
 import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/Icons'
 import { cn } from '@/utilities/cn'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import type { CompanyInfo, Hero as HeroType } from '@/payload-types'
 import { CMSLink } from '../Link'
 import { getCachedGlobal } from '@/utilities/getGlobals'
+import { HeroCornerDots } from './HeroCornerDots'
 
 type Props = NonNullable<HeroType['highImpact']>
 
@@ -56,66 +58,21 @@ export async function Hero({ title, description, image, links }: Props) {
             ))}
         </div>
       </div>
-      <div className="relative">
+      <div className="relative self-start lg:col-span-6">
         {image != null && typeof image === 'object' && (
           <>
             <Image
-              src={image.url ?? '/woman-laptop.webp'}
+              src={getMediaUrl(image.url) || '/woman-laptop.webp'}
               alt={image.alt ?? 'Woman using telehealth services from home.'}
               className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
               width={image.width ?? 0}
               height={image.height ?? 0}
               priority
             />
-            <HeroSVG />
+            <HeroCornerDots />
           </>
         )}
       </div>
     </section>
-  )
-}
-
-export const HeroSVG = ({ direction = 'ltr' }: { direction?: 'ltr' | 'rtl' | null }) => {
-  return (
-    <span
-      className={cn('hidden xl:block absolute -z-10 text-brand', {
-        '-bottom-9 -left-9': direction === 'ltr' || direction === 'rtl',
-        // '-bottom-9 -left-9': direction === 'ltr',
-      })}
-    >
-      <svg
-        width="93"
-        height="93"
-        viewBox="0 0 93 93"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="2.5" cy="2.5" r="2.5" />
-        <circle cx="2.5" cy="24.5" r="2.5" />
-        <circle cx="2.5" cy="46.5" r="2.5" />
-        <circle cx="2.5" cy="68.5" r="2.5" />
-        <circle cx="2.5" cy="90.5" r="2.5" />
-        <circle cx="24.5" cy="2.5" r="2.5" />
-        <circle cx="24.5" cy="24.5" r="2.5" />
-        <circle cx="24.5" cy="46.5" r="2.5" />
-        <circle cx="24.5" cy="68.5" r="2.5" />
-        <circle cx="24.5" cy="90.5" r="2.5" />
-        <circle cx="46.5" cy="2.5" r="2.5" />
-        <circle cx="46.5" cy="24.5" r="2.5" />
-        <circle cx="46.5" cy="46.5" r="2.5" />
-        <circle cx="46.5" cy="68.5" r="2.5" />
-        <circle cx="46.5" cy="90.5" r="2.5" />
-        <circle cx="68.5" cy="2.5" r="2.5" />
-        <circle cx="68.5" cy="24.5" r="2.5" />
-        <circle cx="68.5" cy="46.5" r="2.5" />
-        <circle cx="68.5" cy="68.5" r="2.5" />
-        <circle cx="68.5" cy="90.5" r="2.5" />
-        <circle cx="90.5" cy="2.5" r="2.5" />
-        <circle cx="90.5" cy="24.5" r="2.5" />
-        <circle cx="90.5" cy="46.5" r="2.5" />
-        <circle cx="90.5" cy="68.5" r="2.5" />
-        <circle cx="90.5" cy="90.5" r="2.5" />
-      </svg>
-    </span>
   )
 }

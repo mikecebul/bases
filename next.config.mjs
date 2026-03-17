@@ -7,9 +7,6 @@ const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   serverExternalPackages: [`require-in-the-middle`],
   output: process.env.NEXT_OUTPUT === 'standalone' ? 'standalone' : undefined,
   images: {

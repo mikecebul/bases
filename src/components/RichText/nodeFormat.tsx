@@ -1,8 +1,8 @@
-// @ts-nocheck
 //This copy-and-pasted from lexical here: https://github.com/facebook/lexical/blob/c2ceee223f46543d12c574e62155e619f9a18a5d/packages/lexical/src/LexicalConstants.ts
 
-import type { ElementFormatType, TextFormatType } from 'lexical'
-import type { TextDetailType, TextModeType } from 'lexical/nodes/LexicalTextNode'
+import type { ElementFormatType, TextFormatType, TextModeType } from 'lexical'
+
+type TextDetailType = 'directionless' | 'unmergeable' | 'unmergable'
 
 /**
  * Copyright (c) Meta Platforms, Inc. and affiliates.
@@ -61,8 +61,6 @@ export const IS_ALIGN_END = 6
 
 // Reconciliation
 export const NON_BREAKING_SPACE = '\u00A0'
-const ZERO_WIDTH_SPACE = '\u200b'
-
 export const DOUBLE_LINE_BREAK = '\n\n'
 
 // For FF, we need to use a non-breaking space, or it gets composition

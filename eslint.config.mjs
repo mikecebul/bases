@@ -1,12 +1,12 @@
-import { FlatCompat } from '@eslint/eslintrc'
 import { defineConfig, globalIgnores } from 'eslint/config'
-
-const compat = new FlatCompat({
-  // import.meta.dirname is available after Node.js v20.11.0
-  baseDirectory: import.meta.dirname,
-})
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTypescript from 'eslint-config-next/typescript'
+import prettier from 'eslint-config-prettier'
 
 const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTypescript,
+  prettier,
   globalIgnores([
     '.tmp/**',
     '**/.git/**',
@@ -23,12 +23,11 @@ const eslintConfig = defineConfig([
     'jest.config.js',
     'src/payload-types.ts',
   ]),
-  ...compat.config({
-    extends: ['next', 'prettier'],
+  {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
     },
-  }),
+  },
 ])
 
 export default eslintConfig

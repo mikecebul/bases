@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## Project Overview
 
@@ -20,11 +20,11 @@ This is a Next.js 15 application built with PayloadCMS for content management, s
 ## Architecture
 
 ### Core Technologies
-- **Framework**: Next.js 15 with React 19
-- **CMS**: PayloadCMS 3.48.0 with MongoDB database
+- **Framework**: Next.js
+- **CMS**: PayloadCMS with MongoDB database
 - **Styling**: TailwindCSS with Shadcn/ui components
-- **Animations**: Framer Motion (motion v12)
-- **Forms**: React Hook Form with TanStack Form
+- **Animations**: Framer Motion
+- **Forms**: TanStack Form
 - **Storage**: S3-compatible storage (Cloudflare R2)
 
 ### Application Structure

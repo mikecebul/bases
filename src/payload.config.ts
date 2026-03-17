@@ -51,6 +51,7 @@ import { Subtitle } from './components/Hero/HeroMedium'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const databaseURL = process.env.DATABASE_URI || process.env.MONGODB_URI
 
 const generateTitle: GenerateTitle<TeamType | Page> = ({ doc }) => {
   if ('name' in doc) {
@@ -222,7 +223,7 @@ export default buildConfig({
     disable: true,
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI!,
+    url: databaseURL!,
   }),
   collections: [Pages, Services, Team, Media, Users, Forms, FormSubmissions],
   globals: [Header, Footer, CompanyInfo],
@@ -277,7 +278,7 @@ export default buildConfig({
         admin: {
           group: 'Admin',
         },
-        // @ts-expect-error
+        // @ts-expect-error Payload's redirects plugin typing does not expose this override shape correctly.
         fields: ({ defaultFields }) => {
           return defaultFields.map((field) => {
             if ('name' in field && field.name === 'from') {

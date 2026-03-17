@@ -3,7 +3,7 @@
 import type { SelectFieldClientProps, SelectFieldValidation } from 'payload'
 
 import { SelectField, useForm } from '@payloadcms/ui'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 
 interface SelectFieldOption {
   label: string
@@ -15,31 +15,34 @@ const DynamicFieldSelector: React.FC<
 > = (props) => {
   const { fields, getDataByPath } = useForm()
 
-  const [options, setOptions] = useState<SelectFieldOption[]>([])
+  const options = useMemo(() => {
+    const formFields = (getDataByPath('fields') as any[] | undefined) ?? []
 
-  useEffect(() => {
-    const fields: any[] = getDataByPath('fields')
+    return formFields
+      .map((block): null | SelectFieldOption => {
+        const { name, blockType, label } = block
 
-    if (fields) {
-      const allNonPaymentFields = fields
-        .map((block): null | SelectFieldOption => {
-          const { name, blockType, label } = block
-
-          if (blockType !== 'payment') {
-            return {
-              label,
-              value: name,
-            }
+        if (blockType !== 'payment') {
+          return {
+            label,
+            value: name,
           }
+        }
 
-          return null
-        })
-        .filter(Boolean) as SelectFieldOption[]
-      setOptions(allNonPaymentFields)
-    }
+        return null
+      })
+      .filter(Boolean) as SelectFieldOption[]
   }, [fields, getDataByPath])
 
-  return <SelectField {...props} />
+  return (
+    <SelectField
+      {...props}
+      field={{
+        ...props.field,
+        options,
+      }}
+    />
+  )
 }
 
 export default DynamicFieldSelector

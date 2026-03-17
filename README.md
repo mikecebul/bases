@@ -61,7 +61,7 @@ Before running the application, you need to set up the following services:
 1. **MongoDB Database**
 
    - Create a new database
-   - Add the connection string to `MONGODB_URI` in your `.env` file
+   - Add the connection string to `DATABASE_URI` in your `.env` file
 
 2. **S3 Compatible Storage (Cloudflare R2)**
    - Set `S3_ENABLED=true` for production
@@ -175,7 +175,7 @@ sudo apt-get install mongodb-database-tools
 2. To restore to a new database name:
 
 ```bash
-mongorestore --uri="YOUR_MONGODB_URI" \
+mongorestore --uri="YOUR_DATABASE_URI" \
   --nsInclude="original-db-name.*" \
   --nsFrom="original-db-name.*" \
   --nsTo="new-db-name.*" \
@@ -188,7 +188,7 @@ mongorestore --uri="YOUR_MONGODB_URI" \
 ##### MongoDB Shell (mongosh):
 
 ```bash
-mongosh "YOUR_MONGODB_URI"
+mongosh "YOUR_DATABASE_URI"
 use database-name
 db.dropDatabase()
 ```
@@ -205,7 +205,7 @@ db.dropDatabase()
 ##### Then restore (notice we don't need nsFrom/nsTo when keeping the same name)
 
 ```bash
-mongorestore --uri="YOUR_MONGODB_URI" \
+mongorestore --uri="YOUR_DATABASE_URI" \
  --nsInclude="database-name.\*" \
  --gzip \
  --archive=".dumps/your-backup-file.gz"
@@ -235,6 +235,6 @@ This project is deployed on a VPS (Virtual Private Server) with Hetzner using [D
 Update your production `.env` file with MongoDB connection details:
 
 ```bash
-MONGODB_URI=mongodb://username:password@localhost:27017/database
+DATABASE_URI=mongodb://username:password@localhost:27017/database
 # ... other existing env vars ...
 ```

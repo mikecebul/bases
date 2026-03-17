@@ -2,6 +2,7 @@
 
 import Container from '@/components/Container'
 import type { CarfBlock as CarfBlockType } from '@/payload-types'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 
@@ -19,7 +20,7 @@ export const CarfBlock = ({ subtitle, title, description, image }: CarfBlockType
           {!!image && typeof image === 'object' && (
             <Image
               alt={image?.alt}
-              src={image.url ?? '/placeholder.svg'}
+              src={getMediaUrl(image.url) || '/placeholder.svg'}
               width={image.width ?? 800}
               height={image.height ?? 800}
               className="w-32 lg:w-48"

@@ -3,16 +3,12 @@ import { CTALinks } from '@/components/CTALinks'
 import { Description, Title } from '@/components/Hero/HeroMedium'
 import { Icon } from '@/components/Icons/Icon'
 import { Badge } from '@/components/ui/badge'
-import type { CompanyInfo, TwoColumnLayoutBlock as TwoColumnLayoutBlockType } from '@/payload-types'
+import type { TwoColumnLayoutBlock as TwoColumnLayoutBlockType } from '@/payload-types'
 import { cn } from '@/utilities/cn'
 import { RichText } from '@/components/RichText'
 import { RenderBlocks } from '../RenderBlocks'
 import RichTextCarousel from '../RichText/RichTextCarousel'
 import { imagesAsMedia } from '@/utilities/imagesAsMedia'
-import { HeroSVG } from '@/components/Hero'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Media } from '@/components/Media'
 
 export const TwoColumnLayoutBlock = async ({
   direction = 'ltr',
@@ -38,7 +34,7 @@ export const TwoColumnLayoutBlock = async ({
   const validImages = imagesAsMedia(images)
 
   return (
-    <Container className="xl:overflow-visible">
+    <Container className="overflow-visible">
       <div
         className={cn('grid grid-cols-1 gap-12', `${breakpoint}:grid-cols-2`, {
           'xl:items-start': sticky,
@@ -75,7 +71,6 @@ export const TwoColumnLayoutBlock = async ({
           className={cn('order-2', {
             'flex flex-col items-center justify-center': !sticky,
             'sticky xl:top-20 xl:pt-2': sticky,
-            relative: svg,
             'sm:order-1': direction === 'rtl' && breakpoint === 'sm',
             'md:order-1': direction === 'rtl' && breakpoint === 'md',
             'lg:order-1': direction === 'rtl' && breakpoint === 'lg',
@@ -84,20 +79,14 @@ export const TwoColumnLayoutBlock = async ({
         >
           {columnTwoType === 'form' ? (
             form && <RenderBlocks blocks={form} nested />
-          ) : validImages.length > 1 ? (
-            <div className="relative">
-              <RichTextCarousel images={validImages} priority={priority ?? false} />
-              {svg && <HeroSVG direction={direction} />}
-            </div>
-          ) : images?.[0] && typeof images[0] === 'object' ? (
-            <div className="relative">
-              <Media
-                className="relative"
-                imgClassName="rounded-lg shadow-lg ring-1 ring-gray-400/10"
-                resource={validImages[0] ?? '/women-laptop.webp'}
+          ) : validImages.length > 0 ? (
+            <div className="self-start w-full">
+              <RichTextCarousel
+                direction={direction}
+                images={validImages}
                 priority={priority ?? false}
+                showCornerDots={svg ?? false}
               />
-              {svg && <HeroSVG direction={direction} />}
             </div>
           ) : null}
         </div>

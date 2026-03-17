@@ -1,6 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import Image from 'next/image'
 import type { LinkCard as LinkCardType } from './VideoCard'
 
@@ -13,7 +14,7 @@ export const LinkCard = ({ card }: { card: LinkCardType }) => {
             typeof card.image === 'object' &&
             typeof card.image?.url === 'string' && (
               <Image
-                src={card.image.url}
+                src={getMediaUrl(card.image.url)}
                 alt={card.image.alt}
                 width={800}
                 height={800}
