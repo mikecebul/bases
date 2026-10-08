@@ -5,6 +5,7 @@ import { cn } from '@/utilities/cn'
 import type { CompanyInfo, Hero as HeroType } from '@/payload-types'
 import { CMSLink } from '../Link'
 import { getCachedGlobal } from '@/utilities/getGlobals'
+import { getMediaSource } from '@/utilities/getMediaSource'
 
 type Props = NonNullable<HeroType['highImpact']>
 
@@ -50,21 +51,29 @@ export async function Hero({ title, description, image, links }: Props) {
                 key={id}
                 {...link}
                 size="xl"
-                appearance={index === 0 ? 'brand' : link.appearance === 'primary' ? 'default' : link.appearance}
+                appearance={
+                  index === 0
+                    ? 'brand'
+                    : link.appearance === 'primary'
+                      ? 'default'
+                      : link.appearance
+                }
                 className="hidden rounded-lg xl:flex lg:min-w-64"
               />
             ))}
         </div>
       </div>
       <div className="relative">
-        {image != null && typeof image === 'object' && (
+        {image != null && typeof image === 'object' && image.url && (
           <>
             <Image
-              src={image.url ?? '/woman-laptop.webp'}
+              src={getMediaSource(image)!.src}
+              style={{ objectPosition: getMediaSource(image)!.objectPosition }}
               alt={image.alt ?? 'Woman using telehealth services from home.'}
               className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
-              width={image.width ?? 0}
-              height={image.height ?? 0}
+              width={image.width || 960}
+              height={image.height || 640}
+              sizes="(min-width: 1024px) 50vw, 100vw"
               priority
             />
             <HeroSVG />

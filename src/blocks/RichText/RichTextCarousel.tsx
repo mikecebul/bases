@@ -5,6 +5,7 @@ import type { Media } from '@/payload-types'
 import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
 import Image from 'next/image'
+import { getMediaSource } from '@/utilities/getMediaSource'
 
 export default function RichTextCarousel({
   images,
@@ -26,18 +27,22 @@ export default function RichTextCarousel({
     >
       {/* Needs better type checking system */}
       <CarouselContent>
-        {images.map((image, index) => (
-          <CarouselItem key={image.id} className="relative">
-            <Image
-              className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
-              src={image.url ?? ''}
-              alt={image.alt ?? ''}
-              width={image.width ?? 960}
-              height={image.height ?? 640}
-              priority={index === 0 ? (priority ?? false) : false}
-            />
-          </CarouselItem>
-        ))}
+        {images
+          .filter((image) => image?.url)
+          .map((image, index) => (
+            <CarouselItem key={image.id} className="relative">
+              <Image
+                className="object-cover w-full max-w-3xl rounded-lg shadow-lg ring-1 ring-gray-400/10 max-h-96"
+                src={getMediaSource(image)!.src}
+                style={{ objectPosition: getMediaSource(image)!.objectPosition }}
+                alt={image.alt ?? ''}
+                width={image.width ?? 960}
+                height={image.height ?? 640}
+                sizes="(min-width: 1280px) 50vw, 100vw"
+                priority={index === 0 ? (priority ?? false) : false}
+              />
+            </CarouselItem>
+          ))}
       </CarouselContent>
     </Carousel>
   )

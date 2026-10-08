@@ -3,6 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
 import Image from 'next/image'
 import type { LinkCard as LinkCardType } from './VideoCard'
+import { getMediaSource } from '@/utilities/getMediaSource'
 
 export const LinkCard = ({ card }: { card: LinkCardType }) => {
   return (
@@ -13,10 +14,12 @@ export const LinkCard = ({ card }: { card: LinkCardType }) => {
             typeof card.image === 'object' &&
             typeof card.image?.url === 'string' && (
               <Image
-                src={card.image.url}
+                src={getMediaSource(card.image)!.src}
+                style={{ objectPosition: getMediaSource(card.image)!.objectPosition }}
                 alt={card.image.alt}
-                width={800}
-                height={800}
+                width={card.image.width || 800}
+                height={card.image.height || 800}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="object-cover transition-transform duration-300 ease-in-out max-h-60 group-hover:scale-105"
               />
             )}

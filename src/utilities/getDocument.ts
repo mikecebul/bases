@@ -27,5 +27,5 @@ async function getDocument(collection: Collection, slug: string, depth = 0) {
  */
 export const getCachedDocument = (collection: Collection, slug: string) =>
   unstable_cache(async () => getDocument(collection, slug), [collection, slug], {
-    tags: [`${collection}_${slug}`],
+    tags: [`${collection}_${slug}`, 'media'],
   })

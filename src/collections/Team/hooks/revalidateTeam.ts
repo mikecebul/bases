@@ -7,8 +7,10 @@ import type { Team } from '@/payload-types'
 export const revalidateTeam: CollectionAfterChangeHook<Team> = ({
   doc,
   previousDoc,
-  req: { payload },
+  req: { payload, context },
 }) => {
+  if (context.disableRevalidate) return doc
+
   if (doc._status === 'published') {
     const path = `/team/${doc.slug}`
 
@@ -16,17 +18,22 @@ export const revalidateTeam: CollectionAfterChangeHook<Team> = ({
 
     revalidatePath(path)
     revalidatePath('/team')
+    revalidatePath('/(frontend)', 'layout')
     revalidateTag('sitemap')
   }
 
   // If the post was previously published, we need to revalidate the old path
-  if (previousDoc._status === 'published' && doc._status !== 'published') {
+  if (
+    previousDoc?._status === 'published' &&
+    (doc._status !== 'published' || previousDoc.slug !== doc.slug)
+  ) {
     const oldPath = `/team/${previousDoc.slug}`
 
     payload.logger.info(`Revalidating old team member at path: ${oldPath}`)
 
     revalidatePath(oldPath)
     revalidatePath('/team')
+    revalidatePath('/(frontend)', 'layout')
     revalidateTag('sitemap')
   }
   return doc
