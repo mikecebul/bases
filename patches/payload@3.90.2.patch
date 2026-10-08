@@ -1,0 +1,160 @@
+diff --git a/dist/uploads/cropImage.js b/dist/uploads/cropImage.js
+index e617668fa576f9c0bbc673f4b96f3ed4a4a6279d..79c975474550f2b6181898e9ec6c9a114e259ffa 100644
+--- a/dist/uploads/cropImage.js
++++ b/dist/uploads/cropImage.js
+@@ -12,10 +12,35 @@ export async function cropImage({ cropData, dimensions, file: fileArg, heightInP
+         if (fileIsAnimatedType) {
+             sharpOptions.animated = true;
+         }
+-        const { height: originalHeight, width: originalWidth } = dimensions;
+-        const newWidth = Number(widthInPixels);
+-        const newHeight = Number(heightInPixels);
+-        const dimensionsChanged = originalWidth !== newWidth || originalHeight !== newHeight;
++        // The browser crops the displayed, EXIF-oriented image. Normalize the
++        // pixels first so extraction uses that same coordinate system.
++        const source = file.tempFilePath || file.data;
++        const metadata = await sharp(source, sharpOptions).metadata();
++        let cropSource = source;
++        let originalWidth = metadata.width || dimensions.width;
++        let originalHeight = metadata.height || dimensions.height;
++        if (metadata.orientation && metadata.orientation !== 1) {
++            const oriented = await sharp(source, sharpOptions).rotate().toBuffer({ resolveWithObject: true });
++            cropSource = oriented.data;
++            originalWidth = oriented.info.width;
++            originalHeight = oriented.info.height;
++        }
++        const left = percentToPixel(x, originalWidth);
++        const top = percentToPixel(y, originalHeight);
++        // Prefer the selected percentages over stale or rounded pixel inputs.
++        const percentCrop = cropData.unit === '%' && Number(cropData.width) > 0 && Number(cropData.height) > 0;
++        const newWidth = percentCrop ? Math.round(Number(cropData.width) / 100 * originalWidth) : Number(widthInPixels);
++        const newHeight = percentCrop ? Math.round(Number(cropData.height) / 100 * originalHeight) : Number(heightInPixels);
++        const remainingWidth = originalWidth - left;
++        const remainingHeight = originalHeight - top;
++        if (![left, top, newWidth, newHeight].every(Number.isFinite) ||
++            left < 0 || top < 0 || newWidth < 1 || newHeight < 1 ||
++            newWidth > remainingWidth + 1 || newHeight > remainingHeight + 1) {
++            throw new Error('Crop exceeds the current image bounds. Reopen the image editor and select the crop again.');
++        }
++        const cropWidth = Math.min(newWidth, remainingWidth);
++        const cropHeight = Math.min(newHeight, remainingHeight);
++        const dimensionsChanged = left !== 0 || top !== 0 || originalWidth !== cropWidth || originalHeight !== cropHeight;
+         if (!dimensionsChanged) {
+             let adjustedHeight = originalHeight;
+             if (fileIsAnimatedType) {
+@@ -23,7 +48,7 @@ export async function cropImage({ cropData, dimensions, file: fileArg, heightInP
+                 adjustedHeight = animatedMetadata.pages ? animatedMetadata.height : originalHeight;
+             }
+             return {
+-                data: file.data,
++                data: Buffer.isBuffer(cropSource) ? cropSource : await sharp(cropSource, sharpOptions).toBuffer(),
+                 info: {
+                     height: adjustedHeight,
+                     size: file.size,
+@@ -32,12 +57,12 @@ export async function cropImage({ cropData, dimensions, file: fileArg, heightInP
+             };
+         }
+         const formattedCropData = {
+-            height: Number(heightInPixels),
+-            left: percentToPixel(x, dimensions.width),
+-            top: percentToPixel(y, dimensions.height),
+-            width: Number(widthInPixels)
++            height: cropHeight,
++            left,
++            top,
++            width: cropWidth
+         };
+-        let cropped = sharp(file.tempFilePath || file.data, sharpOptions).extract(formattedCropData);
++        let cropped = sharp(cropSource, sharpOptions).extract(formattedCropData);
+         cropped = await optionallyAppendMetadata({
+             req: req,
+             sharpFile: cropped,
+diff --git a/dist/uploads/generateFileData.js b/dist/uploads/generateFileData.js
+index f1032b8ba0487d02c279a1558fde719356bdd12b..572b5c798dd57c3bcd3c0c17867a95deccda9f5e 100644
+--- a/dist/uploads/generateFileData.js
++++ b/dist/uploads/generateFileData.js
+@@ -228,55 +228,40 @@ const shouldReupload = (uploadEdits, fileData)=>{
+                 widthInPixels: uploadEdits.widthInPixels,
+                 withMetadata
+             });
+-            // Apply resize after cropping to ensure it conforms to resizeOptions
+-            if (resizeOptions && !resizeOptions.withoutEnlargement) {
+-                const resizedAfterCrop = await sharp(croppedImage).resize({
+-                    fit: resizeOptions?.fit || 'cover',
+-                    height: resizeOptions?.height,
+-                    position: resizeOptions?.position || 'center',
+-                    width: resizeOptions?.width
+-                }).toBuffer({
+-                    resolveWithObject: true
+-                });
+-                filesToSave.push({
+-                    buffer: resizedAfterCrop.data,
+-                    path: `${staticPath}/${fsSafeName}`
+-                });
+-                fileForResize = {
+-                    ...fileForResize,
+-                    data: resizedAfterCrop.data,
+-                    size: resizedAfterCrop.info.size
+-                };
+-                fileData.width = resizedAfterCrop.info.width;
+-                fileData.height = resizedAfterCrop.info.height;
+-                if (fileIsAnimatedType) {
+-                    const metadata = await sharpFile.metadata();
+-                    fileData.height = metadata.pages ? resizedAfterCrop.info.height / metadata.pages : resizedAfterCrop.info.height;
+-                }
+-                fileData.filesize = resizedAfterCrop.info.size;
+-            } else {
+-                // If resizeOptions is not present, just save the cropped image
+-                filesToSave.push({
+-                    buffer: croppedImage,
+-                    path: `${staticPath}/${fsSafeName}`
+-                });
+-                fileForResize = {
+-                    ...file,
+-                    data: croppedImage,
+-                    size: info.size
++            // Crop first, then apply all original-image resize and format options.
++            // withoutEnlargement prevents upscaling; it must not skip formatting
++            // or the maximum source width on cropped uploads.
++            let croppedOutput = sharp(croppedImage, sharpOptions);
++            if (resizeOptions) {
++                croppedOutput = croppedOutput.resize(resizeOptions);
++            }
++            if (formatOptions) {
++                croppedOutput = croppedOutput.toFormat(formatOptions.format, formatOptions.options);
++            }
++            croppedOutput = await optionallyAppendMetadata({ req, sharpFile: croppedOutput, withMetadata });
++            const savedCrop = await croppedOutput.toBuffer({ resolveWithObject: true });
++            filesToSave.push({ buffer: savedCrop.data, path: `${staticPath}/${fsSafeName}` });
++            fileForResize = { ...file, data: savedCrop.data, size: savedCrop.info.size };
++            fileData.width = savedCrop.info.width;
++            fileData.height = savedCrop.info.height;
++            if (fileIsAnimatedType) {
++                const metadata = await sharpFile.metadata();
++                fileData.height = metadata.pages ? savedCrop.info.height / metadata.pages : savedCrop.info.height;
++            }
++            fileData.filesize = savedCrop.info.size;
++            // The UI reports its focal point relative to the uncropped image.
++            // Derivatives and frontend CSS need coordinates within the saved crop.
++            if (uploadEdits.focalPoint && cropData.unit === '%' &&
++                Number(cropData.width) > 0 && Number(cropData.height) > 0) {
++                uploadEdits.focalPoint = {
++                    x: Math.max(0, Math.min(100, (Number(uploadEdits.focalPoint.x) - Number(cropData.x)) * 100 / Number(cropData.width))),
++                    y: Math.max(0, Math.min(100, (Number(uploadEdits.focalPoint.y) - Number(cropData.y)) * 100 / Number(cropData.height)))
+                 };
+-                fileData.width = info.width;
+-                fileData.height = info.height;
+-                if (fileIsAnimatedType) {
+-                    const metadata = await sharpFile.metadata();
+-                    fileData.height = metadata.pages ? info.height / metadata.pages : info.height;
+-                }
+-                fileData.filesize = info.size;
+             }
+             delete file.clientUploadContext;
+             delete fileForResize.clientUploadContext;
+             if (file.tempFilePath) {
+-                await fs.writeFile(file.tempFilePath, croppedImage); // write fileBuffer to the temp path
++                await fs.writeFile(file.tempFilePath, savedCrop.data); // keep cloud storage and resizes on the final bytes
+             } else {
+                 req.file = fileForResize;
+             }

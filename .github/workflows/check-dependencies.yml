@@ -6,6 +6,10 @@ on:
       - Dockerfile
       - package.json
       - pnpm-lock.yaml
+      - 'patches/**'
+      - 'src/**'
+      - 'tests/**'
+      - tsconfig.json
       - .github/workflows/check-dependencies.yml
   workflow_dispatch:
 
@@ -19,3 +23,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify frozen dependency install in Docker
         run: docker build --target deps --tag bases-dependency-check .
+      - name: Verify media uploads and initial rendering in Alpine
+        run: |
+          docker run --rm \
+            -v "$PWD/src:/app/src:ro" \
+            -v "$PWD/tests:/app/tests:ro" \
+            -v "$PWD/tsconfig.json:/app/tsconfig.json:ro" \
+            bases-dependency-check \
+            sh -c 'pnpm run test:uploads && pnpm run test:media && pnpm run test:loading'

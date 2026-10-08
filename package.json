@@ -6,7 +6,7 @@
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--no-deprecation payload migrate && next build",
+    "build": "pnpm run generate:importmap && cross-env NODE_OPTIONS=--no-deprecation payload migrate && next build",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --turbo",
     "build:dev": "cross-env NODE_OPTIONS=--no-deprecation rm -rf .next && pnpm build && pnpm start",
@@ -21,6 +21,7 @@
     "reinstall": "cross-env NODE_OPTIONS=--no-deprecation rm -rf node_modules && rm pnpm-lock.yaml && pnpm install",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test:media": "node --import tsx tests/media.test.ts",
+    "test:uploads": "node --import tsx tests/media-upload.test.ts",
     "test:loading": "cross-env TSX_TSCONFIG_PATH=tests/tsconfig.json node --import tsx tests/initial-render.test.tsx"
   },
   "dependencies": {
@@ -100,8 +101,8 @@
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "tailwindcss": "4.1.12",
-    "typescript": "5.9.2",
-    "tsx": "4.22.4"
+    "tsx": "4.22.4",
+    "typescript": "5.9.2"
   },
   "engines": {
     "node": "^20.18.1 || >=22.0.0",
@@ -114,6 +115,9 @@
       "esbuild",
       "sharp",
       "unrs-resolver"
-    ]
+    ],
+    "patchedDependencies": {
+      "payload@3.90.2": "patches/payload@3.90.2.patch"
+    }
   }
 }

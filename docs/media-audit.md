@@ -34,6 +34,7 @@ Payload and its runtime plugins are aligned at **3.90.2**, Next and its ESLint p
 
 ## Verification
 
+- Production-editing follow-up: Payload 3.90.2 now has a version-specific patch for EXIF-oriented crops, stale pixel inputs, crop-relative focal coordinates, and applying WebP/resize options after cropping. `pnpm run test:uploads` exercises the full `generateFileData` pipeline for new and existing uploads. Docker installs the committed patch and CI runs the media tests in Alpine. The build regenerates the admin import map before compilation. The missing underscore URL reported on October 8 returned 404, while Mark's published hyphenated source still loaded; this patch does not recreate missing storage objects.
 - Follow-up loading fix: service grids now show their SVG icons immediately, and the shared media component retains a compact inline blur fallback for records without generated placeholders. Team portraits preload and their containing grid is visible before hydration. `pnpm run test:loading` checks the initial rendered HTML; isolated browser checks also verified blur removal after decoding.
 - `pnpm run test:media` exercises URL construction, missing relationships, focal coordinates, R2 filename encoding, small-image derivatives, and crop boundaries using Sharp and Payload.
 - `pnpm run typecheck` and `pnpm run lint` check the application and test code.
