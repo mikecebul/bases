@@ -1,5 +1,4 @@
 import Container from '@/components/Container'
-import * as motion from 'motion/react-client'
 import type { Team } from '@/payload-types'
 import { CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { RichText } from '@/components/RichText'
@@ -12,18 +11,15 @@ import { Media } from '@/components/Media'
 export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
   return (
     <Container className="lg:overflow-visible">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="grid grid-cols-1 gap-x-8 lg:grid-cols-2 lg:items-start"
-      >
-        {typeof teamMember.image === 'object' && (
+      <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2 lg:items-start">
+        {teamMember.image && typeof teamMember.image === 'object' && (
           <Media
             alt={teamMember.image.alt ?? 'Team Member Profile'}
             className="pb-8 lg:sticky lg:top-28 lg:col-start-2 lg:row-start-1 lg:pb-0"
             imgClassName="object-top w-3/5 mx-auto mt-0 rounded-lg sm:w-2/5 lg:w-4/5 xl:w-3/5"
             resource={teamMember.image}
+            priority
+            size="(min-width: 1280px) 30vw, (min-width: 640px) 40vw, 60vw"
           />
         )}
         <div>
@@ -47,7 +43,7 @@ export const TeamMemberBlock = ({ teamMember }: { teamMember: Team }) => {
             Back
           </Link>
         </CardFooter>
-      </motion.div>
+      </div>
     </Container>
   )
 }
