@@ -33,7 +33,7 @@ test('a generated blur is preferred to the generic fallback', () => {
   assert.match(html, /custom-generated-placeholder/)
 })
 
-test('service icons and labels are visible in the initial HTML without viewport animation', () => {
+test('service icons are visible initially while the text retains its entrance animation', () => {
   const services = [
     { id: 'counseling', title: 'Counseling', icon: 'Brain', desc: 'Individual sessions' },
   ] as Service[]
@@ -42,7 +42,11 @@ test('service icons and labels are visible in the initial HTML without viewport 
   assert.match(html, /lucide-brain/)
   assert.match(html, /Counseling/)
   assert.equal((html.match(/<svg/g) || []).length, 1)
-  assert.doesNotMatch(html, /opacity:0|visibility:hidden|translateX|display:none/)
+  const beforeIcon = html.slice(0, html.indexOf('<svg'))
+  assert.doesNotMatch(beforeIcon, /opacity:0|visibility:hidden|translateX|display:none/)
+  assert.match(html, /<span[^>]*style="opacity:0;transform:translateX/)
+  assert.match(html, /<dd[^>]*style="opacity:0;transform:translateX/)
+  assert.match(html, /motion-reduce:opacity-100!/)
 })
 
 test('team portraits have a first-render placeholder and start loading eagerly', () => {
