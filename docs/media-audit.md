@@ -34,6 +34,7 @@ Payload and its runtime plugins are aligned at **3.90.2**, Next and its ESLint p
 
 ## Verification
 
+- Follow-up loading fix: service grids now show their SVG icons immediately, and the shared media component retains a compact inline blur fallback for records without generated placeholders. Team portraits preload and their containing grid is visible before hydration. `pnpm run test:loading` checks the initial rendered HTML; isolated browser checks also verified blur removal after decoding.
 - `pnpm run test:media` exercises URL construction, missing relationships, focal coordinates, R2 filename encoding, small-image derivatives, and crop boundaries using Sharp and Payload.
 - `pnpm run typecheck` and `pnpm run lint` check the application and test code.
 - `node node_modules/next/dist/bin/next build --experimental-build-mode compile` checks production bundling without running the project's migration command or database-backed prerendering. A full deployment build and an admin-browser crop/upload check are still required before claiming end-to-end production validation.
