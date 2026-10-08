@@ -5,6 +5,7 @@ import path from 'path'
 import { superAdmin } from '@/access/superAdmin'
 import { editorOrHigher } from '@/access/editorOrHigher'
 import { generateBlurhash } from './generateBlurhash'
+import { revalidateMedia } from './hooks/revalidateMedia'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,18 +33,20 @@ export const Media: CollectionConfig = {
     },
     resizeOptions: {
       width: 1600,
-      height: undefined,
+      withoutEnlargement: true,
     },
     imageSizes: [
       {
         name: 'thumbnail',
         width: 300,
         height: 300,
+        fit: 'cover',
+        withoutEnlargement: false,
         formatOptions: {
           format: 'webp',
         },
-        generateImageName: ({ originalName }) => {
-          return `${originalName}-thumbnail`
+        generateImageName: ({ originalName, extension }) => {
+          return `${originalName}-thumbnail.${extension}`
         },
       },
       {
@@ -52,11 +55,12 @@ export const Media: CollectionConfig = {
         height: 630,
         position: 'top',
         fit: 'inside',
+        withoutEnlargement: true,
         formatOptions: {
           format: 'webp',
         },
-        generateImageName: ({ originalName }) => {
-          return `${originalName}-meta`
+        generateImageName: ({ originalName, extension }) => {
+          return `${originalName}-meta.${extension}`
         },
       },
     ],
@@ -98,5 +102,7 @@ export const Media: CollectionConfig = {
   ],
   hooks: {
     beforeValidate: [generateBlurhash],
+    afterChange: [revalidateMedia],
+    afterDelete: [revalidateMedia],
   },
 }

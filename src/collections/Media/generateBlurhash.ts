@@ -1,4 +1,4 @@
-import { APIError, CollectionBeforeValidateHook } from 'payload'
+import type { CollectionBeforeValidateHook } from 'payload'
 import { getPlaiceholder } from 'plaiceholder'
 
 export const generateBlurhash: CollectionBeforeValidateHook = async ({ data, operation, req }) => {
@@ -8,7 +8,7 @@ export const generateBlurhash: CollectionBeforeValidateHook = async ({ data, ope
       const mimeType = req?.file?.mimetype
 
       if (buffer && mimeType?.startsWith('image/')) {
-        const { base64 } = await getPlaiceholder(buffer, { size: 32 })
+        const { base64 } = await getPlaiceholder(buffer, { size: 8 })
 
         return {
           ...data,
@@ -17,7 +17,9 @@ export const generateBlurhash: CollectionBeforeValidateHook = async ({ data, ope
       }
       return data
     } catch (error) {
-      throw new APIError('Failed to generate blur data url')
+      req.payload.logger.warn({ err: error, msg: 'Unable to generate image placeholder' })
+      // A placeholder is optional; do not reject an otherwise valid upload (e.g. SVG).
+      return { ...data, blurhash: null }
     }
   }
 }

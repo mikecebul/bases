@@ -9,6 +9,7 @@ import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { s3Storage as s3StoragePlugin } from '@payloadcms/storage-s3'
 import { S3_PLUGIN_CONFIG } from './plugins/s3'
+import { getStorageFileUrl } from './utilities/getStorageFileUrl'
 import {
   BlocksFeature,
   ParagraphFeature,
@@ -231,22 +232,22 @@ export default buildConfig({
   email:
     process.env.NODE_ENV === 'production'
       ? resendAdapter({
-        apiKey: process.env.RESEND_API_KEY || '',
-        defaultFromAddress: 'bases-website@mikecebul.com',
-        defaultFromName: 'BASES Website',
-      })
+          apiKey: process.env.RESEND_API_KEY || '',
+          defaultFromAddress: 'bases-website@mikecebul.com',
+          defaultFromName: 'BASES Website',
+        })
       : nodemailerAdapter({
-        defaultFromAddress: 'bases-website@mikecebul.com',
-        defaultFromName: 'BASES Website',
-        transportOptions: {
-          host: process.env.EMAIL_HOST || 'localhost',
-          port: process.env.EMAIL_PORT || 1025,
-          auth: {
-            user: process.env.EMAIL_USER || 'user',
-            pass: process.env.EMAIL_PASSWORD || 'password',
+          defaultFromAddress: 'bases-website@mikecebul.com',
+          defaultFromName: 'BASES Website',
+          transportOptions: {
+            host: process.env.EMAIL_HOST || 'localhost',
+            port: process.env.EMAIL_PORT || 1025,
+            auth: {
+              user: process.env.EMAIL_USER || 'user',
+              pass: process.env.EMAIL_PASSWORD || 'password',
+            },
           },
-        },
-      }),
+        }),
   plugins: [
     sentryPlugin({
       enabled: true,
@@ -306,10 +307,7 @@ export default buildConfig({
       collections: {
         media: {
           disableLocalStorage: true,
-          generateFileURL: (args: any) => {
-            if (typeof args.filename !== 'string') return null as unknown as string
-            return `https://${process.env.NEXT_PUBLIC_S3_HOSTNAME}/${args.prefix}/${args.filename}`
-          },
+          generateFileURL: getStorageFileUrl,
           prefix: process.env.NEXT_PUBLIC_UPLOAD_PREFIX || 'media',
         },
       },

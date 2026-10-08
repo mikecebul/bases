@@ -1,5 +1,3 @@
-import { getClientSideURL } from './getURL'
-
 /**
  * Processes media resource URL to ensure proper formatting
  * @param url The original URL from the resource
@@ -9,12 +7,24 @@ import { getClientSideURL } from './getURL'
 export const getMediaUrl = (url: string | null | undefined, cacheTag?: string | null): string => {
   if (!url) return ''
 
-  // Check if URL already has http/https protocol
+  // Payload may return an absolute URL for its local file endpoint. Keep it local
+  // so Next's optimizer does not make a remote request to a private/loopback host.
   if (url.startsWith('http://') || url.startsWith('https://')) {
-    return cacheTag ? `${url}?${cacheTag}` : url
+    const parsed = new URL(url)
+    const server = new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000')
+    if (
+      parsed.pathname.startsWith('/api/media/file/') &&
+      (parsed.origin === server.origin ||
+        ['localhost', '127.0.0.1', '[::1]'].includes(parsed.hostname))
+    ) {
+      url = `${parsed.pathname}${parsed.search}${parsed.hash}`
+    }
   }
 
-  // Otherwise prepend client-side URL
-  const baseUrl = getClientSideURL()
-  return cacheTag ? `${baseUrl}${url}?${cacheTag}` : `${baseUrl}${url}`
+  // Relative URLs work on both server and client without changing during hydration.
+  if (!cacheTag) return url
+
+  const [path, ...fragment] = url.split('#')
+  const separator = path.includes('?') ? '&' : '?'
+  return `${path}${separator}v=${encodeURIComponent(cacheTag)}${fragment.length ? `#${fragment.join('#')}` : ''}`
 }

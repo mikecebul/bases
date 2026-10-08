@@ -4,22 +4,16 @@ import Link from 'next/link'
 import { motion } from 'motion/react'
 import { cn } from '@/utilities/cn'
 
-import { Icons } from '@/components/Icons'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { TeamAvatar } from './TeamAvatar'
 import { buttonVariants } from '@/components/ui/button'
 
-import type { Team as TeamType, TeamBlock as TeamBlockType } from '@/payload-types'
+import type { TeamBlock as TeamBlockType } from '@/payload-types'
 
 export const Team = ({
   teamBlock: { title, description, memberType, teamMembers, reverse },
 }: {
   teamBlock: TeamBlockType
 }) => {
-  const imageThumbnailUrlIfExists = (person: TeamType) => {
-    if (typeof person.image === 'object' && person.image.sizes?.thumbnail?.url)
-      return person.image.sizes.thumbnail.url
-  }
-
   return (
     <div
       className={cn('flex flex-col gap-x-20 gap-y-8 xl:flex-row', {
@@ -45,7 +39,7 @@ export const Team = ({
         {teamMembers &&
           Array.isArray(teamMembers) &&
           teamMembers.map((person, index) => {
-            if (typeof person === 'object')
+            if (person && typeof person === 'object')
               return (
                 <motion.div
                   key={person.id}
@@ -66,15 +60,7 @@ export const Team = ({
                   >
                     <li>
                       <div className="flex items-center gap-x-6">
-                        <Avatar className="w-16 h-16">
-                          <AvatarImage
-                            src={imageThumbnailUrlIfExists(person)}
-                            alt="profile of staff member."
-                          />
-                          <AvatarFallback>
-                            <Icons.user className="size-8" />
-                          </AvatarFallback>
-                        </Avatar>
+                        <TeamAvatar image={person.image} name={person.name} />
                         <div>
                           <p className="text-base font-semibold leading-7 tracking-tight">
                             {person.name}
