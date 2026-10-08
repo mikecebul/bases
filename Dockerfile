@@ -7,8 +7,8 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Update and enable Corepack
-RUN npm install -g corepack@latest
+# Use a Node 20-compatible Corepack; package.json pins the pnpm version.
+RUN npm install -g corepack@0.34.6
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -77,8 +77,8 @@ ENV SENTRY_SUPPRESS_GLOBAL_ERROR_HANDLER_FILE_WARNING=1
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_OUTPUT=standalone
 
-# Update and enable Corepack
-RUN npm install -g corepack@latest
+# Match the dependency stage's Corepack and package.json's pinned pnpm version.
+RUN npm install -g corepack@0.34.6
 
 RUN \
   if [ -f pnpm-lock.yaml ]; then corepack enable pnpm && set -a && . ./.env.production && set +a && pnpm run build; \
@@ -117,4 +117,3 @@ ENV PORT=3000
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
 ENV HOSTNAME="0.0.0.0"
 CMD ["node", "server.js"]
-
