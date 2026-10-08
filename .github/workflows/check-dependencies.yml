@@ -1,0 +1,21 @@
+name: Check Docker dependencies
+
+on:
+  pull_request:
+    paths:
+      - Dockerfile
+      - package.json
+      - pnpm-lock.yaml
+      - .github/workflows/check-dependencies.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify frozen dependency install in Docker
+        run: docker build --target deps --tag bases-dependency-check .

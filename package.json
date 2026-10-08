@@ -4,6 +4,7 @@
   "description": "BASESmi.org website.",
   "license": "MIT",
   "type": "module",
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation payload migrate && next build",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs",
@@ -107,7 +108,11 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "sharp"
+      "@sentry/cli",
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp",
+      "unrs-resolver"
     ]
   }
 }
