@@ -343,10 +343,6 @@ export interface ServicesBlock {
    * Select and sort the top 3 services
    */
   topThreeServices?: (string | Service)[] | null;
-  /**
-   * Select and sort all your available services
-   */
-  allServices?: (string | Service)[] | null;
   links?: LinkGroup;
   id?: string | null;
   blockName?: string | null;
@@ -1323,7 +1319,6 @@ export interface ServicesBlockSelect<T extends boolean = true> {
   gridSVG?: T;
   howMany?: T;
   topThreeServices?: T;
-  allServices?: T;
   links?: T | LinkGroupSelect<T>;
   id?: T;
   blockName?: T;

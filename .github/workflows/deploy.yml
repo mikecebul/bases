@@ -28,6 +28,8 @@ jobs:
           tags: |
             mikecebul/bases:latest
           platforms: linux/amd64
+          build-args: |
+            SENTRY_RELEASE=${{ github.sha }}
           secrets: |
             DATABASE_URI=${{ secrets.DATABASE_URI }}
             NEXT_PUBLIC_SERVER_URL=${{ secrets.NEXT_PUBLIC_SERVER_URL }}

@@ -16,7 +16,7 @@ export const revalidateDelete: CollectionAfterDeleteHook<Service> = ({
     // Revalidate services page
     revalidatePath('/services')
 
-    revalidateTag('sitemap')
+    revalidateTag('sitemap', { expire: 0 })
   }
 
   return doc

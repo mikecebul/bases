@@ -1,5 +1,5 @@
-# Use Node.js 20-alpine for compatibility with tsx and your engines field
-FROM node:20-alpine AS base
+# Use a supported Node.js LTS runtime for builds and production.
+FROM node:24-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -7,7 +7,7 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Use a Node 20-compatible Corepack; package.json pins the pnpm version.
+# package.json pins the pnpm version.
 RUN npm install -g corepack@0.34.6
 
 # Install dependencies based on the preferred package manager
@@ -20,6 +20,8 @@ RUN \
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+ARG SENTRY_RELEASE
+ENV SENTRY_RELEASE=${SENTRY_RELEASE}
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -88,6 +90,8 @@ RUN \
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
+ARG SENTRY_RELEASE
+ENV SENTRY_RELEASE=${SENTRY_RELEASE}
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1

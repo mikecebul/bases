@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import { cn } from '@/utilities/cn'
 
 import { TeamAvatar } from './TeamAvatar'
@@ -14,6 +14,8 @@ export const Team = ({
 }: {
   teamBlock: TeamBlockType
 }) => {
+  const reduceMotion = useReducedMotion()
+
   return (
     <div
       className={cn('flex flex-col gap-x-20 gap-y-8 xl:flex-row', {
@@ -21,10 +23,10 @@ export const Team = ({
       })}
     >
       <motion.div
-        initial={{ x: 'var(--x-from)', opacity: 0 }}
+        initial={{ x: reduceMotion ? 0 : 'var(--x-from)', opacity: reduceMotion ? 1 : 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: reduceMotion ? 0 : 0.5 }}
         className={cn('[--x-from:-30px] sm:[--x-from:-40px] max-w-prose xl:w-5/12 text-pretty', {
           '[--x-from:30px] sm:[--x-from:40px]': reverse,
         })}
@@ -43,12 +45,15 @@ export const Team = ({
               return (
                 <motion.div
                   key={person.id}
-                  initial={{ x: 'var(--x-from)', opacity: 0 }}
+                  initial={{ x: reduceMotion ? 0 : 'var(--x-from)', opacity: reduceMotion ? 1 : 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.05 }}
-                  className={cn('[--x-from:30px] sm:[--translate-x-from:-40] max-w-lg', {
-                    '[--x-from:-30px] sm:[--translate-x-from:40]': reverse,
+                  transition={{
+                    duration: reduceMotion ? 0 : 0.6,
+                    delay: reduceMotion ? 0 : index * 0.05,
+                  }}
+                  className={cn('[--x-from:30px] sm:[--x-from:-40px] max-w-lg', {
+                    '[--x-from:-30px] sm:[--x-from:40px]': reverse,
                   })}
                 >
                   <Link

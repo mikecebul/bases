@@ -92,22 +92,6 @@ export const Services: Block = {
       minRows: 3,
       required: true,
     },
-    {
-      name: 'allServices',
-      label: 'Services',
-      type: 'relationship',
-      admin: {
-        condition: (_, { howMany } = {}) => ['allServices'].includes(howMany),
-        description: 'Select and sort all your available services',
-        // width: '350px',
-        style: {
-          maxWidth: '350px',
-        },
-      },
-      relationTo: 'services',
-      hasMany: true,
-      required: true,
-    },
     linkGroup({
       overrides: {
         maxRows: 1,
