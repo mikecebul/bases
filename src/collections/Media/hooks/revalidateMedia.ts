@@ -7,7 +7,7 @@ import type { Media } from '@/payload-types'
 export const revalidateMedia: CollectionAfterChangeHook<Media> &
   CollectionAfterDeleteHook<Media> = ({ doc, req: { context } }) => {
   if (!context.disableRevalidate) {
-    revalidateTag('media')
+    revalidateTag('media', { expire: 0 })
     revalidatePath('/(frontend)', 'layout')
   }
   return doc

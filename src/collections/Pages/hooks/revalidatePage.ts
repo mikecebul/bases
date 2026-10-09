@@ -16,7 +16,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 
     if (headers['X-Payload-Migration'] !== 'true') {
       revalidatePath(path)
-      revalidateTag('sitemap')
+      revalidateTag('sitemap', { expire: 0 })
     }
   }
 
@@ -28,7 +28,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 
     if (headers['X-Payload-Migration'] !== 'true') {
       revalidatePath(oldPath)
-      revalidateTag('sitemap')
+      revalidateTag('sitemap', { expire: 0 })
     }
   }
 

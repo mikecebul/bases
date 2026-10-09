@@ -2,18 +2,20 @@
 
 import Container from '@/components/Container'
 import type { CarfBlock as CarfBlockType } from '@/payload-types'
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import Image from 'next/image'
 
 export const CarfBlock = ({ subtitle, title, description, image }: CarfBlockType) => {
+  const reduceMotion = useReducedMotion()
+
   return (
     <Container className="py-24 2xl:max-w-[1920px] bg-brand">
       <div className="container grid px-4 mx-auto lg:grid-cols-2 md:px-8 xl:items-center xl:text-center">
         <motion.div
-          initial={{ opacity: 0, x: 'var(--x-from)' }}
+          initial={{ opacity: reduceMotion ? 1 : 0, x: reduceMotion ? 0 : 'var(--x-from)' }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: reduceMotion ? 0 : 0.6 }}
           className="flex items-center justify-start max-w-2xl pb-8 lg:pb-0 lg:justify-center [--x-from:40px] sm:[--x-from:-40px]"
         >
           {!!image && typeof image === 'object' && (
@@ -28,10 +30,10 @@ export const CarfBlock = ({ subtitle, title, description, image }: CarfBlockType
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 'var(--y-from)' }}
+          initial={{ opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : 'var(--y-from)' }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: reduceMotion ? 0 : 0.6 }}
           className="flex flex-col max-w-2xl text-left 2xl:container 2xl:px-0 text-accent/90 [--y-from:40px]"
         >
           <p className="text-base font-semibold leading-7 text-brand-foreground">{subtitle}</p>

@@ -19,7 +19,7 @@ export const revalidateTeam: CollectionAfterChangeHook<Team> = ({
     revalidatePath(path)
     revalidatePath('/team')
     revalidatePath('/(frontend)', 'layout')
-    revalidateTag('sitemap')
+    revalidateTag('sitemap', { expire: 0 })
   }
 
   // If the post was previously published, we need to revalidate the old path
@@ -34,7 +34,7 @@ export const revalidateTeam: CollectionAfterChangeHook<Team> = ({
     revalidatePath(oldPath)
     revalidatePath('/team')
     revalidatePath('/(frontend)', 'layout')
-    revalidateTag('sitemap')
+    revalidateTag('sitemap', { expire: 0 })
   }
   return doc
 }

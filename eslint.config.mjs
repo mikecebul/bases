@@ -1,10 +1,6 @@
-import { FlatCompat } from '@eslint/eslintrc'
 import { defineConfig, globalIgnores } from 'eslint/config'
-
-const compat = new FlatCompat({
-  // import.meta.dirname is available after Node.js v20.11.0
-  baseDirectory: import.meta.dirname,
-})
+import nextConfig from 'eslint-config-next'
+import prettierConfig from 'eslint-config-prettier/flat'
 
 const eslintConfig = defineConfig([
   globalIgnores([
@@ -23,12 +19,24 @@ const eslintConfig = defineConfig([
     'jest.config.js',
     'src/payload-types.ts',
   ]),
-  ...compat.config({
-    extends: ['next', 'prettier'],
+  ...nextConfig,
+  prettierConfig,
+  {
+    files: ['**/*.{js,jsx,mjs,ts,tsx,mts,cts}'],
+    rules: {
+      // Next 16 adds React Compiler diagnostics. Keep them visible while
+      // retaining the existing lint policy for this non-compiled application.
+      'react-hooks/immutability': 'warn',
+      'react-hooks/set-state-in-effect': 'warn',
+      'react-hooks/static-components': 'warn',
+    },
+  },
+  {
+    files: ['**/*.{ts,tsx}'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
     },
-  }),
+  },
 ])
 
 export default eslintConfig

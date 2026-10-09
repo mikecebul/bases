@@ -1,9 +1,11 @@
-import type { ServicesBlock as ServicesBlockType } from '@/payload-types'
+import type { Service, ServicesBlock as ServicesBlockType } from '@/payload-types'
 import { ServicesList } from '@/components/ServicesList'
 import { CMSLink } from '@/components/Link'
 import { HeroMedium } from '@/components/Hero/HeroMedium'
 import { GridSVG } from '@/components/GridSVG'
 import Container from '@/components/Container'
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
 
 export async function ServicesBlock({
   subtitle,
@@ -12,12 +14,21 @@ export async function ServicesBlock({
   description,
   gridSVG,
   howMany,
-  allServices,
   topThreeServices,
   links,
 }: ServicesBlockType) {
-  const sanitizedAllServices =
-    allServices != null && allServices.every((item) => typeof item === 'object') ? allServices : []
+  let allServices: Service[] = []
+  if (howMany === 'allServices') {
+    const payload = await getPayload({ config: configPromise })
+    const { docs } = await payload.find({
+      collection: 'services',
+      pagination: false,
+      limit: 0,
+      sort: 'title',
+      overrideAccess: false,
+    })
+    allServices = docs
+  }
   const sanitizedTopThreeServices =
     topThreeServices != null && topThreeServices.every((item) => typeof item === 'object')
       ? topThreeServices
@@ -27,8 +38,8 @@ export async function ServicesBlock({
     <Container className="">
       {gridSVG && <GridSVG />}
       <HeroMedium subtitle={subtitle} title={title} description={description} heading={heading} />
-      {howMany === 'allServices' && sanitizedAllServices.length > 0 && (
-        <ServicesList services={sanitizedAllServices} />
+      {howMany === 'allServices' && allServices.length > 0 && (
+        <ServicesList services={allServices} />
       )}
       {howMany === 'topThreeServices' && sanitizedTopThreeServices.length > 0 && (
         <>

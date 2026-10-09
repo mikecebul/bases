@@ -15,7 +15,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { cn } from '@/utilities/cn'
 
-import { motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { Plus, Trash2 } from 'lucide-react'
 import { ReactNode } from 'react'
 
@@ -158,15 +158,17 @@ export const ArrayFieldComponent = ({
 }
 
 const MotionWrapper = ({ children }: { children: ReactNode }) => {
+  const reduceMotion = useReducedMotion()
+
   return (
     <motion.div
-      initial={{ marginBottom: 0 }}
+      initial={reduceMotion ? false : { marginBottom: 0 }}
       animate={{ marginBottom: 16 }}
       exit={{ marginBottom: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: reduceMotion ? 0 : 0.3 }}
     >
       <motion.div
-        initial={{ opacity: 0, height: 0, padding: 0 }}
+        initial={reduceMotion ? false : { opacity: 0, height: 0, padding: 0 }}
         animate={{
           opacity: 1,
           height: 'auto',
@@ -174,11 +176,11 @@ const MotionWrapper = ({ children }: { children: ReactNode }) => {
         exit={{
           opacity: 0,
           height: 0,
-          transition: { duration: 0.2 },
+          transition: { duration: reduceMotion ? 0 : 0.2 },
         }}
         transition={{
-          opacity: { duration: 0.05, delay: 0.15 },
-          height: { duration: 0.2 },
+          opacity: { duration: reduceMotion ? 0 : 0.05, delay: reduceMotion ? 0 : 0.15 },
+          height: { duration: reduceMotion ? 0 : 0.2 },
         }}
       >
         {children}

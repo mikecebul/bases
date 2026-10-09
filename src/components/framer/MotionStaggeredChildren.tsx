@@ -1,20 +1,23 @@
 'use client'
 
-import { motion } from 'motion/react'
-import { ReactNode } from 'react'
+import { motion, useReducedMotion } from 'motion/react'
+import type { ReactNode } from 'react'
 
 export const MotionStaggerChildren = ({ children }: { children: ReactNode }) => {
+  const reduceMotion = useReducedMotion()
+
   return (
     <motion.section
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       variants={{
-        hidden: { opacity: 0 },
+        hidden: { opacity: reduceMotion ? 1 : 0 },
         visible: {
           opacity: 1,
           transition: {
-            staggerChildren: 0.25,
+            staggerChildren: reduceMotion ? 0 : 0.25,
+            ...(reduceMotion ? { duration: 0 } : {}),
           },
         },
       }}

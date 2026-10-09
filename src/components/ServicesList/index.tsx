@@ -1,12 +1,13 @@
 import { IconWithBorder } from '@/components/Icons/Icon'
 import type { Service } from '@/payload-types'
 import { RichText } from '@/components/RichText'
+import { ServiceReveal, ServicesReveal } from './ServiceReveal'
 
 export function ServicesList({ services }: { services: Service[] }) {
   return (
-    <dl className="grid max-w-xl grid-cols-1 gap-y-10 md:mx-auto lg:max-w-none lg:grid-cols-2 lg:gap-x-8 lg:gap-y-16 xl:grid-cols-3">
+    <ServicesReveal>
       {services?.map((service) => (
-        <div key={service.id} className="relative pl-16 text-left">
+        <ServiceReveal key={service.id}>
           <dt className="text-base font-semibold leading-7 text-primary">
             <div className="absolute top-0 left-0">
               <IconWithBorder name={service.icon ?? 'Check'} color="white" />
@@ -23,8 +24,8 @@ export function ServicesList({ services }: { services: Service[] }) {
               {service.desc ?? 'TBA'}
             </dd>
           )}
-        </div>
+        </ServiceReveal>
       ))}
-    </dl>
+    </ServicesReveal>
   )
 }
